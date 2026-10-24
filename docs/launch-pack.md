@@ -112,3 +112,31 @@ verbatim — the validator rejects anything the AI paraphrases. No signup:
 - Lemon Squeezy (activates checkout at launch — founding $49 LTD is the
   launch-week offer)
 - Directory + GSC accounts (pre-launch backlinks)
+
+---
+
+## 5. Waitlist founding-member email (send when LS is live)
+
+Subject: You're first — founding member, $49 for life
+
+Hi {first name},
+
+You joined the EpisodeKit waitlist early, so you get first shot at this: the
+first 50 shows can lock Pro for life for $49 — one payment, never billed
+again (Pro will be $19/month for everyone after).
+
+What you get: 12 episodes/month, every artifact (article notes, discussion
+kit, 5-day email series, social pack, summary, titles), no attribution,
+exportable everything.
+
+Your link: {LS_FOUNDER_URL}
+
+Founding spots are capped at 50 and this goes to the full waitlist in the
+order people joined. If you have questions or want to see something before
+committing, just reply — I read everything.
+
+— Abid
+EpisodeKit · episodekit.vercel.app
+
+P.S. The free tools (show notes, titles, discussion kit, email series) stay
+free forever, no signup — founding membership is for the full pipeline.

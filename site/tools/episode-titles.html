@@ -78,7 +78,7 @@ go.addEventListener("click",async()=>{
     const r=await fetch("/api/generate-suite",{
       method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({mode:"titles",text:text.slice(0,60000)})});
-    if(!r.ok) throw new Error("server "+r.status);
+    if(r.status===400){const j=await r.json().catch(()=>({}));if(j.error==="english_transcripts_only_for_now"){alert("English transcripts only for now — language support is on the roadmap. Paste an English transcript and it will work instantly.");return;}throw new Error("server "+r.status);}
     const j=await r.json();
     current=j;
     document.getElementById("themes").innerHTML=j.themes.map(t=>`<span class="tag">${t}</span>`).join("");

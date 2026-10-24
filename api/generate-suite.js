@@ -11,6 +11,15 @@
 import { generateSuiteGlm, hasGlm } from "../engine/glm.js";
 import { analyzeTranscript, buildTitles, buildEmailSeries, buildArticle } from "../engine/lib.js";
 
+// The deterministic engine's sentence splitter and theme extractor are
+// Latin-script; non-Latin transcripts (CJK/Cyrillic/Arabic…) would yield empty
+// artifacts. Fail honestly instead of rendering a broken page.
+function supportedInput(text) {
+  const latin = (text.match(/[A-Za-z]/g) || []).length;
+  const letters = (text.match(/\p{L}/gu) || []).length;
+  return letters === 0 ? false : latin / letters >= 0.6;
+}
+
 const TIMEOUT_MS = 45000;
 
 export default async function handler(req, res) {
@@ -25,6 +34,9 @@ export default async function handler(req, res) {
   }
   if (text.length > 60000) {
     return res.status(413).json({ error: "text too long" });
+  }
+  if (!supportedInput(text)) {
+    return res.status(400).json({ error: "english_transcripts_only_for_now" });
   }
   // Server-side usage event — activation is measurable from Vercel logs alone.
   console.log(JSON.stringify({ sk_usage: { t: Date.now(), mode, words: text.split(/\s+/).length } }));
