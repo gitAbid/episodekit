@@ -7,9 +7,9 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-25 (build session 9)",
+  "updatedAt": "2026-10-25 (build session 10)",
   "progress": {
-    "shipped": 28,
+    "shipped": 29,
     "tests": 60
   },
   "branches": [
@@ -182,6 +182,11 @@
           "date": "D6"
         },
         {
+          "title": "Launch pack: PH submission + maker comment + Show HN draft",
+          "status": "done",
+          "date": "D10"
+        },
+        {
           "title": "Complaint lexicon + community plan (podcast spaces)",
           "status": "done",
           "date": "D7"
@@ -210,6 +215,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 10,
+      "date": "2026-10-25",
+      "title": "Launch pack complete; metrics baseline recorded",
+      "note": "Paste-ready PH submission (gallery, maker first-comment) and Show HN post (free-tool link meeting the try-it-now rule, technical first comment on the verbatim validator). METRICS.md baseline: all current traffic is agent verification; distribution still gated on user accounts."
+    },
     {
       "day": 9,
       "date": "2026-10-25",
@@ -260,10 +271,9 @@
     }
   ],
   "next": [
-    "PH launch prep: gallery assets + first comment drafts",
+    "Launch: Show HN first, then PH Tue–Thu (user accounts)",
     "GLM_API_KEY + ASR_API_KEY (activates AI + audio paths)",
     "Lemon Squeezy account (activates checkout)",
-    "Directory submissions + GSC (user accounts)",
-    "Show HN / Product Hunt launch (wk 3)"
+    "Directory submissions + GSC (user accounts)"
   ]
 }

@@ -2,6 +2,12 @@
 
 All entries map to a commit. Newest first.
 
+## Day 10 (build session 10) — 2026-10-25
+- Launch pack: paste-ready PH submission + maker comment + Show HN post +
+  launch-day checklist — `docs/launch-pack.md`
+- `docs/METRICS.md` created (daily-loop reference): honest baseline, Vercel-log
+  field guide, decision gates
+
 ## Day 9 (build session 9) — 2026-10-25
 - **Demo video #1**: 38s narrated walkthrough (8 live-app frames + Ken Burns +
   crossfades + TTS + branded cards via ffmpeg/Swift), embedded on the landing,
