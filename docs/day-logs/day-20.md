@@ -1,6 +1,6 @@
 # Day 20 (build session 20) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · pillar #2.
+**Build commit:** `20dabc0` · pillar #2.
 
 ## What shipped
 **The Podcast Repurposing Playbook** — `site/guides/repurposing.html`: the
