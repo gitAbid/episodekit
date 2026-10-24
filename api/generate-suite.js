@@ -1,12 +1,15 @@
 // SermonKit suite generator — Vercel serverless function (Node, ESM).
-// POST { mode: "discussion-guide" | "full", text }
+// POST { mode: "discussion-guide" | "full" | "titles" | "devotionals", text }
 // - "full": complete content suite via the engine. Uses GLM when GLM_API_KEY is
 //   set (validated: quotes must be verbatim), otherwise the deterministic engine.
 //   Either way the response is a valid suite — never a user-facing error.
+// - "titles" / "devotionals": deterministic engine slices for the free tools —
+//   always work, no key needed.
 // - "discussion-guide": AI-enhanced guide only; 503 when unconfigured so the
 //   client falls back to its own offline generator.
 
 import { generateSuiteGlm, hasGlm } from "../engine/glm.js";
+import { analyzeSermon, buildTitles, buildDevotionals } from "../engine/lib.js";
 
 const TIMEOUT_MS = 45000;
 
@@ -27,6 +30,14 @@ export default async function handler(req, res) {
   if (mode === "full") {
     const suite = await generateSuiteGlm(text);
     return res.status(200).json({ suite });
+  }
+
+  if (mode === "titles" || mode === "devotionals") {
+    const a = analyzeSermon(text);
+    if (mode === "titles") {
+      return res.status(200).json({ titles: buildTitles(a), themes: a.themes.slice(0, 5) });
+    }
+    return res.status(200).json({ devotionals: buildDevotionals(a) });
   }
 
   if (mode !== "discussion-guide") {

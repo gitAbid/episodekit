@@ -2,6 +2,16 @@
 
 All entries map to a commit. Newest first.
 
+## Day 3 — 2026-10-24
+- Free tool #2: sermon title generator (themes + 6 titles) — `tools/sermon-titles.html`
+- Free tool #3: devotional generator (5-day series, copy export) — `tools/devotional.html`
+- Tools hub page (free church communication tools) + shared `tools/tool.css`
+- Analytics v0: first-party beacon + `/api/track` (no external account, no PII)
+- SEO: robots.txt, sitemap.xml (6 URLs), OG/Twitter tags on all pages, canonical,
+  1200×630 OG image rendered via `scripts/gen_og.swift` (visual-qa verdict: SHIP)
+- API: `mode:"titles"` + `mode:"devotionals"` (deterministic, keyless)
+- Engine: always-6 titles; 22/22 tests green
+
 ## Day 2 — 2026-10-24
 - Sermon engine core: deterministic full-suite builder (titles, summary, manuscript,
   discussion guide, 5-day devotionals, social pack) — `engine/lib.js`

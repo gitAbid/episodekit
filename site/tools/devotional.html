@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Devotional Generator — turn a sermon into a 5-day series — SermonKit</title>
+<meta name="description" content="Paste a sermon transcript and get a 5-day devotional series: each day anchored on a real quote from the message, with a reflection, action step, and prayer. Free, no signup.">
+<meta property="og:title" content="Free Devotional Generator — from any sermon">
+<meta property="og:description" content="Paste a sermon, get a 5-day devotional series anchored on real quotes from the message. Free, no signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sermonkit.vercel.app/tools/devotional.html">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="tool.css">
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="logo"><a href="../index.html" style="color:inherit">Sermon<span>Kit</span></a></div>
+  <a href="../index.html#pricing">Pricing</a>
+  <a href="../samples.html">Sample suite</a>
+  <a href="index.html">Free tools</a>
+  <a href="#" style="margin-left:auto;color:var(--accent)">Devotional generator</a>
+</div></header>
+
+<main class="wrap">
+  <h1>Sermon → 5-Day Devotional Series</h1>
+  <p class="sub">Paste Sunday's sermon and get a devotional series for the week:
+  each day is anchored on an actual quote from the message, with a reflection, one
+  action step, and a short prayer. Free, no signup.</p>
+
+  <textarea id="sermon" placeholder="Paste your sermon transcript here… (the fuller the sermon, the better the series)"></textarea>
+  <div class="row">
+    <button class="primary" id="go">Generate devotional series</button>
+    <span class="hint" id="count">0 words</span>
+  </div>
+
+  <div id="out">
+    <div id="days"></div>
+    <div class="row">
+      <button class="ghost" id="copy">Copy series as text</button>
+      <button class="ghost" id="again">↻ Start over</button>
+    </div>
+    <div class="notice" id="notice"></div>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  Part of <a href="../index.html">SermonKit</a> — one sermon, a month of content.
+  <a href="discussion-guide.html">Also free: discussion guide generator</a> ·
+  <a href="sermon-titles.html">sermon title generator</a>
+</div></footer>
+
+<script src="../js/analytics.js"></script>
+<script>
+const area=document.getElementById("sermon"), go=document.getElementById("go");
+area.addEventListener("input",()=>{
+  document.getElementById("count").textContent=(area.value.trim().split(/\s+/).filter(Boolean).length)+" words";
+});
+let current=null;
+go.addEventListener("click",async()=>{
+  const text=area.value.trim();
+  const wc=text.split(/\s+/).filter(Boolean).length;
+  if(wc<80){alert("Please paste at least ~80 words of sermon text so each day can be anchored in the message.");return;}
+  go.disabled=true; go.textContent="Generating…";
+  try{
+    const r=await fetch("/api/generate-suite",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({mode:"devotionals",text:text.slice(0,60000)})});
+    if(!r.ok) throw new Error("server "+r.status);
+    const j=await r.json();
+    current=j.devotionals;
+    document.getElementById("days").innerHTML=current.map(d=>`
+      <div class="card">
+        <h2 class="cardtitle">${d.title}</h2>
+        <h3 class="k">Re-read</h3>
+        <blockquote>“${d.anchor}”</blockquote>
+        <h3 class="k">Reflection</h3>
+        <p class="txt">${d.reflection}</p>
+        <h3 class="k">Live it</h3>
+        <p class="txt">${d.action}</p>
+        <h3 class="k">Pray</h3>
+        <p class="txt">${d.prayer}</p>
+      </div>`).join("");
+    document.getElementById("notice").textContent="Every quote above is taken word-for-word from the sermon you pasted — nothing is invented.";
+    document.getElementById("out").style.display="block";
+    go.textContent="Generate again";
+  }catch(e){
+    alert("The generator couldn't reach the server. Check your connection and try again.");
+  }finally{
+    go.disabled=false; if(go.textContent==="Generating…") go.textContent="Generate devotional series";
+  }
+});
+document.getElementById("copy").addEventListener("click",()=>{
+  if(!current)return;
+  const t=current.map(d=>`${d.title}\n\nRe-read: “${d.anchor}”\n\n${d.reflection}\n\nLive it: ${d.action}\n\nPray: ${d.prayer}`).join("\n\n———\n\n");
+  navigator.clipboard.writeText(t+"\n\n— generated with SermonKit (sermonkit.app)").then(()=>{
+    const b=document.getElementById("copy"); b.textContent="Copied ✓"; setTimeout(()=>b.textContent="Copy series as text",1500);
+  });
+});
+document.getElementById("again").addEventListener("click",()=>{
+  document.getElementById("out").style.display="none"; area.value=""; area.focus();
+  document.getElementById("count").textContent="0 words";
+});
+</script>
+</body>
+</html>

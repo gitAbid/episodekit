@@ -34,8 +34,10 @@ from audio or a YouTube link.
       deterministic template fallback when no key). Sample sermon in repo (public
       domain) + generated sample suite committed as marketing proof. — see
       docs/day-logs/day-02.md
-- [ ] D3: Free tool #2 (sermon title generator) + free tool #3 (devotional generator);
+- [x] D3: Free tool #2 (sermon title generator) + free tool #3 (devotional generator);
       each with its own SEO page + meta. Analytics snippet (PostHog or Cloudflare).
+      — shipped with tools hub + first-party analytics v0 (no external account
+      needed) + sitemap/robots/OG; see docs/day-logs/day-03.md
 - [ ] D4: App v0: upload audio (m4a/mp3) → ASR (Deepgram/Groq via env key; graceful
       "transcript paste" fallback) → suite result page + copy/download buttons.
 - [ ] D5: Vercel deploy (site + api functions), custom domain if provided; sitemap,

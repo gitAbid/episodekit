@@ -206,6 +206,7 @@ export function buildTitles(a) {
     `${t[0]} for Ordinary Weeks`,
     `${t[2] || t[1] || "Grace"} Changes Everything`,
     `The ${t[0]} We Almost Missed`,
+    `Why ${t[0]} Matters`,
   ];
   const firstQuote = a.keyQuotes[0];
   if (firstQuote) {
