@@ -24,3 +24,16 @@
 
 ## Blockers
 Unchanged (LS account, GLM/ASR keys, PH/HN/GSC accounts).
+
+## Addendum (same session): sprint timeline converted to 7 days
+
+User request: "convert this into 7 days." Delivered:
+- ROADMAP.md rewritten as the **7-Day Launch Sprint (2026-10-27 → 2026-11-02)**,
+  A1–A7: unlock+freeze → Show HN → distribution → Product Hunt → feedback
+  hardening → compound → all-numbers report. Compressed kill-gates included
+  (launch proceeds even without payments attached).
+- status.json sprint window updated (sprintDays: 7); map header now renders
+  "day N of 7" dynamically from the data (no hardcoded 30 anywhere).
+- Daily 9 AM automation prompt updated via CronUpdate (title + instructions,
+  incl. the changelog-mandatory rule) — next run A1 Monday 09:00.
+- Memory updated.

@@ -1,135 +1,103 @@
-# EpisodeKit — 30-Day Roadmap (2026-10-24 → 2026-11-24)
+# EpisodeKit — 7-Day Launch Sprint (2026-10-27 → 2026-11-02)
 
-**PIVOT (Day 7, 2026-10-24):** repositioned from SermonKit (church/sermon vertical)
-to **EpisodeKit (podcasters)** per a hard user constraint: this project must stay
-religion-neutral. Same engine; artifacts are now article/show notes, discussion
-kit, 5-day email series, social pack, summary, titles. Old church positioning and
-demo content are fully removed (test gate: religion-free output). Kill/pivot gates
-now track the podcast vertical. Live: **https://episodekit.vercel.app/map** shows
-progress in real time.
+**TIMELINE CHANGE (user request, 2026-10-26):** sprint compressed from 30 days
+to **7 days ending 2026-11-02**. The build phase (21 sessions, Oct 24–26)
+already delivered everything the original plan scheduled through week 3 —
+product (62 tests), full SEO surface, demo videos (landscape + vertical),
+payment rail, launch drafts — so these 7 days are pure launch execution.
+Daily 09:00 sessions continue unchanged; day-logs keep session numbering
+(next: 22). History: docs/day-logs/ + CHANGELOG.md.
 
-**One episode upload → a month of content.** Article, discussion kit, email
-series, social captions + pull quotes, summary, titles — generated from audio or
-a transcript.
+**PIVOT (Day 7, 2026-10-24):** repositioned from SermonKit (church vertical) to
+**EpisodeKit (podcasters)** per a hard user constraint: religion-neutral only.
+Same engine; artifacts: article/show notes, discussion kit, 5-day email series,
+social pack, summary, titles. Permanent test gate: religion-free output.
+Live: **https://episodekit.vercel.app** · sprint map: **/map**.
 
-## Why this product (see RESEARCH.md)
-- Verified incumbents charge $39–129/mo for this exact job (Pulpit AI, Sermon Shots).
-- We enter at **$19/mo** — 2× margin room below the floor of the vertical's pricing.
-- Weekly recurring need (every Sunday), low churn, solo decision-maker.
-- Engine is vertical-agnostic: podcast/coach pivots = new landing page only.
-- The build agent can also generate demo videos and sample artifacts daily —
-  marketing materials are a byproduct of the engine itself.
+**One episode upload → a month of content** — audio or transcript in, six
+artifact families out, every quote verbatim.
+
+## Why this product (see RESEARCH.md + its Day-7 addendum)
+- Podcast repurposing incumbents verified at $9–699/mo (Podsqueeze, Castmagic);
+  complaints: generic output, price, overwhelm.
+- Our wedge: verbatim-quote integrity (AI-paraphrased quotes rejected at
+  generation time) + keyless deterministic engine + free no-signup tools.
+- $19/mo Pro; $49 founding (first 50); Free 3 eps/mo while in beta.
 
 ## Hard rules (all sessions, including scheduled runs)
-1. **Never fake progress, metrics, or testimonials.** Every changelog line maps to a
-   commit. Testimonials only with real permission (FTC).
+1. **Never fake progress, metrics, or testimonials.** Every changelog line maps
+   to a commit. Testimonials only with real permission (FTC).
 2. No spam, no vote-buying, no fake accounts. Maker-disclosed sharing only.
 3. Every user-facing claim must be true of the shipped product today.
-4. Ship something verifiable every day: a commit, a deployed change, or a published
-   artifact — logged in docs/day-logs/ and CHANGELOG.md.
-5. If blocked on an item >2 hours, log the blocker, move to the next item.
-6. **GLM limits (user-authorized, 2026-10-24):** when a GLM plan/model hits its
-   limit, switch to another available plan/model as needed. If all are exhausted,
-   continue with offline/deterministic work and schedule a one-shot automation to
-   resume the blocked step at the next reset. Log every switch in the day log.
+4. Ship something verifiable every day; log it in docs/day-logs/ AND
+   CHANGELOG.md (changelog upkeep is mandatory — it drifted once; never again).
+5. If blocked >2 hours, log the blocker, move to the next item.
+6. **GLM limits (user-authorized):** switch plans/models on limit hits; if all
+   exhausted, continue deterministic/offline work and schedule a one-shot
+   resume at reset. Log switches.
 
-## Status legend: [ ] todo · [~] in progress · [x] done (with commit hash)
+## The 7 days
 
-## Week 1 (Days 1–7): Foundation + free-tool wedge
-- [x] D1: Research, decision, roadmap, repo scaffold, landing v0, free tool #1
-      (discussion-guide generator, works offline via heuristics) — commit `117a611`
-- [x] D2: Sermon engine core (Node): transcript → suite generator (GLM via env key;
-      deterministic template fallback when no key). Sample sermon in repo (public
-      domain) + generated sample suite committed as marketing proof. — see
-      docs/day-logs/day-02.md
-- [x] D3: Free tool #2 (sermon title generator) + free tool #3 (devotional generator);
-      each with its own SEO page + meta. Analytics snippet (PostHog or Cloudflare).
-      — shipped with tools hub + first-party analytics v0 (no external account
-      needed) + sitemap/robots/OG; see docs/day-logs/day-03.md
-- [x] D4: App v0: upload audio (m4a/mp3) → ASR (Deepgram/Groq via env key; graceful
-      "transcript paste" fallback) → suite result page + copy/download buttons.
-      — browser-e2e'd paste flow, audio path code-complete (ASR key pending);
-      see docs/day-logs/day-04.md
-- [x] D5: Vercel deploy (site + api functions), custom domain if provided; sitemap,
-      robots, OG images. Verify Lighthouse ≥90 on landing. — **LIVE
-      https://sermonkit.vercel.app**; Lighthouse 100/100/96/100; GSC submission
-      needs user's Google account (documented in day-05 log)
-      robots, OG images. Verify Lighthouse ≥90 on landing.
-- [x] D6: Pricing page, waitlist capture, docs/samples page with the generated suite.
-      — pricing proof grid + waitlist (live e2e) + samples context card +
-      directory kit; see docs/day-logs/day-06.md
-- [x] D7: Buffer/catch-up + Week-1 review in docs/day-logs/week-1-review.md.
-      — week-1 review + complaint lexicon + payment rail (pulled forward) +
-      Day-7 pivot to EpisodeKit + live sprint map; see docs/day-logs/day-07.md
+### A1 — Mon 2026-10-27: Unlock + freeze
+- **USER (critical path, ~15 min, docs/ls-activation-runbook.md):** Lemon
+  Squeezy account + LS env vars; GLM_API_KEY + ASR_API_KEY in Vercel.
+- Agent: pre-launch freeze (no risky changes), verify checkout end-to-end with
+  LS test order, verify AI + audio paths live, final Lighthouse + link crawl.
+- If user actions not done: everything else proceeds; launch dates hold only if
+  unlocks land by A2 morning (Show HN can go first without payments; PH needs
+  checkout).
 
-## Week 2 (Days 8–14): Payments + launch prep
-- [ ] Lemon Squeezy: products (Pro/Studio/Founder-LTD), checkout links, webhook →
-      license keys. **Requires user to create LS account (see "Needs from user").**
-- [ ] Credits + paywall on the app; free tier = 3 sermons/mo watermark.
-- [ ] Landing polish with real sample artifacts + screenshots.
-- [ ] Demo video #1 (agent-generated with the video kit): "paste sermon → full suite
-      in 2 minutes" for YouTube Short / PH gallery.
-- [ ] Directory batch #1: BetaList (pre-launch), AlternativeTo, There's An AI For
-      That, SaaSHub, Indie Hackers, Futurepedia, DevHunt queue.
-- [ ] Comparison pages: "SermonKit vs Pulpit AI", "vs Sermon Shots" (honest, verified
-      facts only).
-- [ ] Community: complaint-lexicon doc (15–25 phrases); start genuine 1:1 replies
-      where rules allow (Reddit subs that permit tool sharing; HN comments).
+### A2 — Tue 2026-10-28: Show HN
+- Submit from docs/launch-pack.md (free-tool link, technical first comment).
+- Answer every comment for 48h; log traffic/sk_usage hourly; fix anything the
+  traffic breaks.
 
-## Week 3 (Days 15–21): Launch week
-- [ ] Show HN (only when the free tool is instantly usable with no signup).
-- [ ] Product Hunt launch (Tue–Thu; gallery, 60s demo, maker comment, promo widget).
-- [ ] DevHunt / Uneed staggered launch.
-- [ ] Founder LTD $49 × 50 pushed to waitlist + launch traffic.
-- [ ] Daily: answer every comment for 48h post-launch; log metrics.
+### A3 — Wed 2026-10-29: Distribution day
+- Directories (kit ready), GSC sitemap + rich-results check, first 1:1 value
+  replies from docs/complaint-lexicon.md (rules: 2-week account age, disclosure).
 
-## Week 4 (Days 22–28): Compound + harden
-- [ ] Activation fixes from PostHog funnels (target ≥40% first-output-in-10-min).
-- [ ] v2 engine: audio clips + quote graphics (ffmpeg) if unit economics allow;
-      otherwise deepen text suite quality (A/B prompt packs per artifact).
-- [ ] 5 user interviews (async email) → top-3 requested artifacts built.
-- [ ] First churn check; founder-touch onboarding emails to every signup.
+### A4 — Thu 2026-10-30: Product Hunt
+- Launch per launch-pack (gallery assets at 1270×760 in docs/launch-assets/).
+- Maker comment in 2 min; founding-member push to waitlist; answer all day.
 
-## Day 29–30: Month-one report
-- [ ] Public "month one, all numbers" post (the transparency post earns links).
-- [ ] Month-2 plan: SEO compounding, extension/API decision, possible vertical #2.
+### A5 — Fri 2026-10-31: Feedback hardening
+- Fix top 3 issues from launch traffic; publish Shorts (vertical demo ready)
+  if accounts exist; second comparison page if competitors appear in threads.
 
-## Kill/pivot criteria (honesty gates)
-- <10 activated free users by Day 14 → double distribution effort, delay paywall.
-- 0 paying customers by Day 24 despite ≥200 activated free users → pricing/positioning
-  autopsy; consider podcast-vertical repositioning (same engine).
-- ASR+LLM unit cost > $1.00/sermon → cut free tier to 1 sermon/mo before losing money.
+### A6 — Sat 2026-11-01: Compound
+- Content refresh from real questions (FAQ/schema updates), any engine quality
+  fixes from real usage, waitlist → founding conversion follow-ups.
 
-## Needs from user (none block daily progress)
-- Lemon Squeezy account (payout rail; needed ~Day 8)
-- API keys via Vercel env when available: `GLM_API_KEY` (text suite),
-  `ASR_API_KEY`/`ASR_PROVIDER` (Deepgram or Groq; audio path)
-- Optional: custom domain (~$10–20/yr); else sermonkit.netlify.app
-- Optional: PostHog account for funnels; else Cloudflare Web Analytics only
+### A7 — Sun 2026-11-02: Sprint report
+- Honest all-numbers report (METRICS.md final); public "7 days, all numbers"
+  post draft; recommendation for the next 30 days (continue / pivot vertical /
+  double down).
 
-## Stack (chosen for agent-operability + $0 base cost)
-- Static site (vanilla HTML/CSS/JS, no build step) + Netlify Functions (Node).
-- Server suite-generator: GLM chat completions (OpenAI-compatible endpoint) with a
-  deterministic template fallback so every page works keyless.
-- ASR: provider-agnostic server function (Deepgram/Groq/Whisper-compatible).
-- Payments: Lemon Squeezy (MoR). Analytics: PostHog/Cloudflare. Hosting: Vercel
-  (static from `site/`, functions from `api/`; user chose Vercel over Netlify).
+## Kill/pivot gates (compressed)
+- No user unlocks by A2 morning → launch anyway with free-tier story; payments
+  attach when they land (the app handles LS-absent gracefully).
+- <50 activated free users by end of A4 despite launches → distribution
+  autopsy before A5; consider direct 1:1 outreach pivot.
+- 0 paying customers by A7 despite ≥100 activated → pricing/positioning
+  autopsy; recommendation in the A7 report (podcast→coach/vertical pivot is a
+  landing-page change).
+
+## Needs from user (unchanged, now the critical path)
+1. Lemon Squeezy account (~15 min runbook)
+2. GLM_API_KEY / ASR_API_KEY in Vercel env
+3. Show HN / Product Hunt / directory / GSC accounts
+4. Optional: episodekit.app domain
 
 ## Daily cadence (automation: 09:00 local, every day)
-0. **Uptime check (first, always):** curl (1) `/` → 200, (2) `/tools/show-notes.html`
-   (follow redirects) → 200, (3) `/api/config` → 200 JSON, (4) POST
-   `/api/generate-suite` mode `titles` with a short test body → 200 JSON with
-   `titles`. All healthy → continue silently. Any failure → diagnose (npm test,
-   vercel inspect), fix (a `vercel --prod --yes` redeploy fixes most cases),
-   re-verify, and record the incident + evidence in that day's day-log before
-   anything else.
+0. **Uptime check (first, always):** `/` → 200, `/tools/show-notes.html` → 200,
+   `/api/config` → 200 JSON, POST `/api/generate-suite` (titles) → 200 JSON.
+   Healthy → continue silently. Failure → diagnose, fix (redeploy usually),
+   re-verify, log incident in the day log first.
 1. Read ROADMAP.md + latest docs/day-logs/ + CHANGELOG.md.
-2. Pick the highest-priority unfinished item; build/verify it (test in browser where
-   possible). One marketing action from the GTM sections.
-3. **Update site/status.json** (the live sprint map's data: branches, decisions,
-   next-up, progress counts) so https://…/map reflects today's reality, **and
-   add a CHANGELOG.md entry for today's work** (this was skipped in sessions
-   11–20; do not skip it), then deploy if anything user-facing changed.
-4. Commit with a clear message; update CHANGELOG.md; write docs/day-logs/day-NN.md
-   (what shipped, evidence, what's next). Log metrics if any exist.
-4. Never mark items [x] without the commit/deploy evidence.
+2. Execute the current A-day's items; if user-side items are still blocked,
+   do the day's agent-side work and note the blocker.
+3. Update site/status.json (map data: branches, decisions, next-up, counts —
+   and keep `sprint.end`/`sprintDays` in sync) + CHANGELOG.md entry. Deploy if
+   anything user-facing changed.
+4. Commit with a clear message; write docs/day-logs/day-NN.md (what shipped,
+   evidence, next session's start point). Log metrics in docs/METRICS.md.

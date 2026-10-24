@@ -2,9 +2,10 @@
   "project": "EpisodeKit",
   "tagline": "One episode → a month of content",
   "sprint": {
-    "start": "2026-10-24",
-    "end": "2026-11-24",
-    "day": 7
+    "start": "2026-10-27",
+    "end": "2026-11-02",
+    "sprintDays": 7,
+    "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
   "updatedAt": "2026-10-26 (build session 21)",
@@ -283,6 +284,12 @@
     {
       "day": 21,
       "date": "2026-10-26",
+      "title": "Sprint compressed: 30 days → 7 days (user request)",
+      "note": "The build finished early (21 sessions delivered the original week-3 scope in 3 days), so the sprint is now a 7-day launch execution ending 2026-11-02: unlock day → Show HN → distribution → Product Hunt → hardening → compound → all-numbers report."
+    },
+    {
+      "day": 21,
+      "date": "2026-10-26",
       "title": "Site-wide QA sweep",
       "note": "Crawled all 15 pages locally + 14 live routes (zero broken links; two regex false-positives were JS template literals). Lighthouse re-run caught an a11y regression from content added since day 5 (color-only links) — fixed with underlines; landing back to 100/100/100."
     },
@@ -402,9 +409,10 @@
     }
   ],
   "next": [
-    "Launch: Show HN first, then PH Tue–Thu (user accounts)",
-    "GLM_API_KEY + ASR_API_KEY (activates AI + audio paths)",
-    "Lemon Squeezy account (activates checkout)",
-    "Directory submissions + GSC (user accounts)"
+    "A1 (Oct 27): user unlocks — LS runbook + GLM/ASR keys",
+    "A2 (Oct 28): Show HN launch",
+    "A3 (Oct 29): directories + GSC",
+    "A4 (Oct 30): Product Hunt launch",
+    "A7 (Nov 2): all-numbers sprint report"
   ]
 }

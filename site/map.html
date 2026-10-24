@@ -112,7 +112,7 @@ async function boot() {
     $("#tree").innerHTML = '<div class="loading">Could not load status.json — refresh in a moment.</div>';
     return;
   }
-  $("#updated").textContent = "updated " + (s.updatedAt || "?") + " · day " + sprintDay(s) + " of 30";
+  $("#updated").textContent = "updated " + (s.updatedAt || "?") + " · day " + sprintDay(s) + " of " + (s.sprint.sprintDays || 30) + (s.sprint.note ? " · " + s.sprint.note.split("(")[0].trim() : "");
 
   renderMetrics(s, null, null);
   renderTree(s);
@@ -138,12 +138,13 @@ async function boot() {
 }
 
 function sprintDay(s) {
+  const total = s.sprint.sprintDays || 30;
   const start = new Date(s.sprint.start).getTime();
-  return Math.max(1, Math.min(30, Math.ceil((Date.now() - start) / 86400000) + 1));
+  return Math.max(1, Math.min(total, Math.ceil((Date.now() - start) / 86400000) + 1));
 }
 
 function renderMetrics(s, track, waitlist) {
-  const daysLeft = Math.max(0, 30 - sprintDay(s));
+  const daysLeft = Math.max(0, (s.sprint.sprintDays || 30) - sprintDay(s));
   const items = [
     { v: daysLeft, l: "days left in sprint", c: "gold" },
     { v: s.progress?.shipped ?? "—", l: "features shipped", c: "green" },
