@@ -1,6 +1,6 @@
 # Day 2 — 2026-10-24
 
-**Build commit:** (filled by follow-up docs commit) · engine + sample + api.
+**Build commit:** `f1d63a3` · engine + sample + api.
 
 ## What shipped
 1. **Sermon engine core** (`engine/`):
