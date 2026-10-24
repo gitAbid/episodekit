@@ -2,6 +2,16 @@
 
 All entries map to a commit. Newest first.
 
+## Day 5 — 2026-10-24
+- **LIVE: https://sermonkit.vercel.app** — Vercel production deploy (static
+  site + 3 API functions), protection disabled, project renamed to `sermonkit`,
+  domain auto-attaches on deploy
+- Live-verified end-to-end: all pages 200, generate-suite + track APIs working
+  in prod, browser e2e paste flow on the live URL
+- Lighthouse mobile: **Performance 100 / Accessibility 100 / Best Practices 96 /
+  SEO 100** (a11y fixed from 89: main landmark + link contrast)
+- Engine: light-verb stopwords (cleaner themes); 22+17 tests green
+
 ## Day 4 — 2026-10-24
 - App v0 (paid-product core): audio upload with browser-side compression to fit
   Vercel's 4.5MB limit, transcript-paste path, full-suite result page with

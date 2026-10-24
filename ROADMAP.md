@@ -42,7 +42,10 @@ from audio or a YouTube link.
       "transcript paste" fallback) → suite result page + copy/download buttons.
       — browser-e2e'd paste flow, audio path code-complete (ASR key pending);
       see docs/day-logs/day-04.md
-- [ ] D5: Vercel deploy (site + api functions), custom domain if provided; sitemap,
+- [x] D5: Vercel deploy (site + api functions), custom domain if provided; sitemap,
+      robots, OG images. Verify Lighthouse ≥90 on landing. — **LIVE
+      https://sermonkit.vercel.app**; Lighthouse 100/100/96/100; GSC submission
+      needs user's Google account (documented in day-05 log)
       robots, OG images. Verify Lighthouse ≥90 on landing.
 - [ ] D6: Pricing page, waitlist capture, docs/samples page with the generated suite.
 - [ ] D7: Buffer/catch-up + Week-1 review in docs/day-logs/week-1-review.md.

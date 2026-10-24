@@ -1,5 +1,8 @@
 # SermonKit
 
+**Live: <https://sermonkit.vercel.app>** — deployed on Vercel (auto-deploys from
+this repo's `main` via `vercel --prod`; env vars set in the Vercel dashboard).
+
 **One sermon → a month of content.** SermonKit turns a Sunday sermon (audio file or
 transcript) into the full content package a church communications volunteer spends
 hours writing every week: an edited manuscript, small-group discussion guide,

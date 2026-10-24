@@ -7,7 +7,9 @@
 const STOP = new Set(
   ("the a an and or but if then than that this these those of to in on for with as is are was were be been being it its his her their our your you we they he she i not no so at by from into about after before during under over between out up down here there what which who whom when where why how all any both each few more most other some such only own same too very can will just don should now lord god jesus christ church people us may one also let said says say unto because therefore notice remember imagine every week thing things something really actually very there's it's we're you're they're don't can't won't ours yours theirs " +
     // sermon meta-language: words about the talk, not the message
-    "story sermon message passage chapter verse verses bible bibles text today tonight morning room want know like come going still never always someone everyone anybody nobody something another without within maybe perhaps those these").split(" ")
+    "story sermon message passage chapter verse verses bible bibles text today tonight morning room want know like come going still never always someone everyone anybody nobody something another without within maybe perhaps those these " +
+    // light verbs that pollute theme lists
+    "comes coming come want wants wanted mean means meant take takes taken make makes made give gives gave says saying look looks looking feel feels felt think thinks thought").split(" ")
 );
 
 export function normalizeWs(t) {
