@@ -36,6 +36,7 @@
   </div>
 
   <div id="out">
+    <div id="handoff"></div>
     <div id="days"></div>
     <div class="row">
       <button class="ghost" id="copy">Copy series as text</button>
@@ -52,6 +53,7 @@
 </div></footer>
 
 <script src="../js/analytics.js"></script>
+<script src="../js/handoff.js"></script>
 <script>
 const area=document.getElementById("sermon"), go=document.getElementById("go");
 area.addEventListener("input",()=>{
@@ -84,6 +86,7 @@ go.addEventListener("click",async()=>{
       </div>`).join("");
     document.getElementById("notice").textContent="Every quote above is taken word-for-word from the episode you pasted — nothing is invented.";
     document.getElementById("out").style.display="block";
+    EKHandoff.offer(document.getElementById("handoff"), text);
     go.textContent="Generate again";
   }catch(e){
     alert("The generator couldn't reach the server. Check your connection and try again.");

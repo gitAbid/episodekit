@@ -128,6 +128,24 @@ function updateQuota() {
   return left;
 }
 updateQuota();
+// Tool→app handoff: a transcript stashed by a free-tool page pre-fills the paste flow
+(() => {
+  try {
+    const t = sessionStorage.getItem("ek_handoff");
+    if (t && t.split(/\s+/).length >= 80) {
+      sessionStorage.removeItem("ek_handoff");
+      switchTab(false);
+      const box = document.getElementById("sermon");
+      box.value = t;
+      box.dispatchEvent(new Event("input"));
+      const note = document.createElement("div");
+      note.className = "notice";
+      note.style.marginBottom = "16px";
+      note.textContent = "Transcript carried over from the free tool — hit generate when ready.";
+      box.parentElement.insertBefore(note, box);
+    }
+  } catch (e) {}
+})();
 // Config-driven UX: default to the paste tab (and label the audio tab honestly)
 // until audio transcription is configured on the server.
 (async () => {

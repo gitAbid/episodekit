@@ -43,6 +43,7 @@
   </div>
 
   <div id="out">
+    <div id="handoff"></div>
     <div class="card">
       <h2 class="cardtitle" id="artTitle"></h2>
       <p class="meta" id="themes"></p>
@@ -64,6 +65,7 @@
 </div></footer>
 
 <script src="../js/analytics.js"></script>
+<script src="../js/handoff.js"></script>
 <script>
 const area=document.getElementById("sermon"), go=document.getElementById("go");
 area.addEventListener("input",()=>{
@@ -87,6 +89,7 @@ go.addEventListener("click",async()=>{
     document.getElementById("body").innerHTML=j.article.sections.map(sec=>`
       <div class="sec"><h3>${sec.heading}</h3>${sec.paragraphs.map(p=>`<p>${p}</p>`).join("")}</div>`).join("");
     document.getElementById("out").style.display="block";
+    EKHandoff.offer(document.getElementById("handoff"), text);
     go.textContent="Generate again";
   }catch(e){
     alert("The generator couldn't reach the server. Check your connection and try again.");

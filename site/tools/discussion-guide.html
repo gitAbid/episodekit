@@ -37,6 +37,7 @@
   </div>
 
   <div id="out">
+    <div id="handoff"></div>
     <div class="card" id="guide"></div>
     <div class="row copy">
       <button class="ghost" id="copy">Copy kit as text</button>
@@ -52,6 +53,7 @@
 </div></footer>
 
 <script src="../js/analytics.js"></script>
+<script src="../js/handoff.js"></script>
 <script>
 const STOP = new Set(("the a an and or but if then than that this these those of to in on for with as is are was were be been being it its his her their our your you we they he she i not no so at by from into about after before during under over between out up down here there what which who whom when where why how all any both each few more most other some such only own same too very can will just don should now may also let said says say us one thing things something really actually because therefore notice remember imagine every week there's it's we're you're they're don't can't won't ours yours theirs episode podcast show today tonight listener listeners audience guys thanks welcome back").split(" "));
 
@@ -150,6 +152,7 @@ go.addEventListener("click",async()=>{
   current=g; render(g);
   document.getElementById("notice").textContent=note||"Every quote above is taken word-for-word from what you pasted — nothing is invented.";
   document.getElementById("out").style.display="block";
+    EKHandoff.offer(document.getElementById("handoff"), text);
   go.disabled=false; go.textContent="Generate again";
 });
 

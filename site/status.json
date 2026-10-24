@@ -7,7 +7,7 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 15)",
+  "updatedAt": "2026-10-26 (build session 16)",
   "progress": {
     "shipped": 31,
     "tests": 62
@@ -154,6 +154,11 @@
           "title": "Comparison pages (vs Podsqueeze, vs Castmagic) — factual, attributed",
           "status": "done",
           "date": "D8"
+        },
+        {
+          "title": "Pillar guide (head keyword) + tool→app transcript handoff",
+          "status": "done",
+          "date": "D16"
         }
       ]
     },
@@ -250,6 +255,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 16,
+      "date": "2026-10-26",
+      "title": "Content pillar + conversion bridge",
+      "note": "A genuinely useful complete guide to podcast show notes (head-term SEO, links template/tools/comparisons), and every free tool now offers 'generate the full package with this transcript' — carrying the text into the app via sessionStorage (never leaves the browser)."
+    },
     {
       "day": 15,
       "date": "2026-10-26",
