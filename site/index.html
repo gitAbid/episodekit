@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SermonKit — One sermon, a month of content</title>
+<meta name="description" content="Turn Sunday's sermon into discussion guides, devotionals, social captions, and an edited manuscript in minutes. Built for church communications teams.">
+<style>
+  :root{
+    --bg:#0e1116; --bg2:#151b23; --card:#1a2230; --line:#283242;
+    --text:#e8edf4; --muted:#98a6b8; --accent:#e8b04b; --accent2:#6fb3ff;
+    --max:1040px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--accent2);text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);background:rgba(14,17,22,.9);position:sticky;top:0;backdrop-filter:blur(8px);z-index:5}
+  .nav{display:flex;align-items:center;gap:24px;padding:16px 0}
+  .nav .logo{font-weight:800;font-size:19px;color:var(--text);letter-spacing:.2px}
+  .nav .logo span{color:var(--accent)}
+  .nav a{color:var(--muted);font-size:14.5px}
+  .nav a:hover{color:var(--text)}
+  .nav .cta{margin-left:auto;background:var(--accent);color:#141414;font-weight:700;padding:9px 18px;border-radius:10px}
+  .hero{padding:88px 0 64px;text-align:center;background:
+    radial-gradient(600px 300px at 20% -10%,rgba(232,176,75,.13),transparent),
+    radial-gradient(700px 320px at 85% 0%,rgba(111,179,255,.10),transparent)}
+  .hero h1{font-size:clamp(34px,5.5vw,56px);line-height:1.12;font-weight:800;letter-spacing:-.5px;max-width:820px;margin:0 auto}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p.sub{color:var(--muted);font-size:19px;max-width:640px;margin:20px auto 32px}
+  .hero .cta{display:inline-block;background:var(--accent);color:#141414;font-weight:700;font-size:17px;padding:14px 30px;border-radius:12px}
+  .hero .cta:hover{filter:brightness(1.06)}
+  .hero .fine{color:var(--muted);font-size:13.5px;margin-top:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:56px 0 8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;text-align:left}
+  .card h3{font-size:16.5px;margin-bottom:8px}
+  .card p{color:var(--muted);font-size:14.5px}
+  .card .n{display:inline-flex;width:30px;height:30px;border-radius:9px;background:rgba(232,176,75,.15);color:var(--accent);font-weight:800;align-items:center;justify-content:center;margin-bottom:12px}
+  section{padding:56px 0;border-top:1px solid var(--line)}
+  h2{font-size:30px;letter-spacing:-.3px;text-align:center;margin-bottom:10px}
+  .section-sub{color:var(--muted);text-align:center;max-width:620px;margin:0 auto 36px}
+  .artifacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .artifact{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .artifact .tag{font-size:11.5px;font-weight:700;letter-spacing:1.2px;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+  .artifact p{color:var(--muted);font-size:14.5px}
+  .price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:900px;margin:0 auto}
+  .price{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
+  .price.pro{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+  .price .name{font-weight:800;font-size:15px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
+  .price .amount{font-size:38px;font-weight:800;margin:10px 0 2px}
+  .price .amount small{font-size:15px;color:var(--muted);font-weight:500}
+  .price ul{list-style:none;margin:16px 0}
+  .price li{padding:5px 0;color:var(--muted);font-size:14.5px}
+  .price li::before{content:"✓";color:var(--accent);margin-right:9px;font-weight:800}
+  .btn{display:block;text-align:center;background:var(--accent);color:#141414;font-weight:700;padding:11px;border-radius:11px;margin-top:6px}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  .founding{background:rgba(232,176,75,.08);border:1px dashed var(--accent);border-radius:14px;padding:16px 20px;max-width:900px;margin:26px auto 0;color:var(--muted);font-size:14.5px;text-align:center}
+  .founding b{color:var(--accent)}
+  footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--muted);font-size:14px}
+  footer .cols{display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between}
+  @media(max-width:640px){.hero{padding:56px 0 40px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="logo">Sermon<span>Kit</span></div>
+    <a href="#how">How it works</a>
+    <a href="tools/discussion-guide.html" title="Free discussion guide generator — no signup">Free tool</a>
+    <a href="#pricing">Pricing</a>
+    <a class="cta" href="#pricing">Get started</a>
+  </div>
+</header>
+
+<div class="hero wrap">
+  <h1>One sermon. <em>A month of content.</em></h1>
+  <p class="sub">Upload Sunday's audio or transcript. SermonKit writes the edited
+  manuscript, small-group discussion guide, devotional emails, social captions with
+  pull quotes, and titles — in minutes, not volunteer-hours.</p>
+  <a class="cta" href="tools/discussion-guide.html">Try the free guide generator →</a>
+  <div class="fine">No signup for the free tools. Full suite coming soon.</div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p class="section-sub">Built for the communications volunteer with a to-do list
+    and no spare evening.</p>
+    <div class="grid">
+      <div class="card"><span class="n">1</span><h3>Upload the sermon</h3><p>Audio file, or paste the transcript. Long sermons welcome.</p></div>
+      <div class="card"><span class="n">2</span><h3>SermonKit reads it through</h3><p>Transcription, structure, key quotes, and the through-line of the message.</p></div>
+      <div class="card"><span class="n">3</span><h3>Get the whole package</h3><p>Manuscript, discussion guide, devotionals, captions, quotes, titles — ready to paste.</p></div>
+      <div class="card"><span class="n">4</span><h3>Review and ship</h3><p>Everything is editable and exportable. You approve; nothing publishes without you.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What you get every week</h2>
+    <p class="section-sub">Each artifact is generated from the sermon itself — no
+    generic templates.</p>
+    <div class="artifacts">
+      <div class="artifact"><div class="tag">Manuscript</div><p>Cleaned, reflowed sermon text with headings — for the church blog or archive.</p></div>
+      <div class="artifact"><div class="tag">Discussion guide</div><p>Icebreaker, 6–8 questions walking the passage, and a closing prayer prompt.</p></div>
+      <div class="artifact"><div class="tag">Devotionals</div><p>A 5-day devotional email series drawn from the message's key movements.</p></div>
+      <div class="artifact"><div class="tag">Social pack</div><p>Captions and pull quotes sized for Instagram, Facebook, and X.</p></div>
+      <div class="artifact"><div class="tag">Summary</div><p>A 150-word recap for the newsletter and website.</p></div>
+      <div class="artifact"><div class="tag">Titles</div><p>Sermon title and series ideas, generated from the actual content.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <h2>Pricing</h2>
+    <p class="section-sub">Priced for churches, not enterprises. Every plan includes
+    the full artifact suite.</p>
+    <div class="price-grid">
+      <div class="price">
+        <div class="name">Free</div>
+        <div class="amount">$0</div>
+        <ul>
+          <li>3 sermons per month</li>
+          <li>Full artifact suite</li>
+          <li>SermonKit attribution line</li>
+        </ul>
+        <a class="btn ghost" href="tools/discussion-guide.html">Start free</a>
+      </div>
+      <div class="price pro">
+        <div class="name">Pro</div>
+        <div class="amount">$19<small>/mo</small></div>
+        <ul>
+          <li>12 sermons per month</li>
+          <li>No attribution</li>
+          <li>Editable &amp; exportable everything</li>
+          <li>Email support</li>
+        </ul>
+        <a class="btn" href="#founding">Join founding members</a>
+      </div>
+      <div class="price">
+        <div class="name">Studio</div>
+        <div class="amount">$49<small>/mo</small></div>
+        <ul>
+          <li>40 sermons per month</li>
+          <li>Multi-campus &amp; batch mode</li>
+          <li>Priority processing</li>
+          <li>API access</li>
+        </ul>
+        <a class="btn ghost" href="#founding">Join founding members</a>
+      </div>
+    </div>
+    <div class="founding" id="founding">
+      <b>Founding members:</b> the first 50 churches get Pro for life for $49 once.
+      Checkout opens at launch — <a href="mailto:founders@sermonkit.app?subject=Founding member">email us</a> to reserve a spot.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap cols">
+    <div>
+      <div class="logo" style="font-weight:800">Sermon<span style="color:var(--accent)">Kit</span></div>
+      <p style="margin-top:8px">Made for church communications teams.</p>
+    </div>
+    <div>
+      <p><a href="tools/discussion-guide.html">Free: discussion guide generator</a></p>
+      <p><a href="mailto:hello@sermonkit.app">hello@sermonkit.app</a></p>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:28px;font-size:13px;opacity:.8">
+    SermonKit is an independent product. Your content stays yours; nothing is
+    published without your review.
+  </div>
+</footer>
+</body>
+</html>
