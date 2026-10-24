@@ -1,6 +1,6 @@
 # Day 14 (build session 14) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · launch-day de-risking.
+**Build commit:** `097c3b9` · launch-day de-risking.
 
 ## What shipped
 1. **Quote-validator hardening** (`engine/glm.js`): real LLMs return
