@@ -1,6 +1,6 @@
 # Day 16 (build session 16) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · content pillar + conversion bridge.
+**Build commit:** `4ab297c` · content pillar + conversion bridge.
 
 ## What shipped
 1. **Pillar guide** — `site/guides/show-notes.html`: "The Complete Guide to
