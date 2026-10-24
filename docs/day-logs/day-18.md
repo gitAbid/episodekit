@@ -1,6 +1,6 @@
 # Day 18 (build session 18) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · launch-ops hardening.
+**Build commit:** `d2cd43b` · launch-ops hardening.
 
 ## What shipped
 1. **Uptime check in the daily loop** (ROADMAP step 0): the 9 AM session now
