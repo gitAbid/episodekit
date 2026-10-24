@@ -1,6 +1,6 @@
 # Day 13 (build session 13) — 2026-10-25
 
-**Build commit:** (see follow-up docs commit) · self-serve indexing + repo credibility.
+**Build commit:** `2316d11` · self-serve indexing + repo credibility.
 
 ## What shipped
 1. **IndexNow** (self-serve search indexing, no account): generated a key,
