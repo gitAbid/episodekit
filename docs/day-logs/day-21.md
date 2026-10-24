@@ -1,6 +1,6 @@
 # Day 21 (build session 21) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · site-wide QA sweep.
+**Build commit:** `cbc6994` · site-wide QA sweep.
 
 ## What shipped
 1. **Full-site link crawl** — all 15 local pages parsed for internal links, 14
