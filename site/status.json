@@ -7,7 +7,7 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 18)",
+  "updatedAt": "2026-10-26 (build session 19)",
   "progress": {
     "shipped": 31,
     "tests": 62
@@ -96,6 +96,11 @@
           "title": "Config-driven first-run UX (paste tab default until ASR live) + vertical 9:16 demo cut",
           "status": "done",
           "date": "D15"
+        },
+        {
+          "title": "Engine copywriting pass: 6-way follow-up bank, richer apply prompts, pair-based titles",
+          "status": "done",
+          "date": "D19"
         }
       ]
     },
@@ -265,6 +270,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 19,
+      "date": "2026-10-26",
+      "title": "Deterministic quality pass",
+      "note": "Until GLM keys land, the deterministic engine IS the product — so its copy got a rewrite: six varied discussion follow-ups (was 3 rotating), sharper apply prompts, and a 'What X Gets Wrong About Y' pair-template for titles. Sample regenerated; 62/62 tests."
+    },
     {
       "day": 18,
       "date": "2026-10-26",

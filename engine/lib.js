@@ -115,17 +115,23 @@ export function buildDiscussionKit(a) {
     "What stands out to you in that moment, and why?",
     "Do you agree? What would you add or push back on?",
     "Where have you seen this play out — or fail — in your own experience?",
+    "If you acted on this tomorrow, what would be the first thing to break?",
+    "Who in your world would push back hardest on this — and what would their objection be?",
+    "What's the smallest version of this idea you could test this week?",
   ];
   const qs = a.keyQuotes.slice(0, 6).map((q, i) => ({ quote: q, follow: followUps[i % followUps.length] }));
+  const applyPool = [
+    `What is one concrete step you can take this week based on ${t1}?`,
+    `Who do you know that needs to hear this episode — and what will you tell them about it?`,
+    `Where did this episode catch you doing the opposite of what it recommends? Be specific.`,
+    `Set a check-in: what will have changed by next time you meet if you acted on ${t1}?`,
+  ];
   return {
     title: `Discussion Kit — ${titleCase(t1)}${t2 ? " & " + titleCase(t2) : ""}`,
     opener: `In one sentence: what did you take away from this episode?`,
     open,
     qs,
-    apply: [
-      `What is one concrete step you can take this week based on ${t1}?`,
-      `Who do you know that needs to hear this episode — and what will you tell them about it?`,
-    ],
+    apply: [applyPool[0], applyPool[1 + (a.themes.length % 3)]],
     closing: `Close by having everyone share the one thing they're going to try first, and check in on it next time you meet.`,
   };
 }
@@ -197,9 +203,9 @@ export function buildTitles(a) {
   const out = [
     `${t[0]} and ${t[1] || "Trade-offs"}`,
     `The ${t[0]} We Keep Avoiding`,
-    `${t[0]} for Ordinary Weeks`,
+    `What ${t[1] || "Everyone"} Gets Wrong About ${t[0]}`,
     `${t[2] || t[1] || "Focus"} Changes Everything`,
-    `The ${t[0]} We Almost Missed`,
+    `${t[0]} for Ordinary Weeks`,
     `Why ${t[0]} Matters`,
   ];
   const firstQuote = a.keyQuotes[0];

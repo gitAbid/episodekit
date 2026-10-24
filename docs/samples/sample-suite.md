@@ -5,9 +5,9 @@
 ## Titles
 1. Attention and Version
 2. The Attention We Keep Avoiding
-3. Attention for Ordinary Weeks
+3. What Version Gets Wrong About Attention
 4. Focus Changes Everything
-5. The Attention We Almost Missed
+5. Attention for Ordinary Weeks
 6. Why Attention Matters
 
 ## Summary
@@ -62,15 +62,15 @@ Because here is the takeaway I want you to carry out of this episode: your atten
 
 > “Because attention compounds, the cost of an interruption is not the five minutes it takes.”
 
-- What stands out to you in that moment, and why?
+- If you acted on this tomorrow, what would be the first thing to break?
 
 > “The research on task switching says it can take over twenty minutes to get back to full depth, which means a single ping can quietly tax the entire morning.”
 
-- Do you agree? What would you add or push back on?
+- Who in your world would push back hardest on this — and what would their objection be?
 
 > “Calendars beat to-do lists because a to-do item is a wish while a calendar block is a promise.”
 
-- Where have you seen this play out — or fail — in your own experience?
+- What's the smallest version of this idea you could test this week?
 
 **Apply it**
 1. What is one concrete step you can take this week based on attention?

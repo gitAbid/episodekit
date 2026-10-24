@@ -1,6 +1,6 @@
 {
   "engine": "offline",
-  "generatedAt": "2026-10-24T08:04:30.388Z",
+  "generatedAt": "2026-10-24T09:09:15.483Z",
   "stats": {
     "words": 575,
     "sentences": 25,
@@ -15,9 +15,9 @@
   "titles": [
     "Attention and Version",
     "The Attention We Keep Avoiding",
-    "Attention for Ordinary Weeks",
+    "What Version Gets Wrong About Attention",
     "Focus Changes Everything",
-    "The Attention We Almost Missed",
+    "Attention for Ordinary Weeks",
     "Why Attention Matters"
   ],
   "summary": {
@@ -75,15 +75,15 @@
       },
       {
         "quote": "Because attention compounds, the cost of an interruption is not the five minutes it takes.",
-        "follow": "What stands out to you in that moment, and why?"
+        "follow": "If you acted on this tomorrow, what would be the first thing to break?"
       },
       {
         "quote": "The research on task switching says it can take over twenty minutes to get back to full depth, which means a single ping can quietly tax the entire morning.",
-        "follow": "Do you agree? What would you add or push back on?"
+        "follow": "Who in your world would push back hardest on this — and what would their objection be?"
       },
       {
         "quote": "Calendars beat to-do lists because a to-do item is a wish while a calendar block is a promise.",
-        "follow": "Where have you seen this play out — or fail — in your own experience?"
+        "follow": "What's the smallest version of this idea you could test this week?"
       }
     ],
     "apply": [
