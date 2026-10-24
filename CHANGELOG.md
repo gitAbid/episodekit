@@ -2,6 +2,13 @@
 
 All entries map to a commit. Newest first.
 
+## Day 9 (build session 9) — 2026-10-25
+- **Demo video #1**: 38s narrated walkthrough (8 live-app frames + Ken Burns +
+  crossfades + TTS + branded cards via ffmpeg/Swift), embedded on the landing,
+  range-streaming verified — `site/demo.mp4`, `scripts/gen_cards.swift`
+- Visual QA iterations: fixed pillarbox (full-bleed recapture) + edge strip
+  (crop) — final SHIP
+
 ## Day 8 (build session 8) — 2026-10-25
 - Free tool #4: **show notes generator** (money-keyword SEO page) + new API
   `mode:"article"` — `tools/show-notes.html`

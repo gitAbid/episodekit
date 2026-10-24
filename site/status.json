@@ -1,10 +1,17 @@
 {
   "project": "EpisodeKit",
   "tagline": "One episode → a month of content",
-  "sprint": { "start": "2026-10-24", "end": "2026-11-24", "day": 7 },
+  "sprint": {
+    "start": "2026-10-24",
+    "end": "2026-11-24",
+    "day": 7
+  },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-25 (build session 8)",
-  "progress": { "shipped": 27, "tests": 60 },
+  "updatedAt": "2026-10-25 (build session 9)",
+  "progress": {
+    "shipped": 28,
+    "tests": 60
+  },
   "branches": [
     {
       "id": "strategy",
@@ -12,11 +19,31 @@
       "status": "done",
       "caption": "3-agent research → decision → pivot",
       "children": [
-        { "title": "Market scan: 6 verticals priced & verified", "status": "done", "date": "D1" },
-        { "title": "Business model: freemium + credits, Lemon Squeezy MoR", "status": "done", "date": "D1" },
-        { "title": "Distribution plan: free-tool SEO + 1:1 replies + launches", "status": "done", "date": "D1" },
-        { "title": "Decision: content-suite engine, vertical-first GTM", "status": "done", "date": "D1" },
-        { "title": "Positioning pivot to podcasters (user constraint: religion-neutral products only)", "status": "done", "date": "D7" }
+        {
+          "title": "Market scan: 6 verticals priced & verified",
+          "status": "done",
+          "date": "D1"
+        },
+        {
+          "title": "Business model: freemium + credits, Lemon Squeezy MoR",
+          "status": "done",
+          "date": "D1"
+        },
+        {
+          "title": "Distribution plan: free-tool SEO + 1:1 replies + launches",
+          "status": "done",
+          "date": "D1"
+        },
+        {
+          "title": "Decision: content-suite engine, vertical-first GTM",
+          "status": "done",
+          "date": "D1"
+        },
+        {
+          "title": "Positioning pivot to podcasters (user constraint: religion-neutral products only)",
+          "status": "done",
+          "date": "D7"
+        }
       ]
     },
     {
@@ -25,13 +52,41 @@
       "status": "doing",
       "caption": "deterministic-first, verbatim-quote honesty checks",
       "children": [
-        { "title": "Deterministic suite engine (titles, summary, article, discussion kit, email series, social pack)", "status": "done", "date": "D2" },
-        { "title": "GLM enhancement path with verbatim-quote validator", "status": "done", "date": "D2" },
-        { "title": "60-test suite incl. honesty + religion-free gates", "status": "done", "date": "D2–7" },
-        { "title": "App v0: audio upload (browser-compressed) + paste → full package", "status": "done", "date": "D4" },
-        { "title": "ASR providers (Deepgram/Groq) — activates with API key", "status": "blocked", "date": "needs key" },
-        { "title": "GLM live enhancement — activates with API key", "status": "blocked", "date": "needs key" },
-        { "title": "v2 artifacts: audio clips + quote graphics (ffmpeg)", "status": "next", "date": "wk 4" }
+        {
+          "title": "Deterministic suite engine (titles, summary, article, discussion kit, email series, social pack)",
+          "status": "done",
+          "date": "D2"
+        },
+        {
+          "title": "GLM enhancement path with verbatim-quote validator",
+          "status": "done",
+          "date": "D2"
+        },
+        {
+          "title": "60-test suite incl. honesty + religion-free gates",
+          "status": "done",
+          "date": "D2–7"
+        },
+        {
+          "title": "App v0: audio upload (browser-compressed) + paste → full package",
+          "status": "done",
+          "date": "D4"
+        },
+        {
+          "title": "ASR providers (Deepgram/Groq) — activates with API key",
+          "status": "blocked",
+          "date": "needs key"
+        },
+        {
+          "title": "GLM live enhancement — activates with API key",
+          "status": "blocked",
+          "date": "needs key"
+        },
+        {
+          "title": "v2 artifacts: audio clips + quote graphics (ffmpeg)",
+          "status": "next",
+          "date": "wk 4"
+        }
       ]
     },
     {
@@ -40,14 +95,51 @@
       "status": "done",
       "caption": "live, Lighthouse 100/100/96/100",
       "children": [
-        { "title": "Landing page with real proof screenshots + waitlist", "status": "done", "date": "D1–6" },
-        { "title": "Free tool: discussion kit generator", "status": "done", "date": "D1" },
-        { "title": "Free tool: episode title generator", "status": "done", "date": "D3" },
-        { "title": "Free tool: show notes generator (the money keyword)", "status": "done", "date": "D8" },
-        { "title": "Free tool: email series generator", "status": "done", "date": "D3" },
-        { "title": "Sample package page (unedited engine output)", "status": "done", "date": "D2" },
-        { "title": "SEO: sitemap, robots, OG tags + image, analytics", "status": "done", "date": "D3" },
-        { "title": "Comparison pages (vs Podsqueeze, vs Castmagic) — factual, attributed", "status": "done", "date": "D8" }
+        {
+          "title": "Landing page with real proof screenshots + waitlist",
+          "status": "done",
+          "date": "D1–6"
+        },
+        {
+          "title": "Free tool: discussion kit generator",
+          "status": "done",
+          "date": "D1"
+        },
+        {
+          "title": "Free tool: episode title generator",
+          "status": "done",
+          "date": "D3"
+        },
+        {
+          "title": "Free tool: show notes generator (the money keyword)",
+          "status": "done",
+          "date": "D8"
+        },
+        {
+          "title": "Free tool: email series generator",
+          "status": "done",
+          "date": "D3"
+        },
+        {
+          "title": "Demo video #1: 38s narrated walkthrough (title/app/end cards)",
+          "status": "done",
+          "date": "D9"
+        },
+        {
+          "title": "Sample package page (unedited engine output)",
+          "status": "done",
+          "date": "D2"
+        },
+        {
+          "title": "SEO: sitemap, robots, OG tags + image, analytics",
+          "status": "done",
+          "date": "D3"
+        },
+        {
+          "title": "Comparison pages (vs Podsqueeze, vs Castmagic) — factual, attributed",
+          "status": "done",
+          "date": "D8"
+        }
       ]
     },
     {
@@ -56,10 +148,26 @@
       "status": "doing",
       "caption": "rail built, awaiting credentials",
       "children": [
-        { "title": "Stateless license keys (HMAC, plan tiers)", "status": "done", "date": "D7" },
-        { "title": "Lemon Squeezy webhook (signature-verified) → license issue", "status": "done", "date": "D7" },
-        { "title": "In-app checkout buttons + license activation UI", "status": "done", "date": "D7" },
-        { "title": "Lemon Squeezy account + products + webhook secret", "status": "blocked", "date": "needs user" }
+        {
+          "title": "Stateless license keys (HMAC, plan tiers)",
+          "status": "done",
+          "date": "D7"
+        },
+        {
+          "title": "Lemon Squeezy webhook (signature-verified) → license issue",
+          "status": "done",
+          "date": "D7"
+        },
+        {
+          "title": "In-app checkout buttons + license activation UI",
+          "status": "done",
+          "date": "D7"
+        },
+        {
+          "title": "Lemon Squeezy account + products + webhook secret",
+          "status": "blocked",
+          "date": "needs user"
+        }
       ]
     },
     {
@@ -68,26 +176,91 @@
       "status": "doing",
       "caption": "kit ready, accounts pending",
       "children": [
-        { "title": "Directory submission kit (8 directories)", "status": "done", "date": "D6" },
-        { "title": "Complaint lexicon + community plan (podcast spaces)", "status": "done", "date": "D7" },
-        { "title": "Directory submissions", "status": "blocked", "date": "needs user" },
-        { "title": "GSC sitemap submit", "status": "blocked", "date": "needs user" },
-        { "title": "Demo video #1 (agent-generated)", "status": "next", "date": "wk 2" },
-        { "title": "Show HN + Product Hunt launch", "status": "next", "date": "wk 3" }
+        {
+          "title": "Directory submission kit (8 directories)",
+          "status": "done",
+          "date": "D6"
+        },
+        {
+          "title": "Complaint lexicon + community plan (podcast spaces)",
+          "status": "done",
+          "date": "D7"
+        },
+        {
+          "title": "Directory submissions",
+          "status": "blocked",
+          "date": "needs user"
+        },
+        {
+          "title": "GSC sitemap submit",
+          "status": "blocked",
+          "date": "needs user"
+        },
+        {
+          "title": "Demo video #1 (agent-generated)",
+          "status": "next",
+          "date": "wk 2"
+        },
+        {
+          "title": "Show HN + Product Hunt launch",
+          "status": "next",
+          "date": "wk 3"
+        }
       ]
     }
   ],
   "decisions": [
-    { "day": 1, "date": "2026-10-24", "title": "Product decision: content-suite engine", "note": "3 parallel research agents. Mass clip market saturated ($14–29/mo floor); verticals pay 2–4×. Model: freemium + usage credits via Lemon Squeezy (MoR). Distribution: free-tool SEO + 1:1 replies + launch windows." },
-    { "day": 2, "date": "2026-10-24", "title": "Engine ships with verbatim-quote honesty validator", "note": "Deterministic-first engine (works with zero API keys) + GLM path where any AI quote that isn't an exact substring of the source is rejected. Sample package committed unedited as proof." },
-    { "day": 5, "date": "2026-10-24", "title": "Live on production, perfect Lighthouse", "note": "Vercel deploy; deployment protection disabled; domain auto-attach fixed (manual aliases go stale). Performance 100 / Accessibility 100 / Best Practices 96 / SEO 100." },
-    { "day": 7, "date": "2026-10-24", "title": "Positioning pivot: podcasters (religion-neutral)", "note": "User set a hard constraint: no religious-domain products. Full rebrand to EpisodeKit — same engine, new artifacts (article/show notes, discussion kit, email series), new CC0 demo, religion-free test gates. Podcast vertical was research rank-2 (Podsqueeze $9–89/mo, Castmagic $19–699/mo)." },
-    { "day": 7, "date": "2026-10-24", "title": "Payment rail built ahead of schedule", "note": "Stateless HMAC license keys (SK1/SK4/SKF), signature-verified LS webhook, checkout config endpoint, in-app activation. Inert until Lemon Squeezy credentials arrive — then payments are live in minutes." },
-    { "day": 8, "date": "2026-10-25", "title": "SEO assets: show-notes generator + comparison pages", "note": "Free no-signup 'podcast show notes generator' (the market's money keyword) + honest vs-Podsqueeze / vs-Castmagic pages with attributed facts. Server-side sk_usage events make activation measurable from Vercel logs alone." },
-    { "day": 7, "date": "2026-10-24", "title": "This live sprint map", "note": "status.json is updated by every daily build session; the map also polls live counters (pageviews, waitlist) every 30 seconds." }
+    {
+      "day": 9,
+      "date": "2026-10-25",
+      "title": "Demo video #1 shipped (frame-sequenced, narrated)",
+      "note": "The browser recorder proved unusable (guest kills recordings), so the demo is built deterministically: 8 full-bleed frames from the live app + Ken Burns zoom + crossfades + TTS narration + branded title/end cards, composed with ffmpeg. 38s, 7.7MB, streams with range support; embedded on the landing page."
+    },
+    {
+      "day": 1,
+      "date": "2026-10-24",
+      "title": "Product decision: content-suite engine",
+      "note": "3 parallel research agents. Mass clip market saturated ($14–29/mo floor); verticals pay 2–4×. Model: freemium + usage credits via Lemon Squeezy (MoR). Distribution: free-tool SEO + 1:1 replies + launch windows."
+    },
+    {
+      "day": 2,
+      "date": "2026-10-24",
+      "title": "Engine ships with verbatim-quote honesty validator",
+      "note": "Deterministic-first engine (works with zero API keys) + GLM path where any AI quote that isn't an exact substring of the source is rejected. Sample package committed unedited as proof."
+    },
+    {
+      "day": 5,
+      "date": "2026-10-24",
+      "title": "Live on production, perfect Lighthouse",
+      "note": "Vercel deploy; deployment protection disabled; domain auto-attach fixed (manual aliases go stale). Performance 100 / Accessibility 100 / Best Practices 96 / SEO 100."
+    },
+    {
+      "day": 7,
+      "date": "2026-10-24",
+      "title": "Positioning pivot: podcasters (religion-neutral)",
+      "note": "User set a hard constraint: no religious-domain products. Full rebrand to EpisodeKit — same engine, new artifacts (article/show notes, discussion kit, email series), new CC0 demo, religion-free test gates. Podcast vertical was research rank-2 (Podsqueeze $9–89/mo, Castmagic $19–699/mo)."
+    },
+    {
+      "day": 7,
+      "date": "2026-10-24",
+      "title": "Payment rail built ahead of schedule",
+      "note": "Stateless HMAC license keys (SK1/SK4/SKF), signature-verified LS webhook, checkout config endpoint, in-app activation. Inert until Lemon Squeezy credentials arrive — then payments are live in minutes."
+    },
+    {
+      "day": 8,
+      "date": "2026-10-25",
+      "title": "SEO assets: show-notes generator + comparison pages",
+      "note": "Free no-signup 'podcast show notes generator' (the market's money keyword) + honest vs-Podsqueeze / vs-Castmagic pages with attributed facts. Server-side sk_usage events make activation measurable from Vercel logs alone."
+    },
+    {
+      "day": 7,
+      "date": "2026-10-24",
+      "title": "This live sprint map",
+      "note": "status.json is updated by every daily build session; the map also polls live counters (pageviews, waitlist) every 30 seconds."
+    }
   ],
   "next": [
-    "Demo video #1 (agent-recorded + narrated)",
+    "PH launch prep: gallery assets + first comment drafts",
     "GLM_API_KEY + ASR_API_KEY (activates AI + audio paths)",
     "Lemon Squeezy account (activates checkout)",
     "Directory submissions + GSC (user accounts)",
