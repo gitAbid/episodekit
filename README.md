@@ -1,9 +1,15 @@
 # EpisodeKit
 
+[![CI](https://github.com/gitAbid/episodekit/actions/workflows/ci.yml/badge.svg)](https://github.com/gitAbid/episodekit/actions/workflows/ci.yml)
+
 **Live: <https://episodekit.vercel.app>** · **Sprint map (live):
 <https://episodekit.vercel.app/map>** · **Built in the open** — every decision,
 day log, and test is in this repo (`docs/day-logs/`), produced by an autonomous
 daily build loop running through November 2026.
+
+![EpisodeKit demo](docs/demo-preview.gif)
+
+*38-second narrated demo: [episodekit.vercel.app](https://episodekit.vercel.app)*
 
 **One episode → a month of content.** EpisodeKit turns a podcast episode (audio
 file or transcript) into the full content package a creator spends hours

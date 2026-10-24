@@ -7,7 +7,7 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-25 (build session 12)",
+  "updatedAt": "2026-10-25 (build session 13)",
   "progress": {
     "shipped": 31,
     "tests": 60
@@ -197,6 +197,16 @@
           "date": "D12"
         },
         {
+          "title": "IndexNow submission (Bing/Yandex self-serve indexing, 10 URLs)",
+          "status": "done",
+          "date": "D13"
+        },
+        {
+          "title": "GitHub CI workflow + README badge + demo GIF",
+          "status": "done",
+          "date": "D13"
+        },
+        {
           "title": "Complaint lexicon + community plan (podcast spaces)",
           "status": "done",
           "date": "D7"
@@ -225,6 +235,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 13,
+      "date": "2026-10-25",
+      "title": "Self-serve indexing + repo credibility",
+      "note": "IndexNow key deployed and all 10 URLs submitted (HTTP 202) — Bing/Yandex indexing without an account. GitHub Actions CI runs the 60 tests on every push (badge live), README now leads with an 8s demo GIF, and every tool/template/compare page carries og:image."
+    },
     {
       "day": 12,
       "date": "2026-10-25",
