@@ -38,8 +38,10 @@ from audio or a YouTube link.
       each with its own SEO page + meta. Analytics snippet (PostHog or Cloudflare).
       — shipped with tools hub + first-party analytics v0 (no external account
       needed) + sitemap/robots/OG; see docs/day-logs/day-03.md
-- [ ] D4: App v0: upload audio (m4a/mp3) → ASR (Deepgram/Groq via env key; graceful
+- [x] D4: App v0: upload audio (m4a/mp3) → ASR (Deepgram/Groq via env key; graceful
       "transcript paste" fallback) → suite result page + copy/download buttons.
+      — browser-e2e'd paste flow, audio path code-complete (ASR key pending);
+      see docs/day-logs/day-04.md
 - [ ] D5: Vercel deploy (site + api functions), custom domain if provided; sitemap,
       robots, OG images. Verify Lighthouse ≥90 on landing.
 - [ ] D6: Pricing page, waitlist capture, docs/samples page with the generated suite.

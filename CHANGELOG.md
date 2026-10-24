@@ -2,6 +2,17 @@
 
 All entries map to a commit. Newest first.
 
+## Day 4 — 2026-10-24
+- App v0 (paid-product core): audio upload with browser-side compression to fit
+  Vercel's 4.5MB limit, transcript-paste path, full-suite result page with
+  per-artifact copy + Markdown/JSON download — `site/app.html`,
+  `site/js/suite-render.js`
+- Provider-agnostic ASR (`api/asr.js`: Deepgram/Groq) + `api/transcribe.js`
+  endpoint with coded errors and graceful paste fallback
+- Free-tier counter (3/month, localStorage, beta-labeled)
+- Local dev server wiring site + API functions — `scripts/dev-server.mjs`
+- Tests: 22/22 engine + 17/17 ASR; browser e2e paste flow verified; visual QA SHIP
+
 ## Day 3 — 2026-10-24
 - Free tool #2: sermon title generator (themes + 6 titles) — `tools/sermon-titles.html`
 - Free tool #3: devotional generator (5-day series, copy export) — `tools/devotional.html`

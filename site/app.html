@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SermonKit App — turn a sermon into the whole content package</title>
+<meta name="description" content="Upload your sermon audio or paste the transcript. Get the manuscript, discussion guide, 5-day devotionals, social pack, summary and titles — with copy and download.">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="tools/tool.css">
+<style>
+.tabs{display:flex;gap:8px;margin-bottom:20px}
+.tab{flex:1;text-align:center;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);font-weight:700;cursor:pointer}
+.tab.active{border-color:var(--accent);color:var(--text);background:rgba(232,176,75,.08)}
+#drop{border:2px dashed var(--line);border-radius:16px;padding:44px 20px;text-align:center;color:var(--muted);cursor:pointer;transition:border-color .15s}
+#drop.over{border-color:var(--accent)}
+#drop b{color:var(--text)}
+.progress{margin-top:18px}
+.bar{height:10px;background:var(--bg2);border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.bar>div{height:100%;background:var(--accent);width:0%;transition:width .3s}
+.step{display:none}
+.step.on{display:block}
+.steps{margin:18px 0 6px;color:var(--muted);font-size:14px}
+.badge{display:inline-block;background:rgba(111,179,255,.15);color:var(--accent2);border-radius:8px;padding:2px 10px;font-size:12.5px;font-weight:700}
+.dl{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+button.ghost.small{padding:6px 12px;font-size:13px}
+.warn{border-color:#a33;color:#e88}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="logo"><a href="index.html" style="color:inherit">Sermon<span>Kit</span></a></div>
+  <a href="index.html#pricing">Pricing</a>
+  <a href="samples.html">Sample suite</a>
+  <a href="tools/index.html">Free tools</a>
+  <a href="#" style="margin-left:auto;color:var(--accent)">App <span class="badge">beta</span></a>
+</div></header>
+
+<main class="wrap">
+  <h1>Turn a sermon into the whole package</h1>
+  <p class="sub">Audio file or transcript in — manuscript, discussion guide, 5-day
+  devotionals, social pack, summary, and titles out. Free while in beta:
+  <b id="quotaLeft">3</b> sermons left this month. Every quote is taken
+  word-for-word from your sermon.</p>
+
+  <div class="tabs">
+    <div class="tab active" id="tabAudio">🎙 Upload audio</div>
+    <div class="tab" id="tabPaste">📋 Paste transcript</div>
+  </div>
+
+  <div class="step on" id="stepInput">
+    <div id="pastePane" style="display:none">
+      <textarea id="sermon" placeholder="Paste your sermon transcript here…"></textarea>
+      <div class="row">
+        <button class="primary" id="goPaste">Generate my content package</button>
+        <span class="hint" id="count">0 words</span>
+      </div>
+    </div>
+    <div id="audioPane">
+      <div id="drop">
+        <b>Click to choose an audio file</b> — or drag &amp; drop it here<br>
+        <span style="font-size:14px">m4a, mp3, wav, webm · long sermons are fine (audio is compressed in your browser before upload)</span>
+      </div>
+      <input type="file" id="file" accept="audio/*,.m4a,.mp3,.wav,.webm" style="display:none">
+      <div class="progress" id="progress" style="display:none">
+        <div class="steps" id="steptext">Reading audio…</div>
+        <div class="bar"><div id="barfill"></div></div>
+      </div>
+      <div class="row">
+        <button class="primary" id="goAudio" style="display:none">Transcribe &amp; generate</button>
+        <button class="ghost" id="rechoose" style="display:none">Choose a different file</button>
+      </div>
+      <div class="notice" id="audioNote" style="display:none"></div>
+    </div>
+  </div>
+
+  <div class="step" id="stepBusy">
+    <div class="progress" style="display:block">
+      <div class="steps" id="busytext">Working…</div>
+      <div class="bar"><div id="busyfill" style="width:40%"></div></div>
+    </div>
+  </div>
+
+  <div class="step" id="stepDone">
+    <div class="row" style="justify-content:space-between">
+      <h2 class="cardtitle" id="suiteTitle"></h2>
+      <div class="dl">
+        <button class="ghost" id="dlMd">Download Markdown</button>
+        <button class="ghost" id="dlJson">Download JSON</button>
+        <button class="ghost" id="startOver">↻ New sermon</button>
+      </div>
+    </div>
+    <div id="suite"></div>
+  </div>
+
+  <div class="card" id="quotaCard" style="display:none">
+    <h2 class="cardtitle">You've used your 3 free sermons this month</h2>
+    <p class="meta">SermonKit Pro is $19/mo for 12 sermons — half the price of the
+    big tools, and every artifact stays editable and yours.</p>
+    <a class="primary" style="display:inline-block;padding:12px 22px;border-radius:11px;color:#141414;font-weight:700" href="mailto:founders@sermonkit.app?subject=Pro%20upgrade">Get Pro — email us</a>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  Part of <a href="index.html">SermonKit</a> — one sermon, a month of content.
+  Prefer a quick single artifact? Try the <a href="tools/index.html">free tools</a>.
+</div></footer>
+
+<script src="js/analytics.js"></script>
+<script src="js/suite-render.js"></script>
+<script>
+const $ = (id) => document.getElementById(id);
+const MONTH = new Date().toISOString().slice(0, 7);
+const quotaKey = "sk_used_" + MONTH;
+function usedCount() { return parseInt(localStorage.getItem(quotaKey) || "0", 10); }
+function updateQuota() {
+  const left = Math.max(0, 3 - usedCount());
+  $("quotaLeft").textContent = left;
+  if (left === 0) { $("quotaCard").style.display = "block"; }
+  return left;
+}
+updateQuota();
+
+// --- tabs ---
+$("tabAudio").addEventListener("click", () => switchTab(true));
+$("tabPaste").addEventListener("click", () => switchTab(false));
+function switchTab(audio) {
+  $("tabAudio").classList.toggle("active", audio);
+  $("tabPaste").classList.toggle("active", !audio);
+  $("audioPane").style.display = audio ? "block" : "none";
+  $("pastePane").style.display = audio ? "none" : "block";
+}
+
+// --- paste path ---
+$("sermon").addEventListener("input", () => {
+  $("count").textContent = ($("sermon").value.trim().split(/\s+/).filter(Boolean).length) + " words";
+});
+$("goPaste").addEventListener("click", () => {
+  const text = $("sermon").value.trim();
+  const wc = text.split(/\s+/).filter(Boolean).length;
+  if (wc < 80) { alert("Please paste at least ~80 words of sermon text."); return; }
+  runSuite(text);
+});
+
+// --- audio path: choose → decode → compress in-browser → hold for upload ---
+let encodedBlob = null, encodedName = "sermon.webm";
+const drop = $("drop"), fileInput = $("file");
+drop.addEventListener("click", () => fileInput.click());
+drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("over"); });
+drop.addEventListener("dragleave", () => drop.classList.remove("over"));
+drop.addEventListener("drop", (e) => {
+  e.preventDefault(); drop.classList.remove("over");
+  if (e.dataTransfer.files[0]) prepareAudio(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener("change", () => { if (fileInput.files[0]) prepareAudio(fileInput.files[0]); });
+
+async function prepareAudio(file) {
+  encodedBlob = null;
+  $("goAudio").style.display = "none"; $("rechoose").style.display = "none";
+  $("audioNote").style.display = "none";
+  $("progress").style.display = "block"; setBar(8); $("steptext").textContent = "Reading " + file.name + " (" + (file.size / 1e6).toFixed(1) + " MB)…";
+  try {
+    setBar(25); $("steptext").textContent = "Decoding & compressing in your browser (16 kHz mono)…";
+    const buf = await file.arrayBuffer();
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const decoded = await ctx.decodeAudioData(buf);
+    await ctx.close();
+    const secs = decoded.duration;
+    // Resample to 16 kHz mono offline.
+    const off = new OfflineAudioContext(1, Math.ceil(secs * 16000), 16000);
+    const src = off.createBufferSource();
+    src.buffer = decoded;
+    src.connect(off.destination);
+    src.start();
+    const mono = await off.startRendering();
+    // Encode at low bitrate so long sermons fit the upload limit.
+    const mime = MediaRecorder.isTypeSupported("audio/webm;codecs=opus") ? "audio/webm;codecs=opus"
+      : MediaRecorder.isTypeSupported("audio/mp4") ? "audio/mp4" : "";
+    if (!mime) throw new Error("This browser can't re-encode audio — use the paste-transcript tab.");
+    encodedName = mime.startsWith("audio/webm") ? "sermon.webm" : "sermon.mp4";
+    const recCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const dest = recCtx.createMediaStreamDestination();
+    const play = recCtx.createBufferSource();
+    play.buffer = mono;
+    play.connect(dest);
+    const rec = new MediaRecorder(dest.stream, { mimeType: mime, audioBitsPerSecond: 16000 });
+    const chunks = [];
+    rec.ondataavailable = (e) => chunks.push(e.data);
+    const done = new Promise((r) => (rec.onstop = r));
+    rec.start(2000); play.start();
+    const tick = setInterval(() => setBar(25 + Math.min(60, (recCtx.currentTime / Math.max(secs, 1)) * 60)), 500);
+    await new Promise((r) => setTimeout(r, secs * 1000 + 300));
+    rec.stop(); await done; clearInterval(tick); await recCtx.close();
+    encodedBlob = new Blob(chunks, { type: mime.split(";")[0] });
+    setBar(100);
+    const mb = encodedBlob.size / 1e6;
+    $("steptext").textContent = "Ready: " + Math.round(secs / 60) + " min sermon → " + mb.toFixed(1) + " MB to upload";
+    if (mb > 4.4) {
+      encodedBlob = null;
+      $("audioNote").className = "notice warn";
+      $("audioNote").textContent = "Even compressed, this audio is over the 4.4 MB upload limit. For very long sermons, paste the transcript instead (any transcription app works).";
+      $("audioNote").style.display = "block";
+      return;
+    }
+    $("goAudio").style.display = "inline-block"; $("rechoose").style.display = "inline-block";
+  } catch (e) {
+    setBar(0); $("progress").style.display = "none";
+    $("audioNote").className = "notice warn";
+    $("audioNote").textContent = "Couldn't process that audio file (" + (e.message || "decode failed") + "). Try another format, or use the paste-transcript tab.";
+    $("audioNote").style.display = "block";
+  }
+}
+$("rechoose").addEventListener("click", () => {
+  encodedBlob = null; $("progress").style.display = "none";
+  $("goAudio").style.display = "none"; $("rechoose").style.display = "none";
+});
+function setBar(p) { $("barfill").style.width = p + "%"; }
+
+$("goAudio").addEventListener("click", async () => {
+  if (!encodedBlob) return;
+  if (usedCount() >= 3) { $("quotaCard").style.display = "block"; $("quotaCard").scrollIntoView({ behavior: "smooth" }); return; }
+  showStep("stepBusy"); $("busytext").textContent = "Transcribing your sermon…";
+  $("busyfill").style.width = "30%";
+  try {
+    const r = await fetch("/api/transcribe", {
+      method: "POST",
+      headers: { "Content-Type": encodedBlob.type, "X-Filename": encodedName },
+      body: encodedBlob,
+    });
+    if (r.status === 503) {
+      throw new Error("Audio transcription isn't configured on the server yet — use the paste-transcript tab for now (everything else works).");
+    }
+    if (!r.ok) {
+      const j = await r.json().catch(() => ({}));
+      throw new Error(j.error === "too_large" ? "Audio too large after compression — try the paste-transcript tab." : "Transcription failed (" + r.status + "). Try again or paste the transcript.");
+    }
+    const j = await r.json();
+    $("busytext").textContent = "Transcript ready (" + j.words + " words) — generating your package…";
+    $("busyfill").style.width = "70%";
+    await runSuite(j.transcript);
+  } catch (e) {
+    alert(e.message || "Transcription failed.");
+    showStep("stepInput");
+  }
+});
+
+async function runSuite(text) {
+  if (usedCount() >= 3) { $("quotaCard").style.display = "block"; $("quotaCard").scrollIntoView({ behavior: "smooth" }); return; }
+  showStep("stepBusy"); $("busytext").textContent = "Reading the sermon and writing your package…";
+  $("busyfill").style.width = "45%";
+  try {
+    const r = await fetch("/api/generate-suite", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mode: "full", text: text.slice(0, 60000) }),
+    });
+    if (!r.ok) throw new Error("server " + r.status);
+    const j = await r.json();
+    localStorage.setItem(quotaKey, String(usedCount() + 1));
+    updateQuota();
+    render(j.suite);
+  } catch (e) {
+    alert("Generation failed (" + (e.message || "network") + "). Please try again.");
+    showStep("stepInput");
+  }
+}
+
+function render(s) {
+  showStep("stepDone");
+  $("suiteTitle").textContent = s.manuscript.title;
+  SermonKitSuite.renderSuite($("suite"), s);
+  $("dlMd").onclick = () => SermonKitSuite.download(s.manuscript.title.replace(/[^\w]+/g, "-").toLowerCase() + "-suite.md", SermonKitSuite.suiteMarkdown(s), "text/markdown");
+  $("dlJson").onclick = () => SermonKitSuite.download(s.manuscript.title.replace(/[^\w]+/g, "-").toLowerCase() + "-suite.json", JSON.stringify(s, null, 2), "application/json");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+$("startOver").addEventListener("click", () => {
+  showStep("stepInput");
+  $("sermon").value = ""; $("count").textContent = "0 words";
+  encodedBlob = null; $("progress").style.display = "none";
+  $("goAudio").style.display = "none"; $("rechoose").style.display = "none";
+});
+function showStep(id) {
+  for (const s of ["stepInput", "stepBusy", "stepDone"]) $(s).classList.toggle("on", s === id);
+}
+</script>
+</body>
+</html>
