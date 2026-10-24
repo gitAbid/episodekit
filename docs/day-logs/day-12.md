@@ -1,6 +1,6 @@
 # Day 12 (build session 12) — 2026-10-25
 
-**Build commit:** (see follow-up docs commit) · open-sourced the build.
+**Build commit:** `8b7c93d` · open-sourced the build.
 
 ## What shipped
 1. **Public GitHub repo: <https://github.com/gitAbid/episodekit>** — the full
