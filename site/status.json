@@ -7,9 +7,9 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-25 (build session 10)",
+  "updatedAt": "2026-10-25 (build session 11)",
   "progress": {
-    "shipped": 29,
+    "shipped": 31,
     "tests": 60
   },
   "branches": [
@@ -126,6 +126,11 @@
           "date": "D9"
         },
         {
+          "title": "Show notes template page (SEO) + FAQ + schema.org structured data",
+          "status": "done",
+          "date": "D11"
+        },
+        {
           "title": "Sample package page (unedited engine output)",
           "status": "done",
           "date": "D2"
@@ -215,6 +220,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 11,
+      "date": "2026-10-25",
+      "title": "Template + structured data shipped",
+      "note": "Copyable show-notes template page with a worked example (targets template-intent searches, funnels to the generator), plus FAQ section and SoftwareApplication+FAQPage JSON-LD on the landing for rich results."
+    },
     {
       "day": 10,
       "date": "2026-10-25",

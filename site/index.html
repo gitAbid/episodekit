@@ -15,6 +15,36 @@
 <meta name="twitter:description" content="One episode upload → the whole week's content package.">
 <meta name="twitter:image" content="https://episodekit.vercel.app/og.png">
 <link rel="canonical" href="https://episodekit.vercel.app/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "EpisodeKit",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://episodekit.vercel.app/",
+      "description": "Turn one podcast episode into a month of content: article-style show notes, discussion kit, 5-day email series, social pack, summary and titles — with every quote verbatim from the episode.",
+      "offers": [
+        { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD", "description": "3 episodes per month while in beta" },
+        { "@type": "Offer", "name": "Pro", "price": "19", "priceCurrency": "USD", "description": "12 episodes per month" },
+        { "@type": "Offer", "name": "Studio", "price": "49", "priceCurrency": "USD", "description": "40 episodes per month" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Are the quotes real?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — architecturally. Every quote is validated as an exact word-for-word sentence from your transcript; AI-paraphrased quotes are rejected and fall back to the deterministic build." } },
+        { "@type": "Question", "name": "Do I need an account?", "acceptedAnswer": { "@type": "Answer", "text": "No. The free tools work with zero signup, and the app is open while in beta." } },
+        { "@type": "Question", "name": "Audio or transcript?", "acceptedAnswer": { "@type": "Answer", "text": "Both. Upload an audio file (compressed in your browser before upload) or paste a transcript from any transcription app." } },
+        { "@type": "Question", "name": "What does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "Free while in beta: 3 episodes/month. Pro will be $19/mo. The first 50 shows can lock Pro for life with a one-time $49 founding membership." } },
+        { "@type": "Question", "name": "Who owns the content?", "acceptedAnswer": { "@type": "Answer", "text": "You do. Everything is editable and exportable (Markdown/JSON), and nothing is published without you." } }
+      ]
+    }
+  ]
+}
+</script>
 <style>
   :root{
     --bg:#0e1116; --bg2:#151b23; --card:#1a2230; --line:#283242;
@@ -72,6 +102,9 @@
   .proof img{width:100%;border-radius:14px;border:1px solid var(--line)}
   .proof a{color:var(--muted);font-size:13.5px;display:block;text-align:center;margin-top:8px}
   .waitrow{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+  details.faq{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:10px 0;max-width:820px;margin-left:auto;margin-right:auto}
+  details.faq summary{font-weight:700;cursor:pointer;font-size:15.5px}
+  details.faq p{color:var(--muted);font-size:14.5px;margin-top:10px}
   .waitrow input{background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 14px;font-size:15px;min-width:260px}
   .waitrow button{background:var(--accent);color:#141414;font-weight:700;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;font-size:15px}
   #waitmsg{margin-top:10px;font-size:14px;color:var(--accent2);min-height:20px}
@@ -194,6 +227,14 @@
         <img src="img/landing-pricing.png" alt="EpisodeKit pricing: Free, Pro at $19/month, Studio at $49/month" loading="lazy" width="1280" height="800">
         <a href="app.html">Or start now in the app (beta) →</a>
       </div>
+    </div>
+    <div style="max-width:820px;margin:44px auto 0" id="faq">
+      <h2>FAQ</h2>
+      <details class="faq"><summary>Are the quotes real?</summary><p>Yes — architecturally. Every quote in every artifact is validated as an exact word-for-word sentence from your transcript; if the AI-enhanced pass paraphrases, that artifact falls back to the deterministic build. Nothing invented.</p></details>
+      <details class="faq"><summary>Do I need an account?</summary><p>No. The free tools (show notes, titles, discussion kit, email series) work with zero signup, and the app is open while in beta.</p></details>
+      <details class="faq"><summary>Audio or transcript?</summary><p>Both. Upload an audio file — it's compressed in your browser before upload — or paste a transcript from any transcription app.</p></details>
+      <details class="faq"><summary>What does it cost?</summary><p>Free while in beta: 3 episodes/month. Pro will be $19/mo (12 episodes, no attribution). The first 50 shows can lock Pro for life with a one-time $49 founding membership.</p></details>
+      <details class="faq"><summary>Who owns the content?</summary><p>You do. Everything is editable and exportable (Markdown/JSON), and nothing is published anywhere without you.</p></details>
     </div>
   </div>
 </section>
