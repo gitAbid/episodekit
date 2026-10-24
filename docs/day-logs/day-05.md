@@ -1,6 +1,6 @@
 # Day 5 — 2026-10-24
 
-**Build commit:** (see follow-up docs commit) · **SermonKit is LIVE:
+**Build commit:** `d034095` · **SermonKit is LIVE:
 <https://sermonkit.vercel.app>**
 
 ## What shipped
