@@ -7,7 +7,7 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 16)",
+  "updatedAt": "2026-10-26 (build session 17)",
   "progress": {
     "shipped": 31,
     "tests": 62
@@ -159,6 +159,11 @@
           "title": "Pillar guide (head keyword) + tool→app transcript handoff",
           "status": "done",
           "date": "D16"
+        },
+        {
+          "title": "Working contact form (dead mailto: CTAs replaced — domain not owned)",
+          "status": "done",
+          "date": "D17"
         }
       ]
     },
@@ -255,6 +260,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 17,
+      "date": "2026-10-26",
+      "title": "Bug fix: every 'email us' CTA was dead",
+      "note": "The site pointed at @episodekit.app addresses — a domain we don't own, so those emails silently bounced. Replaced with a contact page backed by /api/contact (durable sk_contact log); all mailto: and stale-address references removed."
+    },
     {
       "day": 16,
       "date": "2026-10-26",

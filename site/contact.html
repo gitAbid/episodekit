@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — EpisodeKit</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="tools/tool.css">
+<style>
+textarea{font-family:inherit}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="logo"><a href="index.html" style="color:inherit">Episode<span>Kit</span></a></div>
+  <a href="index.html#pricing">Pricing</a>
+  <a href="tools/index.html">Free tools</a>
+  <a href="#" style="margin-left:auto;color:var(--accent)">Contact</a>
+</div></header>
+
+<main class="wrap">
+  <h1>Say hello</h1>
+  <p class="sub">Questions, feedback, founding-membership interest, or a bug —
+  it all lands directly with the maker (an honest human reads every message;
+  this form is the reliable path while we set up a mailbox).</p>
+
+  <div class="card" style="margin-top:8px">
+    <div class="row" style="margin-top:0">
+      <input id="cemail" type="email" placeholder="you@yourshow.fm" style="flex:1;min-width:240px;background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 14px;font-size:15px">
+    </div>
+    <textarea id="cmsg" style="min-height:160px;margin-top:12px" placeholder="What's on your mind?"></textarea>
+    <div class="row">
+      <button class="primary" id="cgo">Send message</button>
+    </div>
+    <div class="notice" id="cmsgout" style="display:none"></div>
+  </div>
+</main>
+
+<footer><div class="wrap">Part of <a href="index.html">EpisodeKit</a> — one episode, a month of content · <a href="map.html">watch us build live</a></div></footer>
+<script src="js/analytics.js"></script>
+<script>
+document.getElementById("cgo").addEventListener("click", async () => {
+  const email = document.getElementById("cemail").value.trim();
+  const message = document.getElementById("cmsg").value.trim();
+  const out = document.getElementById("cmsgout");
+  out.style.display = "block";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { out.textContent = "Please enter a valid email so we can reply."; return; }
+  if (message.length < 10) { out.textContent = "Tell us a little more (10+ characters)."; return; }
+  const btn = document.getElementById("cgo");
+  btn.disabled = true; btn.textContent = "Sending…";
+  try {
+    const r = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email, message }) });
+    if (r.status === 204) {
+      out.textContent = "Got it — thank you. We reply within a day or two.";
+      document.getElementById("cmsg").value = "";
+    } else throw new Error("server " + r.status);
+  } catch {
+    out.textContent = "Couldn't reach the server — please try again in a minute.";
+  } finally {
+    btn.disabled = false; btn.textContent = "Send message";
+  }
+});
+</script>
+</body>
+</html>

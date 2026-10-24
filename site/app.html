@@ -96,7 +96,7 @@ button.ghost.small{padding:6px 12px;font-size:13px}
     <h2 class="cardtitle" id="quotaTitle">You've used your 3 free episodes this month</h2>
     <p class="meta" id="quotaBody">EpisodeKit Pro is $19/mo for 12 episodes — every artifact stays editable and yours. Founding-member pricing while in beta.</p>
     <div class="dl" id="quotaButtons">
-      <a class="primary" style="display:inline-block;padding:12px 22px;border-radius:11px;color:#141414;font-weight:700" href="mailto:founders@episodekit.app?subject=Pro%20upgrade">Get Pro — email us</a>
+      <a class="primary" style="display:inline-block;padding:12px 22px;border-radius:11px;color:#141414;font-weight:700" href="contact.html">Get Pro — talk to us</a>
     </div>
     <div class="row" style="margin-top:18px">
       <input id="lickey" placeholder="Have a license key? SK1-…" style="flex:1;min-width:220px;background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 14px;font-size:15px">
@@ -182,7 +182,7 @@ $("licgo").addEventListener("click", async () => {
       msg.textContent = "License active — " + j.plan + " (" + j.monthlySermons + " episodes/month).";
       updateQuota();
     } else {
-      msg.textContent = "That key didn't validate (" + (j.reason || "invalid") + "). Email founders@episodekit.app and we'll sort it.";
+      msg.textContent = "That key didn't validate (" + (j.reason || "invalid") + "). Use the contact page and we'll sort it.";
     }
   } catch {
     msg.textContent = "Couldn't reach the server — try again.";
