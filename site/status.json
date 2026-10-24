@@ -3,8 +3,8 @@
   "tagline": "One episode → a month of content",
   "sprint": { "start": "2026-10-24", "end": "2026-11-24", "day": 7 },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-25 (build session 7)",
-  "progress": { "shipped": 24, "tests": 60 },
+  "updatedAt": "2026-10-25 (build session 8)",
+  "progress": { "shipped": 27, "tests": 60 },
   "branches": [
     {
       "id": "strategy",
@@ -43,10 +43,11 @@
         { "title": "Landing page with real proof screenshots + waitlist", "status": "done", "date": "D1–6" },
         { "title": "Free tool: discussion kit generator", "status": "done", "date": "D1" },
         { "title": "Free tool: episode title generator", "status": "done", "date": "D3" },
+        { "title": "Free tool: show notes generator (the money keyword)", "status": "done", "date": "D8" },
         { "title": "Free tool: email series generator", "status": "done", "date": "D3" },
         { "title": "Sample package page (unedited engine output)", "status": "done", "date": "D2" },
         { "title": "SEO: sitemap, robots, OG tags + image, analytics", "status": "done", "date": "D3" },
-        { "title": "Comparison pages (vs Podsqueeze, vs Castmagic)", "status": "next", "date": "wk 3" }
+        { "title": "Comparison pages (vs Podsqueeze, vs Castmagic) — factual, attributed", "status": "done", "date": "D8" }
       ]
     },
     {
@@ -82,14 +83,14 @@
     { "day": 5, "date": "2026-10-24", "title": "Live on production, perfect Lighthouse", "note": "Vercel deploy; deployment protection disabled; domain auto-attach fixed (manual aliases go stale). Performance 100 / Accessibility 100 / Best Practices 96 / SEO 100." },
     { "day": 7, "date": "2026-10-24", "title": "Positioning pivot: podcasters (religion-neutral)", "note": "User set a hard constraint: no religious-domain products. Full rebrand to EpisodeKit — same engine, new artifacts (article/show notes, discussion kit, email series), new CC0 demo, religion-free test gates. Podcast vertical was research rank-2 (Podsqueeze $9–89/mo, Castmagic $19–699/mo)." },
     { "day": 7, "date": "2026-10-24", "title": "Payment rail built ahead of schedule", "note": "Stateless HMAC license keys (SK1/SK4/SKF), signature-verified LS webhook, checkout config endpoint, in-app activation. Inert until Lemon Squeezy credentials arrive — then payments are live in minutes." },
+    { "day": 8, "date": "2026-10-25", "title": "SEO assets: show-notes generator + comparison pages", "note": "Free no-signup 'podcast show notes generator' (the market's money keyword) + honest vs-Podsqueeze / vs-Castmagic pages with attributed facts. Server-side sk_usage events make activation measurable from Vercel logs alone." },
     { "day": 7, "date": "2026-10-24", "title": "This live sprint map", "note": "status.json is updated by every daily build session; the map also polls live counters (pageviews, waitlist) every 30 seconds." }
   ],
   "next": [
-    "Vercel rename → episodekit.vercel.app + verification",
+    "Demo video #1 (agent-recorded + narrated)",
     "GLM_API_KEY + ASR_API_KEY (activates AI + audio paths)",
     "Lemon Squeezy account (activates checkout)",
     "Directory submissions + GSC (user accounts)",
-    "Demo video #1 + comparison pages",
     "Show HN / Product Hunt launch (wk 3)"
   ]
 }

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Podcast Show Notes Generator — EpisodeKit</title>
+<meta name="description" content="Paste your episode transcript and get structured show notes: a titled writeup with section headings built from what was actually said. Free, no signup, quotes verbatim.">
+<meta property="og:title" content="Free Podcast Show Notes Generator">
+<meta property="og:description" content="Paste an episode, get article-ready show notes with headings — every line grounded in your transcript. Free, no signup.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://episodekit.vercel.app/tools/show-notes.html">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="tool.css">
+<style>
+.sec{margin:22px 0 6px}
+.sec h3{font-size:17px;color:var(--text)}
+.sec p{color:var(--text);margin-top:6px}
+.tl{color:var(--muted);font-size:12.5px;font-style:italic}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="logo"><a href="../index.html" style="color:inherit">Episode<span>Kit</span></a></div>
+  <a href="../index.html#pricing">Pricing</a>
+  <a href="../samples.html">Sample package</a>
+  <a href="index.html">Free tools</a>
+  <a href="#" style="margin-left:auto;color:var(--accent)">Show notes generator</a>
+</div></header>
+
+<main class="wrap">
+  <h1>Podcast Show Notes Generator</h1>
+  <p class="sub">Paste your episode transcript — get structured show notes: a
+  titled writeup with section headings, written entirely from what was actually
+  said in the episode. No signup, instant, and every sentence comes from your
+  transcript (nothing invented).</p>
+
+  <textarea id="sermon" placeholder="Paste your episode transcript here… (full transcript = best headings)"></textarea>
+  <div class="row">
+    <button class="primary" id="go">Generate show notes</button>
+    <span class="hint" id="count">0 words</span>
+  </div>
+
+  <div id="out">
+    <div class="card">
+      <h2 class="cardtitle" id="artTitle"></h2>
+      <p class="meta" id="themes"></p>
+      <div id="body"></div>
+      <div class="row" style="margin-top:20px">
+        <button class="ghost" id="copy">Copy as Markdown</button>
+        <button class="ghost" id="again">↻ Start over</button>
+      </div>
+    </div>
+    <div class="notice">Tip: paste the full transcript — more text means better section headings.
+    Need the discussion kit, email series, and social pack too? <a href="../app.html">Generate the whole package →</a></div>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  Part of <a href="../index.html">EpisodeKit</a> — one episode, a month of content.
+  <a href="discussion-guide.html">Discussion kit</a> ·
+  <a href="episode-titles.html">Episode titles</a> ·
+  <a href="email-series.html">Email series</a>
+</div></footer>
+
+<script src="../js/analytics.js"></script>
+<script>
+const area=document.getElementById("sermon"), go=document.getElementById("go");
+area.addEventListener("input",()=>{
+  document.getElementById("count").textContent=(area.value.trim().split(/\s+/).filter(Boolean).length)+" words";
+});
+let current=null;
+go.addEventListener("click",async()=>{
+  const text=area.value.trim();
+  const wc=text.split(/\s+/).filter(Boolean).length;
+  if(wc<80){alert("Please paste at least ~80 words of transcript so the notes can be grounded in the episode.");return;}
+  go.disabled=true; go.textContent="Generating…";
+  try{
+    const r=await fetch("/api/generate-suite",{
+      method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({mode:"article",text:text.slice(0,60000)})});
+    if(!r.ok) throw new Error("server "+r.status);
+    const j=await r.json();
+    current=j;
+    document.getElementById("artTitle").textContent=j.article.title;
+    document.getElementById("themes").textContent="Themes: "+j.themes.join(", ");
+    document.getElementById("body").innerHTML=j.article.sections.map(sec=>`
+      <div class="sec"><h3>${sec.heading}</h3>${sec.paragraphs.map(p=>`<p>${p}</p>`).join("")}</div>`).join("");
+    document.getElementById("out").style.display="block";
+    go.textContent="Generate again";
+  }catch(e){
+    alert("The generator couldn't reach the server. Check your connection and try again.");
+  }finally{
+    go.disabled=false; if(go.textContent==="Generating…") go.textContent="Generate show notes";
+  }
+});
+document.getElementById("copy").addEventListener("click",()=>{
+  if(!current)return;
+  const md="# "+current.article.title+"\n\n"+current.article.sections.map(s=>"## "+s.heading+"\n\n"+s.paragraphs.join("\n\n")).join("\n\n")+"\n\n— generated with EpisodeKit (episodekit.app)";
+  navigator.clipboard.writeText(md).then(()=>{
+    const b=document.getElementById("copy"); b.textContent="Copied ✓"; setTimeout(()=>b.textContent="Copy as Markdown",1500);
+  });
+});
+document.getElementById("again").addEventListener("click",()=>{
+  document.getElementById("out").style.display="none"; area.value=""; area.focus();
+  document.getElementById("count").textContent="0 words";
+});
+</script>
+</body>
+</html>

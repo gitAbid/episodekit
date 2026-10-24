@@ -2,6 +2,14 @@
 
 All entries map to a commit. Newest first.
 
+## Day 8 (build session 8) — 2026-10-25
+- Free tool #4: **show notes generator** (money-keyword SEO page) + new API
+  `mode:"article"` — `tools/show-notes.html`
+- Comparison pages: vs Podsqueeze, vs Castmagic (factual, attributed,
+  choose-them-first honesty) — `compare/`
+- Server-side `sk_usage` events → activation measurable from Vercel logs
+- Sitemap/hub/footer wiring; tests 60/60; live-verified
+
 ## Day 7 (build session 7) — 2026-10-25
 - **Pivot: SermonKit → EpisodeKit** (user constraint: religion-neutral products
   only). Full rebrand, podcast vertical, new CC0 demo, religion-free test gate,

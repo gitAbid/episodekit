@@ -9,7 +9,7 @@
 //   client falls back to its own offline generator.
 
 import { generateSuiteGlm, hasGlm } from "../engine/glm.js";
-import { analyzeTranscript, buildTitles, buildEmailSeries } from "../engine/lib.js";
+import { analyzeTranscript, buildTitles, buildEmailSeries, buildArticle } from "../engine/lib.js";
 
 const TIMEOUT_MS = 45000;
 
@@ -26,10 +26,17 @@ export default async function handler(req, res) {
   if (text.length > 60000) {
     return res.status(413).json({ error: "text too long" });
   }
+  // Server-side usage event — activation is measurable from Vercel logs alone.
+  console.log(JSON.stringify({ sk_usage: { t: Date.now(), mode, words: text.split(/\s+/).length } }));
 
   if (mode === "full") {
     const suite = await generateSuiteGlm(text);
     return res.status(200).json({ suite });
+  }
+
+  if (mode === "article") {
+    const a = analyzeTranscript(text);
+    return res.status(200).json({ article: buildArticle(text, a), themes: a.themes.slice(0, 5) });
   }
 
   if (mode === "titles" || mode === "series") {
