@@ -1,6 +1,6 @@
 # Day 9 (build session 9) — 2026-10-25
 
-**Build commit:** (see follow-up docs commit) · demo video #1.
+**Build commit:** `8333dd2` · demo video #1.
 
 ## What shipped
 **38-second narrated product demo**, embedded on the landing page and ready for
