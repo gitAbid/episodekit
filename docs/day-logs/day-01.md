@@ -1,6 +1,7 @@
 # Day 1 — 2026-10-24
 
-**Commit:** `117a611` (repo: project-okra, branch main)
+**Build commit:** `7b8853f` (repo: project-okra, branch main; this log amended in a
+follow-up docs commit)
 
 ## What shipped
 1. **Research → decision.** Three parallel research agents (demand scan, business
