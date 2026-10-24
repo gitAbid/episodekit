@@ -1,6 +1,6 @@
 # Day 10 (build session 10) — 2026-10-25
 
-**Build commit:** (see follow-up docs commit) · launch pack + metrics baseline.
+**Build commit:** `3217a92` · launch pack + metrics baseline.
 
 ## What shipped
 1. **Launch pack** — `docs/launch-pack.md`, paste-ready:
