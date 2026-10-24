@@ -1,6 +1,6 @@
 # Day 7 (build session 7) — 2026-10-25
 
-**Build commit:** (see follow-up docs commit) · pivot + payment rail + live map.
+**Build commit:** `8333ab0` · pivot + payment rail + live map.
 
 ## What shipped
 1. **Positioning pivot: SermonKit → EpisodeKit.** User set a hard constraint:
