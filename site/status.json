@@ -7,7 +7,7 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 14)",
+  "updatedAt": "2026-10-26 (build session 15)",
   "progress": {
     "shipped": 31,
     "tests": 62
@@ -91,6 +91,11 @@
           "title": "Quote validator accepts verbatim fragments (ellipses/curly quotes); paraphrases still rejected",
           "status": "done",
           "date": "D14"
+        },
+        {
+          "title": "Config-driven first-run UX (paste tab default until ASR live) + vertical 9:16 demo cut",
+          "status": "done",
+          "date": "D15"
         }
       ]
     },
@@ -245,6 +250,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 15,
+      "date": "2026-10-26",
+      "title": "First-run honesty + Shorts asset",
+      "note": "The app now asks /api/config whether audio transcription is live and defaults to the paste tab with a clear explanation until it is — no more dead-end first click. A 1080x1920 vertical cut of the demo is ready for Shorts/TikTok at launch."
+    },
     {
       "day": 14,
       "date": "2026-10-26",

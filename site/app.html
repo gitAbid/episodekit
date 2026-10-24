@@ -128,10 +128,20 @@ function updateQuota() {
   return left;
 }
 updateQuota();
-// Checkout buttons + license activation (payment rail; inert until LS env set)
+// Config-driven UX: default to the paste tab (and label the audio tab honestly)
+// until audio transcription is configured on the server.
 (async () => {
   try {
     const c = await (await fetch("/api/config")).json();
+    if (!c.audioEnabled) {
+      switchTab(false);
+      const note = document.createElement("div");
+      note.className = "notice";
+      note.style.marginTop = "16px";
+      note.textContent = "Audio upload activates at public launch — paste a transcript today (any transcription app works; everything else is identical).";
+      document.getElementById("audioPane").prepend(note);
+      document.getElementById("tabAudio").addEventListener("click", () => { /* allow exploring; the note explains */ }, { once: true });
+    }
     if (c.paymentsEnabled) {
       const btns = [];
       if (c.checkout.founder) btns.push(`<a class="primary" style="display:inline-block;padding:12px 22px;border-radius:11px;color:#141414;font-weight:700" href="${c.checkout.founder}">Founding member — $49 once</a>`);
