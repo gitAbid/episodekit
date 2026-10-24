@@ -2,6 +2,11 @@
 
 All entries map to a commit. Newest first.
 
+## Day 22 (build session 22) — 2026-10-26
+- Language guard: non-Latin transcripts → honest 400 + friendly notices (was empty artifacts)
+- scripts/pull-metrics.mjs (launch-day sk_* aggregation from Vercel logs)
+- Founding-member email draft in launch pack; GitHub release v1.0.0
+
 ## Day 21 (build session 21) — 2026-10-26
 - Site-wide QA sweep: 15-page link crawl + 14 live routes — zero broken links
 - Lighthouse re-run caught an a11y regression (color-only links from newer

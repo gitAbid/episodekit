@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 21)",
+  "updatedAt": "2026-10-26 (build session 22)",
   "progress": {
     "shipped": 31,
     "tests": 62
@@ -102,6 +102,11 @@
           "title": "Engine copywriting pass: 6-way follow-up bank, richer apply prompts, pair-based titles",
           "status": "done",
           "date": "D19"
+        },
+        {
+          "title": "Language guard (honest 400 for non-Latin input) + launch-day metrics puller",
+          "status": "done",
+          "date": "S22"
         }
       ]
     },
@@ -281,6 +286,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 22,
+      "date": "2026-10-26",
+      "title": "Launch hardening: language guard + v1.0.0",
+      "note": "Non-Latin transcripts now fail honestly (400 + friendly notice) instead of rendering empty artifacts; metrics puller aggregates sk_* events from Vercel logs for launch-day tracking; founding email drafted; GitHub release v1.0.0 published."
+    },
     {
       "day": 21,
       "date": "2026-10-26",
