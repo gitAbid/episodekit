@@ -47,7 +47,9 @@ from audio or a YouTube link.
       https://sermonkit.vercel.app**; Lighthouse 100/100/96/100; GSC submission
       needs user's Google account (documented in day-05 log)
       robots, OG images. Verify Lighthouse ≥90 on landing.
-- [ ] D6: Pricing page, waitlist capture, docs/samples page with the generated suite.
+- [x] D6: Pricing page, waitlist capture, docs/samples page with the generated suite.
+      — pricing proof grid + waitlist (live e2e) + samples context card +
+      directory kit; see docs/day-logs/day-06.md
 - [ ] D7: Buffer/catch-up + Week-1 review in docs/day-logs/week-1-review.md.
 
 ## Week 2 (Days 8–14): Payments + launch prep

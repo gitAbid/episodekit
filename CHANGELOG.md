@@ -2,6 +2,14 @@
 
 All entries map to a commit. Newest first.
 
+## Day 6 — 2026-10-24
+- Waitlist capture: `/api/waitlist` + form on landing (live e2e verified)
+- Landing proof: live-captured screenshots (app result, samples, pricing) with
+  alt text, lazy loading, CLS-safe dimensions — `site/img/`
+- Samples page: generated-from-context highlight card + try-it CTA
+- Directory submission kit for 8 directories — `docs/directory-submissions.md`
+- Tests 39/39; all features verified on production
+
 ## Day 5 — 2026-10-24
 - **LIVE: https://sermonkit.vercel.app** — Vercel production deploy (static
   site + 3 API functions), protection disabled, project renamed to `sermonkit`,
