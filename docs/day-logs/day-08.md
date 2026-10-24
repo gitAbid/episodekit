@@ -1,6 +1,6 @@
 # Day 8 (build session 8) — 2026-10-25
 
-**Build commit:** (see follow-up docs commit) · SEO assets + usage events.
+**Build commit:** `ee394cf` · SEO assets + usage events.
 
 ## What shipped
 1. **Free tool #4: Podcast Show Notes Generator** —
