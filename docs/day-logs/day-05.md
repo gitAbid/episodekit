@@ -5,7 +5,7 @@
 
 ## What shipped
 1. **Production deploy on Vercel.** Vercel CLI was already authenticated
-   (account `perabyteai-6559`, team pera-byte). Deployed from repo root
+   (our team account). Deployed from repo root
    (static `site/` + `api/` functions), then:
    - Disabled Deployment Protection (`ssoProtection: null` via PATCH
      /v9/projects — public access verified with unauthenticated curl).

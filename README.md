@@ -1,8 +1,9 @@
 # EpisodeKit
 
 **Live: <https://episodekit.vercel.app>** · **Sprint map (live):
-<https://episodekit.vercel.app/map>** — deployed on Vercel (`vercel --prod
---yes` from the repo root; env vars in the Vercel dashboard).
+<https://episodekit.vercel.app/map>** · **Built in the open** — every decision,
+day log, and test is in this repo (`docs/day-logs/`), produced by an autonomous
+daily build loop running through November 2026.
 
 **One episode → a month of content.** EpisodeKit turns a podcast episode (audio
 file or transcript) into the full content package a creator spends hours
