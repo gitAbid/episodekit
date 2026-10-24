@@ -1,6 +1,6 @@
 # Day 3 — 2026-10-24
 
-**Build commit:** (see follow-up docs commit) · tools #2/#3 + analytics v0 + SEO.
+**Build commit:** `f1b9637` · tools #2/#3 + analytics v0 + SEO.
 
 ## What shipped
 1. **Free tool #2 — Sermon Title Generator** (`site/tools/sermon-titles.html`):
