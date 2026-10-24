@@ -1,6 +1,6 @@
 # Day 15 (build session 15) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · first-run honesty + Shorts asset.
+**Build commit:** `bb289a6` · first-run honesty + Shorts asset.
 
 ## What shipped
 1. **Config-driven first-run UX** — `/api/config` now reports `audioEnabled`
