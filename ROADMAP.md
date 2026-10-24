@@ -116,6 +116,13 @@ a transcript.
   (static from `site/`, functions from `api/`; user chose Vercel over Netlify).
 
 ## Daily cadence (automation: 09:00 local, every day)
+0. **Uptime check (first, always):** curl (1) `/` → 200, (2) `/tools/show-notes.html`
+   (follow redirects) → 200, (3) `/api/config` → 200 JSON, (4) POST
+   `/api/generate-suite` mode `titles` with a short test body → 200 JSON with
+   `titles`. All healthy → continue silently. Any failure → diagnose (npm test,
+   vercel inspect), fix (a `vercel --prod --yes` redeploy fixes most cases),
+   re-verify, and record the incident + evidence in that day's day-log before
+   anything else.
 1. Read ROADMAP.md + latest docs/day-logs/ + CHANGELOG.md.
 2. Pick the highest-priority unfinished item; build/verify it (test in browser where
    possible). One marketing action from the GTM sections.

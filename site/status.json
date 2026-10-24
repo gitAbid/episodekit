@@ -7,7 +7,7 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 17)",
+  "updatedAt": "2026-10-26 (build session 18)",
   "progress": {
     "shipped": 31,
     "tests": 62
@@ -255,11 +255,22 @@
           "title": "Show HN + Product Hunt launch",
           "status": "next",
           "date": "wk 3"
+        },
+        {
+          "title": "PH-spec gallery assets (1270×760) + uptime check in daily loop",
+          "status": "done",
+          "date": "D18"
         }
       ]
     }
   ],
   "decisions": [
+    {
+      "day": 18,
+      "date": "2026-10-26",
+      "title": "Launch ops hardening",
+      "note": "Gallery images pre-cropped to PH's exact 1270×760 spec; the daily build loop now starts with a 4-endpoint uptime check that self-heals (redeploy) and logs incidents; README shows verified sample output (a quote I initially mis-attributed was corrected against the actual generated JSON)."
+    },
     {
       "day": 17,
       "date": "2026-10-26",

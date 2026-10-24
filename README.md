@@ -11,6 +11,18 @@ daily build loop running through November 2026.
 
 *38-second narrated demo: [episodekit.vercel.app](https://episodekit.vercel.app)*
 
+**Sample output, unedited** — from the CC0 demo transcript in
+`docs/samples/demo-episode.txt` (see it rendered:
+[samples page](https://episodekit.vercel.app/samples)):
+
+> **Titles:** Attention and Version · The Attention We Keep Avoiding · Attention
+> for Ordinary Weeks · Focus Changes Everything · …
+> **Summary:** Attention compounds, the cost of an interruption is not the five
+> minutes it takes… calendars beat to-do lists because a to-do item is a wish
+> while a calendar block is a promise…
+> **Social pull-quote:** "We budget our dollars, we calendar our hours, and
+> then we let anyone with a notification spend our attention for free."
+
 **One episode → a month of content.** EpisodeKit turns a podcast episode (audio
 file or transcript) into the full content package a creator spends hours
 writing every week: an article-ready writeup, community discussion kit, 5-day

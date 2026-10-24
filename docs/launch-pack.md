@@ -28,10 +28,13 @@ transcript. Free while in beta (3 episodes/month); Pro is $19/mo.
 
 **Gallery order:**
 1. `site/demo.mp4` — the 38s narrated demo (lead asset)
-2. `site/img/landing-hero.png` — hero + CTA
-3. `site/img/app-result.png` — real result page (6 artifacts)
-4. `site/img/samples.png` — full sample package
-5. `site/og.png` — brand card
+2. `docs/launch-assets/ph-landing-hero.png` — hero + CTA (1270×760, PH spec)
+3. `docs/launch-assets/ph-app-result.png` — real result page (1270×760)
+4. `docs/launch-assets/ph-samples.png` — full sample package (1270×760)
+5. `docs/launch-assets/brand-1200x630.png` — brand card
+
+(PH gallery images must be exactly 1270×760 — all pre-cropped in
+`docs/launch-assets/`; the vertical cut for Shorts is `site/demo-vertical.mp4`.)
 
 **Topics:** Podcasting · Artificial Intelligence · Productivity
 
