@@ -7,7 +7,7 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-25 (build session 11)",
+  "updatedAt": "2026-10-25 (build session 12)",
   "progress": {
     "shipped": 31,
     "tests": 60
@@ -192,6 +192,11 @@
           "date": "D10"
         },
         {
+          "title": "Public GitHub repo (build-in-public channel)",
+          "status": "done",
+          "date": "D12"
+        },
+        {
           "title": "Complaint lexicon + community plan (podcast spaces)",
           "status": "done",
           "date": "D7"
@@ -220,6 +225,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 12,
+      "date": "2026-10-25",
+      "title": "Open-sourced the build: github.com/gitAbid/episodekit",
+      "note": "Distribution without new accounts: the full repo (engine, site, day logs, tests) is public with topics. Infra account ids redacted from logs first; secrets scan clean (.vercel/ ignored). Also checked for GLM/ASR keys in the environment — none exposed, so AI/audio activation remains user-side."
+    },
     {
       "day": 11,
       "date": "2026-10-25",
