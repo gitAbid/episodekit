@@ -1,6 +1,6 @@
 # Day 19 (build session 19) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · deterministic quality pass.
+**Build commit:** `c2d051d` · deterministic quality pass.
 
 ## What shipped
 **Engine copywriting pass** — until GLM keys land, the deterministic engine is
