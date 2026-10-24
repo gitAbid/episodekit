@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Podcast Repurposing Playbook (2026) — EpisodeKit</title>
+<meta name="description" content="How to turn one episode into a month of content without burning out: the priority order, the batch workflow, the verbatim rule, and the tools.">
+<meta property="og:title" content="The Podcast Repurposing Playbook">
+<meta property="og:description" content="One episode → a month of content: priority order, batch workflow, and the verbatim rule.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://episodekit.vercel.app/guides/repurposing.html">
+<meta property="og:image" content="https://episodekit.vercel.app/og.png">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="../tools/tool.css">
+<style>
+.g{max-width:760px;margin:0 auto}
+main{padding:44px 0 80px}
+h1{font-size:clamp(28px,4.5vw,40px);letter-spacing:-.5px;line-height:1.15}
+.meta{color:var(--muted);font-size:14px;margin:10px 0 30px}
+h2.q{font-size:24px;margin:40px 0 12px;letter-spacing:-.3px}
+p.p{margin:14px 0;color:var(--text)}
+ul.l,ol.l{padding-left:22px;margin:12px 0}
+ul.l li,ol.l li{margin:8px 0;color:var(--text)}
+.box{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:16px 20px;margin:20px 0}
+a{color:var(--accent2)}
+table.tb{width:100%;border-collapse:collapse;margin:18px 0;font-size:14px}
+table.tb th{color:var(--accent);font-size:12px;letter-spacing:1px;text-transform:uppercase;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+table.tb td{padding:10px 12px;border-bottom:1px solid var(--line);color:var(--text);vertical-align:top}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="logo"><a href="../index.html" style="color:inherit">Episode<span>Kit</span></a></div>
+  <a href="../index.html#pricing">Pricing</a>
+  <a href="../tools/index.html">Free tools</a>
+  <a href="show-notes.html" style="margin-left:auto;color:var(--muted)">Show notes guide</a>
+</div></header>
+
+<main class="wrap g">
+  <h1>The Podcast Repurposing Playbook</h1>
+  <p class="meta">One episode, a month of content — without a content team. The priority order, the batch workflow, and the rules that keep it honest. ~6 min read.</p>
+
+  <h2 class="q">The math nobody tells solo podcasters</h2>
+  <p class="p">A weekly 45-minute episode contains roughly 6,000 spoken words — more than most people write in a week. Nearly all of it evaporates. Repurposing isn't making "extra" content; it's <b>rescuing content you already made</b>. Done even partially, one episode yields: an episode-page writeup, a newsletter, a 5-day email drip, 3–6 social posts with quotes, a community discussion prompt, and title options for the clip cuts. That's 15–20 assets, most of them derived, not written.</p>
+
+  <h2 class="q">Priority order (when you can't do it all)</h2>
+  <table class="tb">
+    <tr><th>Asset</th><th>Effort</th><th>Return</th><th>Do it if…</th></tr>
+    <tr><td>Show notes / episode page</td><td>Medium</td><td>Compounding (search)</td><td>Always — it's the anchor everything links to</td></tr>
+    <tr><td>Newsletter issue</td><td>Low</td><td>Highest (owned audience)</td><td>You have any list at all</td></tr>
+    <tr><td>2–3 quote posts</td><td>Very low</td><td>Reach + guest shares</td><td>Always — guests reshare their own best lines</td></tr>
+    <tr><td>Community discussion prompts</td><td>Low</td><td>Retention</td><td>You have a Discord/Patreon/group</td></tr>
+    <tr><td>5-day email drip</td><td>Medium</td><td>Onboarding new subscribers for months</td><td>List &gt; ~500</td></tr>
+    <tr><td>Video clips</td><td>High</td><td>Volatile</td><td>You have video source + editing time</td></tr>
+  </table>
+
+  <h2 class="q">The verbatim rule</h2>
+  <div class="box">Whatever tool writes your repurposed assets: <b>quotes must be word-for-word from the transcript.</b> A fabricated "quote" shared publicly by a guest is the fastest way to burn a relationship — and it's the #1 complaint about AI repurposing tools (hosts report rewriting "most of the output anyway"). Our <a href="../tools/show-notes.html">generator</a> enforces this architecturally: AI-paraphrased quotes are rejected at generation time.</div>
+
+  <h2 class="q">The batch workflow (one focused hour per episode)</h2>
+  <ol class="l">
+    <li><b>Transcript ready</b> (your usual ASR; or paste it).</li>
+    <li><b>Pull the 6 best moments</b> — claims, numbers, stories. These become your quotes and timestamps.</li>
+    <li><b>Write the notes</b> around them — <a href="../templates/show-notes.html">template here</a>, full anatomy in the <a href="show-notes.html">show notes guide</a>.</li>
+    <li><b>Derive the rest</b>: newsletter = summary + one quote; social = quote + link; community = 3 questions; drip = 5 moments, one per day.</li>
+    <li><b>Schedule once</b>, then leave it alone. Batching beats dripping your own attention all week.</li>
+  </ol>
+  <p class="p">Steps 2–4 are exactly what the <a href="../app.html">EpisodeKit app</a> automates — all six artifact families from one transcript — but the playbook works by hand too; the tools are speed, not magic.</p>
+
+  <h2 class="q">Choosing tools honestly</h2>
+  <p class="p">All-in-one suites (Podsqueeze, Castmagic) are real products with broad feature sets; the common complaints are price tiers and generic-feeling output. Ours trades breadth for the verbatim guarantee and a no-signup floor. The honest comparisons: <a href="../compare/podsqueeze.html">vs Podsqueeze</a> · <a href="../compare/castmagic.html">vs Castmagic</a>.</p>
+
+  <h2 class="q">The one-metric check</h2>
+  <p class="p">Each month, ask: <b>which repurposed asset actually got clicked?</b> Kill the rest without guilt. The playbook survives contact with your audience only if you prune it.</p>
+  <p class="p" style="margin-top:28px">Start with the free <a href="../tools/show-notes.html">show notes generator</a> — paste a transcript, no signup — or grab the <a href="../templates/show-notes.html">template</a> and do it by hand.</p>
+</main>
+
+<footer><div class="wrap">Part of <a href="../index.html">EpisodeKit</a> — one episode, a month of content ·
+<a href="show-notes.html">Show notes guide</a> · <a href="../map.html">watch us build live</a></div></footer>
+<script src="../js/analytics.js"></script>
+</body>
+</html>

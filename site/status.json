@@ -7,7 +7,7 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 19)",
+  "updatedAt": "2026-10-26 (build session 20)",
   "progress": {
     "shipped": 31,
     "tests": 62
@@ -169,6 +169,11 @@
           "title": "Working contact form (dead mailto: CTAs replaced — domain not owned)",
           "status": "done",
           "date": "D17"
+        },
+        {
+          "title": "Pillar #2: podcast repurposing playbook",
+          "status": "done",
+          "date": "D20"
         }
       ]
     },
@@ -270,6 +275,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 20,
+      "date": "2026-10-26",
+      "title": "Second content pillar live",
+      "note": "The repurposing playbook targets the category term every directory/competitor uses, with an effort/return priority table, the batch workflow, and the verbatim rule — completing the internal-link graph around the tools."
+    },
     {
       "day": 19,
       "date": "2026-10-26",
