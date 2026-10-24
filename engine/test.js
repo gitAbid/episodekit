@@ -71,6 +71,19 @@ ok(v2.social.pullQuotes[0] !== "This quote was never in the episode, it is inven
 ok(v2.series[0].anchor !== "Also invented.", "invented anchor rejected → deterministic fallback");
 ok(validateSuite(null, clean, base) === null, "null AI → null (caller falls back)");
 
+console.log("validator tolerance for LLM punctuation habits");
+const q0 = a.keyQuotes[0];
+const styledAi = JSON.parse(JSON.stringify(honestAi));
+styledAi.social.pullQuotes = [
+  q0.replace(/"/g, "\u201C").replace(/'/g, "\u2019").replace(/ - /g, " \u2014 ") + "",
+  q0.slice(0, -1) + "\u2026",
+];
+const v3 = validateSuite(styledAi, clean, base);
+ok(v3.social.pullQuotes.some(q => q.includes("\u201C") || q.endsWith("\u2026")), "curly-quoted / ellipsized verbatim quotes accepted (no silent fallback)");
+const liarAi2 = JSON.parse(JSON.stringify(honestAi));
+liarAi2.social.pullQuotes = [q0.replace(/\bthe\b/g, "a").replace(/\bis\b/g, "was")];
+ok(validateSuite(liarAi2, clean, base).social.pullQuotes.every(q => q === base.social.pullQuotes[0] || base.social.pullQuotes.includes(q)), "punctuation-normalized but paraphrased quote still rejected");
+
 console.log("renderers");
 const md = suiteToMarkdown(suite);
 ok(md.includes("## Article (show notes)") && md.includes("## Email series (5 days)"), "markdown renders all sections");

@@ -7,10 +7,10 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-25 (build session 13)",
+  "updatedAt": "2026-10-26 (build session 14)",
   "progress": {
     "shipped": 31,
-    "tests": 60
+    "tests": 62
   },
   "branches": [
     {
@@ -86,6 +86,11 @@
           "title": "v2 artifacts: audio clips + quote graphics (ffmpeg)",
           "status": "next",
           "date": "wk 4"
+        },
+        {
+          "title": "Quote validator accepts verbatim fragments (ellipses/curly quotes); paraphrases still rejected",
+          "status": "done",
+          "date": "D14"
         }
       ]
     },
@@ -172,6 +177,11 @@
           "title": "Lemon Squeezy account + products + webhook secret",
           "status": "blocked",
           "date": "needs user"
+        },
+        {
+          "title": "Validator hardened for real-LLM punctuation + LS activation runbook",
+          "status": "done",
+          "date": "D14"
         }
       ]
     },
@@ -235,6 +245,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 14,
+      "date": "2026-10-26",
+      "title": "Launch-day de-risking: validator hardening + LS runbook",
+      "note": "The verbatim-quote validator now tolerates real LLM output habits (curly quotes, em-dashes, ellipsis-marked fragments) instead of silently falling back to deterministic — paraphrases still rejected (62 tests). Plus a 15-minute click-path runbook so Lemon Squeezy activation works first try."
+    },
     {
       "day": 13,
       "date": "2026-10-25",
