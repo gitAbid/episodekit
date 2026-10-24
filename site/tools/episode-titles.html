@@ -3,31 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free Sermon Title Generator — SermonKit</title>
-<meta name="description" content="Paste your sermon transcript or notes and get 6 sermon title ideas grounded in the actual message — plus the themes it's really about. Free, no signup.">
-<meta property="og:title" content="Free Sermon Title Generator">
-<meta property="og:description" content="Paste a sermon, get 6 title ideas pulled from the message itself. Free, no signup.">
+<title>Free Podcast Episode Title Generator — EpisodeKit</title>
+<meta name="description" content="Paste your episode transcript or notes and get 6 title ideas grounded in the actual episode — plus the themes it's really about. Free, no signup.">
+<meta property="og:title" content="Free Podcast Episode Title Generator">
+<meta property="og:description" content="Paste an episode, get 6 title ideas pulled from the content itself. Free, no signup.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://sermonkit.vercel.app/tools/sermon-titles.html">
+<meta property="og:url" content="https://episodekit.vercel.app/tools/episode-titles.html">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="tool.css">
 </head>
 <body>
 <header><div class="wrap nav">
-  <div class="logo"><a href="../index.html" style="color:inherit">Sermon<span>Kit</span></a></div>
+  <div class="logo"><a href="../index.html" style="color:inherit">Episode<span>Kit</span></a></div>
   <a href="../index.html#pricing">Pricing</a>
-  <a href="../samples.html">Sample suite</a>
+  <a href="../samples.html">Sample package</a>
   <a href="index.html">Free tools</a>
-  <a href="#" style="margin-left:auto;color:var(--accent)">Sermon title generator</a>
+  <a href="#" style="margin-left:auto;color:var(--accent)">Episode title generator</a>
 </div></header>
 
 <main class="wrap">
-  <h1>Sermon Title Generator</h1>
-  <p class="sub">Stuck on what to call Sunday's message? Paste your transcript or
-  notes — you'll get 6 title ideas built from the sermon's own themes, plus the
-  five themes your message is actually about. Free, no signup.</p>
+  <h1>Podcast Episode Title Generator</h1>
+  <p class="sub">Stuck on what to call this week's episode? Paste your transcript
+  or show notes — you'll get 6 title ideas built from the episode's own themes,
+  plus the five themes your episode is actually about. Free, no signup.</p>
 
-  <textarea id="sermon" placeholder="Paste your sermon transcript, manuscript, or detailed notes here…"></textarea>
+  <textarea id="sermon" placeholder="Paste your episode transcript, show notes, or outline here…"></textarea>
   <div class="row">
     <button class="primary" id="go">Generate title ideas</button>
     <span class="hint" id="count">0 words</span>
@@ -35,13 +35,13 @@
 
   <div id="out">
     <div class="card">
-      <h2 class="cardtitle">Your sermon's themes</h2>
-      <p class="meta">What the message is actually about, by weight</p>
+      <h2 class="cardtitle">Your episode's themes</h2>
+      <p class="meta">What the episode is actually about, by weight</p>
       <div class="taglist" id="themes"></div>
     </div>
     <div class="card">
       <h2 class="cardtitle">6 title ideas</h2>
-      <p class="meta">Generated from the sermon's own language — edit freely</p>
+      <p class="meta">Generated from the episode's own language — edit freely</p>
       <div id="titles"></div>
       <div class="row" style="margin-top:20px">
         <button class="ghost" id="copy">Copy all titles</button>
@@ -53,9 +53,9 @@
 </main>
 
 <footer><div class="wrap">
-  Part of <a href="../index.html">SermonKit</a> — one sermon, a month of content.
-  <a href="discussion-guide.html">Also free: discussion guide generator</a> ·
-  <a href="devotional.html">devotional generator</a>
+  Part of <a href="../index.html">EpisodeKit</a> — one episode, a month of content.
+  <a href="discussion-guide.html">Also free: discussion kit generator</a> ·
+  <a href="email-series.html">email series generator</a>
 </div></footer>
 
 <script src="../js/analytics.js"></script>
@@ -68,7 +68,7 @@ let current=null;
 go.addEventListener("click",async()=>{
   const text=area.value.trim();
   const wc=text.split(/\s+/).filter(Boolean).length;
-  if(wc<80){alert("Please paste at least ~80 words so the titles can be grounded in the actual message.");return;}
+  if(wc<80){alert("Please paste at least ~80 words so the titles can be grounded in the actual episode.");return;}
   go.disabled=true; go.textContent="Generating…";
   try{
     const r=await fetch("/api/generate-suite",{
@@ -79,7 +79,7 @@ go.addEventListener("click",async()=>{
     current=j;
     document.getElementById("themes").innerHTML=j.themes.map(t=>`<span class="tag">${t}</span>`).join("");
     document.getElementById("titles").innerHTML=j.titles.map((t,i)=>`<div class="bigtitle">${i+1}. ${t}</div>`).join("");
-    document.getElementById("notice").textContent="Tip: paste the full manuscript — more text means sharper themes and better titles.";
+    document.getElementById("notice").textContent="Tip: paste the full transcript — more text means sharper themes and better titles.";
     document.getElementById("out").style.display="block";
     go.textContent="Generate again";
   }catch(e){

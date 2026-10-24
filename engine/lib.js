@@ -1,15 +1,17 @@
-// SermonKit deterministic suite engine — pure ESM, zero dependencies.
+// EpisodeKit deterministic suite engine — pure ESM, zero dependencies.
 // Every artifact is built ONLY from the input text: quotes are exact sentences,
-// summaries are extractive, titles come from the sermon's own themes. Nothing is
-// invented. This module is the keyless fallback AND the validator baseline for the
-// GLM-enhanced path (glm.js).
+// summaries are extractive, titles come from the episode's own themes. Nothing
+// is invented. This module is the keyless fallback AND the validator baseline
+// for the GLM-enhanced path (glm.js).
 
 const STOP = new Set(
-  ("the a an and or but if then than that this these those of to in on for with as is are was were be been being it its his her their our your you we they he she i not no so at by from into about after before during under over between out up down here there what which who whom when where why how all any both each few more most other some such only own same too very can will just don should now lord god jesus christ church people us may one also let said says say unto because therefore notice remember imagine every week thing things something really actually very there's it's we're you're they're don't can't won't ours yours theirs " +
-    // sermon meta-language: words about the talk, not the message
-    "story sermon message passage chapter verse verses bible bibles text today tonight morning room want know like come going still never always someone everyone anybody nobody something another without within maybe perhaps those these " +
+  ("the a an and or but if then than that this these those of to in on for with as is are was were be been being it its his her their our your you we they he she i not no so at by from into about after before during under over between out up down here there what which who whom when where why how all any both each few more most other some such only own same too very can will just don should now may also let said says say unto us one two thing things something really actually there's it's we're you're they're don't can't won't ours yours theirs " +
+    // episode meta-language: words about the show, not the content
+    "episode podcast show today tonight morning room want know like come going still never always someone everyone anybody nobody another without within maybe perhaps those these listener listeners audience guys thanks welcome back everyone's " +
+    // rhetorical markers that pollute theme lists
+    "because therefore notice remember imagine means takeaway here's " +
     // light verbs that pollute theme lists
-    "comes coming come want wants wanted mean means meant take takes taken make makes made give gives gave says saying look looks looking feel feels felt think thinks thought").split(" ")
+    "comes coming want wants wanted mean means meant take takes taken make makes made give gives gave look looks looking feel feels felt think thinks thought").split(" ")
 );
 
 export function normalizeWs(t) {
@@ -42,8 +44,8 @@ function titleCase(w) {
   return w[0].toUpperCase() + w.slice(1);
 }
 
-// Rank sentences by theme coverage; boost rhetorical markers (application,
-// cause, invitation — the sentences a guide should anchor on).
+// Rank sentences by theme coverage; boost rhetorical markers (the sentences a
+// content pack should anchor on: reasons, takeaways, calls to action).
 export function rankedSentences(sents, themeWords) {
   const tset = new Set(themeWords);
   return sents
@@ -52,48 +54,43 @@ export function rankedSentences(sents, themeWords) {
       let score = 0;
       for (const w of ws) if (tset.has(w)) score += 1;
       score /= Math.sqrt(ws.length);
-      if (/\b(because|therefore|remember|question|ask yourself|imagine|notice|means|choose|this week)\b/i.test(s)) score *= 1.3;
+      if (/\b(because|therefore|the key is|here's why|remember|notice|imagine|means|choose|this week|takeaway)\b/i.test(s)) score *= 1.3;
       return { s, i, score };
     })
     .sort((a, b) => b.score - a.score);
 }
 
-export function analyzeSermon(rawText) {
+export function analyzeTranscript(rawText) {
   const text = normalizeWs(rawText); // single whitespace-normalized source of truth
-  const all = sentences(text);
-  // The first sentences are usually liturgy (greeting, "open your Bibles"),
-  // not the message — keep them for the manuscript, exclude from quotes.
-  const sents = all.slice(2);
+  const sents = sentences(text);
   const th = themes(text, 10).filter((t) => t.length >= 5);
   const ranked = rankedSentences(sents, th);
-  // Key quotes: top-scored, returned in sermon order, deduped.
+  // Key quotes: top-scored, returned in episode order, deduped.
   const keyQuotes = ranked.slice(0, 12).sort((a, b) => a.i - b.i).map((r) => r.s);
-  // Movements: split the sermon into 3–5 contiguous chunks; label each with its
+  // Segments: split the episode into 3–5 contiguous chunks; label each with its
   // own dominant theme (honest labels — the theme IS what that chunk is about).
-  const movementCount = Math.max(3, Math.min(5, Math.round(all.length / 8)));
-  const per = Math.ceil(all.length / movementCount);
-  const movements = [];
+  const segmentCount = Math.max(3, Math.min(5, Math.round(sents.length / 8)));
+  const per = Math.ceil(sents.length / segmentCount);
+  const segments = [];
   const usedLabels = new Set();
-  for (let m = 0; m < movementCount; m++) {
-    const chunk = all.slice(m * per, (m + 1) * per);
+  for (let m = 0; m < segmentCount; m++) {
+    const chunk = sents.slice(m * per, (m + 1) * per);
     if (!chunk.length) continue;
     const localThemes = themes(chunk.join(" "), 3).filter((t) => t.length >= 5);
-    let label = localThemes[0] || th[m] || "the message";
+    let label = localThemes[0] || th[m] || "the episode";
     if (usedLabels.has(label) && localThemes[1]) label = localThemes[1];
     usedLabels.add(label);
-    movements.push({
-      label: m === 0
-        ? `Opening: ${titleCase(label)}`
-        : titleCase(label),
+    segments.push({
+      label: m === 0 ? `Opening: ${titleCase(label)}` : titleCase(label),
       sents: chunk,
     });
   }
-  return { sents, all, themes: th, keyQuotes, movements, wordCount: words(text).length };
+  return { sents, themes: th, keyQuotes, segments, wordCount: words(text).length };
 }
 
-export function buildManuscript(rawText, a) {
-  const title = `${titleCase(a.themes[0] || "Sermon")} — ${titleCase(a.themes[1] || "a message")}`;
-  const sections = a.movements.map((m) => ({
+export function buildArticle(rawText, a) {
+  const title = `${titleCase(a.themes[0] || "Episode")} — ${titleCase(a.themes[1] || "takeaways")}`;
+  const sections = a.segments.map((m) => ({
     heading: m.label,
     paragraphs: splitParagraphs(m.sents),
   }));
@@ -107,62 +104,57 @@ function splitParagraphs(sents) {
   return out;
 }
 
-export function buildDiscussionGuide(a) {
-  const [t1, t2, t3] = [a.themes[0] || "the message", a.themes[1] || "this week", a.themes[2] || "the passage"];
+export function buildDiscussionKit(a) {
+  const [t1, t2, t3] = [a.themes[0] || "this episode", a.themes[1] || "this week", a.themes[2] || "the topic"];
   const open = [
-    `Where do you see ${t1} showing up in your everyday life — not at church, but Monday to Saturday?`,
-    `The sermon pressed into ${t2}. What about that challenged or comforted you most?`,
-    `If ${t3} became real in your household this week, what would change first?`,
+    `Where does ${t1} show up in your own work or life right now?`,
+    `The episode pressed into ${t2}. What about that challenged or confirmed what you thought?`,
+    `If ${t3} became real for you this month, what would change first?`,
   ];
   const followUps = [
-    "What stands out to you in that moment of the message, and why?",
+    "What stands out to you in that moment, and why?",
     "Do you agree? What would you add or push back on?",
-    "How have you seen this be true — or struggle to be true — in your own walk?",
+    "Where have you seen this play out — or fail — in your own experience?",
   ];
   const qs = a.keyQuotes.slice(0, 6).map((q, i) => ({ quote: q, follow: followUps[i % followUps.length] }));
   return {
-    title: `Discussion Guide — ${titleCase(t1)}${t2 ? " & " + titleCase(t2) : ""}`,
-    icebreaker: `When you hear the word "${t1}", what picture comes to mind first? Share it with the group.`,
+    title: `Discussion Kit — ${titleCase(t1)}${t2 ? " & " + titleCase(t2) : ""}`,
+    opener: `In one sentence: what did you take away from this episode?`,
     open,
     qs,
-    living: [
-      `What is one concrete step you can take this week in response to ${t1}?`,
-      `Who in your life needs to hear what you heard in this sermon — and how will you share it with them?`,
+    apply: [
+      `What is one concrete step you can take this week based on ${t1}?`,
+      `Who do you know that needs to hear this episode — and what will you tell them about it?`,
     ],
-    prayer: `Close by praying together: thank God for His word, ask for help to live out ${t1} this week, and pray for one person each of you named tonight.`,
+    closing: `Close by having everyone share the one thing they're going to try first, and check in on it next time you meet.`,
   };
 }
 
-// 5-day devotional: each day anchored on an exact quote, reflection built from
-// adjacent real sentences, one action, one prayer line. No scripture references
-// are cited (the engine cannot verify chapter/verse from text alone).
-export function buildDevotionals(a) {
+// 5-day email series: each day anchored on an exact quote, reflection built
+// from adjacent real sentences, one action, one closing line. Nothing invented.
+export function buildEmailSeries(a) {
   const dayActions = [
-    (t) => `Write down one situation this week where you will need ${t}, and pray over it once today.`,
-    (t) => `Tell one trusted person what God has been teaching you about ${t}.`,
-    (t) =>DoOneStep(t),
-    (t) => `Do one small act of service today that nobody will notice — practice ${t} in secret.`,
-    (t) => `Look back on the week: note one moment God gave you the strength to choose ${t}. Thank Him for it.`,
+    (t) => `Write down where you ran into ${t} this week, and one thing you'd do differently.`,
+    (t) => `Tell one colleague or friend what you learned about ${t} — explaining it is how it sticks.`,
+    (t) => `Pick the smallest possible experiment around ${t} and run it today.`,
+    (t) => `Do one small act today that applies ${t} — something nobody would notice but you.`,
+    (t) => `Look back on the week: note one moment where ${t} actually changed what you did. Write it down.`,
   ];
   const anchors = a.keyQuotes.slice(0, 5);
   while (anchors.length < 5 && a.sents.length) anchors.push(a.sents[anchors.length % a.sents.length]);
   return anchors.map((quote, i) => {
     const idx = a.sents.indexOf(quote);
     const refl = a.sents.slice(Math.max(0, idx - 1), Math.max(0, idx - 1) + 3).join(" ") || quote;
-    const theme = a.themes[i % a.themes.length] || "the message";
+    const theme = a.themes[i % a.themes.length] || "the topic";
     return {
       day: i + 1,
       title: `Day ${i + 1}: ${titleCase(theme)}`,
       anchor: quote,
       reflection: refl,
       action: dayActions[i](theme),
-      prayer: `Lord, help me live out ${theme} today. Amen.`,
+      closing: `Reply and tell us what you think — we read everything.`,
     };
   });
-}
-
-function DoOneStep(t) {
-  return `Name one person you have struggled to extend ${t} to — take one small step toward them today.`;
 }
 
 export function buildSocialPack(a) {
@@ -174,7 +166,7 @@ export function buildSocialPack(a) {
   const tags = a.themes.slice(0, 3).map((t) => "#" + t.replace(/[^a-z0-9]/gi, ""));
   const captions = pullQuotes.map((q) => ({
     platform: "any",
-    text: `Sunday's message in one line:\n\n“${q}”\n\nFull sermon + discussion guide on our church page. ${tags.join(" ")}`,
+    text: `This week's episode in one line:\n\n“${q}”\n\nFull episode + show notes on our site. ${tags.join(" ")}`,
   }));
   const xPosts = pullQuotes.map((q) => {
     let text = `“${q}” ${tags.slice(0, 2).join(" ")}`;
@@ -185,7 +177,7 @@ export function buildSocialPack(a) {
 }
 
 export function buildSummary(a) {
-  // Extractive ~150-word summary: top-ranked sentences, sermon order.
+  // Extractive ~150-word summary: top-ranked sentences, episode order.
   const target = 150;
   const picked = [];
   let wc = 0;
@@ -203,10 +195,10 @@ export function buildSummary(a) {
 export function buildTitles(a) {
   const t = a.themes.map(titleCase);
   const out = [
-    `${t[0]} and ${t[1] || "Grace"}`,
+    `${t[0]} and ${t[1] || "Trade-offs"}`,
     `The ${t[0]} We Keep Avoiding`,
     `${t[0]} for Ordinary Weeks`,
-    `${t[2] || t[1] || "Grace"} Changes Everything`,
+    `${t[2] || t[1] || "Focus"} Changes Everything`,
     `The ${t[0]} We Almost Missed`,
     `Why ${t[0]} Matters`,
   ];
@@ -219,18 +211,17 @@ export function buildTitles(a) {
 }
 
 export function generateSuiteDeterministic(rawText) {
-  const a = analyzeSermon(rawText);
+  const a = analyzeTranscript(rawText);
   a.ranked = rankedSentences(a.sents, a.themes);
-  const text = normalizeWs(rawText);
   return {
     engine: "offline",
     generatedAt: new Date().toISOString(),
     stats: { words: a.wordCount, sentences: a.sents.length, themes: a.themes.slice(0, 5) },
     titles: buildTitles(a),
     summary: buildSummary(a),
-    manuscript: buildManuscript(text, a),
-    discussionGuide: buildDiscussionGuide(a),
-    devotionals: buildDevotionals(a),
+    article: buildArticle(rawText, a),
+    discussion: buildDiscussionKit(a),
+    series: buildEmailSeries(a),
     social: buildSocialPack(a),
   };
 }

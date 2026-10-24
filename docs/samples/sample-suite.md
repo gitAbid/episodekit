@@ -1,158 +1,148 @@
-# Father — House
+# Attention — Version
 
-> Themes: father, house, country, older, brother · 741 words · engine: offline
+> Themes: attention, version, focus, calendar, spend · 575 words · engine: offline
 
 ## Titles
-1. Father and House
-2. The Father We Keep Avoiding
-3. Father for Ordinary Weeks
-4. Country Changes Everything
-5. The Father We Almost Missed
-6. Why Father Matters
+1. Attention and Version
+2. The Attention We Keep Avoiding
+3. Attention for Ordinary Weeks
+4. Focus Changes Everything
+5. The Attention We Almost Missed
+6. Why Attention Matters
 
 ## Summary
 
-Remember that repentance in this story begins not with shame but with memory — he remembers whose house he came from. And then there is the older brother, and this is where the story gets uncomfortable, because most of us in this room are the older brother. This is the quiet danger of religious people: you can live in the father's house and still have the far country in your heart, because resentment can carry you as far from home as recklessness can. So what does the father say to the older son? The scoreboard is what kept the older brother outside, and it will keep you outside too. Father, we have all been in the far country, and some of us are standing outside the party.
+We budget our dollars, we calendar our hours, and then we let anyone with a notification spend our attention for free. Because attention compounds, the cost of an interruption is not the five minutes it takes. Calendars beat to-do lists because a to-do item is a wish while a calendar block is a promise. Focus is treated as a personal virtue, which makes it feel rude to defend; so we let the loudest agenda in the room spend everyone's attention. Pick one ninety-minute block, put it on the calendar, silence everything, and work on the single thing that has been sitting on your list the longest. The version of your week with protected focus in it is the version that compounds.
 
-## Edited manuscript
+## Article (show notes)
 
-### Opening: Father
+### Opening: Attention
 
-If you have your Bibles, open them to the story of the Prodigal Son — Luke chapter fifteen — because today I want to hold that story up to the light and let it examine us for a few minutes. Every one of us knows what it is to wander. The younger son in the story takes his inheritance early, walks out of his father's house, and spends everything he has on a far country. And I want you to notice something about that far country: it did not start far away.
+Today I want to talk about focus, because focus is the most expensive resource in modern work and almost nobody manages it like money. We budget our dollars, we calendar our hours, and then we let anyone with a notification spend our attention for free. Here is the uncomfortable truth about deep work: it is not a personality trait, it is an environment you build. Every one of us knows the version of ourselves that opens a document and actually finishes it, and we all know the version that checks one message and surfaces forty minutes later wondering where the morning went.
 
-It started as one small step, one reasonable decision, one "I know better than my father." Nobody wakes up in a pigsty; you get there one step at a time. That is how wandering works, and it is still how it works in your life and mine. But the story does not stay in the far country, because the son comes to himself. He remembers that even the hired servants in his father's house have bread enough and to spare.
+The difference between those two people is rarely discipline; it is friction. Notice how the distracted version of you is never one decision deep — you made one small permissive choice and the environment did the rest. Because attention compounds, the cost of an interruption is not the five minutes it takes. The research on task switching says it can take over twenty minutes to get back to full depth, which means a single ping can quietly tax the entire morning.
 
-Remember that repentance in this story begins not with shame but with memory — he remembers whose house he came from.
+Remember that the next time someone says it will only take a second: seconds are how attention debt is issued, and the interest rate is brutal.
 
-### Running
+### Tools
 
-Some of you have been running so long that you have forgotten whose house you came from, and the Father's first mercy to you today may simply be the memory of home. Now watch what happens when he turns around, because this is the heart of the story. While he was still a long way off, his father saw him and ran. In that culture an old man did not run; running was beneath his dignity.
+The key is deciding before the day starts. Calendars beat to-do lists because a to-do item is a wish while a calendar block is a promise. Imagine looking at your Tuesday and seeing two ninety-minute blocks with your name on them, notifications off, one tab open; for most people that single change doubles their output before lunch, because output was never the problem — protected time was. And let us be honest about the tools, because this is the part nobody wants to hear.
 
-But love has never been terribly concerned with dignity. The father runs, the father embraces him before the boy can finish his rehearsed apology, and the robe and the ring and the shoes come out before the confession is even complete. Grace, church, is not a wage you negotiate on the porch; it is an embrace you meet on the road. And then there is the older brother, and this is where the story gets uncomfortable, because most of us in this room are the older brother.
+Every app that promises to organize your attention is also competing for it. Therefore the real upgrade is usually subtraction: fewer inputs, fewer tabs, fewer meetings that could have been a paragraph. The professional with three tools and a clear calendar will out-ship the one with thirty tools and a badge for organizing them all. Focus is treated as a personal virtue, which makes it feel rude to defend; so we let the loudest agenda in the room spend everyone's attention.
 
-And when the music starts, he stands outside the party and refuses to go in.
+Boundaries are the fix, and boundaries sound like scripts: I am offline until noon; send it and I will get there this afternoon; let us make this a document instead of a meeting.
 
-### House
+### Everything
 
-Hear his complaint: "All these years I have served you, and you never gave me a young goat." He has been keeping score in a house built on grace. This is the quiet danger of religious people: you can live in the father's house and still have the far country in your heart, because resentment can carry you as far from home as recklessness can. So what does the father say to the older son? "Son, you are always with me, and everything I have is yours." The father goes out to the angry son the same way he ran to the returning one.
+Saying them out loud once costs less than resenting the interruption for a month. Pick one ninety-minute block, put it on the calendar, silence everything, and work on the single thing that has been sitting on your list the longest. Notice how it feels; most people tell me it feels like getting a whole extra day back. The version of your week with protected focus in it is the version that compounds.
 
-God's mercy is not exhausted by the sinner who comes back; there is enough left over for the saint who is bitter. Maybe you came in here this morning angry at someone whose forgiveness was celebrated while your faithfulness went unnoticed. The father is at the door asking you to come inside too. So here is what I am asking you to do this week.
+Because here is the takeaway I want you to carry out of this episode: your attention is the budget everything else is bought with. Spend it like it is yours, because it is. Thanks for listening; show notes and the full transcript are on the site, and if this helped, send it to the person who keeps pinging you at nine in the morning.
 
-Stop pretending the wandering is just a season; call it what it is, and turn around.
+## Discussion Kit — Attention & Version
 
-### Outside
-
-The scoreboard is what kept the older brother outside, and it will keep you outside too. Communion is not a reward for the sorted-out; it is bread for the hungry. Because here is the truth I want you to carry out of this room: the Father is not waiting to lecture you when you come home. The question the story leaves us with is not whether God will forgive — the story settled that on the road.
-
-The question is whether we will let Him, and whether we will let Him forgive the brother we are still angry at too. Father, we have all been in the far country, and some of us are standing outside the party. Give us the memory of home, the humility to turn around, and the courage to come to the table.
-
-## Discussion guide
-
-**Discussion Guide — Father & House**
-
-**Icebreaker.** When you hear the word "father", what picture comes to mind first? Share it with the group.
+**Opener.** In one sentence: what did you take away from this episode?
 
 **Opening questions**
-1. Where do you see father showing up in your everyday life — not at church, but Monday to Saturday?
-2. The sermon pressed into house. What about that challenged or comforted you most?
-3. If country became real in your household this week, what would change first?
+1. Where does attention show up in your own work or life right now?
+2. The episode pressed into version. What about that challenged or confirmed what you thought?
+3. If focus became real for you this month, what would change first?
 
-**In the sermon**
-> “The younger son in the story takes his inheritance early, walks out of his father's house, and spends everything he has on a far country.”
+**From the episode**
+> “Today I want to talk about focus, because focus is the most expensive resource in modern work and almost nobody manages it like money.”
 
-- What stands out to you in that moment of the message, and why?
+- What stands out to you in that moment, and why?
 
-> “And I want you to notice something about that far country: it did not start far away.”
-
-- Do you agree? What would you add or push back on?
-
-> “But the story does not stay in the far country, because the son comes to himself.”
-
-- How have you seen this be true — or struggle to be true — in your own walk?
-
-> “Remember that repentance in this story begins not with shame but with memory — he remembers whose house he came from.”
-
-- What stands out to you in that moment of the message, and why?
-
-> “Some of you have been running so long that you have forgotten whose house you came from, and the Father's first mercy to you today may simply be the memory of home.”
+> “We budget our dollars, we calendar our hours, and then we let anyone with a notification spend our attention for free.”
 
 - Do you agree? What would you add or push back on?
 
-> “The father runs, the father embraces him before the boy can finish his rehearsed apology, and the robe and the ring and the shoes come out before the confession is even complete.”
+> “Every one of us knows the version of ourselves that opens a document and actually finishes it, and we all know the version that checks one message and surfaces forty minutes later wondering where the morning went.”
 
-- How have you seen this be true — or struggle to be true — in your own walk?
+- Where have you seen this play out — or fail — in your own experience?
 
-**Living it out**
-1. What is one concrete step you can take this week in response to father?
-2. Who in your life needs to hear what you heard in this sermon — and how will you share it with them?
+> “Because attention compounds, the cost of an interruption is not the five minutes it takes.”
 
-**Prayer.** Close by praying together: thank God for His word, ask for help to live out father this week, and pray for one person each of you named tonight.
+- What stands out to you in that moment, and why?
 
-## Devotional series (5 days)
+> “The research on task switching says it can take over twenty minutes to get back to full depth, which means a single ping can quietly tax the entire morning.”
 
-### Day 1: Father
+- Do you agree? What would you add or push back on?
 
-**Re-read:** “The younger son in the story takes his inheritance early, walks out of his father's house, and spends everything he has on a far country.”
+> “Calendars beat to-do lists because a to-do item is a wish while a calendar block is a promise.”
 
-The younger son in the story takes his inheritance early, walks out of his father's house, and spends everything he has on a far country. And I want you to notice something about that far country: it did not start far away. It started as one small step, one reasonable decision, one "I know better than my father." Nobody wakes up in a pigsty; you get there one step at a time.
+- Where have you seen this play out — or fail — in your own experience?
 
-**Live it:** Write down one situation this week where you will need father, and pray over it once today.
+**Apply it**
+1. What is one concrete step you can take this week based on attention?
+2. Who do you know that needs to hear this episode — and what will you tell them about it?
 
-**Pray:** Lord, help me live out father today. Amen.
+**Closing.** Close by having everyone share the one thing they're going to try first, and check in on it next time you meet.
 
-### Day 2: House
+## Email series (5 days)
 
-**Re-read:** “And I want you to notice something about that far country: it did not start far away.”
+### Day 1: Attention
 
-The younger son in the story takes his inheritance early, walks out of his father's house, and spends everything he has on a far country. And I want you to notice something about that far country: it did not start far away. It started as one small step, one reasonable decision, one "I know better than my father." Nobody wakes up in a pigsty; you get there one step at a time.
+**Re-listen:** “Today I want to talk about focus, because focus is the most expensive resource in modern work and almost nobody manages it like money.”
 
-**Live it:** Tell one trusted person what God has been teaching you about house.
+Today I want to talk about focus, because focus is the most expensive resource in modern work and almost nobody manages it like money. We budget our dollars, we calendar our hours, and then we let anyone with a notification spend our attention for free. Here is the uncomfortable truth about deep work: it is not a personality trait, it is an environment you build.
 
-**Pray:** Lord, help me live out house today. Amen.
+**Do this:** Write down where you ran into attention this week, and one thing you'd do differently.
 
-### Day 3: Country
+**Sign-off:** Reply and tell us what you think — we read everything.
 
-**Re-read:** “But the story does not stay in the far country, because the son comes to himself.”
+### Day 2: Version
 
-That is how wandering works, and it is still how it works in your life and mine. But the story does not stay in the far country, because the son comes to himself. He remembers that even the hired servants in his father's house have bread enough and to spare.
+**Re-listen:** “We budget our dollars, we calendar our hours, and then we let anyone with a notification spend our attention for free.”
 
-**Live it:** Name one person you have struggled to extend country to — take one small step toward them today.
+Today I want to talk about focus, because focus is the most expensive resource in modern work and almost nobody manages it like money. We budget our dollars, we calendar our hours, and then we let anyone with a notification spend our attention for free. Here is the uncomfortable truth about deep work: it is not a personality trait, it is an environment you build.
 
-**Pray:** Lord, help me live out country today. Amen.
+**Do this:** Tell one colleague or friend what you learned about version — explaining it is how it sticks.
 
-### Day 4: Older
+**Sign-off:** Reply and tell us what you think — we read everything.
 
-**Re-read:** “Remember that repentance in this story begins not with shame but with memory — he remembers whose house he came from.”
+### Day 3: Focus
 
-He remembers that even the hired servants in his father's house have bread enough and to spare. Remember that repentance in this story begins not with shame but with memory — he remembers whose house he came from. Some of you have been running so long that you have forgotten whose house you came from, and the Father's first mercy to you today may simply be the memory of home.
+**Re-listen:** “Every one of us knows the version of ourselves that opens a document and actually finishes it, and we all know the version that checks one message and surfaces forty minutes later wondering where the morning went.”
 
-**Live it:** Do one small act of service today that nobody will notice — practice older in secret.
+Here is the uncomfortable truth about deep work: it is not a personality trait, it is an environment you build. Every one of us knows the version of ourselves that opens a document and actually finishes it, and we all know the version that checks one message and surfaces forty minutes later wondering where the morning went. The difference between those two people is rarely discipline; it is friction.
 
-**Pray:** Lord, help me live out older today. Amen.
+**Do this:** Pick the smallest possible experiment around focus and run it today.
 
-### Day 5: Brother
+**Sign-off:** Reply and tell us what you think — we read everything.
 
-**Re-read:** “Some of you have been running so long that you have forgotten whose house you came from, and the Father's first mercy to you today may simply be the memory of home.”
+### Day 4: Calendar
 
-Remember that repentance in this story begins not with shame but with memory — he remembers whose house he came from. Some of you have been running so long that you have forgotten whose house you came from, and the Father's first mercy to you today may simply be the memory of home. Now watch what happens when he turns around, because this is the heart of the story.
+**Re-listen:** “Because attention compounds, the cost of an interruption is not the five minutes it takes.”
 
-**Live it:** Look back on the week: note one moment God gave you the strength to choose brother. Thank Him for it.
+Notice how the distracted version of you is never one decision deep — you made one small permissive choice and the environment did the rest. Because attention compounds, the cost of an interruption is not the five minutes it takes. The research on task switching says it can take over twenty minutes to get back to full depth, which means a single ping can quietly tax the entire morning.
 
-**Pray:** Lord, help me live out brother today. Amen.
+**Do this:** Do one small act today that applies calendar — something nobody would notice but you.
+
+**Sign-off:** Reply and tell us what you think — we read everything.
+
+### Day 5: Spend
+
+**Re-listen:** “The research on task switching says it can take over twenty minutes to get back to full depth, which means a single ping can quietly tax the entire morning.”
+
+Because attention compounds, the cost of an interruption is not the five minutes it takes. The research on task switching says it can take over twenty minutes to get back to full depth, which means a single ping can quietly tax the entire morning. Remember that the next time someone says it will only take a second: seconds are how attention debt is issued, and the interest rate is brutal.
+
+**Do this:** Look back on the week: note one moment where spend actually changed what you did. Write it down.
+
+**Sign-off:** Reply and tell us what you think — we read everything.
 
 ## Social pack
 
 **Pull quotes**
-> “The younger son in the story takes his inheritance early, walks out of his father's house, and spends everything he has on a far country.”
-> “And I want you to notice something about that far country: it did not start far away.”
-> “But the story does not stay in the far country, because the son comes to himself.”
+> “Today I want to talk about focus, because focus is the most expensive resource in modern work and almost nobody manages it like money.”
+> “We budget our dollars, we calendar our hours, and then we let anyone with a notification spend our attention for free.”
+> “Every one of us knows the version of ourselves that opens a document and actually finishes it, and we all know the version that checks one message and surfaces forty minutes later wondering where the morning went.”
 
 **Captions**
-- Sunday's message in one line: /  / “The younger son in the story takes his inheritance early, walks out of his father's house, and spends everything he has on a far country.” /  / Full sermon + discussion guide on our church page. #father #house #country
-- Sunday's message in one line: /  / “And I want you to notice something about that far country: it did not start far away.” /  / Full sermon + discussion guide on our church page. #father #house #country
-- Sunday's message in one line: /  / “But the story does not stay in the far country, because the son comes to himself.” /  / Full sermon + discussion guide on our church page. #father #house #country
+- This week's episode in one line: /  / “Today I want to talk about focus, because focus is the most expensive resource in modern work and almost nobody manages it like money.” /  / Full episode + show notes on our site. #attention #version #focus
+- This week's episode in one line: /  / “We budget our dollars, we calendar our hours, and then we let anyone with a notification spend our attention for free.” /  / Full episode + show notes on our site. #attention #version #focus
+- This week's episode in one line: /  / “Every one of us knows the version of ourselves that opens a document and actually finishes it, and we all know the version that checks one message and surfaces forty minutes later wondering where the morning went.” /  / Full episode + show notes on our site. #attention #version #focus
 
 **X posts**
-- “The younger son in the story takes his inheritance early, walks out of his father's house, and spends everything he has on a far country.” #father #house
-- “And I want you to notice something about that far country: it did not start far away.” #father #house
-- “But the story does not stay in the far country, because the son comes to himself.” #father #house
+- “Today I want to talk about focus, because focus is the most expensive resource in modern work and almost nobody manages it like money.” #attention #version
+- “We budget our dollars, we calendar our hours, and then we let anyone with a notification spend our attention for free.” #attention #version
+- “Every one of us knows the version of ourselves that opens a document and actually finishes it, and we all know the version that checks one message and surfaces forty minutes later wondering where the morning went.” #attention #version

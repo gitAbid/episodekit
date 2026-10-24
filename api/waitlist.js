@@ -1,8 +1,8 @@
-// SermonKit waitlist v0 — Vercel function.
+// EpisodeKit waitlist v0 — Vercel function.
 // POST /api/waitlist  { email } → 204 (stored + logged durably as sk_waitlist)
-// GET  /api/waitlist  → count + entries (per warm instance; durable record is the
-// Vercel function log — export via logs, same honest v0 pattern as api/track).
-// Validation: RFC-ish email check; dedupe per instance; no PII beyond email.
+// GET  /api/waitlist  → count only (no emails — privacy; durable record is the
+// Vercel function log, exportable via dashboard Logs).
+// Validation: RFC-ish email check; dedupe per instance.
 
 const KEY = "sk_waitlist_" + new Date().toISOString().slice(0, 10);
 const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/;
@@ -31,7 +31,6 @@ export default async function handler(req, res) {
       date: KEY.slice(-10),
       note: "per warm instance (v0); durable record in Vercel function logs via sk_waitlist",
       count: store.entries.length,
-      entries: store.entries,
     });
   }
   return res.status(405).json({ error: "POST/GET only" });

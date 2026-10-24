@@ -1,4 +1,4 @@
-// SermonKit CLI — node engine/cli.js <transcript.txt> [--json out.json] [--md out.md] [--html out.html]
+// EpisodeKit CLI — node engine/cli.js <transcript.txt> [--json out.json] [--md out.md] [--html out.html]
 import { readFileSync, writeFileSync } from "node:fs";
 import { generateSuite, suiteToMarkdown, suiteToHtml } from "./index.js";
 

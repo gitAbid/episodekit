@@ -2,6 +2,19 @@
 
 All entries map to a commit. Newest first.
 
+## Day 7 (build session 7) — 2026-10-25
+- **Pivot: SermonKit → EpisodeKit** (user constraint: religion-neutral products
+  only). Full rebrand, podcast vertical, new CC0 demo, religion-free test gate,
+  Vercel project renamed → episodekit.vercel.app (old domain removed)
+- **Payment rail built + tested**: stateless HMAC license keys,
+  signature-verified Lemon Squeezy webhook, checkout config, in-app activation
+  (inert until LS credentials)
+- **Live sprint mind map**: /map with status-tree, decision timeline, live
+  metric polling; status.json maintained by the daily build loop
+- Privacy: waitlist GET now counts-only; week-1 review; podcast complaint
+  lexicon + directory kit rewrites
+- Tests 60/60; live e2e on new domain; visual QA SHIP on map
+
 ## Day 6 — 2026-10-24
 - Waitlist capture: `/api/waitlist` + form on landing (live e2e verified)
 - Landing proof: live-captured screenshots (app result, samples, pricing) with

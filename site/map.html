@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EpisodeKit — Live Sprint Mind Map</title>
+<meta name="description" content="A live mind map of the EpisodeKit build: decisions, implementation progress, and metrics — updated every day by the build agent.">
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --bg:#0b0e13;--bg2:#11151d;--card:#161c27;--line:#252e3f;
+  --text:#e8edf4;--muted:#8b99ad;--accent:#e8b04b;--accent2:#6fb3ff;
+  --done:#3ecf8e;--doing:#e8b04b;--next:#6fb3ff;--blocked:#ff7a7a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background-image:radial-gradient(900px 400px at 15% -5%,rgba(232,176,75,.06),transparent),radial-gradient(900px 400px at 90% 0%,rgba(111,179,255,.05),transparent)}
+a{color:var(--accent2);text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+header{border-bottom:1px solid var(--line);padding:18px 0}
+.hrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:19px}.logo span{color:var(--accent)}
+.livedot{width:9px;height:9px;border-radius:50%;background:var(--done);display:inline-block;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(62,207,142,.5)}70%{box-shadow:0 0 0 8px rgba(62,207,142,0)}100%{box-shadow:0 0 0 0 rgba(62,207,142,0)}}
+.livetag{font-size:12.5px;font-weight:700;color:var(--done);letter-spacing:.5px}
+.updated{color:var(--muted);font-size:13px;margin-left:auto}
+main{padding:26px 0 70px}
+
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px}
+.metric{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.metric .v{font-size:26px;font-weight:800;letter-spacing:-.5px}
+.metric .v.gold{color:var(--accent)}.metric .v.blue{color:var(--accent2)}.metric .v.green{color:var(--done)}
+.metric .l{color:var(--muted);font-size:12.5px;margin-top:2px}
+
+.sect{display:flex;align-items:baseline;gap:12px;margin:30px 0 14px}
+.sect h2{font-size:20px;letter-spacing:-.3px}
+.sect .sub{color:var(--muted);font-size:13.5px}
+
+/* tree */
+.tree{position:relative;overflow-x:auto;padding:6px 2px 18px}
+#svg{position:absolute;top:0;left:0;pointer-events:none;z-index:0}
+.branch{position:relative;z-index:1;margin-bottom:14px}
+.bhead{display:inline-flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;cursor:pointer;user-select:none}
+.bhead:hover{border-color:var(--accent)}
+.bhead .bt{font-weight:800;font-size:15.5px}
+.bhead .bc{color:var(--muted);font-size:12.5px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;border-radius:7px;padding:3px 9px}
+.chip.done{color:var(--done);background:rgba(62,207,142,.12)}
+.chip.doing{color:var(--doing);background:rgba(232,176,75,.12)}
+.chip.next{color:var(--next);background:rgba(111,179,255,.12)}
+.chip.blocked{color:var(--blocked);background:rgba(255,122,122,.12)}
+.children{margin:10px 0 0 18px;padding-left:22px;border-left:1px dashed var(--line)}
+.leaf{display:flex;align-items:flex-start;gap:9px;padding:6px 10px;margin:4px 0;background:var(--bg2);border:1px solid var(--line);border-radius:10px;max-width:640px}
+.leaf .t{font-weight:650;font-size:14px}
+.leaf .d{color:var(--muted);font-size:12px;margin-left:auto;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none}
+.dot.done{background:var(--done)}.dot.doing{background:var(--doing)}.dot.next{background:var(--next)}.dot.blocked{background:var(--blocked)}
+.branch.collapsed .children{display:none}
+
+/* decisions timeline */
+.timeline{border-left:2px solid var(--line);margin-left:8px;padding-left:22px}
+.titem{position:relative;padding:10px 14px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;max-width:720px}
+.titem::before{content:"";position:absolute;left:-29px;top:18px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--bg)}
+.titem .day{font-size:11.5px;font-weight:800;letter-spacing:1px;color:var(--accent);text-transform:uppercase}
+.titem .tt{font-weight:750;font-size:15px;margin:3px 0}
+.titem .note{color:var(--muted);font-size:13.5px}
+.nextstrip{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.nextpill{background:rgba(111,179,255,.08);border:1px solid rgba(111,179,255,.3);color:var(--accent2);border-radius:999px;padding:7px 15px;font-size:13.5px;font-weight:600}
+footer{border-top:1px solid var(--line);padding:22px 0 50px;color:var(--muted);font-size:13.5px}
+.loading{color:var(--muted);padding:40px 0;text-align:center}
+@media(max-width:700px){.updated{margin-left:0;width:100%}}
+</style>
+</head>
+<body>
+<header><div class="wrap hrow">
+  <div class="logo">Episode<span>Kit</span> · Sprint Map</div>
+  <span class="livetag"><span class="livedot"></span>LIVE</span>
+  <span class="updated" id="updated">loading…</span>
+</div></header>
+
+<main class="wrap">
+  <div class="metrics" id="metrics"></div>
+
+  <div class="sect"><h2>Decision &amp; implementation tree</h2>
+    <span class="sub">click a branch to fold · statuses update with every daily build session</span></div>
+  <div class="tree" id="tree"><div class="loading">Loading project state…</div></div>
+
+  <div class="sect"><h2>Decision log</h2><span class="sub">what changed and why</span></div>
+  <div class="timeline" id="timeline"></div>
+
+  <div class="sect"><h2>Next up</h2></div>
+  <div class="nextstrip" id="next"></div>
+</main>
+
+<footer><div class="wrap">
+  Part of <a href="index.html">EpisodeKit</a> — one episode, a month of content ·
+  this map reads <code>status.json</code> (updated by the daily build agent) and
+  polls live counters every 30s · <a href="app.html">open the app</a>
+</div></footer>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (t) => String(t ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const CHIP = { done:"done", doing:"doing", next:"next", blocked:"blocked" };
+const CHIP_LABEL = { done:"done", doing:"in&nbsp;progress", next:"next", blocked:"needs&nbsp;user" };
+
+async function boot() {
+  let s;
+  try {
+    s = await (await fetch("status.json", { cache: "no-store" })).json();
+  } catch {
+    $("#tree").innerHTML = '<div class="loading">Could not load status.json — refresh in a moment.</div>';
+    return;
+  }
+  $("#updated").textContent = "updated " + (s.updatedAt || "?") + " · day " + sprintDay(s) + " of 30";
+
+  renderMetrics(s, null, null);
+  renderTree(s);
+  renderTimeline(s);
+  renderNext(s);
+
+  // live counters — poll every 30s; replace any unresolved "…" with "—" after 8s
+  const poll = async () => {
+    try {
+      const t = await (await fetch("/api/track")).json();
+      let wl = null;
+      try { wl = (await (await fetch("/api/waitlist")).json()).count ?? null; } catch {}
+      renderMetrics(s, t, wl);
+    } catch {}
+  };
+  poll();
+  setInterval(poll, 30000);
+  setTimeout(() => {
+    document.querySelectorAll("#metrics .v").forEach((v) => {
+      if (v.textContent.trim() === "…") v.textContent = "—";
+    });
+  }, 8000);
+}
+
+function sprintDay(s) {
+  const start = new Date(s.sprint.start).getTime();
+  return Math.max(1, Math.min(30, Math.ceil((Date.now() - start) / 86400000) + 1));
+}
+
+function renderMetrics(s, track, waitlist) {
+  const daysLeft = Math.max(0, 30 - sprintDay(s));
+  const items = [
+    { v: daysLeft, l: "days left in sprint", c: "gold" },
+    { v: s.progress?.shipped ?? "—", l: "features shipped", c: "green" },
+    { v: s.progress?.tests ?? "—", l: "tests passing", c: "green" },
+    { v: track ? track.pageviews : "…", l: "pageviews (today, live)", c: "blue" },
+    { v: track ? track.visitors : "…", l: "visitors (today, live)", c: "blue" },
+    { v: waitlist ?? "…", l: "waitlist signups (live)", c: "gold" },
+  ];
+  $("#metrics").innerHTML = items.map(m =>
+    `<div class="metric"><div class="v ${m.c}">${esc(m.v)}</div><div class="l">${esc(m.l)}</div></div>`).join("");
+}
+
+function renderTree(s) {
+  const el = $("#tree");
+  el.innerHTML = s.branches.map(b => `
+    <div class="branch" data-b="${esc(b.id)}">
+      <div class="bhead">
+        <span class="bt">${esc(b.title)}</span>
+        <span class="chip ${CHIP[b.status] || "next"}">${CHIP_LABEL[b.status] || b.status}</span>
+        <span class="bc">${esc(b.caption || "")}</span>
+      </div>
+      <div class="children">
+        ${(b.children || []).map(c => `
+          <div class="leaf">
+            <span class="dot ${CHIP[c.status] || "next"}"></span>
+            <span class="t">${esc(c.title)}</span>
+            ${c.date ? `<span class="d">${esc(c.date)}</span>` : ""}
+          </div>`).join("")}
+      </div>
+    </div>`).join("");
+  el.querySelectorAll(".bhead").forEach(h => h.addEventListener("click", () => h.parentElement.classList.toggle("collapsed")));
+}
+
+function renderTimeline(s) {
+  $("#timeline").innerHTML = (s.decisions || []).map(d => `
+    <div class="titem">
+      <div class="day">Day ${esc(d.day)} · ${esc(d.date)}</div>
+      <div class="tt">${esc(d.title)}</div>
+      <div class="note">${esc(d.note)}</div>
+    </div>`).join("");
+}
+
+function renderNext(s) {
+  $("#next").innerHTML = (s.next || []).map(n => `<span class="nextpill">${esc(n)}</span>`).join("");
+}
+boot();
+</script>
+</body>
+</html>

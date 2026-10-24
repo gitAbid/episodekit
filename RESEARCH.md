@@ -86,3 +86,14 @@ buyers, hardest problem), student study tools (churn + incumbency), meeting note
 **SermonKit**: one sermon upload → full content suite, launched into the church
 vertical at $19/mo (undercutting Pulpit AI's $39), engine vertical-agnostic so a
 podcast/coach pivot is a landing-page change, not a rebuild.
+
+## Addendum — Day 7 pivot (2026-10-24)
+
+User set a hard constraint: **no religious-domain products** ("can't carry that
+one"). SermonKit's church positioning is therefore retired. Pivot target =
+Day-1 research's rank-2: **podcasters** — Podsqueeze $9–89/mo, Castmagic
+$19–699/mo (verified Day 1), complaints "generic output / expensive /
+overwhelming" (r/YouTubeCreators + r/SideProject via pullpush, May–Jun 2026).
+Wedge unchanged: verbatim-quote honesty + keyless deterministic engine +
+free-tool SEO. All church/sermon copy, demo content, and branding were removed
+and a permanent test gate now asserts religion-free output.

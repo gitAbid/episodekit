@@ -1,7 +1,7 @@
-// SermonKit GLM-enhanced generation — chat completions with strict validation.
+// EpisodeKit GLM-enhanced generation — chat completions with strict validation.
 // HONESTY RULE: any "quote" an AI returns must be an exact substring of the
-// source sermon. If an artifact fails validation, that artifact silently falls
-// back to the deterministic build. The API key never leaves the server.
+// source transcript. If an artifact fails validation, that artifact silently
+// falls back to the deterministic build. The API key never leaves the server.
 
 import { generateSuiteDeterministic, normalizeWs, words } from "./lib.js";
 
@@ -41,10 +41,11 @@ async function chat(messages, { temperature = 0.7, json = true } = {}) {
 }
 
 const SYS =
-  "You produce church communication artifacts from sermon transcripts. " +
+  "You produce podcast content packages from episode transcripts: show-note " +
+  "articles, community discussion kits, email series, and social copy. " +
   "ABSOLUTE RULE: any field named quote/anchor/pullQuote must be copied VERBATIM " +
   "from the transcript — same words, same punctuation. If you paraphrase, the " +
-  "output is discarded. Warm, plain language. JSON only, no markdown.";
+  "output is discarded. Warm, plain, energetic language. JSON only, no markdown.";
 
 function isExactQuote(q, source) {
   return typeof q === "string" && q.length > 20 && normalizeWs(source).includes(normalizeWs(q));
@@ -63,34 +64,34 @@ export function validateSuite(ai, source, base) {
     const wc = words(ai.summary.text).length;
     if (wc >= 80 && wc <= 250) out.summary = { text: ai.summary.text, wordCount: wc };
   }
-  if (Array.isArray(ai.devotionals) && ai.devotionals.length >= 5 &&
-      ai.devotionals.every((d) => isExactQuote(d?.anchor, source))) {
-    out.devotionals = ai.devotionals.slice(0, 5).map((d, i) => ({
+  if (Array.isArray(ai.series) && ai.series.length >= 5 &&
+      ai.series.every((d) => isExactQuote(d?.anchor, source))) {
+    out.series = ai.series.slice(0, 5).map((d, i) => ({
       day: i + 1,
       title: String(d.title || `Day ${i + 1}`).slice(0, 80),
       anchor: d.anchor,
       reflection: String(d.reflection || d.anchor).slice(0, 1200),
       action: String(d.action || "").slice(0, 400),
-      prayer: String(d.prayer || "Amen.").slice(0, 400),
+      closing: String(d.closing || "Reply and tell us what you think.").slice(0, 400),
     }));
   }
   if (Array.isArray(ai.social?.pullQuotes) && ai.social.pullQuotes.length >= 2 &&
       ai.social.pullQuotes.every((q) => isExactQuote(q, source))) {
     out.social = { ...base.social, pullQuotes: ai.social.pullQuotes.slice(0, 3) };
   }
-  if (ai.discussionGuide && Array.isArray(ai.discussionGuide.qs) && ai.discussionGuide.qs.length >= 4 &&
-      ai.discussionGuide.qs.every((q) => isExactQuote(q?.quote, source))) {
-    out.discussionGuide = {
-      title: String(ai.discussionGuide.title || base.discussionGuide.title).slice(0, 120),
-      icebreaker: String(ai.discussionGuide.icebreaker || base.discussionGuide.icebreaker),
-      open: Array.isArray(ai.discussionGuide.open) && ai.discussionGuide.open.length >= 2
-        ? ai.discussionGuide.open.map(String).slice(0, 4) : base.discussionGuide.open,
-      qs: ai.discussionGuide.qs.slice(0, 6).map((q) => ({ quote: q.quote, follow: String(q.follow || "What stands out to you, and why?") })),
-      living: base.discussionGuide.living,
-      prayer: String(ai.discussionGuide.prayer || base.discussionGuide.prayer),
+  if (ai.discussion && Array.isArray(ai.discussion.qs) && ai.discussion.qs.length >= 4 &&
+      ai.discussion.qs.every((q) => isExactQuote(q?.quote, source))) {
+    out.discussion = {
+      title: String(ai.discussion.title || base.discussion.title).slice(0, 120),
+      opener: String(ai.discussion.opener || base.discussion.opener),
+      open: Array.isArray(ai.discussion.open) && ai.discussion.open.length >= 2
+        ? ai.discussion.open.map(String).slice(0, 4) : base.discussion.open,
+      qs: ai.discussion.qs.slice(0, 6).map((q) => ({ quote: q.quote, follow: String(q.follow || "What stands out to you, and why?") })),
+      apply: base.discussion.apply,
+      closing: String(ai.discussion.closing || base.discussion.closing),
     };
   }
-  // Manuscript headings from AI are hard to verify — keep deterministic manuscript
+  // Article headings from AI are hard to verify — keep deterministic article
   // (it is fully extractive by construction).
   return out;
 }
@@ -105,11 +106,11 @@ export async function generateSuiteGlm(rawText) {
       {
         role: "user",
         content:
-          "From the sermon transcript below, return JSON with keys: " +
+          "From the podcast episode transcript below, return JSON with keys: " +
           "titles (6 strings), summary ({text: 120-180 words}), " +
-          "devotionals (5 objects {title, anchor: EXACT quote, reflection, action, prayer}), " +
+          "series (5 objects {title, anchor: EXACT quote, reflection, action, closing}), " +
           "social ({pullQuotes: 3 EXACT quotes}), " +
-          "discussionGuide ({title, icebreaker, open: 3 strings, qs: 6 objects {quote: EXACT quote, follow}, prayer}). " +
+          "discussion ({title, opener, open: 3 strings, qs: 6 objects {quote: EXACT quote, follow}, closing}). " +
           "Transcript:\n\n" + text.slice(0, 60000),
       },
     ]);

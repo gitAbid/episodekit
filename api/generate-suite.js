@@ -1,15 +1,15 @@
-// SermonKit suite generator — Vercel serverless function (Node, ESM).
-// POST { mode: "discussion-guide" | "full" | "titles" | "devotionals", text }
-// - "full": complete content suite via the engine. Uses GLM when GLM_API_KEY is
-//   set (validated: quotes must be verbatim), otherwise the deterministic engine.
-//   Either way the response is a valid suite — never a user-facing error.
-// - "titles" / "devotionals": deterministic engine slices for the free tools —
+// EpisodeKit suite generator — Vercel serverless function (Node, ESM).
+// POST { mode: "discussion-guide" | "full" | "titles" | "series", text }
+// - "full": complete content package via the engine. Uses GLM when GLM_API_KEY
+//   is set (validated: quotes must be verbatim), otherwise the deterministic
+//   engine. Either way the response is a valid suite — never a user-facing error.
+// - "titles" / "series": deterministic engine slices for the free tools —
 //   always work, no key needed.
-// - "discussion-guide": AI-enhanced guide only; 503 when unconfigured so the
+// - "discussion-guide": AI-enhanced kit only; 503 when unconfigured so the
 //   client falls back to its own offline generator.
 
 import { generateSuiteGlm, hasGlm } from "../engine/glm.js";
-import { analyzeSermon, buildTitles, buildDevotionals } from "../engine/lib.js";
+import { analyzeTranscript, buildTitles, buildEmailSeries } from "../engine/lib.js";
 
 const TIMEOUT_MS = 45000;
 
@@ -32,12 +32,12 @@ export default async function handler(req, res) {
     return res.status(200).json({ suite });
   }
 
-  if (mode === "titles" || mode === "devotionals") {
-    const a = analyzeSermon(text);
+  if (mode === "titles" || mode === "series") {
+    const a = analyzeTranscript(text);
     if (mode === "titles") {
       return res.status(200).json({ titles: buildTitles(a), themes: a.themes.slice(0, 5) });
     }
-    return res.status(200).json({ devotionals: buildDevotionals(a) });
+    return res.status(200).json({ series: buildEmailSeries(a) });
   }
 
   if (mode !== "discussion-guide") {
@@ -59,17 +59,17 @@ export default async function handler(req, res) {
           {
             role: "system",
             content:
-              "You write small-group discussion guides for church congregations from sermon transcripts. " +
-              "Ground every question in actual quotes or specific moments from the sermon. Warm, plain, " +
-              "non-preachy language. Never invent quotes that are not in the transcript.",
+              "You write community discussion kits from podcast episode transcripts. " +
+              "Ground every question in actual quotes or specific moments from the episode. Warm, plain, " +
+              "energetic language. Never invent quotes that are not in the transcript.",
           },
           {
             role: "user",
             content:
-              "From the sermon transcript below, produce JSON only (no markdown) with keys: " +
-              "title (string), icebreaker (string), open (array of 3 strings), " +
-              "qs (array of 6 objects {quote: exact sentence from the sermon, follow: one follow-up question}), " +
-              "prayer (string). Transcript:\n\n" + text.slice(0, 60000),
+              "From the episode transcript below, produce JSON only (no markdown) with keys: " +
+              "title (string), opener (string), open (array of 3 strings), " +
+              "qs (array of 6 objects {quote: exact sentence from the episode, follow: one follow-up question}), " +
+              "closing (string). Transcript:\n\n" + text.slice(0, 60000),
           },
         ],
         temperature: 0.7,

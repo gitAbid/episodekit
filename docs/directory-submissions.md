@@ -1,63 +1,62 @@
-# Directory Submission Kit — SermonKit
+# Directory Submission Kit — EpisodeKit
 
-Live URL: **https://sermonkit.vercel.app** · Contact: hello@sermonkit.app
+Live URL: **https://episodekit.vercel.app** · Contact: hello@episodekit.app
 
 Everything below is ready to paste. Submissions require an account on each
-directory (email login). None of these can be done without a user account —
-**this file is the complete kit so each submission takes ~3 minutes.**
+directory (email login). **This file is the complete kit so each submission
+takes ~3 minutes.**
 
 ## Master copy
 
-**Name:** SermonKit
+**Name:** EpisodeKit
 
-**One-liner:** Turn one sermon into a month of content — manuscript, discussion
-guide, 5-day devotionals, social pack, summary, and titles.
+**One-liner:** Turn one podcast episode into a month of content — article, discussion kit, 5-day email series, social pack, titles.
 
 **Description (short, ≤160 chars):**
-One sermon upload becomes the full church content package: discussion guide,
-devotionals, social captions with pull quotes, edited manuscript, and titles.
+One episode upload becomes the full content package: article-ready show notes,
+discussion kit, email series, social captions with pull quotes, and titles.
 
 **Description (long):**
-SermonKit turns a single sermon — audio file or pasted transcript — into the
-whole content package a church communications volunteer spends hours writing
-every week: an edited manuscript with headings, a small-group discussion guide
-anchored on verbatim quotes from the sermon, a 5-day devotional series, social
-captions with pull quotes sized for each platform, a newsletter summary, and
-sermon title ideas. Every quote SermonKit shows is taken word-for-word from the
-sermon you provide — nothing is invented. Free while in beta (3 sermons/month);
-Pro is $19/mo. Three free no-signup tools: discussion guide generator, sermon
-title generator, and devotional generator.
+EpisodeKit turns a single podcast episode — audio file or pasted transcript —
+into the whole content package a creator spends hours writing every week: an
+article-ready writeup with headings, a community discussion kit anchored on
+verbatim quotes from the episode, a 5-day email series for your list, social
+captions with pull quotes sized for each platform, a summary, and episode
+title ideas. Every quote EpisodeKit shows is taken word-for-word from the
+episode you provide — nothing is invented. Free while in beta (3
+episodes/month); Pro is $19/mo. Three free no-signup tools: discussion kit
+generator, episode title generator, and email series generator.
 
-**Tags/categories:** AI writing assistant, church management, content
-repurposing, sermon tools, ministry tools, text-to-social
+**Tags/categories:** AI writing assistant, podcast tools, content repurposing,
+show notes generator, creator tools, text-to-social
 
-**Pricing:** Freemium — Free (3 sermons/mo) · Pro $19/mo · Studio $49/mo
+**Pricing:** Freemium — Free (3 episodes/mo) · Pro $19/mo · Studio $49/mo
 
-**Assets:** `site/og.png` (1200×630 logo card), `site/img/landing-hero.png`,
-`site/img/app-result.png`, `site/img/samples.png` (1280×800 screenshots)
+**Assets:** `site/og.png` (1200×630 logo card), `site/img/*.png` (1280×800
+screenshots)
 
 ## Per-directory notes
 
 | Directory | URL | Notes |
 |---|---|---|
-| AlternativeTo | https://alternativeto.net/manage/new/ | List as alternative to Pulpit AI / Sermon Shots / Opus Clip (be factual) |
-| There's An AI For That | https://theresanaiforthat.com/submit/ | Very high approval volume; use short description + og.png |
-| SaaSHub | https://www.saashub.com/submit | Requires product profile; long description fits |
-| Indie Hackers | https://www.indiehackers.com/ | Post in "Share your product" as maker; honesty-first writeup welcome |
-| Futurepedia | https://www.futurepedia.io/submit-a-tool | Free tier submission; tag "content repurposing" |
-| Uneed | https://uneed-best/submit (launch queue) | Book a launch day |
-| DevHunt | https://devhunt.org | Weekly launch cycle — schedule after PH decision |
-| BetaList | https://betalist.com/submit | Pre-launch positioning OK while in beta |
+| AlternativeTo | https://alternativeto.net/manage/new/ | List as alternative to Podsqueeze / Castmagic / Recast Studio (factual) |
+| There's An AI For That | https://theresanaiforthat.com/submit/ | Short description + og.png |
+| SaaSHub | https://www.saashub.com/submit | Long description fits |
+| Indie Hackers | https://www.indiehackers.com/ | Maker post; honesty-first writeup (verbatim-quote validator is the hook) |
+| Futurepedia | https://www.futurepedia.io/submit-a-tool | Tag "content repurposing" |
+| Uneed | https://uneed-best/submit | Book a launch day |
+| DevHunt | https://devhunt.org | Weekly launch cycle |
+| BetaList | https://betalist.com/submit | Beta positioning OK |
 
 ## Maker-disclosure blurb (for community posts)
 
-I'm building SermonKit — it turns a sermon into the full content package
-(discussion guide, 5-day devotionals, social pack, manuscript, titles) with
-every quote verbatim from the sermon. Free tools with no signup here: [link].
-Happy to answer anything about how the quote-integrity checks work.
+I'm building EpisodeKit — it turns a podcast episode into the full content
+package (article, discussion kit, 5-day email series, social pack, titles)
+with every quote verbatim from the episode. Free tools with no signup here:
+[link]. Happy to answer anything about how the quote-integrity checks work.
 
 ## Status log
 
 | Date | Directory | Status |
 |---|---|---|
-| 2026-10-24 | (all) | Kit prepared; submissions pending user accounts |
+| 2026-10-24 | (all) | Kit prepared (EpisodeKit copy); submissions pending user accounts |

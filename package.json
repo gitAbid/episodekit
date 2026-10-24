@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node engine/test.js && node api/asr.test.js",
-    "sample": "node engine/cli.js docs/samples/demo-sermon.txt --json docs/samples/sample-suite.json --md docs/samples/sample-suite.md --html site/samples.html"
+    "test": "node engine/test.js && node api/asr.test.js && node api/license.test.js",
+    "sample": "node engine/cli.js docs/samples/demo-episode.txt --json docs/samples/sample-suite.json --md docs/samples/sample-suite.md --html site/samples.html"
   }
 }

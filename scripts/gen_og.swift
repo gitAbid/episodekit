@@ -42,14 +42,14 @@ let gold = CGColor(red: 0.91, green: 0.69, blue: 0.29, alpha: 1)
 let white = CGColor(red: 0.91, green: 0.93, blue: 0.96, alpha: 1)
 let muted = CGColor(red: 0.60, green: 0.65, blue: 0.72, alpha: 1)
 
-draw("Sermon", font: system, color: white, x: 90, y: 430)
+draw("Episode", font: system, color: white, x: 90, y: 430)
 // measure "Sermon" to place "Kit" after it
-let sermonLine = CTLineCreateWithAttributedString(NSAttributedString(string: "Sermon", attributes: [NSAttributedString.Key(kCTFontAttributeName as String): system]))
+let sermonLine = CTLineCreateWithAttributedString(NSAttributedString(string: "Episode", attributes: [NSAttributedString.Key(kCTFontAttributeName as String): system]))
 let sermonW = CGFloat(CTLineGetTypographicBounds(sermonLine, nil, nil, nil))
 draw("Kit", font: system, color: gold, x: 90 + sermonW + 8, y: 430)
-draw("One sermon. A month of content.", font: systemMed, color: white, x: 92, y: 330)
-draw("Manuscript · Discussion guide · Devotionals · Social pack", font: systemMed, color: muted, x: 92, y: 250)
-draw("sermonkit.app", font: systemMed, color: gold, x: 92, y: 110)
+draw("One episode. A month of content.", font: systemMed, color: white, x: 92, y: 330)
+draw("Article · Discussion kit · Email series · Social pack", font: systemMed, color: muted, x: 92, y: 250)
+draw("episodekit.app", font: systemMed, color: gold, x: 92, y: 110)
 
 // thin gold rule
 ctx.setFillColor(gold)

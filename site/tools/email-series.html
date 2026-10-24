@@ -3,33 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free Devotional Generator — turn a sermon into a 5-day series — SermonKit</title>
-<meta name="description" content="Paste a sermon transcript and get a 5-day devotional series: each day anchored on a real quote from the message, with a reflection, action step, and prayer. Free, no signup.">
-<meta property="og:title" content="Free Devotional Generator — from any sermon">
-<meta property="og:description" content="Paste a sermon, get a 5-day devotional series anchored on real quotes from the message. Free, no signup.">
+<title>Free Email Series Generator — turn an episode into a 5-day drip — EpisodeKit</title>
+<meta name="description" content="Paste an episode transcript and get a 5-day email series: each day anchored on a real quote from the episode, with a reflection, action step, and sign-off. Free, no signup.">
+<meta property="og:title" content="Free Email Series Generator — from any podcast episode">
+<meta property="og:description" content="Paste an episode, get a 5-day email series anchored on real quotes from the show. Free, no signup.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://sermonkit.vercel.app/tools/devotional.html">
+<meta property="og:url" content="https://episodekit.vercel.app/tools/email-series.html">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="tool.css">
 </head>
 <body>
 <header><div class="wrap nav">
-  <div class="logo"><a href="../index.html" style="color:inherit">Sermon<span>Kit</span></a></div>
+  <div class="logo"><a href="../index.html" style="color:inherit">Episode<span>Kit</span></a></div>
   <a href="../index.html#pricing">Pricing</a>
-  <a href="../samples.html">Sample suite</a>
+  <a href="../samples.html">Sample package</a>
   <a href="index.html">Free tools</a>
-  <a href="#" style="margin-left:auto;color:var(--accent)">Devotional generator</a>
+  <a href="#" style="margin-left:auto;color:var(--accent)">Email series generator</a>
 </div></header>
 
 <main class="wrap">
-  <h1>Sermon → 5-Day Devotional Series</h1>
-  <p class="sub">Paste Sunday's sermon and get a devotional series for the week:
-  each day is anchored on an actual quote from the message, with a reflection, one
-  action step, and a short prayer. Free, no signup.</p>
+  <h1>Episode → 5-Day Email Series</h1>
+  <p class="sub">Paste this week's episode and get a drip for your list: each
+  day is anchored on an actual quote from the episode, with a reflection, one
+  action step, and a sign-off. Free, no signup.</p>
 
-  <textarea id="sermon" placeholder="Paste your sermon transcript here… (the fuller the sermon, the better the series)"></textarea>
+  <textarea id="sermon" placeholder="Paste your episode transcript here… (the fuller the episode, the better the series)"></textarea>
   <div class="row">
-    <button class="primary" id="go">Generate devotional series</button>
+    <button class="primary" id="go">Generate email series</button>
     <span class="hint" id="count">0 words</span>
   </div>
 
@@ -44,9 +44,9 @@
 </main>
 
 <footer><div class="wrap">
-  Part of <a href="../index.html">SermonKit</a> — one sermon, a month of content.
-  <a href="discussion-guide.html">Also free: discussion guide generator</a> ·
-  <a href="sermon-titles.html">sermon title generator</a>
+  Part of <a href="../index.html">EpisodeKit</a> — one episode, a month of content.
+  <a href="discussion-guide.html">Also free: discussion kit generator</a> ·
+  <a href="episode-titles.html">episode title generator</a>
 </div></footer>
 
 <script src="../js/analytics.js"></script>
@@ -59,40 +59,40 @@ let current=null;
 go.addEventListener("click",async()=>{
   const text=area.value.trim();
   const wc=text.split(/\s+/).filter(Boolean).length;
-  if(wc<80){alert("Please paste at least ~80 words of sermon text so each day can be anchored in the message.");return;}
+  if(wc<80){alert("Please paste at least ~80 words of transcript so each day can be anchored in the episode.");return;}
   go.disabled=true; go.textContent="Generating…";
   try{
     const r=await fetch("/api/generate-suite",{
       method:"POST",headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({mode:"devotionals",text:text.slice(0,60000)})});
+      body:JSON.stringify({mode:"series",text:text.slice(0,60000)})});
     if(!r.ok) throw new Error("server "+r.status);
     const j=await r.json();
-    current=j.devotionals;
+    current=j.series;
     document.getElementById("days").innerHTML=current.map(d=>`
       <div class="card">
         <h2 class="cardtitle">${d.title}</h2>
-        <h3 class="k">Re-read</h3>
+        <h3 class="k">Re-listen</h3>
         <blockquote>“${d.anchor}”</blockquote>
         <h3 class="k">Reflection</h3>
         <p class="txt">${d.reflection}</p>
-        <h3 class="k">Live it</h3>
+        <h3 class="k">Do this</h3>
         <p class="txt">${d.action}</p>
-        <h3 class="k">Pray</h3>
-        <p class="txt">${d.prayer}</p>
+        <h3 class="k">Sign-off</h3>
+        <p class="txt">${d.closing}</p>
       </div>`).join("");
-    document.getElementById("notice").textContent="Every quote above is taken word-for-word from the sermon you pasted — nothing is invented.";
+    document.getElementById("notice").textContent="Every quote above is taken word-for-word from the episode you pasted — nothing is invented.";
     document.getElementById("out").style.display="block";
     go.textContent="Generate again";
   }catch(e){
     alert("The generator couldn't reach the server. Check your connection and try again.");
   }finally{
-    go.disabled=false; if(go.textContent==="Generating…") go.textContent="Generate devotional series";
+    go.disabled=false; if(go.textContent==="Generating…") go.textContent="Generate email series";
   }
 });
 document.getElementById("copy").addEventListener("click",()=>{
   if(!current)return;
-  const t=current.map(d=>`${d.title}\n\nRe-read: “${d.anchor}”\n\n${d.reflection}\n\nLive it: ${d.action}\n\nPray: ${d.prayer}`).join("\n\n———\n\n");
-  navigator.clipboard.writeText(t+"\n\n— generated with SermonKit (sermonkit.app)").then(()=>{
+  const t=current.map(d=>`${d.title}\n\nRe-listen: “${d.anchor}”\n\n${d.reflection}\n\nDo this: ${d.action}\n\n${d.closing}`).join("\n\n———\n\n");
+  navigator.clipboard.writeText(t+"\n\n— generated with EpisodeKit (episodekit.app)").then(()=>{
     const b=document.getElementById("copy"); b.textContent="Copied ✓"; setTimeout(()=>b.textContent="Copy series as text",1500);
   });
 });

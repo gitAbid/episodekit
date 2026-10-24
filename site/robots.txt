@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /map
+Disallow: /app
 
-Sitemap: https://sermonkit.vercel.app/sitemap.xml
+Sitemap: https://episodekit.vercel.app/sitemap.xml

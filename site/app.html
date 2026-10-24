@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SermonKit App — turn a sermon into the whole content package</title>
-<meta name="description" content="Upload your sermon audio or paste the transcript. Get the manuscript, discussion guide, 5-day devotionals, social pack, summary and titles — with copy and download.">
+<title>EpisodeKit App — turn an episode into the whole content package</title>
+<meta name="description" content="Upload your episode audio or paste the transcript. Get the article, discussion kit, 5-day email series, social pack, summary and titles — with copy and download.">
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="tools/tool.css">
 <style>
@@ -28,19 +28,19 @@ button.ghost.small{padding:6px 12px;font-size:13px}
 </head>
 <body>
 <header><div class="wrap nav">
-  <div class="logo"><a href="index.html" style="color:inherit">Sermon<span>Kit</span></a></div>
+  <div class="logo"><a href="index.html" style="color:inherit">Episode<span>Kit</span></a></div>
   <a href="index.html#pricing">Pricing</a>
-  <a href="samples.html">Sample suite</a>
+  <a href="samples.html">Sample package</a>
   <a href="tools/index.html">Free tools</a>
   <a href="#" style="margin-left:auto;color:var(--accent)">App <span class="badge">beta</span></a>
 </div></header>
 
 <main class="wrap">
-  <h1>Turn a sermon into the whole package</h1>
-  <p class="sub">Audio file or transcript in — manuscript, discussion guide, 5-day
-  devotionals, social pack, summary, and titles out. Free while in beta:
-  <b id="quotaLeft">3</b> sermons left this month. Every quote is taken
-  word-for-word from your sermon.</p>
+  <h1>Turn an episode into the whole package</h1>
+  <p class="sub">Audio file or transcript in — article, discussion kit, 5-day
+  email series, social pack, summary, and titles out. Free while in beta:
+  <b id="quotaLeft">3</b> episodes left this month. Every quote is taken
+  word-for-word from your episode.</p>
 
   <div class="tabs">
     <div class="tab active" id="tabAudio">🎙 Upload audio</div>
@@ -49,7 +49,7 @@ button.ghost.small{padding:6px 12px;font-size:13px}
 
   <div class="step on" id="stepInput">
     <div id="pastePane" style="display:none">
-      <textarea id="sermon" placeholder="Paste your sermon transcript here…"></textarea>
+      <textarea id="sermon" placeholder="Paste your episode transcript here…"></textarea>
       <div class="row">
         <button class="primary" id="goPaste">Generate my content package</button>
         <span class="hint" id="count">0 words</span>
@@ -58,7 +58,7 @@ button.ghost.small{padding:6px 12px;font-size:13px}
     <div id="audioPane">
       <div id="drop">
         <b>Click to choose an audio file</b> — or drag &amp; drop it here<br>
-        <span style="font-size:14px">m4a, mp3, wav, webm · long sermons are fine (audio is compressed in your browser before upload)</span>
+        <span style="font-size:14px">m4a, mp3, wav, webm · long episodes are fine (audio is compressed in your browser before upload)</span>
       </div>
       <input type="file" id="file" accept="audio/*,.m4a,.mp3,.wav,.webm" style="display:none">
       <div class="progress" id="progress" style="display:none">
@@ -86,22 +86,28 @@ button.ghost.small{padding:6px 12px;font-size:13px}
       <div class="dl">
         <button class="ghost" id="dlMd">Download Markdown</button>
         <button class="ghost" id="dlJson">Download JSON</button>
-        <button class="ghost" id="startOver">↻ New sermon</button>
+        <button class="ghost" id="startOver">↻ New episode</button>
       </div>
     </div>
     <div id="suite"></div>
   </div>
 
   <div class="card" id="quotaCard" style="display:none">
-    <h2 class="cardtitle">You've used your 3 free sermons this month</h2>
-    <p class="meta">SermonKit Pro is $19/mo for 12 sermons — half the price of the
-    big tools, and every artifact stays editable and yours.</p>
-    <a class="primary" style="display:inline-block;padding:12px 22px;border-radius:11px;color:#141414;font-weight:700" href="mailto:founders@sermonkit.app?subject=Pro%20upgrade">Get Pro — email us</a>
+    <h2 class="cardtitle" id="quotaTitle">You've used your 3 free episodes this month</h2>
+    <p class="meta" id="quotaBody">EpisodeKit Pro is $19/mo for 12 episodes — every artifact stays editable and yours. Founding-member pricing while in beta.</p>
+    <div class="dl" id="quotaButtons">
+      <a class="primary" style="display:inline-block;padding:12px 22px;border-radius:11px;color:#141414;font-weight:700" href="mailto:founders@episodekit.app?subject=Pro%20upgrade">Get Pro — email us</a>
+    </div>
+    <div class="row" style="margin-top:18px">
+      <input id="lickey" placeholder="Have a license key? SK1-…" style="flex:1;min-width:220px;background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 14px;font-size:15px">
+      <button class="ghost" id="licgo">Activate</button>
+    </div>
+    <div class="notice" id="licmsg" style="display:none"></div>
   </div>
 </main>
 
 <footer><div class="wrap">
-  Part of <a href="index.html">SermonKit</a> — one sermon, a month of content.
+  Part of <a href="index.html">EpisodeKit</a> — one episode, a month of content.
   Prefer a quick single artifact? Try the <a href="tools/index.html">free tools</a>.
 </div></footer>
 
@@ -110,15 +116,50 @@ button.ghost.small{padding:6px 12px;font-size:13px}
 <script>
 const $ = (id) => document.getElementById(id);
 const MONTH = new Date().toISOString().slice(0, 7);
-const quotaKey = "sk_used_" + MONTH;
+const quotaKey = "ek_used_" + MONTH;
 function usedCount() { return parseInt(localStorage.getItem(quotaKey) || "0", 10); }
 function updateQuota() {
-  const left = Math.max(0, 3 - usedCount());
+  const lic = JSON.parse(localStorage.getItem("ek_license") || "null");
+  const limit = lic ? lic.monthlySermons : 3;
+  const left = Math.max(0, limit - usedCount());
   $("quotaLeft").textContent = left;
+  if (lic) { $("quotaTitle").textContent = "Pro active — " + limit + " episodes this month"; }
   if (left === 0) { $("quotaCard").style.display = "block"; }
   return left;
 }
 updateQuota();
+// Checkout buttons + license activation (payment rail; inert until LS env set)
+(async () => {
+  try {
+    const c = await (await fetch("/api/config")).json();
+    if (c.paymentsEnabled) {
+      const btns = [];
+      if (c.checkout.founder) btns.push(`<a class="primary" style="display:inline-block;padding:12px 22px;border-radius:11px;color:#141414;font-weight:700" href="${c.checkout.founder}">Founding member — $49 once</a>`);
+      if (c.checkout.pro) btns.push(`<a class="ghost" style="display:inline-block;padding:12px 22px" href="${c.checkout.pro}">Pro — $19/mo</a>`);
+      if (btns.length) $("quotaButtons").innerHTML = btns.join(" ");
+    }
+  } catch {}
+})();
+$("licgo").addEventListener("click", async () => {
+  const key = $("lickey").value.trim();
+  const msg = $("licmsg");
+  msg.style.display = "block";
+  if (!key) { msg.textContent = "Paste your license key (it starts with SK1-, SK4-, or SKF-)."; return; }
+  msg.textContent = "Checking…";
+  try {
+    const r = await fetch("/api/license?key=" + encodeURIComponent(key));
+    const j = await r.json();
+    if (j.valid) {
+      localStorage.setItem("ek_license", JSON.stringify(j));
+      msg.textContent = "License active — " + j.plan + " (" + j.monthlySermons + " episodes/month).";
+      updateQuota();
+    } else {
+      msg.textContent = "That key didn't validate (" + (j.reason || "invalid") + "). Email founders@episodekit.app and we'll sort it.";
+    }
+  } catch {
+    msg.textContent = "Couldn't reach the server — try again.";
+  }
+});
 
 // --- tabs ---
 $("tabAudio").addEventListener("click", () => switchTab(true));
@@ -137,12 +178,12 @@ $("sermon").addEventListener("input", () => {
 $("goPaste").addEventListener("click", () => {
   const text = $("sermon").value.trim();
   const wc = text.split(/\s+/).filter(Boolean).length;
-  if (wc < 80) { alert("Please paste at least ~80 words of sermon text."); return; }
+  if (wc < 80) { alert("Please paste at least ~80 words of transcript."); return; }
   runSuite(text);
 });
 
 // --- audio path: choose → decode → compress in-browser → hold for upload ---
-let encodedBlob = null, encodedName = "sermon.webm";
+let encodedBlob = null, encodedName = "episode.webm";
 const drop = $("drop"), fileInput = $("file");
 drop.addEventListener("click", () => fileInput.click());
 drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("over"); });
@@ -172,11 +213,11 @@ async function prepareAudio(file) {
     src.connect(off.destination);
     src.start();
     const mono = await off.startRendering();
-    // Encode at low bitrate so long sermons fit the upload limit.
+    // Encode at low bitrate so long episodes fit the upload limit.
     const mime = MediaRecorder.isTypeSupported("audio/webm;codecs=opus") ? "audio/webm;codecs=opus"
       : MediaRecorder.isTypeSupported("audio/mp4") ? "audio/mp4" : "";
     if (!mime) throw new Error("This browser can't re-encode audio — use the paste-transcript tab.");
-    encodedName = mime.startsWith("audio/webm") ? "sermon.webm" : "sermon.mp4";
+    encodedName = mime.startsWith("audio/webm") ? "episode.webm" : "episode.mp4";
     const recCtx = new (window.AudioContext || window.webkitAudioContext)();
     const dest = recCtx.createMediaStreamDestination();
     const play = recCtx.createBufferSource();
@@ -193,11 +234,11 @@ async function prepareAudio(file) {
     encodedBlob = new Blob(chunks, { type: mime.split(";")[0] });
     setBar(100);
     const mb = encodedBlob.size / 1e6;
-    $("steptext").textContent = "Ready: " + Math.round(secs / 60) + " min sermon → " + mb.toFixed(1) + " MB to upload";
+    $("steptext").textContent = "Ready: " + Math.round(secs / 60) + " min episode → " + mb.toFixed(1) + " MB to upload";
     if (mb > 4.4) {
       encodedBlob = null;
       $("audioNote").className = "notice warn";
-      $("audioNote").textContent = "Even compressed, this audio is over the 4.4 MB upload limit. For very long sermons, paste the transcript instead (any transcription app works).";
+      $("audioNote").textContent = "Even compressed, this audio is over the 4.4 MB upload limit. For very long episodes, paste the transcript instead (any transcription app works).";
       $("audioNote").style.display = "block";
       return;
     }
@@ -218,7 +259,7 @@ function setBar(p) { $("barfill").style.width = p + "%"; }
 $("goAudio").addEventListener("click", async () => {
   if (!encodedBlob) return;
   if (usedCount() >= 3) { $("quotaCard").style.display = "block"; $("quotaCard").scrollIntoView({ behavior: "smooth" }); return; }
-  showStep("stepBusy"); $("busytext").textContent = "Transcribing your sermon…";
+  showStep("stepBusy"); $("busytext").textContent = "Transcribing your episode…";
   $("busyfill").style.width = "30%";
   try {
     const r = await fetch("/api/transcribe", {
@@ -245,7 +286,7 @@ $("goAudio").addEventListener("click", async () => {
 
 async function runSuite(text) {
   if (usedCount() >= 3) { $("quotaCard").style.display = "block"; $("quotaCard").scrollIntoView({ behavior: "smooth" }); return; }
-  showStep("stepBusy"); $("busytext").textContent = "Reading the sermon and writing your package…";
+  showStep("stepBusy"); $("busytext").textContent = "Reading the episode and writing your package…";
   $("busyfill").style.width = "45%";
   try {
     const r = await fetch("/api/generate-suite", {
@@ -265,10 +306,10 @@ async function runSuite(text) {
 
 function render(s) {
   showStep("stepDone");
-  $("suiteTitle").textContent = s.manuscript.title;
-  SermonKitSuite.renderSuite($("suite"), s);
-  $("dlMd").onclick = () => SermonKitSuite.download(s.manuscript.title.replace(/[^\w]+/g, "-").toLowerCase() + "-suite.md", SermonKitSuite.suiteMarkdown(s), "text/markdown");
-  $("dlJson").onclick = () => SermonKitSuite.download(s.manuscript.title.replace(/[^\w]+/g, "-").toLowerCase() + "-suite.json", JSON.stringify(s, null, 2), "application/json");
+  $("suiteTitle").textContent = s.article.title;
+  EpisodeKitSuite.renderSuite($("suite"), s);
+  $("dlMd").onclick = () => EpisodeKitSuite.download(s.article.title.replace(/[^\w]+/g, "-").toLowerCase() + "-package.md", EpisodeKitSuite.suiteMarkdown(s), "text/markdown");
+  $("dlJson").onclick = () => EpisodeKitSuite.download(s.article.title.replace(/[^\w]+/g, "-").toLowerCase() + "-package.json", JSON.stringify(s, null, 2), "application/json");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 $("startOver").addEventListener("click", () => {

@@ -1,8 +1,16 @@
-# SermonKit — 30-Day Roadmap (2026-10-24 → 2026-11-24)
+# EpisodeKit — 30-Day Roadmap (2026-10-24 → 2026-11-24)
 
-**One sermon upload → a month of content.** Edited manuscript, discussion guide,
-devotional emails, social captions + pull quotes, sermon summary, titles — generated
-from audio or a YouTube link.
+**PIVOT (Day 7, 2026-10-24):** repositioned from SermonKit (church/sermon vertical)
+to **EpisodeKit (podcasters)** per a hard user constraint: this project must stay
+religion-neutral. Same engine; artifacts are now article/show notes, discussion
+kit, 5-day email series, social pack, summary, titles. Old church positioning and
+demo content are fully removed (test gate: religion-free output). Kill/pivot gates
+now track the podcast vertical. Live: **https://episodekit.vercel.app/map** shows
+progress in real time.
+
+**One episode upload → a month of content.** Article, discussion kit, email
+series, social captions + pull quotes, summary, titles — generated from audio or
+a transcript.
 
 ## Why this product (see RESEARCH.md)
 - Verified incumbents charge $39–129/mo for this exact job (Pulpit AI, Sermon Shots).
@@ -50,7 +58,9 @@ from audio or a YouTube link.
 - [x] D6: Pricing page, waitlist capture, docs/samples page with the generated suite.
       — pricing proof grid + waitlist (live e2e) + samples context card +
       directory kit; see docs/day-logs/day-06.md
-- [ ] D7: Buffer/catch-up + Week-1 review in docs/day-logs/week-1-review.md.
+- [x] D7: Buffer/catch-up + Week-1 review in docs/day-logs/week-1-review.md.
+      — week-1 review + complaint lexicon + payment rail (pulled forward) +
+      Day-7 pivot to EpisodeKit + live sprint map; see docs/day-logs/day-07.md
 
 ## Week 2 (Days 8–14): Payments + launch prep
 - [ ] Lemon Squeezy: products (Pro/Studio/Founder-LTD), checkout links, webhook →
@@ -109,6 +119,9 @@ from audio or a YouTube link.
 1. Read ROADMAP.md + latest docs/day-logs/ + CHANGELOG.md.
 2. Pick the highest-priority unfinished item; build/verify it (test in browser where
    possible). One marketing action from the GTM sections.
-3. Commit with a clear message; update CHANGELOG.md; write docs/day-logs/day-NN.md
+3. **Update site/status.json** (the live sprint map's data: branches, decisions,
+   next-up, progress counts) so https://…/map reflects today's reality, and
+   deploy if anything user-facing changed.
+4. Commit with a clear message; update CHANGELOG.md; write docs/day-logs/day-NN.md
    (what shipped, evidence, what's next). Log metrics if any exist.
 4. Never mark items [x] without the commit/deploy evidence.
