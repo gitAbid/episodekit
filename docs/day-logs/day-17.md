@@ -1,6 +1,6 @@
 # Day 17 (build session 17) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · critical CTA bug fix.
+**Build commit:** `0b58b2c` · critical CTA bug fix.
 
 ## What shipped
 **Found and fixed a real conversion-killing bug: every "email us" CTA on the
