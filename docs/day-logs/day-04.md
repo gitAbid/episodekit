@@ -1,6 +1,6 @@
 # Day 4 — 2026-10-24
 
-**Build commit:** (see follow-up docs commit) · app v0 (the paid-product core).
+**Build commit:** `00b6447` · app v0 (the paid-product core).
 
 ## What shipped
 1. **ASR module** (`api/asr.js`) — provider-agnostic transcription: Deepgram
