@@ -2,6 +2,18 @@
 
 All entries map to a commit. Newest first.
 
+## Day 2 — 2026-10-24
+- Sermon engine core: deterministic full-suite builder (titles, summary, manuscript,
+  discussion guide, 5-day devotionals, social pack) — `engine/lib.js`
+- GLM path with verbatim-quote validator + per-artifact deterministic fallback —
+  `engine/glm.js`
+- CLI + renderers (JSON/Markdown/HTML) — `engine/cli.js`, `engine/index.js`
+- 22-test suite (`npm test`) incl. honesty tests (all quotes exact substrings)
+- Marketing proof: engine-generated sample suite committed —
+  `docs/samples/sample-suite.{json,md}` + rendered `site/samples.html`, linked
+  from landing; demo sermon is original CC0 text
+- API `mode:"full"` — full suite endpoint, keyless-capable
+
 ## Day 1 — 2026-10-24
 - Research: 3 parallel agents (demand, business model, distribution) → `RESEARCH.md`
 - Decision: SermonKit (church vertical, $19/mo Pro, Lemon Squeezy MoR) → `ROADMAP.md`

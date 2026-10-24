@@ -30,9 +30,10 @@ from audio or a YouTube link.
 ## Week 1 (Days 1–7): Foundation + free-tool wedge
 - [x] D1: Research, decision, roadmap, repo scaffold, landing v0, free tool #1
       (discussion-guide generator, works offline via heuristics) — commit `117a611`
-- [ ] D2: Sermon engine core (Node): transcript → suite generator (GLM via env key;
+- [x] D2: Sermon engine core (Node): transcript → suite generator (GLM via env key;
       deterministic template fallback when no key). Sample sermon in repo (public
-      domain) + generated sample suite committed as marketing proof.
+      domain) + generated sample suite committed as marketing proof. — see
+      docs/day-logs/day-02.md
 - [ ] D3: Free tool #2 (sermon title generator) + free tool #3 (devotional generator);
       each with its own SEO page + meta. Analytics snippet (PostHog or Cloudflare).
 - [ ] D4: App v0: upload audio (m4a/mp3) → ASR (Deepgram/Groq via env key; graceful

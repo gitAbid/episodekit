@@ -1,0 +1,9 @@
+{
+  "name": "sermonkit",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node engine/test.js",
+    "sample": "node engine/cli.js docs/samples/demo-sermon.txt --json docs/samples/sample-suite.json --md docs/samples/sample-suite.md --html site/samples.html"
+  }
+}
