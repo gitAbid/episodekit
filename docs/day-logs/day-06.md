@@ -1,6 +1,6 @@
 # Day 6 — 2026-10-24
 
-**Build commit:** (see follow-up docs commit) · pricing proof, waitlist, samples
+**Build commit:** `5f7f01d` · pricing proof, waitlist, samples
 context, directory kit.
 
 ## What shipped
