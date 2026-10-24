@@ -1,6 +1,6 @@
 # Day 11 (build session 11) — 2026-10-25
 
-**Build commit:** (see follow-up docs commit) · template SEO page + structured data.
+**Build commit:** `f68a801` · template SEO page + structured data.
 
 ## What shipped
 1. **"Podcast show notes template" page** — `site/templates/show-notes.html`:
