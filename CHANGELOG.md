@@ -2,6 +2,32 @@
 
 All entries map to a commit. Newest first.
 
+## Day 21 (build session 21) — 2026-10-26
+- Site-wide QA sweep: 15-page link crawl + 14 live routes — zero broken links
+- Lighthouse re-run caught an a11y regression (color-only links from newer
+  content) — fixed; landing back to 100/100/100
+
+## Days 11–20 (sessions 11–20) — 2026-10-25/26 (catch-up summary)
+- D11: show-notes template page + landing FAQ + SoftwareApplication/FAQPage
+  JSON-LD (validated)
+- D12: **public repo** github.com/gitAbid/episodekit (secrets-scanned,
+  account-ids redacted); env key-availability check (none exposed)
+- D13: IndexNow self-serve indexing (10 URLs, 202); GitHub Actions CI + badge;
+  README demo GIF; og:image on all pages
+- D14: quote-validator hardened for real-LLM punctuation (verbatim fragments
+  accepted, paraphrases rejected — 62 tests); LS activation runbook
+- D15: config-driven first-run UX (paste tab default until ASR live); 9:16
+  vertical demo cut
+- D16: pillar guide #1 (complete guide to show notes) + tool→app sessionStorage
+  transcript handoff
+- D17: **bug fix** — all "email us" CTAs were dead (unowned domain); working
+  contact form + /api/contact (durable sk_contact log)
+- D18: PH gallery assets at exact 1270×760; uptime check as daily-loop step 0;
+  README sample-output block (quotes verified against generated JSON)
+- D19: engine copywriting pass (6-way follow-up bank, richer apply prompts,
+  pair titles)
+- D20: pillar guide #2 (podcast repurposing playbook)
+
 ## Day 10 (build session 10) — 2026-10-25
 - Launch pack: paste-ready PH submission + maker comment + Show HN post +
   launch-day checklist — `docs/launch-pack.md`

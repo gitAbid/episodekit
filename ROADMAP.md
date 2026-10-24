@@ -127,8 +127,9 @@ a transcript.
 2. Pick the highest-priority unfinished item; build/verify it (test in browser where
    possible). One marketing action from the GTM sections.
 3. **Update site/status.json** (the live sprint map's data: branches, decisions,
-   next-up, progress counts) so https://…/map reflects today's reality, and
-   deploy if anything user-facing changed.
+   next-up, progress counts) so https://…/map reflects today's reality, **and
+   add a CHANGELOG.md entry for today's work** (this was skipped in sessions
+   11–20; do not skip it), then deploy if anything user-facing changed.
 4. Commit with a clear message; update CHANGELOG.md; write docs/day-logs/day-NN.md
    (what shipped, evidence, what's next). Log metrics if any exist.
 4. Never mark items [x] without the commit/deploy evidence.

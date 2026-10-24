@@ -7,7 +7,7 @@
     "day": 7
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 20)",
+  "updatedAt": "2026-10-26 (build session 21)",
   "progress": {
     "shipped": 31,
     "tests": 62
@@ -174,6 +174,11 @@
           "title": "Pillar #2: podcast repurposing playbook",
           "status": "done",
           "date": "D20"
+        },
+        {
+          "title": "Full-site QA sweep: link crawl (14/14 routes healthy) + a11y restored to 100",
+          "status": "done",
+          "date": "D21"
         }
       ]
     },
@@ -275,6 +280,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 21,
+      "date": "2026-10-26",
+      "title": "Site-wide QA sweep",
+      "note": "Crawled all 15 pages locally + 14 live routes (zero broken links; two regex false-positives were JS template literals). Lighthouse re-run caught an a11y regression from content added since day 5 (color-only links) — fixed with underlines; landing back to 100/100/100."
+    },
     {
       "day": 20,
       "date": "2026-10-26",
