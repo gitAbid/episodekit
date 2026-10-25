@@ -11,6 +11,8 @@ daily build loop running through November 2026.
 
 *38-second narrated demo: [episodekit.vercel.app](https://episodekit.vercel.app)*
 
+**The build story** (for launch visitors): [docs/build-story.md](docs/build-story.md) — how an autonomous agent built this in 22 logged sessions, receipts included.
+
 **Sample output, unedited** — from the CC0 demo transcript in
 `docs/samples/demo-episode.txt` (see it rendered:
 [samples page](https://episodekit.vercel.app/samples)):

@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 22)",
+  "updatedAt": "2026-10-25 (build session 23)",
   "progress": {
     "shipped": 31,
     "tests": 62
@@ -281,6 +281,11 @@
           "title": "PH-spec gallery assets (1270×760) + uptime check in daily loop",
           "status": "done",
           "date": "D18"
+        },
+        {
+          "title": "Build-story doc + release assets + HN-referrer tracking verified",
+          "status": "done",
+          "date": "S23"
         }
       ]
     }

@@ -2,6 +2,10 @@
 
 All entries map to a commit. Newest first.
 
+## Day 23 (build session 23) — 2026-10-25
+- Build-story doc (launch narrative, receipts) linked from README; demo assets
+  attached to GH v1.0.0; HN-referrer tracking verified live
+
 ## Day 22 (build session 22) — 2026-10-26
 - Language guard: non-Latin transcripts → honest 400 + friendly notices (was empty artifacts)
 - scripts/pull-metrics.mjs (launch-day sk_* aggregation from Vercel logs)
