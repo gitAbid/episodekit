@@ -1,6 +1,6 @@
 # Day 23 (build session 23) — 2026-10-25
 
-**Build commit:** (see follow-up docs commit) · pre-A1 launch prep.
+**Build commit:** `e39ec7f` · pre-A1 launch prep.
 
 ## What shipped
 1. **Referrer tracking verified for A2**: beacon with an HN-style referrer →
