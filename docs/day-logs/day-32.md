@@ -1,6 +1,6 @@
 # Day 32 (build session 32) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · field scan + A7 post draft.
+**Build commit:** `df014e1` · field scan + A7 post draft.
 
 ## What shipped
 1. **Mention scan** — HN (Algolia API) and live signals checked: zero mentions
