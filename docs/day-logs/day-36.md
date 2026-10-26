@@ -1,6 +1,6 @@
 # Day 36 (build session 36) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · ops hardening: false-incident guard.
+**Build commit:** `6e28f07` · ops hardening: false-incident guard.
 
 ## What shipped
 **Caught a maintenance-procedure bug**: the uptime probe used "a short test
