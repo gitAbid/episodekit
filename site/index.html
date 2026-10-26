@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
 <title>EpisodeKit — One episode, a month of content</title>
 <meta name="description" content="Turn your podcast episode into show notes, an article, a 5-day email series, social captions with pull quotes, and titles — in minutes. Every quote verbatim.">
 <meta property="og:title" content="EpisodeKit — one episode, a month of content">
@@ -15,6 +18,7 @@
 <meta name="twitter:description" content="One episode upload → the whole week's content package.">
 <meta name="twitter:image" content="https://episodekit.vercel.app/og.png">
 <link rel="canonical" href="https://episodekit.vercel.app/">
+<link rel="stylesheet" href="css/theme.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -45,139 +49,84 @@
   ]
 }
 </script>
-<style>
-  :root{
-    --bg:#0e1116; --bg2:#151b23; --card:#1a2230; --line:#283242;
-    --text:#e8edf4; --muted:#98a6b8; --accent:#e8b04b; --accent2:#6fb3ff;
-    --max:1040px;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--text);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-  a{color:var(--accent2);text-decoration:none}
-  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-  header{border-bottom:1px solid var(--line);background:rgba(14,17,22,.9);position:sticky;top:0;backdrop-filter:blur(8px);z-index:5}
-  .nav{display:flex;align-items:center;gap:24px;padding:16px 0}
-  .nav .logo{font-weight:800;font-size:19px;color:var(--text);letter-spacing:.2px}
-  .nav .logo span{color:var(--accent)}
-  .nav a{color:var(--muted);font-size:14.5px}
-  .nav a:hover{color:var(--text)}
-  .nav .cta{margin-left:auto;background:var(--accent);color:#141414;font-weight:700;padding:9px 18px;border-radius:10px}
-  .hero{padding:88px 0 64px;text-align:center;background:
-    radial-gradient(600px 300px at 20% -10%,rgba(232,176,75,.13),transparent),
-    radial-gradient(700px 320px at 85% 0%,rgba(111,179,255,.10),transparent)}
-  .hero h1{font-size:clamp(34px,5.5vw,56px);line-height:1.12;font-weight:800;letter-spacing:-.5px;max-width:820px;margin:0 auto}
-  .hero h1 em{font-style:normal;color:var(--accent)}
-  .hero p.sub{color:var(--muted);font-size:19px;max-width:640px;margin:20px auto 32px}
-  .hero .cta{display:inline-block;background:var(--accent);color:#141414;font-weight:700;font-size:17px;padding:14px 30px;border-radius:12px}
-  .hero .cta:hover{filter:brightness(1.06)}
-  .hero .fine{color:var(--muted);font-size:13.5px;margin-top:14px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:56px 0 8px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;text-align:left}
-  .card h3{font-size:16.5px;margin-bottom:8px}
-  .card p{color:var(--muted);font-size:14.5px}
-  .card .n{display:inline-flex;width:30px;height:30px;border-radius:9px;background:rgba(232,176,75,.15);color:var(--accent);font-weight:800;align-items:center;justify-content:center;margin-bottom:12px}
-  section{padding:56px 0;border-top:1px solid var(--line)}
-  h2{font-size:30px;letter-spacing:-.3px;text-align:center;margin-bottom:10px}
-  .section-sub{color:var(--muted);text-align:center;max-width:620px;margin:0 auto 36px}
-  .artifacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-  .artifact{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:20px}
-  .artifact .tag{font-size:11.5px;font-weight:700;letter-spacing:1.2px;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
-  .artifact p{color:var(--muted);font-size:14.5px}
-  .price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:900px;margin:0 auto}
-  .price{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
-  .price.pro{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
-  .price .name{font-weight:800;font-size:15px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted)}
-  .price .amount{font-size:38px;font-weight:800;margin:10px 0 2px}
-  .price .amount small{font-size:15px;color:var(--muted);font-weight:500}
-  .price ul{list-style:none;margin:16px 0}
-  .price li{padding:5px 0;color:var(--muted);font-size:14.5px}
-  .price li::before{content:"✓";color:var(--accent);margin-right:9px;font-weight:800}
-  .btn{display:block;text-align:center;background:var(--accent);color:#141414;font-weight:700;padding:11px;border-radius:11px;margin-top:6px}
-  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
-  .founding{background:rgba(232,176,75,.08);border:1px dashed var(--accent);border-radius:14px;padding:16px 20px;max-width:900px;margin:26px auto 0;color:var(--muted);font-size:14.5px;text-align:center}
-  .founding b{color:var(--accent)}
-  .shot{display:block;width:100%;border-radius:14px;border:1px solid var(--line);margin-top:34px}
-  .shotcap{color:var(--muted);font-size:13.5px;text-align:center;margin-top:10px}
-  .shotcap a, footer a{text-decoration:underline;text-underline-offset:3px}
-  .proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:38px}
-  .proof img{width:100%;border-radius:14px;border:1px solid var(--line)}
-  .proof a{color:var(--muted);font-size:13.5px;display:block;text-align:center;margin-top:8px}
-  .waitrow{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
-  details.faq{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:10px 0;max-width:820px;margin-left:auto;margin-right:auto}
-  details.faq summary{font-weight:700;cursor:pointer;font-size:15.5px}
-  details.faq p{color:var(--muted);font-size:14.5px;margin-top:10px}
-  .waitrow input{background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 14px;font-size:15px;min-width:260px}
-  .waitrow button{background:var(--accent);color:#141414;font-weight:700;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;font-size:15px}
-  #waitmsg{margin-top:10px;font-size:14px;color:var(--accent2);min-height:20px}
-  footer{border-top:1px solid var(--line);padding:40px 0 60px;color:var(--muted);font-size:14px}
-  footer .cols{display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between}
-  @media(max-width:640px){.hero{padding:56px 0 40px}}
-</style>
 </head>
 <body>
-<header>
-  <div class="wrap nav">
-    <div class="logo">Episode<span>Kit</span></div>
-    <a href="#how">How it works</a>
-    <a href="samples.html" title="A real package generated by the engine">Sample package</a>
-    <a href="tools/index.html" title="Free podcast tools — no signup">Free tools</a>
-    <a href="#pricing">Pricing</a>
-    <a class="cta" href="app.html">Open the app</a>
+<div class="glowbg"></div>
+
+<header class="site-head">
+  <div class="wrap">
+    <div class="wordmark">Episode<span>Kit</span></div>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="samples.html">Sample package</a>
+      <a href="tools/index.html">Free tools</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <a class="btn sm head-cta" href="app.html">Open the app</a>
   </div>
 </header>
 
 <main>
-<div class="hero wrap">
-  <h1>One episode. <em>A month of content.</em></h1>
-  <p class="sub">Upload your podcast audio or paste the transcript. EpisodeKit
-  writes the article-ready show notes, community discussion kit, 5-day email
-  series, social captions with pull quotes, and titles — in minutes, not
-  creator-hours.</p>
-  <a class="cta" href="app.html">Generate my content package →</a>
-  <div class="fine">Free while in beta · or try the <a href="tools/index.html" style="color:inherit;text-decoration:underline">free single-artifact tools</a> · <a href="samples.html" style="color:inherit;text-decoration:underline">see a sample package →</a></div>
-</div>
-
-<section id="how">
+<section class="hero">
+  <div class="hero-orbs"></div>
   <div class="wrap">
-    <h2>How it works</h2>
-    <p class="section-sub">Built for the podcaster with a content calendar and
-    no spare evening.</p>
-    <div class="grid">
-      <div class="card"><span class="n">1</span><h3>Upload the episode</h3><p>Audio file, or paste the transcript. Long episodes welcome.</p></div>
-      <div class="card"><span class="n">2</span><h3>EpisodeKit reads it through</h3><p>Transcription, structure, key quotes, and the through-line of the episode.</p></div>
-      <div class="card"><span class="n">3</span><h3>Get the whole package</h3><p>Article, discussion kit, email series, captions, quotes, titles — ready to paste.</p></div>
-      <div class="card"><span class="n">4</span><h3>Review and ship</h3><p>Everything is editable and exportable. You approve; nothing publishes without you.</p></div>
+    <div class="eyebrow">For podcasters &amp; content teams</div>
+    <h1 class="display" style="margin-top:18px">One episode.<br><em>A month of content.</em></h1>
+    <p class="lede">Upload your podcast audio or paste the transcript. EpisodeKit writes the article-ready
+    show notes, community discussion kit, 5-day email series, social captions with pull quotes,
+    and titles — in minutes, not creator-hours.</p>
+    <a class="btn" href="app.html">Generate my content package →</a>
+    <div class="hero-fine">Free while in beta · <a href="tools/index.html">free single-artifact tools</a> · <a href="samples.html">see a sample package</a></div>
+  </div>
+</section>
+
+<section class="sect" id="how">
+  <div class="wrap">
+    <div class="sect-head">
+      <div class="eyebrow">How it works</div>
+      <h2>From mic to published, in one pass</h2>
+      <p>Built for the creator with a content calendar and no spare evening.</p>
     </div>
-    <video class="shot" controls muted playsinline preload="metadata" poster="og.png" style="width:100%;border-radius:14px;border:1px solid var(--line);margin-top:34px;display:block">
+    <div class="steps">
+      <div class="card step"><span class="num">1</span><h3>Upload the episode</h3><p>Audio file, or paste the transcript. Long episodes welcome.</p></div>
+      <div class="card step"><span class="num">2</span><h3>It reads it through</h3><p>Transcription, structure, key quotes, and the through-line of the episode.</p></div>
+      <div class="card step"><span class="num">3</span><h3>Get the whole package</h3><p>Article, discussion kit, email series, captions, quotes, titles — ready to paste.</p></div>
+      <div class="card step"><span class="num">4</span><h3>Review and ship</h3><p>Everything is editable and exportable. You approve; nothing publishes without you.</p></div>
+    </div>
+    <video class="shot" controls muted playsinline preload="metadata" poster="og.png">
       <source src="demo.mp4" type="video/mp4">
     </video>
     <p class="shotcap">38-second demo — a real run: paste the transcript, get the whole package. <a href="samples.html">See the full sample package →</a></p>
   </div>
 </section>
 
-<section>
+<section class="sect">
   <div class="wrap">
-    <h2>What you get every episode</h2>
-    <p class="section-sub">Each artifact is generated from the episode itself —
-    no generic templates.</p>
+    <div class="sect-head">
+      <div class="eyebrow">Every episode</div>
+      <h2>Six artifacts, zero generic filler</h2>
+      <p>Each one is generated from the episode itself — quotes appear word-for-word or not at all.</p>
+    </div>
     <div class="artifacts">
-      <div class="artifact"><div class="tag">Article</div><p>Cleaned, reflowed show notes with headings — for the blog or episode page.</p></div>
-      <div class="artifact"><div class="tag">Discussion kit</div><p>Opener, 6+ questions anchored on exact episode moments, and action prompts for your community.</p></div>
-      <div class="artifact"><div class="tag">Email series</div><p>A 5-day drip drawn from the episode's key moments — quote, reflection, one action each day.</p></div>
-      <div class="artifact"><div class="tag">Social pack</div><p>Captions and pull quotes sized for Instagram, LinkedIn, and X.</p></div>
-      <div class="artifact"><div class="tag">Summary</div><p>A 150-word recap for the newsletter and episode page.</p></div>
-      <div class="artifact"><div class="tag">Titles</div><p>Episode title and clip ideas, generated from the actual content.</p></div>
+      <div class="card artifact"><span class="tag">Article</span><p>Cleaned, reflowed show notes with headings — for the blog or episode page.</p></div>
+      <div class="card artifact"><span class="tag">Discussion kit</span><p>Opener, 6+ questions anchored on exact episode moments, and action prompts for your community.</p></div>
+      <div class="card artifact"><span class="tag">Email series</span><p>A 5-day drip drawn from the episode's key moments — quote, reflection, one action each day.</p></div>
+      <div class="card artifact"><span class="tag">Social pack</span><p>Captions and pull quotes sized for Instagram, LinkedIn, and X.</p></div>
+      <div class="card artifact"><span class="tag">Summary</span><p>A 150-word recap for the newsletter and episode page.</p></div>
+      <div class="card artifact"><span class="tag">Titles</span><p>Episode title and clip ideas, generated from the actual content.</p></div>
     </div>
   </div>
 </section>
 
-<section id="pricing">
+<section class="sect" id="pricing">
   <div class="wrap">
-    <h2>Pricing</h2>
-    <p class="section-sub">Priced for indie creators. Every plan includes the
-    full artifact suite.</p>
+    <div class="sect-head">
+      <div class="eyebrow">Pricing</div>
+      <h2>Priced for indie creators</h2>
+      <p>Every plan includes the full artifact package.</p>
+    </div>
     <div class="price-grid">
-      <div class="price">
+      <div class="card price">
         <div class="name">Free</div>
         <div class="amount">$0</div>
         <ul>
@@ -187,7 +136,8 @@
         </ul>
         <a class="btn ghost" href="tools/index.html">Start free</a>
       </div>
-      <div class="price pro">
+      <div class="card price pro">
+        <span class="ribbon">Most popular</span>
         <div class="name">Pro</div>
         <div class="amount">$19<small>/mo</small></div>
         <ul>
@@ -198,7 +148,7 @@
         </ul>
         <a class="btn" href="#founding">Join founding members</a>
       </div>
-      <div class="price">
+      <div class="card price">
         <div class="name">Studio</div>
         <div class="amount">$49<small>/mo</small></div>
         <ul>
@@ -229,33 +179,32 @@
         <a href="app.html">Or start now in the app (beta) →</a>
       </div>
     </div>
-    <div style="max-width:820px;margin:44px auto 0" id="faq">
-      <h2>FAQ</h2>
+    <div class="faq-wrap" id="faq">
+      <div class="sect-head" style="margin-bottom:24px"><div class="eyebrow">FAQ</div></div>
       <details class="faq"><summary>Are the quotes real?</summary><p>Yes — architecturally. Every quote in every artifact is validated as an exact word-for-word sentence from your transcript; if the AI-enhanced pass paraphrases, that artifact falls back to the deterministic build. Nothing invented.</p></details>
       <details class="faq"><summary>Do I need an account?</summary><p>No. The free tools (show notes, titles, discussion kit, email series) work with zero signup, and the app is open while in beta.</p></details>
       <details class="faq"><summary>Audio or transcript?</summary><p>Both. Upload an audio file — it's compressed in your browser before upload — or paste a transcript from any transcription app.</p></details>
       <details class="faq"><summary>What does it cost?</summary><p>Free while in beta: 3 episodes/month. Pro will be $19/mo (12 episodes, no attribution). The first 50 shows can lock Pro for life with a one-time $49 founding membership.</p></details>
-      <details class="faq"><summary>Who owns the content?</summary><p>You do. Everything is editable and exportable (Markdown/JSON), and nothing is published anywhere without you.</p></details>
+      <details class="faq"><summary>Who owns the content?</summary><p>You do. Everything is editable and exportable (Markdown/JSON), and nothing is published without you.</p></details>
     </div>
   </div>
 </section>
 </main>
 
-<footer>
+<footer class="site-foot">
   <div class="wrap cols">
     <div>
-      <div class="logo" style="font-weight:800">Episode<span style="color:var(--accent)">Kit</span></div>
+      <div class="wordmark">Episode<span>Kit</span></div>
       <p style="margin-top:8px">Made for podcasters and content teams.</p>
     </div>
     <div>
       <p><a href="tools/index.html">Free tools</a> · <a href="tools/show-notes.html">Show notes</a> · <a href="tools/discussion-guide.html">Discussion kit</a> · <a href="tools/episode-titles.html">Episode titles</a> · <a href="tools/email-series.html">Email series</a></p>
       <p><a href="compare/podsqueeze.html">vs Podsqueeze</a> · <a href="compare/castmagic.html">vs Castmagic</a> · <a href="samples.html">Sample package</a> · <a href="contact.html">Contact</a></p>
+      <p><a href="templates/show-notes.html">Template</a> · <a href="guides/show-notes.html">Show-notes guide</a> · <a href="guides/repurposing.html">Repurposing playbook</a> · <a href="https://github.com/gitAbid/episodekit">Source &amp; build logs</a></p>
     </div>
   </div>
-  <div class="wrap" style="margin-top:28px;font-size:13px;opacity:.8">
-    EpisodeKit is an independent product. Your content stays yours; nothing is
-    published without your review. Built in the open —
-    <a href="https://github.com/gitAbid/episodekit">source &amp; build logs on GitHub</a>.
+  <div class="wrap legal">
+    EpisodeKit is an independent product. Your content stays yours; nothing is published without your review.
   </div>
 </footer>
 <script src="js/analytics.js"></script>
@@ -281,7 +230,7 @@ document.getElementById("waitgo").addEventListener("click", async () => {
       throw new Error("server " + r.status);
     }
   } catch {
-    msg.textContent = "Couldn't reach the server — try again in a minute — or use the contact page.";
+    msg.textContent = "Couldn't reach the server — try again in a minute.";
   } finally {
     btn.disabled = false; btn.textContent = "Reserve my spot";
   }

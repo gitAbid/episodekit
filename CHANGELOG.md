@@ -2,6 +2,12 @@
 
 All entries map to a commit. Newest first.
 
+## Day 42 (build session 42) — 2026-10-26
+- **Visual redesign "midnight editorial"**: Fraunces+Inter design system,
+  landing + tools + app re-skinned, responsive/native across form factors;
+  Lighthouse P94/A100/BP96/SEO100 after font/contrast fixes; proof images
+  recaptured
+
 ## Day 41 (build session 41) — 2026-10-26
 - Mobile nav polish (390px audit) + one-click demo-transcript loader in the
   paste flow; textarea opens at top

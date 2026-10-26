@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 41 — polish)",
+  "updatedAt": "2026-10-26 (build session 42 — visual redesign)",
   "progress": {
     "shipped": 31,
     "tests": 69
@@ -306,6 +306,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 42,
+      "date": "2026-10-26",
+      "title": "Visual redesign: midnight editorial",
+      "note": "User: 'the UI is so ugly'. Full redesign: Fraunces serif + Inter, deep-ink palette with gold gradient CTAs, glow wash, glass cards, responsive/native across form factors (breakpoints 1024/720/480, 48px touch targets, safe-areas). Fonts moved to preconnect links after @import dropped Lighthouse perf to 77; contrast fixes restored a11y to 100. Final: P94/A100/BP96/SEO100. Proof images recaptured."
+    },
     {
       "day": 41,
       "date": "2026-10-26",
