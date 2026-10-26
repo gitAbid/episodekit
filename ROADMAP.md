@@ -45,7 +45,8 @@ artifact families out, every quote verbatim.
       400, tests 62/62 — day-24 log).
 - [ ] **USER (critical path, ~15 min, docs/FOR-ABID.md + ls-runbook):** Lemon
       Squeezy account + LS env vars; GLM_API_KEY + ASR_API_KEY in Vercel →
-      then agent verifies LS test order + AI/audio paths.
+      then agent verifies via `node scripts/verify-unlocks.mjs` (audio e2e with a
+      synthesized voice sample) + LS test order per runbook §7.
 - If user actions not done: everything else proceeds; launch dates hold only if
   unlocks land by A2 morning (Show HN can go first without payments; PH needs
   checkout).
