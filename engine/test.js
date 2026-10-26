@@ -105,5 +105,11 @@ const rep = Array(40).fill("This one sentence repeats over and over again becaus
 const repSuite = generateSuiteDeterministic(rep);
 ok(new Set(repSuite.discussion.qs.map((q) => q.quote)).size === repSuite.discussion.qs.length, "repeated sentences deduped (no duplicate quotes)");
 
+console.log("lowercase ASR transcripts");
+const lower = "welcome back to the show everybody. today we are talking about deep work and why focus is the most expensive resource in modern work. nobody budgets attention like money and that is the whole problem. a calendar block is a promise while a to-do item is a wish. one notification can tax the entire morning because attention compounds like debt.";
+const lowerSuite = generateSuiteDeterministic(lower);
+ok(lowerSuite.discussion.qs.length >= 4, "lowercase transcript still yields full artifacts");
+ok(lowerSuite.article.sections.length >= 3, "lowercase transcript segments into sections");
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

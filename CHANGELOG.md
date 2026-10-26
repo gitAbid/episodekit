@@ -2,6 +2,11 @@
 
 All entries map to a commit. Newest first.
 
+## Day 33 (build session 33) — 2026-10-26
+- Case-insensitive sentence splitting (all-lowercase ASR transcripts fixed —
+  caught by the 60-request burst test) + proportional segments; 69/69;
+  burst re-run 60/60 OK
+
 ## Day 32 (build session 32) — 2026-10-26
 - HN/Reddit mention scan (zero — field clear for A2); A7 transparency post
   pre-drafted (docs/sprint-report-draft.md)

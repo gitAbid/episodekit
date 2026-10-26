@@ -32,9 +32,13 @@ export function words(t) {
 }
 
 export function sentences(text) {
+  // Split on sentence enders regardless of the next word's case — real ASR
+  // output is frequently lowercase, and requiring a capital would collapse a
+  // whole episode into one "sentence". The 40-char minimum filters stray
+  // abbreviation fragments.
   return text
     .replace(/\s+/g, " ")
-    .split(/(?<=[.!?])\s+(?=[A-Z"'“])/)
+    .split(/(?<=[.!?])\s+/)
     .map((s) => s.trim())
     .filter((s) => s.length > 40 && s.length < 420);
 }
@@ -80,12 +84,13 @@ export function analyzeTranscript(rawText) {
   const keyQuotes = ranked.slice(0, 12).sort((a, b) => a.i - b.i).map((r) => r.s);
   // Segments: split the episode into 3–5 contiguous chunks; label each with its
   // own dominant theme (honest labels — the theme IS what that chunk is about).
-  const segmentCount = Math.max(3, Math.min(5, Math.round(sents.length / 8)));
-  const per = Math.ceil(sents.length / segmentCount);
+  const n = sents.length;
+  const segmentCount = Math.max(1, Math.min(5, Math.max(3, Math.round(n / 8))) > n ? n : Math.max(3, Math.min(5, Math.round(n / 8))));
   const segments = [];
   const usedLabels = new Set();
   for (let m = 0; m < segmentCount; m++) {
-    const chunk = sents.slice(m * per, (m + 1) * per);
+    // proportional slicing → every segment non-empty when n >= segmentCount
+    const chunk = sents.slice(Math.floor((m * n) / segmentCount), Math.floor(((m + 1) * n) / segmentCount));
     if (!chunk.length) continue;
     const localThemes = themes(chunk.join(" "), 3).filter((t) => t.length >= 5);
     let label = localThemes[0] || th[m] || "the episode";

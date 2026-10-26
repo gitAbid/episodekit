@@ -8,10 +8,10 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 32)",
+  "updatedAt": "2026-10-26 (build session 33)",
   "progress": {
     "shipped": 31,
-    "tests": 67
+    "tests": 69
   },
   "branches": [
     {
@@ -306,6 +306,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 33,
+      "date": "2026-10-26",
+      "title": "Burst test caught the ASR-case bug",
+      "note": "The 60-request concurrency test exposed that sentence splitting required capitalized sentence starts — all-lowercase ASR transcripts (common) collapsed to one sentence and hard-failed the guard. Fixed (case-insensitive splitting + proportional segments); re-tested under burst: 60/60 OK at p50 0.46s / p90 1.89s. 69/69 tests."
+    },
     {
       "day": 32,
       "date": "2026-10-26",
