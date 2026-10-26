@@ -1,6 +1,6 @@
 # Day 34 (build session 34) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · sample-suite consistency.
+**Build commit:** `950dbc3` · sample-suite consistency.
 
 ## What shipped
 **Sample suite regenerated with the current engine.** Yesterday's splitter
