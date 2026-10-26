@@ -8,7 +8,7 @@
 // - "discussion-guide": AI-enhanced kit only; 503 when unconfigured so the
 //   client falls back to its own offline generator.
 
-import { generateSuiteGlm, hasGlm } from "../engine/glm.js";
+import { generateSuiteGlm, hasGlm, chat } from "../engine/glm.js";
 import { analyzeTranscript, sentences, normalizeWs, stripSpeakerLabels, buildTitles, buildEmailSeries, buildArticle } from "../engine/lib.js";
 
 // The deterministic engine's sentence splitter and theme extractor are
@@ -80,47 +80,30 @@ export default async function handler(req, res) {
     return res.status(503).json({ error: "ai_not_configured" });
   }
 
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
-    const r = await fetch("https://open.bigmodel.cn/api/paas/v4/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${process.env.GLM_API_KEY}` },
-      body: JSON.stringify({
-        model: process.env.GLM_MODEL || "glm-4-flash",
-        messages: [
-          {
-            role: "system",
-            content:
-              "You write community discussion kits from podcast episode transcripts. " +
-              "Ground every question in actual quotes or specific moments from the episode. Warm, plain, " +
-              "energetic language. Never invent quotes that are not in the transcript.",
-          },
-          {
-            role: "user",
-            content:
-              "From the episode transcript below, produce JSON only (no markdown) with keys: " +
-              "title (string), opener (string), open (array of 3 strings), " +
-              "qs (array of 6 objects {quote: exact sentence from the episode, follow: one follow-up question}), " +
-              "apply (array of exactly 2 action-prompt strings), " +
-              "closing (string). Transcript:\n\n" + text.slice(0, 60000),
-          },
-        ],
-        temperature: 0.7,
-        response_format: { type: "json_object" },
-      }),
-      signal: controller.signal,
-    });
-    if (!r.ok) {
-      return res.status(502).json({ error: "upstream_" + r.status });
-    }
-    const data = await r.json();
-    const raw = data.choices?.[0]?.message?.content || "";
-    const guide = JSON.parse(raw);
+    const guide = await chat(
+      [
+        {
+          role: "system",
+          content:
+            "You write community discussion kits from podcast episode transcripts. " +
+            "Ground every question in actual quotes or specific moments from the episode. Warm, plain, " +
+            "energetic language. Never invent quotes that are not in the transcript.",
+        },
+        {
+          role: "user",
+          content:
+            "From the episode transcript below, produce JSON only (no markdown) with keys: " +
+            "title (string), opener (string), open (array of 3 strings), " +
+            "qs (array of 6 objects {quote: exact sentence from the episode, follow: one follow-up question}), " +
+            "apply (array of exactly 2 action-prompt strings), " +
+            "closing (string). Transcript:\n\n" + text.slice(0, 60000),
+        },
+      ],
+      { temperature: 0.7 },
+    );
     return res.status(200).json({ guide });
   } catch (err) {
     return res.status(502).json({ error: "generation_failed", detail: String(err?.message || err).slice(0, 300) });
-  } finally {
-    clearTimeout(timer);
   }
 }

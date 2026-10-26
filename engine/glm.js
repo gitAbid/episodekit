@@ -38,7 +38,7 @@ const ENDPOINTS = [
   { url: "https://api.z.ai/api/paas/v4/chat/completions", model: "glm-4.5-flash" },
 ];
 
-async function chat(messages, { temperature = 0.7, json = true } = {}) {
+export async function chat(messages, { temperature = 0.7, json = true } = {}) {
   if (!process.env.GLM_API_KEY) throw new Error("no_key");
   const errors = [];
   for (const ep of ENDPOINTS) {
