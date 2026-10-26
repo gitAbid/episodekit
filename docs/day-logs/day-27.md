@@ -1,6 +1,6 @@
 # Day 27 (build session 27) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · degenerate-input guards.
+**Build commit:** `61e1ecb` · degenerate-input guards.
 
 ## What shipped
 Two more real-world input edges found by adversarial testing, closed:
