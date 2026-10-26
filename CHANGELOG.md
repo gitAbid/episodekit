@@ -2,7 +2,18 @@
 
 All entries map to a commit. Newest first.
 
-## Unreleased — 2026-10-26
+## Unreleased — 2026-10-27
+- **New demo video: a 42s motion-designed promo** replacing the screenshot
+  slideshow. `site/demo.mp4` (1920×1080) and `site/demo-vertical.mp4`
+  (1080×1920, its own phone-width layout, not a padded landscape cut).
+  Story: problem → brand → paste → generate → six outputs → quote check
+  (exact match kept, paraphrase rejected) → export → CTA. Uses only real
+  sample-suite content. No voiceover; an original music bed with UI clicks.
+  Rebuild with `scripts/demo/build-demo.sh`, which runs
+  `scripts/demo/promo/promo.html` (deterministic `__render(t)` timeline) →
+  `render.mjs` (headless Chrome, 30fps) → `music.py` (numpy/scipy synth) → ffmpeg.
+
+## 2026-10-26
 - **Visual redesign: flat design system.** Replaced the gold "midnight
   editorial" theme with a flat, light-first system (automatic dark mode, Inter
   only, one solid blue accent, 1px borders, no gradients/glows/shadows).
