@@ -1,6 +1,6 @@
 # Day 25 (build session 25) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · launch-readiness hardening.
+**Build commit:** `2283aa2` · launch-readiness hardening.
 
 ## What shipped
 1. **Unlock check**: `/api/config` still `paymentsEnabled:false / audioEnabled:false`
