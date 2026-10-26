@@ -1,6 +1,6 @@
 # Day 30 (build session 30) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · unlock verification, one command.
+**Build commit:** `6b7c097` · unlock verification, one command.
 
 ## What shipped
 **`scripts/verify-unlocks.mjs`** — reads /api/config; when audio is enabled it
