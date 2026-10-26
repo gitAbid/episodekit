@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 31 — maintenance)",
+  "updatedAt": "2026-10-26 (build session 32)",
   "progress": {
     "shipped": 31,
     "tests": 67
@@ -306,6 +306,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 32,
+      "date": "2026-10-26",
+      "title": "Field scan clear; A7 post pre-drafted",
+      "note": "No mentions of EpisodeKit on HN/Reddit yet — Tuesday's story is unpreempted. The A7 transparency post is fully drafted with launch-week numbers as the only blanks (docs/sprint-report-draft.md)."
+    },
     {
       "day": 30,
       "date": "2026-10-26",
