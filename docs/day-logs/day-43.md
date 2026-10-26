@@ -1,6 +1,6 @@
 # Day 43 (build session 43) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · redesign follow-through: inner
+**Build commit:** `f1b27be` · redesign follow-through: inner
 pages + a broken-import fix.
 
 ## What shipped
