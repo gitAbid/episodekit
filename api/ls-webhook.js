@@ -15,6 +15,14 @@ async function hmacHex(raw, secret) {
   return Array.from(new Uint8Array(sig)).map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
+// Deterministic serialization for objects that arrive key-sorted.
+// Exported for tests.
+export function stableStringify(v) {
+  if (v === null || typeof v !== "object") return JSON.stringify(v);
+  if (Array.isArray(v)) return "[" + v.map(stableStringify).join(",") + "]";
+  return "{" + Object.keys(v).sort().map((k) => JSON.stringify(k) + ":" + stableStringify(v[k])).join(",") + "}";
+}
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "POST only" });
@@ -23,14 +31,27 @@ export default async function handler(req, res) {
   if (!secret) {
     return res.status(503).json({ error: "not_configured" });
   }
-  const raw = typeof req.body === "string" ? req.body : JSON.stringify(req.body ?? {});
+  // Vercel parses application/json before we see it, so the exact bytes LS
+  // signed may differ from JSON.stringify(body). Verify against the plausible
+  // serializations; log (never silently fail) if none match.
+  const candidates = [];
+  if (typeof req.body === "string") candidates.push(req.body);
+  else if (req.body && typeof req.body === "object") {
+    candidates.push(JSON.stringify(req.body), stableStringify(req.body));
+  }
   const signature = req.headers["x-signature"] || "";
-  const expected = await hmacHex(raw, secret);
-  if (signature.length !== 64 || expected !== signature) {
+  let ok = false;
+  if (signature.length === 64) {
+    for (const c of candidates) {
+      if ((await hmacHex(c, secret)) === signature) { ok = true; break; }
+    }
+  }
+  if (!ok) {
+    console.log(JSON.stringify({ sk_license: { t: Date.now(), event: "signature_mismatch", preview: candidates[0]?.slice(0, 200) || null } }));
     return res.status(401).json({ error: "bad_signature" });
   }
 
-  const event = typeof req.body === "object" && req.body ? req.body : JSON.parse(raw);
+  const event = typeof req.body === "object" && req.body ? req.body : JSON.parse(candidates[0] || "{}");
   const kind = event?.meta?.event_name;
   const email = event?.data?.attributes?.user_email || "unknown";
   const variant = String(event?.data?.attributes?.first_order_item?.variant_id || "");

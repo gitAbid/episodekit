@@ -8,10 +8,10 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 28)",
+  "updatedAt": "2026-10-26 (build session 29)",
   "progress": {
     "shipped": 31,
-    "tests": 66
+    "tests": 67
   },
   "branches": [
     {
@@ -306,6 +306,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 29,
+      "date": "2026-10-26",
+      "title": "Webhook signature robustness",
+      "note": "The LS webhook now verifies signatures against all plausible body serializations (raw, JSON.stringify, sorted-keys) and logs signature mismatches with payload previews — a Vercel parsing quirk can no longer silently reject real orders on activation day."
+    },
     {
       "day": 28,
       "date": "2026-10-26",

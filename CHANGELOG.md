@@ -2,6 +2,10 @@
 
 All entries map to a commit. Newest first.
 
+## Day 29 (build session 29) — 2026-10-26
+- LS webhook: multi-variant signature verification + mismatch logging (67/67
+  tests incl. sorted-key serialization case)
+
 ## Day 28 (build session 28) — 2026-10-26
 - Fixed latent GLM-activation crash in the discussion tool (AI shape merged
   over heuristic baseline with per-field guards)

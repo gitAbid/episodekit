@@ -1,6 +1,6 @@
 // Payment rail tests — license keys + LS webhook signature verification.
 import { issueLicense, validateLicense } from "./license-keys.js";
-import lsWebhook from "./ls-webhook.js";
+import lsWebhook, { stableStringify } from "./ls-webhook.js";
 
 let passed = 0, failed = 0;
 const ok = (c, n) => { if (c) { passed++; console.log("  ✓", n); } else { failed++; console.error("  ✗ FAIL:", n); } };
@@ -49,6 +49,11 @@ process.env.LS_VARIANTS = JSON.stringify({ "777": "founder" });
 
 await lsWebhook({ method: "POST", headers: { "x-signature": "deadbeef" }, body: raw }, res);
 ok(code === 401, "bad signature → 401");
+// Parsed-object body signed over recursively sorted keys (serialization quirk) → accepted via stable-stringify fallback
+const sortedRaw = stableStringify(payload);
+const sigSorted = Array.from(new Uint8Array(await crypto.subtle.sign("HMAC", key, enc.encode(sortedRaw)))).map(b => b.toString(16).padStart(2, "0")).join("");
+await lsWebhook({ method: "POST", headers: { "x-signature": sigSorted }, body: payload }, res);
+ok(code === 200 && body.ok && body.plan === "founder", "sorted-key serialization verified via stable-stringify fallback");
 await lsWebhook({ method: "POST", headers: { "x-signature": sig }, body: payload }, res);
 ok(code === 200 && body.ok && body.plan === "founder", "valid signature → 200, plan from variant map");
 ok(/^SKF-/.test(body.license), "webhook issues founder license key");
