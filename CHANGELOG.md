@@ -2,6 +2,10 @@
 
 All entries map to a commit. Newest first.
 
+## Day 34 (build session 34) — 2026-10-26
+- Sample suite regenerated with the current engine (post-splitter changes);
+  truth-in-advertising on the samples page preserved
+
 ## Day 33 (build session 33) — 2026-10-26
 - Case-insensitive sentence splitting (all-lowercase ASR transcripts fixed —
   caught by the 60-request burst test) + proportional segments; 69/69;
