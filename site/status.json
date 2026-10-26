@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-25 (build session 23)",
+  "updatedAt": "2026-10-25 (build session 24 — A1 verified early, frozen)",
   "progress": {
     "shipped": 31,
     "tests": 62
@@ -107,6 +107,11 @@
           "title": "Language guard (honest 400 for non-Latin input) + launch-day metrics puller",
           "status": "done",
           "date": "S22"
+        },
+        {
+          "title": "A1 pre-launch verification passed (all modes, guards, checkout-absent) — feature freeze",
+          "status": "done",
+          "date": "S24"
         }
       ]
     },
@@ -292,6 +297,12 @@
   ],
   "decisions": [
     {
+      "day": 24,
+      "date": "2026-10-25",
+      "title": "A1 executed 2 days early; product frozen for launch",
+      "note": "Full A1 checklist green on production (5 uptime endpoints, 4 generation modes, 503/audio + false/payments states correct, CJK guard, 62 tests). FOR-ABID.md condenses the user's five actions to one page; A7 report template ready — the sprint now only waits on the user-side unlocks."
+    },
+    {
       "day": 22,
       "date": "2026-10-26",
       "title": "Launch hardening: language guard + v1.0.0",
@@ -425,10 +436,9 @@
     }
   ],
   "next": [
-    "A1 (Oct 27): user unlocks — LS runbook + GLM/ASR keys",
-    "A2 (Oct 28): Show HN launch",
-    "A3 (Oct 29): directories + GSC",
-    "A4 (Oct 30): Product Hunt launch",
-    "A7 (Nov 2): all-numbers sprint report"
+    "USER: docs/FOR-ABID.md — 5 actions (LS, keys, HN, PH, GSC)",
+    "A2 (Oct 28): Show HN — drafts ready",
+    "A4 (Oct 30): Product Hunt — gallery at spec",
+    "A7 (Nov 2): sprint report — template ready"
   ]
 }

@@ -39,10 +39,13 @@ artifact families out, every quote verbatim.
 ## The 7 days
 
 ### A1 — Mon 2026-10-27: Unlock + freeze
-- **USER (critical path, ~15 min, docs/ls-activation-runbook.md):** Lemon
-  Squeezy account + LS env vars; GLM_API_KEY + ASR_API_KEY in Vercel.
-- Agent: pre-launch freeze (no risky changes), verify checkout end-to-end with
-  LS test order, verify AI + audio paths live, final Lighthouse + link crawl.
+- [x] Agent: pre-launch freeze + full verification (executed early, session
+      24, 2026-10-25: uptime 5/5, all 4 generation modes 200 live, transcribe
+      503 correct, paymentsEnabled/audioEnabled false as expected, CJK guard
+      400, tests 62/62 — day-24 log).
+- [ ] **USER (critical path, ~15 min, docs/FOR-ABID.md + ls-runbook):** Lemon
+      Squeezy account + LS env vars; GLM_API_KEY + ASR_API_KEY in Vercel →
+      then agent verifies LS test order + AI/audio paths.
 - If user actions not done: everything else proceeds; launch dates hold only if
   unlocks land by A2 morning (Show HN can go first without payments; PH needs
   checkout).
