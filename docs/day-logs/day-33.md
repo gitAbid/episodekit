@@ -1,6 +1,6 @@
 # Day 33 (build session 33) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · concurrency test caught a real bug.
+**Build commit:** `5770f68` · concurrency test caught a real bug.
 
 ## What shipped
 **The pre-launch concurrency burst test caught a genuine bug that would have
