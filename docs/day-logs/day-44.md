@@ -1,6 +1,6 @@
 # Day 43 addendum / Day 44 — 2026-10-27
 
-**Build commit:** (see follow-up docs commit) · video + OG rebuilt in the flat design.
+**Build commit:** `7c8977d` · video + OG rebuilt in the flat design.
 
 ## What shipped
 - **Demo video rebuilt** in the flat design: all 8 frames recaptured from the
