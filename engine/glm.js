@@ -33,15 +33,26 @@ export function hasGlm() {
 // from inside a Vercel function, so try both — per-endpoint default models
 // included — and remember nothing between requests.
 const ENDPOINTS = [
+  { url: "https://api.z.ai/api/coding/paas/v4/chat/completions", model: "glm-4.6" },
+  { url: "https://api.z.ai/api/coding/paas/v4/chat/completions", model: "glm-4.5-air" },
+  { url: "https://api.z.ai/api/coding/paas/v4/chat/completions", model: "glm-4.5" },
   { url: "https://open.bigmodel.cn/api/paas/v4/chat/completions", model: "glm-4-flash" },
-  { url: "https://api.z.ai/api/paas/v4/chat/completions", model: "glm-4-flash" },
-  { url: "https://api.z.ai/api/paas/v4/chat/completions", model: "glm-4.5-flash" },
+  { url: "https://api.z.ai/api/paas/v4/chat/completions", model: "glm-4.6" },
 ];
+// Warm instances remember the working endpoint+model to skip failed attempts.
+function cachedEndpoint() {
+  const c = globalThis.__glmWorking;
+  if (!c) return null;
+  const ep = ENDPOINTS.find((e) => e.url === c.url && e.model === c.model);
+  return ep ? { ...ep, cached: true } : null;
+}
 
 export async function chat(messages, { temperature = 0.7, json = true } = {}) {
   if (!process.env.GLM_API_KEY) throw new Error("no_key");
   const errors = [];
-  for (const ep of ENDPOINTS) {
+  const cached = cachedEndpoint();
+  const ordered = cached ? [cached, ...ENDPOINTS.filter((e) => e !== cached)] : ENDPOINTS;
+  for (const ep of ordered) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
     try {
@@ -68,6 +79,7 @@ export async function chat(messages, { temperature = 0.7, json = true } = {}) {
       const data = await res.json();
       const content = data.choices?.[0]?.message?.content;
       if (!content) { errors.push(`${new URL(ep.url).host}:empty`); continue; }
+      globalThis.__glmWorking = { url: ep.url, model: ep.model };
       return json ? JSON.parse(content) : content;
     } catch (err) {
       errors.push(`${new URL(ep.url).host}:${err.name === "AbortError" ? "timeout" : err.message}`);
