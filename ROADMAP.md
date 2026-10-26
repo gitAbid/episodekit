@@ -94,7 +94,9 @@ artifact families out, every quote verbatim.
 
 ## Daily cadence (automation: 09:00 local, every day)
 0. **Uptime check (first, always):** `/` → 200, `/tools/show-notes.html` → 200,
-   `/api/config` → 200 JSON, POST `/api/generate-suite` (titles) → 200 JSON.
+   `/api/config` → 200 JSON, POST `/api/generate-suite` (mode titles) with the
+   EXACT body below (≥4 sentences — shorter probes trip the input guards and
+   false-flag an incident): `{"mode":"titles","text":"focus is the most expensive resource in modern work and nobody budgets attention like money. a calendar block is a promise while a to-do item is a wish. one notification can tax the whole morning because attention compounds. subtraction beats addition when choosing tools. the professional with three tools out-ships the one with thirty."}`
    Healthy → continue silently. Failure → diagnose, fix (redeploy usually),
    re-verify, log incident in the day log first.
 1. Read ROADMAP.md + latest docs/day-logs/ + CHANGELOG.md.

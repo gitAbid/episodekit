@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 35)",
+  "updatedAt": "2026-10-26 (build session 36)",
   "progress": {
     "shipped": 31,
     "tests": 69
@@ -306,6 +306,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 36,
+      "date": "2026-10-26",
+      "title": "False-incident guard in the ops loop",
+      "note": "Short uptime probes tripped the input guards (400 = guard working, not an outage). The ROADMAP now pins the exact 5-sentence canonical probe body so scheduled sessions can't misdiagnose a healthy API. Automation confirmed alive (runCount 1, next run scheduled)."
+    },
     {
       "day": 33,
       "date": "2026-10-26",

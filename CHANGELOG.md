@@ -2,6 +2,10 @@
 
 All entries map to a commit. Newest first.
 
+## Day 36 (build session 36) — 2026-10-26
+- Ops: canonical uptime-probe body pinned in ROADMAP (prevents false incident
+  flags from short probes tripping the input guards); automation alive
+
 ## Day 35 (build session 35) — 2026-10-26
 - Post-fix verification: lowercase full-suite live-verified; 5/5 uptime;
   regenerated sample confirmed deployed; no issues
