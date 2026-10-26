@@ -321,7 +321,7 @@ async function runSuite(text) {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ mode: "full", text: text.slice(0, 60000) }),
     });
-    if (r.status === 400) { const j = await r.json().catch(() => ({})); if (j.error === "english_transcripts_only_for_now") { alert("English transcripts only for now — language support is on the roadmap."); showStep("stepInput"); throw new Error("unsupported"); } } if (!r.ok) throw new Error("server " + r.status);
+    if (r.status === 400) { const j = await r.json().catch(() => ({})); if (j.error === "english_transcripts_only_for_now" || j.error === "not_enough_sentences") { alert(j.error === "not_enough_sentences" ? "Couldn't find enough complete sentences — paste fuller transcript text." : "English transcripts only for now — language support is on the roadmap."); showStep("stepInput"); throw new Error("unsupported"); } } if (!r.ok) throw new Error("server " + r.status);
     const j = await r.json();
     localStorage.setItem(quotaKey, String(usedCount() + 1));
     updateQuota();

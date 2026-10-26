@@ -9,7 +9,7 @@
 //   client falls back to its own offline generator.
 
 import { generateSuiteGlm, hasGlm } from "../engine/glm.js";
-import { analyzeTranscript, buildTitles, buildEmailSeries, buildArticle } from "../engine/lib.js";
+import { analyzeTranscript, sentences, normalizeWs, stripSpeakerLabels, buildTitles, buildEmailSeries, buildArticle } from "../engine/lib.js";
 
 // The deterministic engine's sentence splitter and theme extractor are
 // Latin-script; non-Latin transcripts (CJK/Cyrillic/Arabic…) would yield empty
@@ -18,6 +18,17 @@ function supportedInput(text) {
   const latin = (text.match(/[A-Za-z]/g) || []).length;
   const letters = (text.match(/\p{L}/gu) || []).length;
   return letters === 0 ? false : latin / letters >= 0.6;
+}
+
+// Similarly guard degenerate shapes: too few distinct full sentences
+// (no punctuation, all-short utterances, repetition) → empty artifacts.
+function enoughSentences(text) {
+  const seen = new Set();
+  for (const s of sentences(normalizeWs(stripSpeakerLabels(text)))) {
+    seen.add(s);
+    if (seen.size >= 4) return true;
+  }
+  return false;
 }
 
 const TIMEOUT_MS = 45000;
@@ -37,6 +48,9 @@ export default async function handler(req, res) {
   }
   if (!supportedInput(text)) {
     return res.status(400).json({ error: "english_transcripts_only_for_now" });
+  }
+  if (!enoughSentences(text)) {
+    return res.status(400).json({ error: "not_enough_sentences" });
   }
   // Server-side usage event — activation is measurable from Vercel logs alone.
   console.log(JSON.stringify({ sk_usage: { t: Date.now(), mode, words: text.split(/\s+/).length } }));

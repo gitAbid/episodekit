@@ -100,5 +100,10 @@ ok(!labeledSuite.stats.themes.includes("speaker"), "'speaker' not a theme");
 ok(labeledSuite.discussion.qs.every((q) => labeledClean.includes(q.quote)), "labeled-transcript quotes verbatim vs label-free source");
 ok(labeledSuite.stats.themes.includes("calendar") || labeledSuite.stats.themes.includes("attention"), "real themes surface");
 
+console.log("degenerate inputs");
+const rep = Array(40).fill("This one sentence repeats over and over again because repetition is the test.").join(" ");
+const repSuite = generateSuiteDeterministic(rep);
+ok(new Set(repSuite.discussion.qs.map((q) => q.quote)).size === repSuite.discussion.qs.length, "repeated sentences deduped (no duplicate quotes)");
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

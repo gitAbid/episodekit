@@ -71,7 +71,9 @@ export function rankedSentences(sents, themeWords) {
 
 export function analyzeTranscript(rawText) {
   const text = normalizeWs(stripSpeakerLabels(rawText)); // normalized, label-free source of truth
-  const sents = sentences(text);
+  // Dedupe identical sentences (spam/repetition inputs) preserving order.
+  const seen = new Set();
+  const sents = sentences(text).filter((s) => (seen.has(s) ? false : (seen.add(s), true)));
   const th = themes(text, 10).filter((t) => t.length >= 5);
   const ranked = rankedSentences(sents, th);
   // Key quotes: top-scored, returned in episode order, deduped.

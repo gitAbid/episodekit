@@ -2,6 +2,10 @@
 
 All entries map to a commit. Newest first.
 
+## Day 27 (build session 27) — 2026-10-26
+- Degenerate-input guards: honest 400s for no-punctuation / all-short /
+  repetition inputs; sentence dedup; friendly client alerts (66/66 tests)
+
 ## Day 26 (build session 26) — 2026-10-26
 - Speaker-label stripping for real-ASR transcripts (themes/titles clean);
   flaky license test fixed (65/65 × 3 runs); tool-page bank synced

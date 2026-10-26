@@ -81,7 +81,7 @@ go.addEventListener("click",async()=>{
     const r=await fetch("/api/generate-suite",{
       method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({mode:"article",text:text.slice(0,60000)})});
-    if(r.status===400){const j=await r.json().catch(()=>({}));if(j.error==="english_transcripts_only_for_now"){alert("English transcripts only for now — language support is on the roadmap. Paste an English transcript and it will work instantly.");return;}throw new Error("server "+r.status);}
+    if(r.status===400){const j=await r.json().catch(()=>({}));if(j.error==="english_transcripts_only_for_now"){alert("English transcripts only for now — language support is on the roadmap. Paste an English transcript and it will work instantly.");return;}if(j.error==="not_enough_sentences"){alert("Couldn't find enough complete sentences to work with — paste fuller transcript text (with sentence punctuation).");return;}throw new Error("server "+r.status);}
     const j=await r.json();
     current=j;
     document.getElementById("artTitle").textContent=j.article.title;
