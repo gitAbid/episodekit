@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-27 (build session 44 — flat video/OG)",
+  "updatedAt": "2026-10-27 (build session 45 — ASR live, GLM diagnosed)",
   "progress": {
     "shipped": 31,
     "tests": 69
@@ -74,12 +74,12 @@
           "date": "D4"
         },
         {
-          "title": "ASR providers (Deepgram/Groq) — activates with API key",
-          "status": "blocked",
-          "date": "needs key"
+          "title": "ASR providers — LIVE: audio→transcript→package verified in production",
+          "status": "done",
+          "date": "LIVE Oct 27"
         },
         {
-          "title": "GLM live enhancement — activates with API key",
+          "title": "GLM live enhancement — integration correct (coding-plan URL + models verified); needs active resource package on the key's account",
           "status": "blocked",
           "date": "needs key"
         },
@@ -306,6 +306,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 45,
+      "date": "2026-10-27",
+      "title": "AUDIO PATH LIVE — verified end-to-end in production",
+      "note": "User added ASR key. Voice sample → transcribe (1.3s, correct punctuation) → full 5-quote package generated from the audio. Verified via scripts/verify-unlocks.mjs. GLM: dual-endpoint integration now targets the Z.ai coding-plan URL with correct model names (glm-4.6/4.5-air) — authenticates, but the key's account needs an active resource package (error 1113). Deterministic engine unaffected."
+    },
     {
       "day": 44,
       "date": "2026-10-27",

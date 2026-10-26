@@ -27,6 +27,12 @@ All entries map to a commit. Newest first.
   regenerated to match. Fixed an empty result card showing on tool pages before
   generation and table overflow on mobile.
 
+## Day 45 (build session 45) — 2026-10-27
+- **AUDIO PATH LIVE**: user added ASR key; voice→transcribe(1.3s)→full package
+  verified end-to-end in production (verify-unlocks + discussion-guide probe)
+- GLM: coding-plan URL + models confirmed (auth OK, error 1113 = no resource
+  package on key account — user-side); dual-endpoint fallback retained
+
 ## Day 44 (build session 44) — 2026-10-27
 - Demo video + vertical cut + OG image + README GIF rebuilt in the flat design
   (frames recaptured from the live app; cards flattened)
