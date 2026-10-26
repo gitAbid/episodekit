@@ -14,7 +14,8 @@ Vercel dashboard → project **episodekit** → Settings → Environment Variabl
 - `GLM_API_KEY` (bigmodel.cn) → AI-enhanced artifacts activate
 - `ASR_API_KEY` + `ASR_PROVIDER` (`deepgram` or `groq`) → audio upload activates
 Then Deployments → ⋯ → Redeploy. The app flips itself to audio-first
-automatically (config-driven — no code change).
+automatically (config-driven — no code change). **Verify both unlocks in one
+command:** `node scripts/verify-unlocks.mjs`.
 
 ## 3. Show HN (Tue A2) → first traffic
 Copy-paste from **`docs/launch-pack.md` §2** (title, the free-tool URL, first

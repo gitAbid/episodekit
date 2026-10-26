@@ -2,6 +2,10 @@
 
 All entries map to a commit. Newest first.
 
+## Day 30 (build session 30) — 2026-10-26
+- scripts/verify-unlocks.mjs: one-command unlock verification (voice-sample
+  audio e2e + LS test-order guide)
+
 ## Day 29 (build session 29) — 2026-10-26
 - LS webhook: multi-variant signature verification + mismatch logging (67/67
   tests incl. sorted-key serialization case)
