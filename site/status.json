@@ -8,10 +8,10 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 25 — launch-ready)",
+  "updatedAt": "2026-10-26 (build session 26)",
   "progress": {
     "shipped": 31,
-    "tests": 62
+    "tests": 65
   },
   "branches": [
     {
@@ -112,6 +112,11 @@
           "title": "A1 pre-launch verification passed (all modes, guards, checkout-absent) — feature freeze",
           "status": "done",
           "date": "S24"
+        },
+        {
+          "title": "Speaker-label stripping (real-ASR input quality) + flaky-license-test fix",
+          "status": "done",
+          "date": "S26"
         }
       ]
     },
@@ -296,6 +301,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 26,
+      "date": "2026-10-26",
+      "title": "Real-transcript quality: speaker labels handled",
+      "note": "Real ASR output (Host:/Speaker 1:) was polluting themes and titles. Labels are now stripped in normalization + stopworded; quotes stay verbatim vs spoken content. Also fixed a timestamp-dependent flaky license test (65/65 across 3 runs)."
+    },
     {
       "day": 25,
       "date": "2026-10-26",

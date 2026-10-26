@@ -4,6 +4,7 @@ import {
   generateSuiteDeterministic,
   analyzeTranscript,
   normalizeWs,
+  stripSpeakerLabels,
 } from "./lib.js";
 import { validateSuite } from "./glm.js";
 import { suiteToMarkdown, suiteToHtml } from "./index.js";
@@ -90,6 +91,14 @@ ok(md.includes("## Article (show notes)") && md.includes("## Email series (5 day
 const html = suiteToHtml(suite);
 ok(html.includes("<!doctype html>") && html.includes("Discussion kit") && !html.includes("undefined"), "html renders without undefined leaks");
 ok(!/sermon|church|devotional/i.test(md + html), "rendered output is religion-free");
+
+console.log("speaker-labeled transcripts (real ASR shape)");
+const labeled = "Speaker 1: Welcome back to the show. Today we are talking about deep work and why focus is the most expensive resource in modern work. Host: Nobody budgets attention like money, and that is the whole problem we unpack today. Speaker 2: I think the calendar is the real fix because a to-do item is a wish while a calendar block is a promise. Speaker 1: Remember the research on task switching, because one notification can cost you twenty minutes of real depth. Host: So subtraction beats addition, and the professional with three tools out-ships the one with thirty.";
+const labeledClean = normalizeWs(stripSpeakerLabels(labeled));
+const labeledSuite = generateSuiteDeterministic(labeled);
+ok(!labeledSuite.stats.themes.includes("speaker"), "'speaker' not a theme");
+ok(labeledSuite.discussion.qs.every((q) => labeledClean.includes(q.quote)), "labeled-transcript quotes verbatim vs label-free source");
+ok(labeledSuite.stats.themes.includes("calendar") || labeledSuite.stats.themes.includes("attention"), "real themes surface");
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

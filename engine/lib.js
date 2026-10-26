@@ -10,12 +10,21 @@ const STOP = new Set(
     "episode podcast show today tonight morning room want know like come going still never always someone everyone anybody nobody another without within maybe perhaps those these listener listeners audience guys thanks welcome back everyone's " +
     // rhetorical markers that pollute theme lists
     "because therefore notice remember imagine means takeaway here's " +
+    // transcript speaker labels (real ASR output: "Host:", "Speaker 1:")
+    "host hosts speaker speakers guest guests voice voices talking talk talks " +
     // light verbs that pollute theme lists
     "comes coming want wants wanted mean means meant take takes taken make makes made give gives gave look looks looking feel feels felt think thinks thought").split(" ")
 );
 
 export function normalizeWs(t) {
   return String(t).replace(/\s+/g, " ").trim();
+}
+
+// Strip ASR speaker labels ("Host:", "Speaker 1:", "Guest 2:") — they are
+// transcription scaffolding, not content. Quotes stay verbatim relative to
+// the spoken content.
+export function stripSpeakerLabels(t) {
+  return String(t).replace(/\b(?:host|speaker|guest|voice)\s*\d*\s*:\s*/gi, " ");
 }
 
 export function words(t) {
@@ -61,7 +70,7 @@ export function rankedSentences(sents, themeWords) {
 }
 
 export function analyzeTranscript(rawText) {
-  const text = normalizeWs(rawText); // single whitespace-normalized source of truth
+  const text = normalizeWs(stripSpeakerLabels(rawText)); // normalized, label-free source of truth
   const sents = sentences(text);
   const th = themes(text, 10).filter((t) => t.length >= 5);
   const ranked = rankedSentences(sents, th);

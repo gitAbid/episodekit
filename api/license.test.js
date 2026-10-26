@@ -24,7 +24,8 @@ ok(v.valid && v.plan === "founder", "founder validates");
 
 ok((await validateLicense(pro.toLowerCase(), ENV)).valid, "case-insensitive");
 ok(!(await validateLicense("SK1-xxx-deadbeefdeadbeef", ENV)).valid, "garbage rejected");
-ok(!(await validateLicense(pro.slice(0, -1) + "0", ENV)).valid, "tampered key rejected");
+const tamper = (k) => k.slice(0, -1) + (k.endsWith("0") ? "1" : "0"); // guaranteed different last char
+ok(!(await validateLicense(tamper(pro), ENV)).valid, "tampered key rejected");
 ok(!(await validateLicense(pro, { LS_LICENSE_SECRET: "other" })).valid, "wrong secret rejected");
 const future = "SK1-" + (Date.now() + 86400000).toString(36) + "-0000000000000000";
 ok(!(await validateLicense(future, ENV)).valid, "future stamp rejected");

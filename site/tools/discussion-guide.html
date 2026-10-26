@@ -97,7 +97,10 @@ function heuristicKit(text){
   keys.forEach((k,idx)=>{
     const follow=[`What stands out to you in that moment, and why?`,
       `Do you agree? What would you add or push back on?`,
-      `Where have you seen this play out — or fail — in your own experience?`][idx%3];
+      `Where have you seen this play out — or fail — in your own experience?`,
+      `If you acted on this tomorrow, what would be the first thing to break?`,
+      `Who in your world would push back hardest on this — and what would their objection be?`,
+      `What's the smallest version of this idea you could test this week?`][idx%6];
     qs.push({quote:k,follow});
   });
   const closing=`Close by having everyone share the one thing they're going to try first, and check in on it next time you meet.`;

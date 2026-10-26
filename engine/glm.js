@@ -3,7 +3,7 @@
 // source transcript. If an artifact fails validation, that artifact silently
 // falls back to the deterministic build. The API key never leaves the server.
 
-import { generateSuiteDeterministic, normalizeWs, words } from "./lib.js";
+import { generateSuiteDeterministic, normalizeWs, stripSpeakerLabels, words } from "./lib.js";
 
 // LLMs habitually return typographic variants of otherwise-verbatim text
 // (curly quotes, em-dashes, ellipses). Normalize those before comparison so a
@@ -116,7 +116,7 @@ export function validateSuite(ai, source, base) {
 }
 
 export async function generateSuiteGlm(rawText) {
-  const text = normalizeWs(rawText); // quotes validate against normalized text
+  const text = normalizeWs(stripSpeakerLabels(rawText)); // quotes validate against normalized, label-free text
   const base = generateSuiteDeterministic(text);
   if (!hasGlm()) return base;
   try {

@@ -2,6 +2,10 @@
 
 All entries map to a commit. Newest first.
 
+## Day 26 (build session 26) — 2026-10-26
+- Speaker-label stripping for real-ASR transcripts (themes/titles clean);
+  flaky license test fixed (65/65 × 3 runs); tool-page bank synced
+
 ## Day 25 (build session 25) — 2026-10-26
 - Production latency smoke (p50 0.38s / p90 0.59s / 0 fails); unlock-detection
   automation now 9am+9pm for launch week
