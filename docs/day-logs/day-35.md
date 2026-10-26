@@ -1,6 +1,6 @@
 # Day 35 (build session 35) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · post-fix verification sweep.
+**Build commit:** `6993788` · post-fix verification sweep.
 
 ## What shipped
 Maintenance verification only (by design — queue empty, freeze active):
