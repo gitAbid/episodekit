@@ -12,6 +12,9 @@ All entries map to a commit. Newest first.
   Rebuild with `scripts/demo/build-demo.sh`, which runs
   `scripts/demo/promo/promo.html` (deterministic `__render(t)` timeline) →
   `render.mjs` (headless Chrome, 30fps) → `music.py` (numpy/scipy synth) → ffmpeg.
+- Restored the promo after the Day 44 session overwrote it with a rebuilt
+  slideshow; README GIF regenerated from the promo (8s, generate → results);
+  landing caption now says 42 seconds.
 
 ## 2026-10-26
 - **Visual redesign: flat design system.** Replaced the gold "midnight
