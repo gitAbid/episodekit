@@ -24,6 +24,12 @@
 .dl{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
 button.ghost.small{padding:6px 12px;font-size:13px}
 .warn{border-color:#a33;color:#e88}
+@media(max-width:640px){
+  .nav{flex-wrap:wrap;row-gap:6px}
+  .nav a:nth-child(2),.nav a:nth-child(3){display:none}
+  .nav .badge{display:none}
+}
+.trydemo{color:var(--accent2);cursor:pointer;font-size:13.5px}
 </style>
 </head>
 <body>
@@ -50,6 +56,7 @@ button.ghost.small{padding:6px 12px;font-size:13px}
   <div class="step on" id="stepInput">
     <div id="pastePane" style="display:none">
       <textarea id="sermon" placeholder="Paste your episode transcript here…"></textarea>
+      <div class="row"><span class="trydemo" id="trydemo">No transcript handy? Load a demo episode →</span></div>
       <div class="row">
         <button class="primary" id="goPaste">Generate my content package</button>
         <span class="hint" id="count">0 words</span>
@@ -198,6 +205,17 @@ function switchTab(audio) {
   $("audioPane").style.display = audio ? "block" : "none";
   $("pastePane").style.display = audio ? "none" : "block";
 }
+
+// --- demo transcript loader (first-run friction reducer) ---
+$("trydemo").addEventListener("click", async () => {
+  try {
+    const t = await (await fetch("/demo-transcript.txt")).text();
+    const box = $("sermon");
+    box.value = t.split(/\n---\n?/)[0];
+    box.dispatchEvent(new Event("input"));
+    box.scrollTop = 0;
+  } catch {}
+});
 
 // --- paste path ---
 $("sermon").addEventListener("input", () => {

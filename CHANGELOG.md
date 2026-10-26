@@ -2,6 +2,10 @@
 
 All entries map to a commit. Newest first.
 
+## Day 41 (build session 41) — 2026-10-26
+- Mobile nav polish (390px audit) + one-click demo-transcript loader in the
+  paste flow; textarea opens at top
+
 ## Day 40 (build session 40) — 2026-10-26
 - Maintenance: sweep green, unlocks pending
 

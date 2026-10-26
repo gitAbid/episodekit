@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 40)",
+  "updatedAt": "2026-10-26 (build session 41 — polish)",
   "progress": {
     "shipped": 31,
     "tests": 69
@@ -306,6 +306,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 41,
+      "date": "2026-10-26",
+      "title": "Mobile polish + demo loader",
+      "note": "Mobile audit (390px) found a wrapping nav; secondary links now collapse on small screens. Added a one-click demo-transcript loader to the paste flow (biggest first-run friction: having nothing to paste). Verified live on mobile viewport."
+    },
     {
       "day": 36,
       "date": "2026-10-26",
