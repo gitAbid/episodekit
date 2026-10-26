@@ -2,6 +2,9 @@
 
 All entries map to a commit. Newest first.
 
+## Day 39 (build session 39) — 2026-10-26
+- Maintenance: sweep green, unlocks pending
+
 ## Day 38 (build session 38, scheduled 21:00) — 2026-10-26
 - Scheduled-session procedure run: uptime 4/4 + canonical probe 200; unlock
   check still disabled (A1 user-side window open); no incidents
