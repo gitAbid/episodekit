@@ -22,39 +22,60 @@ function normalizeQuoteStyle(s) {
     .replace(/(^(\.\.\.|…)+\s*)|(\s*(\.\.\.|…)+$)/g, "");
 }
 
-const ENDPOINT = "https://open.bigmodel.cn/api/paas/v4/chat/completions";
 const TIMEOUT_MS = 45000;
 
 export function hasGlm() {
   return Boolean(process.env.GLM_API_KEY);
 }
 
+// GLM keys come in two flavors: bigmodel.cn (mainland) and z.ai (international).
+// The endpoints are not interchangeable, and neither is reachable-diagnosable
+// from inside a Vercel function, so try both — per-endpoint default models
+// included — and remember nothing between requests.
+const ENDPOINTS = [
+  { url: "https://open.bigmodel.cn/api/paas/v4/chat/completions", model: "glm-4-flash" },
+  { url: "https://api.z.ai/api/paas/v4/chat/completions", model: "glm-4-flash" },
+  { url: "https://api.z.ai/api/paas/v4/chat/completions", model: "glm-4.5-flash" },
+];
+
 async function chat(messages, { temperature = 0.7, json = true } = {}) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
-  try {
-    const res = await fetch(ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.GLM_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: process.env.GLM_MODEL || "glm-4-flash",
-        messages,
-        temperature,
-        ...(json ? { response_format: { type: "json_object" } } : {}),
-      }),
-      signal: controller.signal,
-    });
-    if (!res.ok) throw new Error("upstream_" + res.status);
-    const data = await res.json();
-    const content = data.choices?.[0]?.message?.content;
-    if (!content) throw new Error("empty_completion");
-    return json ? JSON.parse(content) : content;
-  } finally {
-    clearTimeout(timer);
+  if (!process.env.GLM_API_KEY) throw new Error("no_key");
+  const errors = [];
+  for (const ep of ENDPOINTS) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+    try {
+      const res = await fetch(ep.url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.GLM_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: process.env.GLM_MODEL || ep.model,
+          messages,
+          temperature,
+          ...(json ? { response_format: { type: "json_object" } } : {}),
+        }),
+        signal: controller.signal,
+      });
+      if (!res.ok) {
+        const detail = await res.text().catch(() => "");
+        errors.push(`${new URL(ep.url).host}:${res.status}:${detail.slice(0, 120)}`);
+        // 401/403 → key rejected by this endpoint; try the next flavor.
+        continue;
+      }
+      const data = await res.json();
+      const content = data.choices?.[0]?.message?.content;
+      if (!content) { errors.push(`${new URL(ep.url).host}:empty`); continue; }
+      return json ? JSON.parse(content) : content;
+    } catch (err) {
+      errors.push(`${new URL(ep.url).host}:${err.name === "AbortError" ? "timeout" : err.message}`);
+    } finally {
+      clearTimeout(timer);
+    }
   }
+  throw new Error("all_endpoints_failed [" + errors.join(" | ") + "]");
 }
 
 const SYS =

@@ -19,7 +19,7 @@ if (cfg.audioEnabled) {
   const dir = mkdtempSync(join(tmpdir(), "ek-verify-"));
   const aiff = join(dir, "voice.aiff");
   const webm = join(dir, "voice.webm");
-  execFileSync("say", ["-o", aiff, "Hello, this is a test of the EpisodeKit audio pipeline. Focus is the most expensive resource in modern work, and nobody budgets attention like money."]);
+  execFileSync("say", ["-o", aiff, "Welcome back to the show. Today we are talking about deep work, and why focus is the most expensive resource in modern work. Nobody budgets attention like money, and that is the whole problem. Remember that a calendar block is a promise, while a to-do item is only a wish. One notification can tax the entire morning, because attention compounds like debt. So subtraction beats addition when choosing your tools."]);
   execFileSync("ffmpeg", ["-y", "-v", "error", "-i", aiff, "-c:a", "libopus", "-b:a", "16k", webm]);
   const bytes = execFileSync("cat", [webm]);
   const t0 = Date.now();
@@ -34,10 +34,15 @@ if (cfg.audioEnabled) {
   }
   const { transcript } = await r.json();
   console.log(`transcribe OK (${((Date.now() - t0) / 1000).toFixed(1)}s): "${transcript.slice(0, 80)}…"`);
-  const g = await (await fetch(`${BASE}/api/generate-suite`, {
+  const gr = await fetch(`${BASE}/api/generate-suite`, {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ mode: "full", text: transcript }),
-  })).json();
+  });
+  const g = await gr.json();
+  if (!gr.ok || !g.suite) {
+    console.error(`full suite FAILED: ${gr.status}`, JSON.stringify(g));
+    process.exit(1);
+  }
   console.log(`full suite from audio: engine=${g.suite.engine} · title="${g.suite.article.title}" · ${g.suite.discussion.qs.length} quote questions`);
   console.log("AUDIO PATH: ✅ verified end-to-end");
 } else {

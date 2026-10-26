@@ -118,8 +118,8 @@ export default async function handler(req, res) {
     const raw = data.choices?.[0]?.message?.content || "";
     const guide = JSON.parse(raw);
     return res.status(200).json({ guide });
-  } catch {
-    return res.status(502).json({ error: "generation_failed" });
+  } catch (err) {
+    return res.status(502).json({ error: "generation_failed", detail: String(err?.message || err).slice(0, 300) });
   } finally {
     clearTimeout(timer);
   }
