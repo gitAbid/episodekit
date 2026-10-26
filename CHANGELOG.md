@@ -3,6 +3,9 @@
 All entries map to a commit. Newest first.
 
 ## Unreleased — 2026-10-27
+- Footer attribution "A PeraByte AI product" (linked to perabyteai.com) on the
+  landing page, every inner page and the generated samples page; replaces
+  "independent product" on the landing page.
 - **New demo video: a 42s motion-designed promo** replacing the screenshot
   slideshow. `site/demo.mp4` (1920×1080) and `site/demo-vertical.mp4`
   (1080×1920, its own phone-width layout, not a padded landscape cut).

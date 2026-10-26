@@ -89,7 +89,7 @@ export function suiteToHtml(s) {
   }
   b.push(`<h2>Social pack</h2><div class="card">${s.social.pullQuotes.map(quote).join("")}<p class="meta" style="margin-top:14px">Captions</p>${s.social.captions.map((c) => `<p style="margin:8px 0">${esc(c.text).replace(/\n/g, "<br>")}</p>`).join("")}<p class="meta" style="margin-top:14px">X posts</p>${s.social.xPosts.map((c) => `<p style="margin:8px 0">${esc(c.text)}</p>`).join("")}</div>`);
   b.push(`<p style="margin:36px 0;color:var(--faint)">Generated from a podcast transcript with <a href="index.html">EpisodeKit</a>. This page was produced by the same engine you can try — no manual edits.</p>`);
-  b.push(`</main><footer><div class="wrap">Part of <a href="index.html">EpisodeKit</a>. Demo transcript: docs/samples/demo-episode.txt (original, CC0).</div></footer><script src="js/analytics.js"></script></body></html>`);
+  b.push(`</main><footer><div class="wrap">Part of <a href="index.html">EpisodeKit</a>. Demo transcript: docs/samples/demo-episode.txt (original, CC0). · A <a href="https://perabyteai.com">PeraByte AI</a> product</div></footer><script src="js/analytics.js"></script></body></html>`);
   return b.join("\n");
 }
 
