@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 42 — visual redesign)",
+  "updatedAt": "2026-10-26 (build session 43 — inner pages + fix)",
   "progress": {
     "shipped": 31,
     "tests": 69
@@ -306,6 +306,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 43,
+      "date": "2026-10-26",
+      "title": "Redesign carried through inner pages (+ import fix)",
+      "note": "Found + fixed a redesign regression: an over-broad regex had stripped theme.css's @import from tool.css, leaving tools/app/guides/comparisons unstyled. All 7 inner page classes verified on the new design system via computed-style sweep."
+    },
     {
       "day": 42,
       "date": "2026-10-26",

@@ -2,6 +2,10 @@
 
 All entries map to a commit. Newest first.
 
+## Day 43 (build session 43) — 2026-10-26
+- Redesign carried through inner pages; fixed broken theme import (over-broad
+  regex) — computed-style sweep verifies 7/7 page classes on the new design
+
 ## Day 42 (build session 42) — 2026-10-26
 - **Visual redesign "midnight editorial"**: Fraunces+Inter design system,
   landing + tools + app re-skinned, responsive/native across form factors;

@@ -1,10 +1,11 @@
+@import url("../css/theme.css");
 /* EpisodeKit — shared tool/app skin ("midnight editorial")
    Legacy var names kept as aliases so older embedded styles keep working. */
 
 :root{
-  /* legacy aliases */
-  --bg:var(--ink); --bg2:var(--ink-2); --line:var(--line);
-  --text:var(--text); --muted:var(--body); --accent:var(--gold); --accent2:var(--cyan);
+  /* legacy aliases — ONLY renamed tokens; self-referential entries poison vars */
+  --bg:var(--ink); --bg2:var(--ink-2);
+  --muted:var(--body); --accent:var(--gold);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
