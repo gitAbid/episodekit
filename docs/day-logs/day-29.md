@@ -1,6 +1,6 @@
 # Day 29 (build session 29) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · webhook signature robustness.
+**Build commit:** `abecd7c` · webhook signature robustness.
 
 ## What shipped
 **LS webhook signature verification hardened for activation day.** Vercel
