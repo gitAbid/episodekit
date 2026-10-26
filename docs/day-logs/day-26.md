@@ -1,6 +1,6 @@
 # Day 26 (build session 26) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · real-ASR input quality fix.
+**Build commit:** `a60e2d0` · real-ASR input quality fix.
 
 ## What shipped
 1. **Speaker-label handling** — real ASR transcripts ("Host:", "Speaker 1:")
