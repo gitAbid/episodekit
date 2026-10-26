@@ -1,6 +1,6 @@
 # Day 24 (build session 24) — 2026-10-25
 
-**Build commit:** (see follow-up docs commit) · A1 executed early; freeze.
+**Build commit:** `5105cff` · A1 executed early; freeze.
 
 ## What shipped
 1. **A1 agent-side checklist, executed 2 days early — all green on
