@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 37)",
+  "updatedAt": "2026-10-26 evening (build session 38)",
   "progress": {
     "shipped": 31,
     "tests": 69
@@ -500,9 +500,9 @@
     }
   ],
   "next": [
-    "USER: docs/FOR-ABID.md — 5 actions (LS, keys, HN, PH, GSC)",
-    "A2 (Oct 28): Show HN — drafts ready",
+    "USER: docs/FOR-ABID.md — 5 actions (LS, keys, HN, PH, GSC) — A1 window closing",
+    "A2 (Oct 28): Show HN — drafts ready in docs/launch-pack.md",
     "A4 (Oct 30): Product Hunt — gallery at spec",
-    "A7 (Nov 2): sprint report — template ready"
+    "A7 (Nov 2): sprint report — draft ready"
   ]
 }
