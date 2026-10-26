@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 43 — inner pages + fix)",
+  "updatedAt": "2026-10-27 (build session 44 — flat video/OG)",
   "progress": {
     "shipped": 31,
     "tests": 69
@@ -306,6 +306,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 44,
+      "date": "2026-10-27",
+      "title": "Demo video + OG rebuilt in the flat design",
+      "note": "All 8 demo frames recaptured from the live flat-design app; title/end cards flattened; vertical cut rebuilt; OG regenerated. Video, GIF, and social cards now match what users see."
+    },
     {
       "day": 43,
       "date": "2026-10-26",

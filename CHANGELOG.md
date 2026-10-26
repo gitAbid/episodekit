@@ -24,6 +24,10 @@ All entries map to a commit. Newest first.
   regenerated to match. Fixed an empty result card showing on tool pages before
   generation and table overflow on mobile.
 
+## Day 44 (build session 44) — 2026-10-27
+- Demo video + vertical cut + OG image + README GIF rebuilt in the flat design
+  (frames recaptured from the live app; cards flattened)
+
 ## Day 43 (build session 43) — 2026-10-26
 - Redesign carried through inner pages; fixed broken theme import (over-broad
   regex) — computed-style sweep verifies 7/7 page classes on the new design

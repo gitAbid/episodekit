@@ -39,18 +39,11 @@ func write(_ ctx: CGContext, _ name: String) {
   print("wrote \(outDir)/\(name)")
 }
 
-let bg = CGColor(red: 0.043, green: 0.055, blue: 0.075, alpha: 1)
-let gold = CGColor(red: 0.91, green: 0.69, blue: 0.29, alpha: 1)
-let white = CGColor(red: 0.91, green: 0.93, blue: 0.96, alpha: 1)
-let muted = CGColor(red: 0.55, green: 0.60, blue: 0.68, alpha: 1)
+let bg = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+let gold = CGColor(red: 0.14, green: 0.34, blue: 0.84, alpha: 1)   // #2457d6 accent
+let white = CGColor(red: 0.06, green: 0.09, blue: 0.15, alpha: 1)  // ink text on light
+let muted = CGColor(red: 0.45, green: 0.50, blue: 0.58, alpha: 1)
 
-// glows
-func glow(_ ctx: CGContext, cx: CGFloat, cy: CGFloat, r: CGFloat, c: CGColor) {
-  for i in stride(from: CGFloat(1), through: 10, by: 1) {
-    ctx.setFillColor(c)
-    ctx.fillEllipse(in: CGRect(x: cx - r / i, y: cy - r / i, width: 2 * r / i, height: 2 * r / i))
-  }
-}
 
 let bold = CTFontCreateWithName("HelveticaNeue-Bold" as CFString, 96, nil)
 let med = CTFontCreateWithName("HelveticaNeue-Medium" as CFString, 40, nil)
@@ -60,8 +53,6 @@ let medBig = CTFontCreateWithName("HelveticaNeue-Medium" as CFString, 52, nil)
 do {
   let ctx = makeCtx()
   ctx.setFillColor(bg); ctx.fill(CGRect(x: 0, y: 0, width: W, height: H))
-  glow(ctx, cx: 240, cy: 620, r: 500, c: CGColor(red: 0.91, green: 0.69, blue: 0.29, alpha: 0.10))
-  glow(ctx, cx: 1060, cy: 120, r: 460, c: CGColor(red: 0.44, green: 0.70, blue: 1.0, alpha: 0.08))
   let t1 = "Episode", t2 = "Kit"
   let w1 = width(t1, font: bold), w2 = width(t2, font: bold)
   let total = w1 + 6 + w2
@@ -76,7 +67,6 @@ do {
 do {
   let ctx = makeCtx()
   ctx.setFillColor(bg); ctx.fill(CGRect(x: 0, y: 0, width: W, height: H))
-  glow(ctx, cx: 640, cy: 360, r: 700, c: CGColor(red: 0.91, green: 0.69, blue: 0.29, alpha: 0.06))
   let l1 = "Try it free — no signup"
   draw(l1, font: medBig, color: white, x: (CGFloat(W) - width(l1, font: medBig)) / 2, y: 420, ctx: ctx)
   let l2 = "episodekit.vercel.app"
