@@ -1,6 +1,6 @@
 # Day 28 (build session 28) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · pre-activation crash fix.
+**Build commit:** `639372e` · pre-activation crash fix.
 
 ## What shipped
 **Found by tracing the GLM-activation path**: when a key lands, the discussion
