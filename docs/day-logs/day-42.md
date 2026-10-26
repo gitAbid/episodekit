@@ -1,6 +1,6 @@
 # Day 42 (build session 42) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · full visual redesign ("midnight
+**Build commit:** `08a345e` · full visual redesign ("midnight
 editorial") per user request ("the UI is so ugly, make it beautiful"), with
 responsive/native-formfactor requirement from the user mid-session.
 
