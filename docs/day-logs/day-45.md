@@ -1,6 +1,6 @@
 # Day 45 (build session 45) — 2026-10-27
 
-**Build commit:** (see follow-up docs commit) · **AUDIO PATH IS LIVE.**
+**Build commit:** `0513f50` · **AUDIO PATH IS LIVE.**
 
 ## The unlock
 User added ASR + GLM keys to Vercel. Executed the A1 unlock verification:
