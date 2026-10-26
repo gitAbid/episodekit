@@ -1,6 +1,6 @@
 # Day 41 (build session 41) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · product polish (user requested
+**Build commit:** `30a29c2` · product polish (user requested
 polish while they work the unlocks).
 
 ## What shipped
