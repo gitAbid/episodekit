@@ -5,7 +5,7 @@
   window.EKHandoff = {
     offer(el, text) {
       if (!el) return;
-      el.innerHTML = `<div class="notice" style="border-color:rgba(232,176,75,.45);background:rgba(232,176,75,.06)">
+      el.innerHTML = `<div class="notice" style="border-color:var(--accent-border);background:var(--accent-soft)">
         Want all six artifacts at once — article notes, discussion kit, email series, social pack, summary, titles?<br>
         <a href="/app" id="ek-handoff-go" style="color:var(--accent);font-weight:700">Generate the full package with this transcript →</a>
       </div>`;

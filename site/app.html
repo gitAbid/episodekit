@@ -3,36 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fafafc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#090b13" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <title>EpisodeKit App — turn an episode into the whole content package</title>
 <meta name="description" content="Upload your episode audio or paste the transcript. Get the article, discussion kit, 5-day email series, social pack, summary and titles — with copy and download.">
 <meta name="robots" content="noindex">
 <link rel="stylesheet" href="tools/tool.css">
 <style>
-.tabs{display:flex;gap:8px;margin-bottom:20px}
-.tab{flex:1;text-align:center;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--bg2);color:var(--muted);font-weight:700;cursor:pointer}
-.tab.active{border-color:var(--accent);color:var(--text);background:rgba(232,176,75,.08)}
-#drop{border:2px dashed var(--line);border-radius:16px;padding:44px 20px;text-align:center;color:var(--muted);cursor:pointer;transition:border-color .15s}
-#drop.over{border-color:var(--accent)}
-#drop b{color:var(--text)}
+main.app{max-width:760px}
+.tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:1px solid var(--border);width:100%}
+.tab{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;min-height:44px;margin-bottom:-1px;border:0;border-bottom:2px solid transparent;background:transparent;color:var(--body);font:600 14.5px var(--font-body);cursor:pointer;transition:background .15s,color .15s}
+.tab svg{width:17px;height:17px;flex:none}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--text);border-bottom-color:var(--accent)}
+.tab.active svg{color:var(--accent-ink)}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px}
+#drop{border:1px dashed var(--border-strong);border-radius:var(--radius);padding:44px 20px;text-align:center;color:var(--body);cursor:pointer;background:var(--surface-2);transition:border-color .15s,background .15s}
+#drop:hover,#drop.over{border-color:var(--accent);background:var(--accent-soft)}
+#drop .up{margin:0 auto 12px;display:flex;justify-content:center;color:var(--accent-ink)}
+#drop .up svg{width:22px;height:22px}
+#drop b{color:var(--text);font-weight:600}
+#drop small{display:block;font-size:13.5px;color:var(--faint);margin-top:6px}
 .progress{margin-top:18px}
-.bar{height:10px;background:var(--bg2);border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+.bar{height:6px;background:var(--surface-3);border-radius:3px;overflow:hidden}
 .bar>div{height:100%;background:var(--accent);width:0%;transition:width .3s}
-.step{display:none}
-.step.on{display:block}
-.steps{margin:18px 0 6px;color:var(--muted);font-size:14px}
-.badge{display:inline-block;background:rgba(111,179,255,.15);color:var(--accent2);border-radius:8px;padding:2px 10px;font-size:12.5px;font-weight:700}
-.dl{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
-button.ghost.small{padding:6px 12px;font-size:13px}
-.warn{border-color:#a33;color:#e88}
+.stepx{display:none}
+.stepx.on{display:block}
+.steps{margin:0 0 10px;color:var(--body);font-size:14px;font-weight:500}
+.quota-pill{display:inline-flex;align-items:center;gap:6px;background:var(--surface-2);color:var(--body);border:1px solid var(--border);border-radius:var(--radius-sm);padding:3px 12px;font-size:13px;font-weight:600;margin-top:12px}
+.dl{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.toolbar{position:sticky;top:60px;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0 -12px 20px;padding:12px;background:var(--bg);border-bottom:1px solid var(--border)}
+.toolbar h2.cardtitle{margin:0}
+.trydemo{color:var(--accent-ink);cursor:pointer;font-size:13.5px;font-weight:500;background:none;border:0;padding:0;font-family:inherit}
+.trydemo:hover{text-decoration:underline;text-underline-offset:3px}
 @media(max-width:640px){
-  .nav{flex-wrap:wrap;row-gap:6px}
   .nav a:nth-child(2),.nav a:nth-child(3){display:none}
   .nav .badge{display:none}
+  .panel{padding:18px}
+  .tab{font-size:13.5px;padding:10px 8px}
 }
-.trydemo{color:var(--accent2);cursor:pointer;font-size:13.5px}
 </style>
 </head>
 <body>
@@ -44,31 +56,31 @@ button.ghost.small{padding:6px 12px;font-size:13px}
   <a href="#" style="margin-left:auto;color:var(--accent)">App <span class="badge">beta</span></a>
 </div></header>
 
-<main class="wrap">
-  <h1>Turn an episode into the whole package</h1>
-  <p class="sub">Audio file or transcript in — article, discussion kit, 5-day
-  email series, social pack, summary, and titles out. Free while in beta:
-  <b id="quotaLeft">3</b> episodes left this month. Every quote is taken
-  word-for-word from your episode.</p>
+<main class="wrap app">
+  <h1>Create a content package</h1>
+  <p class="sub">Upload episode audio or paste a transcript. You'll get an article, discussion kit,
+  5-day email series, social pack, summary and titles. Free during the beta:
+  <b id="quotaLeft">3</b> episodes left this month.</p>
 
-  <div class="tabs">
-    <div class="tab active" id="tabAudio">🎙 Upload audio</div>
-    <div class="tab" id="tabPaste">📋 Paste transcript</div>
+  <div class="tabs" id="tabsBar" role="tablist" aria-label="Input type">
+    <button type="button" class="tab active" id="tabAudio" role="tab" aria-selected="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Upload audio</button>
+    <button type="button" class="tab" id="tabPaste" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Paste transcript</button>
   </div>
 
-  <div class="step on" id="stepInput">
+  <div class="stepx on panel" id="stepInput">
     <div id="pastePane" style="display:none">
       <textarea id="sermon" placeholder="Paste your episode transcript here…"></textarea>
-      <div class="row"><span class="trydemo" id="trydemo">No transcript handy? Load a demo episode →</span></div>
+      <div class="row"><button type="button" class="trydemo" id="trydemo">No transcript handy? Load a demo episode →</button></div>
       <div class="row">
         <button class="primary" id="goPaste">Generate my content package</button>
         <span class="hint" id="count">0 words</span>
       </div>
     </div>
     <div id="audioPane">
-      <div id="drop">
-        <b>Click to choose an audio file</b> — or drag &amp; drop it here<br>
-        <span style="font-size:14px">m4a, mp3, wav, webm · long episodes are fine (audio is compressed in your browser before upload)</span>
+      <div id="drop" role="button" tabindex="0" aria-label="Choose an audio file">
+        <div class="up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"/></svg></div>
+        <b>Click to choose an audio file</b> — or drag &amp; drop it here
+        <small>m4a, mp3, wav, webm · long episodes are fine (audio is compressed in your browser before upload)</small>
       </div>
       <input type="file" id="file" accept="audio/*,.m4a,.mp3,.wav,.webm" style="display:none">
       <div class="progress" id="progress" style="display:none">
@@ -83,15 +95,15 @@ button.ghost.small{padding:6px 12px;font-size:13px}
     </div>
   </div>
 
-  <div class="step" id="stepBusy">
+  <div class="stepx panel" id="stepBusy">
     <div class="progress" style="display:block">
       <div class="steps" id="busytext">Working…</div>
       <div class="bar"><div id="busyfill" style="width:40%"></div></div>
     </div>
   </div>
 
-  <div class="step" id="stepDone">
-    <div class="row" style="justify-content:space-between">
+  <div class="stepx" id="stepDone">
+    <div class="toolbar">
       <h2 class="cardtitle" id="suiteTitle"></h2>
       <div class="dl">
         <button class="ghost" id="dlMd">Download Markdown</button>
@@ -106,10 +118,10 @@ button.ghost.small{padding:6px 12px;font-size:13px}
     <h2 class="cardtitle" id="quotaTitle">You've used your 3 free episodes this month</h2>
     <p class="meta" id="quotaBody">EpisodeKit Pro is $19/mo for 12 episodes — every artifact stays editable and yours. Founding-member pricing while in beta.</p>
     <div class="dl" id="quotaButtons">
-      <a class="primary" style="display:inline-block;padding:12px 22px;border-radius:11px;color:#141414;font-weight:700" href="contact.html">Get Pro — talk to us</a>
+      <a class="btn" href="contact.html">Get Pro — talk to us</a>
     </div>
     <div class="row" style="margin-top:18px">
-      <input id="lickey" placeholder="Have a license key? SK1-…" style="flex:1;min-width:220px;background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 14px;font-size:15px">
+      <input id="lickey" placeholder="Have a license key? SK1-…" style="flex:1;min-width:220px">
       <button class="ghost" id="licgo">Activate</button>
     </div>
     <div class="notice" id="licmsg" style="display:none"></div>
@@ -205,6 +217,8 @@ $("tabPaste").addEventListener("click", () => switchTab(false));
 function switchTab(audio) {
   $("tabAudio").classList.toggle("active", audio);
   $("tabPaste").classList.toggle("active", !audio);
+  $("tabAudio").setAttribute("aria-selected", audio);
+  $("tabPaste").setAttribute("aria-selected", !audio);
   $("audioPane").style.display = audio ? "block" : "none";
   $("pastePane").style.display = audio ? "none" : "block";
 }
@@ -235,6 +249,7 @@ $("goPaste").addEventListener("click", () => {
 let encodedBlob = null, encodedName = "episode.webm";
 const drop = $("drop"), fileInput = $("file");
 drop.addEventListener("click", () => fileInput.click());
+drop.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fileInput.click(); } });
 drop.addEventListener("dragover", (e) => { e.preventDefault(); drop.classList.add("over"); });
 drop.addEventListener("dragleave", () => drop.classList.remove("over"));
 drop.addEventListener("drop", (e) => {
@@ -369,6 +384,7 @@ $("startOver").addEventListener("click", () => {
 });
 function showStep(id) {
   for (const s of ["stepInput", "stepBusy", "stepDone"]) $(s).classList.toggle("on", s === id);
+  $("tabsBar").style.display = id === "stepInput" ? "" : "none";
 }
 </script>
 </body>

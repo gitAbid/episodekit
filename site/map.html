@@ -3,41 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fafafc" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#090b13" media="(prefers-color-scheme: dark)">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <title>EpisodeKit — Live Sprint Mind Map</title>
 <meta name="description" content="A live mind map of the EpisodeKit build: decisions, implementation progress, and metrics — updated every day by the build agent.">
 <meta name="robots" content="noindex">
+<link rel="stylesheet" href="tools/tool.css">
 <style>
-:root{
-  --bg:#070a12;--bg2:#0b101c;--card:rgba(255,255,255,.035);--line:rgba(255,255,255,.08);
-  --text:#eef1f7;--muted:#8b99ad;--accent:#f0c060;--accent2:#6fb3ff;
-  --done:#3ecf8e;--doing:#e8b04b;--next:#6fb3ff;--blocked:#ff7a7a;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  background-image:radial-gradient(900px 400px at 15% -5%,rgba(232,176,75,.06),transparent),radial-gradient(900px 400px at 90% 0%,rgba(111,179,255,.05),transparent)}
-a{color:var(--accent2);text-decoration:none}
 .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
-header{border-bottom:1px solid var(--line);padding:18px 0}
-.hrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.logo{font-weight:800;font-size:19px}.logo span{color:var(--accent)}
-.livedot{width:9px;height:9px;border-radius:50%;background:var(--done);display:inline-block;margin-right:6px;animation:pulse 2s infinite}
+.hrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-height:62px}
+main.wrap{padding-top:26px;padding-bottom:70px}
+footer code{font-family:var(--font-mono);font-size:12.5px;background:var(--surface-2);padding:1px 6px;border-radius:5px}
+.livedot{width:9px;height:9px;border-radius:50%;background:var(--done);display:inline-block;margin-right:6px;}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(62,207,142,.5)}70%{box-shadow:0 0 0 8px rgba(62,207,142,0)}100%{box-shadow:0 0 0 0 rgba(62,207,142,0)}}
-.livetag{font-size:12.5px;font-weight:700;color:var(--done);letter-spacing:.5px}
+.livetag{font-size:12.5px;font-weight:700;color:var(--success);letter-spacing:.5px}
 .updated{color:var(--muted);font-size:13px;margin-left:auto}
-main{padding:26px 0 70px}
 
 .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:26px}
-.metric{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 18px;box-shadow:var(--shadow-xs)}
 .metric .v{font-size:26px;font-weight:800;letter-spacing:-.5px}
-.metric .v.gold{color:var(--accent)}.metric .v.blue{color:var(--accent2)}.metric .v.green{color:var(--done)}
+.metric .v.gold{color:var(--warning)}.metric .v.blue{color:var(--accent-ink)}.metric .v.green{color:var(--success)}
 .metric .l{color:var(--muted);font-size:12.5px;margin-top:2px}
 
-.sect{display:flex;align-items:baseline;gap:12px;margin:30px 0 14px}
-.sect h2{font-size:20px;letter-spacing:-.3px}
-.sect .sub{color:var(--muted);font-size:13.5px}
+.msect{display:flex;align-items:baseline;gap:12px;margin:30px 0 14px}
+.msect h2{font-size:20px;letter-spacing:-.3px}
+.msect .sub{color:var(--muted);font-size:13.5px}
 
 /* tree */
 .tree{position:relative;overflow-x:auto;padding:6px 2px 18px}
@@ -47,13 +40,13 @@ main{padding:26px 0 70px}
 .bhead:hover{border-color:var(--accent)}
 .bhead .bt{font-weight:800;font-size:15.5px}
 .bhead .bc{color:var(--muted);font-size:12.5px}
-.chip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;border-radius:7px;padding:3px 9px}
-.chip.done{color:var(--done);background:rgba(62,207,142,.12)}
-.chip.doing{color:var(--doing);background:rgba(232,176,75,.12)}
-.chip.next{color:var(--next);background:rgba(111,179,255,.12)}
-.chip.blocked{color:var(--blocked);background:rgba(255,122,122,.12)}
+.schip{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;border-radius:7px;padding:3px 9px}
+.schip.done{color:var(--success);background:var(--success-soft)}
+.schip.doing{color:var(--warning);background:var(--warning-soft)}
+.schip.next{color:var(--accent-ink);background:var(--accent-soft)}
+.schip.blocked{color:var(--danger);background:var(--danger-soft)}
 .children{margin:10px 0 0 18px;padding-left:22px;border-left:1px dashed var(--line)}
-.leaf{display:flex;align-items:flex-start;gap:9px;padding:6px 10px;margin:4px 0;background:var(--bg2);border:1px solid var(--line);border-radius:10px;max-width:640px}
+.leaf{display:flex;align-items:flex-start;gap:9px;padding:6px 10px;margin:4px 0;background:var(--surface);border:1px solid var(--line);border-radius:10px;max-width:640px}
 .leaf .t{font-weight:650;font-size:14px}
 .leaf .d{color:var(--muted);font-size:12px;margin-left:auto;white-space:nowrap}
 .dot{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none}
@@ -68,15 +61,14 @@ main{padding:26px 0 70px}
 .titem .tt{font-weight:750;font-size:15px;margin:3px 0}
 .titem .note{color:var(--muted);font-size:13.5px}
 .nextstrip{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
-.nextpill{background:rgba(111,179,255,.08);border:1px solid rgba(111,179,255,.3);color:var(--accent2);border-radius:999px;padding:7px 15px;font-size:13.5px;font-weight:600}
-footer{border-top:1px solid var(--line);padding:22px 0 50px;color:var(--muted);font-size:13.5px}
+.nextpill{background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent-ink);border-radius:var(--radius-sm);padding:6px 12px;font-size:13.5px;font-weight:600}
 .loading{color:var(--muted);padding:40px 0;text-align:center}
 @media(max-width:700px){.updated{margin-left:0;width:100%}}
 </style>
 </head>
 <body>
 <header><div class="wrap hrow">
-  <div class="logo">Episode<span>Kit</span> · Sprint Map</div>
+  <div class="logo">Episode<span>Kit</span> <span style="color:var(--faint);font-weight:500">/ Sprint Map</span></div>
   <span class="livetag"><span class="livedot"></span>LIVE</span>
   <span class="updated" id="updated">loading…</span>
 </div></header>
@@ -84,14 +76,14 @@ footer{border-top:1px solid var(--line);padding:22px 0 50px;color:var(--muted);f
 <main class="wrap">
   <div class="metrics" id="metrics"></div>
 
-  <div class="sect"><h2>Decision &amp; implementation tree</h2>
+  <div class="msect"><h2>Decision &amp; implementation tree</h2>
     <span class="sub">click a branch to fold · statuses update with every daily build session</span></div>
   <div class="tree" id="tree"><div class="loading">Loading project state…</div></div>
 
-  <div class="sect"><h2>Decision log</h2><span class="sub">what changed and why</span></div>
+  <div class="msect"><h2>Decision log</h2><span class="sub">what changed and why</span></div>
   <div class="timeline" id="timeline"></div>
 
-  <div class="sect"><h2>Next up</h2></div>
+  <div class="msect"><h2>Next up</h2></div>
   <div class="nextstrip" id="next"></div>
 </main>
 
@@ -166,7 +158,7 @@ function renderTree(s) {
     <div class="branch" data-b="${esc(b.id)}">
       <div class="bhead">
         <span class="bt">${esc(b.title)}</span>
-        <span class="chip ${CHIP[b.status] || "next"}">${CHIP_LABEL[b.status] || b.status}</span>
+        <span class="schip ${CHIP[b.status] || "next"}">${CHIP_LABEL[b.status] || b.status}</span>
         <span class="bc">${esc(b.caption || "")}</span>
       </div>
       <div class="children">

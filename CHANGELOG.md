@@ -2,6 +2,17 @@
 
 All entries map to a commit. Newest first.
 
+## Unreleased — 2026-10-26
+- **Visual redesign: flat design system.** Replaced the gold "midnight
+  editorial" theme with a flat, light-first system (automatic dark mode, Inter
+  only, one solid blue accent, 1px borders, no gradients/glows/shadows).
+  Landing rebuilt with plain product copy, an HTML product preview using real
+  sample output, a quote-check example, pricing and FAQ; app gets underline tabs,
+  an accessible dropzone and a sticky results toolbar; every inner page, the
+  sprint map and the generated samples template use the shared system; OG image
+  regenerated to match. Fixed an empty result card showing on tool pages before
+  generation and table overflow on mobile.
+
 ## Day 43 (build session 43) — 2026-10-26
 - Redesign carried through inner pages; fixed broken theme import (over-broad
   regex) — computed-style sweep verifies 7/7 page classes on the new design
