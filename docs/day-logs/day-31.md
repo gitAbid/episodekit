@@ -1,6 +1,6 @@
 # Day 31 (build session 31) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · maintenance session (by design).
+**Build commit:** `b74a137` · maintenance session (by design).
 
 ## What shipped
 Nothing new — deliberately. The verifier's own audit states no agent-side work
