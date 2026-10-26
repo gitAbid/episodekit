@@ -1,6 +1,6 @@
 # Day 38 (build session 38, scheduled 21:00) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · scheduled-session procedure run.
+**Build commit:** `b4f207c` · scheduled-session procedure run.
 
 ## Procedure results
 - Step 0 uptime: 4/4 endpoints 200 + canonical probe 200 (S36 procedure in
