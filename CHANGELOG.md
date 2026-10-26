@@ -2,6 +2,10 @@
 
 All entries map to a commit. Newest first.
 
+## Day 28 (build session 28) — 2026-10-26
+- Fixed latent GLM-activation crash in the discussion tool (AI shape merged
+  over heuristic baseline with per-field guards)
+
 ## Day 27 (build session 27) — 2026-10-26
 - Degenerate-input guards: honest 400s for no-punctuation / all-short /
   repetition inputs; sentence dedup; friendly client alerts (66/66 tests)

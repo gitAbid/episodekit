@@ -102,6 +102,7 @@ export default async function handler(req, res) {
               "From the episode transcript below, produce JSON only (no markdown) with keys: " +
               "title (string), opener (string), open (array of 3 strings), " +
               "qs (array of 6 objects {quote: exact sentence from the episode, follow: one follow-up question}), " +
+              "apply (array of exactly 2 action-prompt strings), " +
               "closing (string). Transcript:\n\n" + text.slice(0, 60000),
           },
         ],

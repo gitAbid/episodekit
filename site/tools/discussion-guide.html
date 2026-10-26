@@ -143,16 +143,24 @@ go.addEventListener("click",async()=>{
   if(wc<80){alert("Please paste at least ~80 words of transcript so the questions can be anchored in the actual episode.");return;}
   go.disabled=true; go.textContent="Generating…";
   let g=null, note="";
-  // Try the AI endpoint first; fall back to the offline generator.
+  const base=heuristicKit(text); // shape baseline + offline fallback
+  // Try the AI endpoint first; overlay AI fields on the heuristic shape so a
+  // missing key (e.g. no `apply`) can never crash the renderer.
   try{
     const r=await fetch("/api/generate-suite",{
       method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({mode:"discussion-guide",text:text.slice(0,60000)})});
-    if(r.ok){const j=await r.json(); if(j&&j.guide){g={kind:"ai",...j.guide};}}
+    if(r.ok){const j=await r.json(); if(j&&j.guide){
+      const ai=j.guide;
+      g={...base,kind:"ai",...ai,
+         apply:(Array.isArray(ai.apply)&&ai.apply.length>=2)?ai.apply:base.apply,
+         open:(Array.isArray(ai.open)&&ai.open.length>=2)?ai.open:base.open,
+         qs:(Array.isArray(ai.qs)&&ai.qs.length>=4)?ai.qs:base.qs};
+    }}
     else if(r.status===400){const j=await r.json().catch(()=>({}));if(j.error==="english_transcripts_only_for_now"){note="English transcripts only for now — the offline generator below needs English too.";}else if(j.error==="not_enough_sentences"){note="Couldn't find enough complete sentences — paste fuller transcript text.";}}
     else if(r.status===503){note="AI enhancement isn't configured yet — used the offline generator.";}
   }catch(e){note="AI endpoint unavailable — used the offline generator.";}
-  if(!g){ g=heuristicKit(text); if(!g){go.disabled=false;go.textContent="Generate discussion kit";alert("Couldn't find enough sentences to work with. Try pasting fuller transcript text.");return;} }
+  if(!g){ g=base; if(!g){go.disabled=false;go.textContent="Generate discussion kit";alert("Couldn't find enough sentences to work with. Try pasting fuller transcript text.");return;} }
   current=g; render(g);
   document.getElementById("notice").textContent=note||"Every quote above is taken word-for-word from what you pasted — nothing is invented.";
   document.getElementById("out").style.display="block";

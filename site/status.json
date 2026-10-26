@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-26 (build session 27)",
+  "updatedAt": "2026-10-26 (build session 28)",
   "progress": {
     "shipped": 31,
     "tests": 66
@@ -306,6 +306,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 28,
+      "date": "2026-10-26",
+      "title": "Pre-activation crash fixed",
+      "note": "Tracing the GLM-activation path caught a latent crash: the discussion tool's AI response lacked the `apply` field its renderer indexes. The prompt now requests it, and the page overlays AI output on the heuristic shape with per-field guards — activation can no longer break the tool."
+    },
     {
       "day": 27,
       "date": "2026-10-26",
