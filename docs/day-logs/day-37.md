@@ -1,6 +1,6 @@
 # Day 37 (build session 37) — 2026-10-26
 
-**Build commit:** (see follow-up docs commit) · maintenance (canonical probe).
+**Build commit:** `900f7c8` · maintenance (canonical probe).
 
 ## What shipped
 Maintenance only, per the freeze and the empty queue. Sweep executed with the
