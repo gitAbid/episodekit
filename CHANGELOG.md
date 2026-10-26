@@ -2,6 +2,10 @@
 
 All entries map to a commit. Newest first.
 
+## Day 25 (build session 25) — 2026-10-26
+- Production latency smoke (p50 0.38s / p90 0.59s / 0 fails); unlock-detection
+  automation now 9am+9pm for launch week
+
 ## Day 24 (build session 24) — 2026-10-25
 - A1 checklist executed early (all green) — feature freeze for launch
 - docs/FOR-ABID.md (useru2019s 5 actions, one page); A7 report template

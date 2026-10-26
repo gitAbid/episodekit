@@ -8,7 +8,7 @@
     "note": "7-day launch sprint (was 30 days); build phase completed Oct 24-26 in 21 sessions"
   },
   "live": "https://episodekit.vercel.app",
-  "updatedAt": "2026-10-25 (build session 24 — A1 verified early, frozen)",
+  "updatedAt": "2026-10-26 (build session 25 — launch-ready)",
   "progress": {
     "shipped": 31,
     "tests": 62
@@ -296,6 +296,12 @@
     }
   ],
   "decisions": [
+    {
+      "day": 25,
+      "date": "2026-10-26",
+      "title": "Launch-readiness: latency verified, reaction time halved",
+      "note": "30-request production smoke: p50 0.38s / p90 0.59s / 0 failures on the free-tool API. Automation now runs 9am + 9pm with unlock-detection first — any LS/key activation is verified within 12 hours and the map updates."
+    },
     {
       "day": 24,
       "date": "2026-10-25",
