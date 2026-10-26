@@ -2,6 +2,9 @@
 
 All entries map to a commit. Newest first.
 
+## Day 37 (build session 37) — 2026-10-26
+- Maintenance: canonical-probe sweep green (unlocks still disabled, 69/69)
+
 ## Day 36 (build session 36) — 2026-10-26
 - Ops: canonical uptime-probe body pinned in ROADMAP (prevents false incident
   flags from short probes tripping the input guards); automation alive
