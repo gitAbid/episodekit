@@ -6,6 +6,7 @@ import {
   artifactStatusEnum,
   artifacts,
   episodes,
+  feedback,
   segments,
   shows,
   users,
@@ -180,6 +181,49 @@ export async function isWebhookEventProcessed(id: string): Promise<boolean> {
 export async function markWebhookEventProcessed(id: string, provider: string): Promise<void> {
   const db = getDb();
   await db.insert(webhookEvents).values({ id, provider }).onConflictDoNothing();
+}
+
+// ---- feedback (M11 / WP-09) --------------------------------------------------
+
+export async function insertFeedback(row: {
+  userId: string | null;
+  episodeId: string | null;
+  artifactKind: string | null;
+  rating: number | null;
+  note: string | null;
+}): Promise<void> {
+  const db = getDb();
+  await db.insert(feedback).values({
+    userId: row.userId,
+    episodeId: row.episodeId,
+    // validated upstream against the enum values before reaching this boundary
+    artifactKind: row.artifactKind as typeof feedback.$inferInsert.artifactKind,
+    rating: row.rating,
+    note: row.note,
+  });
+}
+
+export type FeedbackListRow = {
+  id: string;
+  artifactKind: string | null;
+  rating: number | null;
+  note: string | null;
+  createdAt: Date;
+};
+
+export async function listFeedback(limit = 50): Promise<FeedbackListRow[]> {
+  const db = getDb();
+  return db
+    .select({
+      id: feedback.id,
+      artifactKind: feedback.artifactKind,
+      rating: feedback.rating,
+      note: feedback.note,
+      createdAt: feedback.createdAt,
+    })
+    .from(feedback)
+    .orderBy(desc(feedback.createdAt))
+    .limit(limit);
 }
 
 /**

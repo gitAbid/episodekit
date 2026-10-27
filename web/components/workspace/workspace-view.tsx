@@ -15,6 +15,7 @@ import { QuotesPanel } from "./quotes-panel";
 import { TranscriptPanel } from "./transcript-panel";
 import { CopyMenu, RegenerateMenu, DownloadAllButton } from "./toolbar";
 import { StatusPill } from "@/components/app/status-pill";
+import { ArtifactFeedback } from "@/components/app/artifact-feedback";
 import { toast as sonnerToast } from "sonner";
 
 const KIND_LABELS: Record<ArtifactKindName, string> = {
@@ -166,6 +167,7 @@ export function WorkspaceView({ initial, freePlan, showName }: { initial: import
                   />
                   Ready
                 </label>
+                <ArtifactFeedback kind={active} episodeId={episode.id} />
                 <RegenerateMenu onRegenerate={onRegenerate} disabled={activeArtifact.status === "writing"} />
                 <CopyMenu
                   kind={active}
