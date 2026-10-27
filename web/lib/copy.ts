@@ -43,3 +43,21 @@ export const AUDIO_UPLOAD_UNAVAILABLE_COPY = "Audio upload isn't set up in this 
 export const AUDIO_PLAYBACK_UNAVAILABLE_COPY = "Audio playback isn't set up in this preview.";
 
 export const PASTE_TRANSCRIPT_FIRST_COPY = "Paste a transcript first.";
+
+/** WP-08 billing route copy — plain, second person, <= 12 words (§0.4 rule 4). */
+
+export const CHECKOUT_UNAVAILABLE_COPY = "Checkout isn't set up in this preview.";
+
+export const ALREADY_PRO_COPY = "You're already on Pro.";
+
+export const FREE_PLAN_CANCEL_COPY = "You're on the Free plan.";
+
+export const LS_UNREACHABLE_COPY = "Couldn't reach the payment provider. Try again.";
+
+export const OWNER_ONLY_COPY = "Only the owner can change plans.";
+
+export const OWNER_NOT_CONFIGURED_COPY = "Owner access isn't configured.";
+
+export const NO_WORKSPACE_FOR_EMAIL_COPY = "No workspace found for that email.";
+
+export const PLAN_REQUIRED_COPY = "Choose a plan to upgrade to.";

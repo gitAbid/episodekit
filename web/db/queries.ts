@@ -1,4 +1,4 @@
-import { and, eq } from "drizzle-orm";
+import { and, count, eq } from "drizzle-orm";
 import { getDb } from "./index";
 import {
   episodes,
@@ -181,4 +181,104 @@ export async function isWebhookEventProcessed(id: string): Promise<boolean> {
 export async function markWebhookEventProcessed(id: string, provider: string): Promise<void> {
   const db = getDb();
   await db.insert(webhookEvents).values({ id, provider }).onConflictDoNothing();
+}
+
+/**
+ * Billing (WP-08) workspace updates. `undefined` values leave the column
+ * unchanged; an explicit `null` clears it. Never fakes values: the caller
+ * decides every field (webhook mapping, manual owner flag).
+ */
+export type WorkspacePlanUpdate = Partial<{
+  plan: "free" | "pro";
+  planSource: "ls" | "manual" | null;
+  founding: boolean;
+  status: "active" | "past_due" | "cancelled";
+  currentPeriodEnd: Date | null;
+  lsCustomerId: string | null;
+  lsSubscriptionId: string | null;
+}>;
+
+export async function updateWorkspacePlan(
+  workspaceId: string,
+  update: WorkspacePlanUpdate,
+): Promise<WorkspaceRow> {
+  const db = getDb();
+  const set = Object.fromEntries(
+    Object.entries(update).filter(([, v]) => v !== undefined),
+  );
+  const updated = await db
+    .update(workspaces)
+    .set(set)
+    .where(eq(workspaces.id, workspaceId))
+    .returning();
+  return updated[0];
+}
+
+export async function getWorkspaceById(id: string): Promise<WorkspaceRow | null> {
+  const db = getDb();
+  const rows = await db.select().from(workspaces).where(eq(workspaces.id, id)).limit(1);
+  return rows[0] ?? null;
+}
+
+/** Webhook fallback attribution when the checkout carried no workspace_id. */
+export async function getWorkspaceByOwnerEmail(email: string): Promise<WorkspaceRow | null> {
+  const db = getDb();
+  const rows = await db
+    .select({ workspace: workspaces })
+    .from(users)
+    .innerJoin(workspaces, eq(workspaces.ownerId, users.id))
+    .where(eq(users.email, email))
+    .limit(1);
+  return rows[0]?.workspace ?? null;
+}
+
+/** Founding counter — always derived (first 100, M10); never stored/faked. */
+export async function countFoundingWorkspaces(): Promise<number> {
+  const db = getDb();
+  const rows = await db
+    .select({ value: count() })
+    .from(workspaces)
+    .where(eq(workspaces.founding, true));
+  return rows[0]?.value ?? 0;
+}
+
+/** Episodes that count against the workspace quota in the given month (M10). */
+export async function countQuotaEpisodes(workspaceId: string, month: string): Promise<number> {
+  const db = getDb();
+  const rows = await db
+    .select({ value: count() })
+    .from(episodes)
+    .innerJoin(shows, eq(episodes.showId, shows.id))
+    .where(
+      and(
+        eq(shows.workspaceId, workspaceId),
+        eq(episodes.quotaMonth, month),
+        eq(episodes.countsQuota, true),
+      ),
+    );
+  return rows[0]?.value ?? 0;
+}
+
+/** Counted when generation starts (M10): stamp the month and flip the flag. */
+export async function markEpisodeQuotaCounted(episodeId: string, month: string): Promise<void> {
+  const db = getDb();
+  await db
+    .update(episodes)
+    .set({ quotaMonth: month, countsQuota: true, updatedAt: new Date() })
+    .where(eq(episodes.id, episodeId));
+}
+
+/** Refunded on pipeline failure (M10): keep quota_month for audit, stop counting. */
+export async function refundEpisodeQuota(episodeId: string): Promise<void> {
+  const db = getDb();
+  await db
+    .update(episodes)
+    .set({ countsQuota: false, updatedAt: new Date() })
+    .where(eq(episodes.id, episodeId));
+}
+
+export async function getUserEmail(userId: string): Promise<string | null> {
+  const db = getDb();
+  const rows = await db.select({ email: users.email }).from(users).where(eq(users.id, userId)).limit(1);
+  return rows[0]?.email ?? null;
 }

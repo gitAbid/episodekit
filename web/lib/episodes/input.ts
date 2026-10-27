@@ -29,3 +29,28 @@ export const episodeTranscribeSchema = z.object({
     .max(64)
     .optional(),
 });
+
+/**
+ * Upload allow-list (M2) + ≤300 MB compressed cap (§7.5 /api/uploads/token).
+ * Moved here from the WP-05 billing stub at integration: these are intake
+ * concerns; lib/billing/entitlements (WP-08) owns plan limits and quota.
+ */
+export const MAX_UPLOAD_BYTES = 300 * 1000 * 1000;
+
+export const AUDIO_UPLOAD_EXTENSIONS = ["mp3", "m4a", "wav", "aac", "ogg", "webm", "mp4", "mov"] as const;
+
+export const AUDIO_UPLOAD_CONTENT_TYPES = [
+  "audio/mpeg",
+  "audio/mp4",
+  "audio/x-m4a",
+  "audio/wav",
+  "audio/x-wav",
+  "audio/aac",
+  "audio/ogg",
+  "audio/opus",
+  "audio/vorbis",
+  "audio/webm",
+  "video/webm",
+  "video/mp4",
+  "video/quicktime",
+] as const;

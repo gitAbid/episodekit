@@ -5,18 +5,15 @@
  * boundaries (@/db/queries, @/lib/blob, @/lib/asr/groq) so tests mock the seams
  * and keyless previews degrade with a clean 503.
  *
- * Quota: counted at create (§7.5) through the entitlements stub
- * (lib/billing/entitlements — WP-08 replaces the bodies). Failures refund:
+ * Quota: counted at create (§7.5) through the real billing boundary
+ * (lib/billing/service.assertAndConsumeQuota + the episode row's counts_quota
+ * flag; integrated from WP-08). Failures refund:
  * unsupported_language / no_speech set counts_quota = false (U19: "This one
  * wasn't charged"). Sample episodes never count (M2).
  */
-import {
-  AUDIO_UPLOAD_CONTENT_TYPES,
-  MAX_UPLOAD_BYTES,
-  checkEpisodeQuota,
-  planLimits,
-  quotaWallCopy,
-} from "@/lib/billing/entitlements";
+import { AUDIO_UPLOAD_CONTENT_TYPES, MAX_UPLOAD_BYTES } from "@/lib/episodes/input";
+import { assertAndConsumeQuota, defaultBillingDeps } from "@/lib/billing/service";
+import { PLAN_LIMITS, quotaWallCopy } from "@/lib/billing/entitlements";
 import {
   AUDIO_PLAYBACK_UNAVAILABLE_COPY,
   NO_AUDIO_COPY,
@@ -113,9 +110,15 @@ export async function handleEpisodesPost(userId: string, raw: unknown): Promise<
 
   const isSample = body.source === "sample";
   if (!isSample) {
-    const quota = await checkEpisodeQuota(workspace);
+    const quota = await assertAndConsumeQuota(userId, defaultBillingDeps());
     if (!quota.allowed) {
-      return { status: 402, json: { errorCode: "quota_exceeded", error: quotaWallCopy(quota) } };
+      return {
+        status: 402,
+        json: {
+          errorCode: "quota_exceeded",
+          error: quota.wallCopy ?? quotaWallCopy({ used: quota.used, limit: quota.limit, resetDate: quota.resetDate }),
+        },
+      };
     }
   }
 
@@ -347,9 +350,15 @@ export async function handleUploadsTokenPost(userId: string, request: Request): 
     return { status: 404, json: { error: NO_SHOW_COPY } };
   }
   const workspace = await queries.getOrCreateWorkspaceByOwner(userId);
-  const quota = await checkEpisodeQuota(workspace);
+  const quota = await assertAndConsumeQuota(userId, defaultBillingDeps());
   if (!quota.allowed) {
-    return { status: 402, json: { errorCode: "quota_exceeded", error: quotaWallCopy(quota) } };
+    return {
+      status: 402,
+      json: {
+        errorCode: "quota_exceeded",
+        error: quota.wallCopy ?? quotaWallCopy({ used: quota.used, limit: quota.limit, resetDate: quota.resetDate }),
+      },
+    };
   }
   const result = await handleClientUpload(request, {
     allowedContentTypes: AUDIO_UPLOAD_CONTENT_TYPES,
@@ -360,5 +369,5 @@ export async function handleUploadsTokenPost(userId: string, request: Request): 
 
 /** Plan duration limit for the client-side 2 h gate (§6 too_long copy). */
 export function maxDurationMsForPlan(plan: string): number {
-  return planLimits(plan).maxDurationMs;
+  return PLAN_LIMITS[plan === "pro" ? "pro" : "free"].maxEpisodeDurationMs;
 }

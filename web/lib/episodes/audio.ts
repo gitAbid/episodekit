@@ -3,7 +3,7 @@
  * /api/uploads/token route (§7.5). Extensions from M2; size ≤300 MB
  * compressed (§7.5).
  */
-import { AUDIO_UPLOAD_EXTENSIONS, MAX_UPLOAD_BYTES } from "@/lib/billing/entitlements";
+import { AUDIO_UPLOAD_EXTENSIONS, MAX_UPLOAD_BYTES } from "@/lib/episodes/input";
 
 export function fileExtension(name: string): string {
   const dot = name.lastIndexOf(".");
