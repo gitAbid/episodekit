@@ -1,6 +1,10 @@
-import { and, count, eq } from "drizzle-orm";
+import { and, count, desc, eq, sql } from "drizzle-orm";
 import { getDb } from "./index";
 import {
+  analysis,
+  artifactKindEnum,
+  artifactStatusEnum,
+  artifacts,
   episodes,
   segments,
   shows,
@@ -267,4 +271,114 @@ export async function getUserEmail(userId: string): Promise<string | null> {
   const db = getDb();
   const rows = await db.select({ email: users.email }).from(users).where(eq(users.id, userId)).limit(1);
   return rows[0]?.email ?? null;
+}
+
+// ---------------------------------------------------------------------------
+// WP-06 — analysis, artifacts, episode list (M4–M8). Additive.
+// ---------------------------------------------------------------------------
+
+export type AnalysisRow = typeof analysis.$inferSelect;
+export type ArtifactRow = typeof artifacts.$inferSelect;
+export type ArtifactKindName = (typeof artifactKindEnum.enumValues)[number];
+
+export async function getAnalysis(episodeId: string): Promise<AnalysisRow | null> {
+  const db = getDb();
+  const rows = await db.select().from(analysis).where(eq(analysis.episodeId, episodeId)).limit(1);
+  return rows[0] ?? null;
+}
+
+export async function upsertAnalysis(
+  episodeId: string,
+  values: { chapters: unknown; topics: string[]; candidateQuotes: unknown },
+): Promise<void> {
+  const db = getDb();
+  await db
+    .insert(analysis)
+    .values({ episodeId, ...values })
+    .onConflictDoUpdate({
+      target: analysis.episodeId,
+      set: { chapters: values.chapters, topics: values.topics, candidateQuotes: values.candidateQuotes },
+    });
+}
+
+export async function upsertArtifact(
+  episodeId: string,
+  kind: ArtifactKindName,
+  values: Partial<typeof artifacts.$inferInsert> & { status: (typeof artifactStatusEnum.enumValues)[number] },
+): Promise<ArtifactRow> {
+  const db = getDb();
+  const rows = await db
+    .insert(artifacts)
+    .values({ episodeId, kind, ...values })
+    .onConflictDoUpdate({
+      target: [artifacts.episodeId, artifacts.kind],
+      set: { ...values, updatedAt: new Date() },
+    })
+    .returning();
+  return rows[0];
+}
+
+export async function getArtifactsByEpisode(episodeId: string): Promise<ArtifactRow[]> {
+  const db = getDb();
+  return db.select().from(artifacts).where(eq(artifacts.episodeId, episodeId));
+}
+
+export async function getArtifactForUser(
+  userId: string,
+  artifactId: string,
+): Promise<ArtifactRow | null> {
+  const db = getDb();
+  const rows = await db
+    .select({ artifact: artifacts })
+    .from(artifacts)
+    .innerJoin(episodes, eq(artifacts.episodeId, episodes.id))
+    .innerJoin(shows, eq(episodes.showId, shows.id))
+    .innerJoin(workspaces, eq(shows.workspaceId, workspaces.id))
+    .where(and(eq(artifacts.id, artifactId), eq(workspaces.ownerId, userId)))
+    .limit(1);
+  return rows[0]?.artifact ?? null;
+}
+
+export async function updateArtifactContent(
+  artifactId: string,
+  content: unknown,
+): Promise<void> {
+  const db = getDb();
+  await db
+    .update(artifacts)
+    .set({ content, updatedAt: new Date() })
+    .where(eq(artifacts.id, artifactId));
+}
+
+export async function setArtifactReady(artifactId: string, ready: boolean): Promise<void> {
+  const db = getDb();
+  await db.update(artifacts).set({ readyFlag: ready }).where(eq(artifacts.id, artifactId));
+}
+
+/** Undo regenerate: restore previous_content and clear the snapshot (M6). */
+export async function undoArtifact(artifactId: string): Promise<ArtifactRow | null> {
+  const db = getDb();
+  const rows = await db
+    .update(artifacts)
+    .set({ content: sql`coalesce(${artifacts.previousContent}, ${artifacts.content})`, previousContent: null, updatedAt: new Date() })
+    .where(eq(artifacts.id, artifactId))
+    .returning();
+  return rows[0] ?? null;
+}
+
+export async function listEpisodesForShow(showId: string): Promise<EpisodeRow[]> {
+  const db = getDb();
+  return db
+    .select()
+    .from(episodes)
+    .where(eq(episodes.showId, showId))
+    .orderBy(desc(episodes.createdAt));
+}
+
+/** Delete an episode the caller owns (segments/analysis/artifacts cascade). */
+export async function deleteEpisodeForUser(userId: string, episodeId: string): Promise<void> {
+  const db = getDb();
+  const owned = await getEpisodeForUser(userId, episodeId);
+  if (!owned) return;
+  await db.delete(episodes).where(eq(episodes.id, episodeId));
 }
