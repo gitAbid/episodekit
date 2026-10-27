@@ -7,6 +7,16 @@ const baseURL = `http://localhost:${port}`;
 const serverCommand =
   port === 3000 ? "pnpm exec next start" : `pnpm exec next start --port ${port}`;
 
+// E2E database mode (E2E_DB=1): embedded Postgres (PGlite) seeded by
+// scripts/e2e-seed.mjs plus the pglite-scoped auth seam (lib/auth.ts — never
+// valid in production). Workspace flows ("db:" tests) run in this mode; the
+// default keyless suite is unchanged.
+const dbMode = process.env.E2E_DB === "1";
+const E2E_ENV = {
+  DATABASE_URL: "pglite:./.pglite-e2e",
+  E2E_AUTH_USER_ID: "user_preview",
+};
+
 export default defineConfig({
   testDir: "tests/e2e",
   timeout: 30_000,
@@ -24,11 +34,12 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: serverCommand,
+    command: dbMode ? `node scripts/e2e-seed.mjs && ${serverCommand}` : serverCommand,
     url: baseURL,
     // CI starts its own server in the e2e step; locally reuse `pnpm dev` if running.
     reuseExistingServer: true,
     stdout: "ignore",
     timeout: 120_000,
+    env: dbMode ? { ...E2E_ENV } : undefined,
   },
 });

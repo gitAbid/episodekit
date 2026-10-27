@@ -1,4 +1,13 @@
 /**
+ * Stored segment ids are globally unique (§7.1 pk): episode-id prefix +
+ * 6-digit index keeps them collision-free across episodes while the prompt
+ * layer's per-episode numbering (§7.3 "seg_000123") maps 1:1 via idx.
+ */
+export function segmentIdFor(episodeId: string, idx: number): string {
+  return `seg_${episodeId.slice(0, 8)}_${String(idx).padStart(6, "0")}`;
+}
+
+/**
  * Intake service (WP-05): POST /api/episodes, POST /api/episodes/:id/transcribe,
  * GET /api/episodes/:id (status read path for U4), GET /api/audio/:episodeId,
  * POST /api/uploads/token (§7.5). DB/blob/ASR calls go through their documented
@@ -137,6 +146,7 @@ export async function handleEpisodesPost(userId: string, raw: unknown): Promise<
     }
     const parsedTranscript = parseTranscript(text);
     segments = parsedTranscript.segments.map((s, idx) => ({
+      // Placeholder: the stored id is namespaced with the episode id below.
       id: `seg_${String(idx).padStart(6, "0")}`,
       idx,
       speaker: s.speaker,
@@ -167,7 +177,7 @@ export async function handleEpisodesPost(userId: string, raw: unknown): Promise<
     await queries.replaceSegments(
       episode.id,
       segments.map((s) => ({
-        id: s.id,
+        id: segmentIdFor(episode.id, s.idx),
         idx: s.idx,
         speaker: s.speaker,
         startMs: s.startMs,

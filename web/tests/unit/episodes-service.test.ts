@@ -155,8 +155,8 @@ describe("handleEpisodesPost — create (§7.5)", () => {
     );
     const segments = mocked.replaceSegments.mock.calls[0][1];
     expect(segments).toHaveLength(2);
-    expect(segments[0]).toMatchObject({ id: "seg_000000", speaker: "Maya", startMs: 0 });
-    expect(segments[1]).toMatchObject({ id: "seg_000001", speaker: "Dev", startMs: 12_000 });
+    expect(segments[0]).toMatchObject({ id: "seg_ep-paste_000000", speaker: "Maya", startMs: 0 });
+    expect(segments[1]).toMatchObject({ id: "seg_ep-paste_000001", speaker: "Dev", startMs: 12_000 });
   });
 
   it("sample episodes never count against quota (M2)", async () => {
@@ -243,7 +243,7 @@ describe("handleTranscribePost — ASR orchestration (§8.3)", () => {
   it("transitions uploading→queued→transcribing, stores merged segments, lands queued", async () => {
     owned(episodeRow({ audioBlobPath: manifest, status: "uploading" }));
     mockTranscribe.mockResolvedValue([
-      { id: "seg_000000", idx: 0, speaker: null, startMs: 0, endMs: 4000, text: "First." },
+      { id: "seg_ep-paste_000000", idx: 0, speaker: null, startMs: 0, endMs: 4000, text: "First." },
       { id: "seg_000001", idx: 1, speaker: null, startMs: 600500, endMs: 604000, text: "Second." },
     ]);
 
@@ -261,7 +261,7 @@ describe("handleTranscribePost — ASR orchestration (§8.3)", () => {
     const statuses = mocked.updateEpisode.mock.calls.map((c) => (c[1] as { status?: string }).status);
     expect(statuses).toEqual(["queued", "transcribing", "queued"]);
     expect(mocked.replaceSegments).toHaveBeenCalledWith("ep-1", [
-      expect.objectContaining({ id: "seg_000000", startMs: 0 }),
+      expect.objectContaining({ id: "seg_ep-paste_000000", startMs: 0 }),
       expect.objectContaining({ id: "seg_000001", startMs: 600500 }),
     ]);
     expect(mocked.updateEpisode).toHaveBeenLastCalledWith("ep-1", {
@@ -276,7 +276,7 @@ describe("handleTranscribePost — ASR orchestration (§8.3)", () => {
   it("includes guest names in the ASR vocab prompt", async () => {
     owned(episodeRow({ audioBlobPath: manifest, guests: ["Dev", "Maya"] }));
     mockTranscribe.mockResolvedValue([
-      { id: "seg_000000", idx: 0, speaker: null, startMs: 0, endMs: 1000, text: "Hi." },
+      { id: "seg_ep-paste_000000", idx: 0, speaker: null, startMs: 0, endMs: 1000, text: "Hi." },
     ]);
     await handleTranscribePost("u1", "ep-1", {});
     expect(mockTranscribe).toHaveBeenCalledWith(expect.anything(), { vocab: ["attention", "Dev", "Maya"] });
@@ -285,7 +285,7 @@ describe("handleTranscribePost — ASR orchestration (§8.3)", () => {
   it("accepts the chunk manifest from the request body and persists it", async () => {
     owned(episodeRow({ audioBlobPath: null, status: "uploading" }));
     mockTranscribe.mockResolvedValue([
-      { id: "seg_000000", idx: 0, speaker: null, startMs: 0, endMs: 1000, text: "Hi." },
+      { id: "seg_ep-paste_000000", idx: 0, speaker: null, startMs: 0, endMs: 1000, text: "Hi." },
     ]);
     await handleTranscribePost("u1", "ep-1", {
       chunks: [{ path: "episodes/e/chunk-0.webm", offsetMs: 0 }],
