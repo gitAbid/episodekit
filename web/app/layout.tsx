@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { isClerkConfigured } from "@/lib/env";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,12 +21,26 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  return (
+  const clerk = isClerkConfigured();
+  const body = (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
+  );
+  if (!clerk) {
+    // Keyless preview/CI: render without a provider — no keys are faked.
+    return body;
+  }
+  return (
+    <ClerkProvider
+      appearance={{ variables: { colorPrimary: "#2457d6" } }}
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+    >
+      {body}
+    </ClerkProvider>
   );
 }
