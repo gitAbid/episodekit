@@ -10,12 +10,23 @@ get license keys automatically, the $49 founding offer goes live.
 *Skip-test: after setup, the runbook's step 7 verifies end-to-end in 2 min.*
 
 ## 2. API keys (2 min) → AI + audio live
+
+> ⚠️ **Status 2026-10-27 PM: the current `GLM_API_KEY` on the `episodekit` project is NOT a
+> real key** (11 characters, every endpoint returns 401 "token expired or incorrect"), and
+> `ASR_API_KEY` is likewise a placeholder that Groq rejects. Both the legacy app and the new
+> `web/` app are running on the deterministic fallback because of this. Paste the real keys
+> (GLM: z.ai/bigmodel.cn console → API keys, format `id.secret`, ~100+ chars; Groq:
+> console.groq.com → API Keys) into BOTH Vercel projects (`episodekit` and `episodekit-web`).
+
 Vercel dashboard → project **episodekit** → Settings → Environment Variables:
 - `GLM_API_KEY` (bigmodel.cn) → AI-enhanced artifacts activate
 - `ASR_API_KEY` + `ASR_PROVIDER` (`deepgram` or `groq`) → audio upload activates
 Then Deployments → ⋯ → Redeploy. The app flips itself to audio-first
 automatically (config-driven — no code change). **Verify both unlocks in one
 command:** `node scripts/verify-unlocks.mjs`.
+
+For the new app also set on **episodekit-web**: `GLM_API_KEY` and (for Groq Whisper
+transcription per the new spec) `GROQ_API_KEY`.
 
 ## 3. Show HN (Tue A2) → first traffic
 Copy-paste from **`docs/launch-pack.md` §2** (title, the free-tool URL, first
