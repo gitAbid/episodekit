@@ -18,6 +18,17 @@ export async function getAuthUserId(): Promise<string | null> {
     return (await auth()).userId ?? null;
   }
   if (isKeylessPreview()) return KEYLESS_USER_ID;
+  // e2e seam (DECISIONS.md 2026-10-27 · WP-06): honored ONLY when Clerk is
+  // absent AND the database is an embedded test instance (pglite: scheme) —
+  // it can never authenticate anyone against a real database, preserving the
+  // fail-closed rule above.
+  if (
+    !isClerkConfigured() &&
+    process.env.E2E_AUTH_USER_ID &&
+    (process.env.DATABASE_URL ?? "").startsWith("pglite:")
+  ) {
+    return process.env.E2E_AUTH_USER_ID;
+  }
   return null;
 }
 
