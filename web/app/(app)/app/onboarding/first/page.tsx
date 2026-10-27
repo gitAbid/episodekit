@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { EpisodeIntakeShell } from "@/components/app/episode-intake-shell";
 import { StepDots } from "@/components/app/step-dots";
@@ -15,7 +16,9 @@ export default function OnboardingFirstPage() {
           You can do this later from Episodes.
         </p>
         <div className="mt-6">
-          <EpisodeIntakeShell />
+          <Suspense fallback={<div className="h-64 animate-pulse rounded-lg bg-neutral-100" />}>
+            <EpisodeIntakeShell />
+          </Suspense>
         </div>
         <div className="mt-6 text-right">
           <Link href="/app" className="text-sm underline" data-testid="skip-first">
