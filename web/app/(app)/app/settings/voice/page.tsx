@@ -1,11 +1,21 @@
+import { redirect } from "next/navigation";
+import { VoiceSettingsForm } from "@/components/app/settings/voice-form";
+import { requireUser } from "@/lib/auth";
+import { isDbConfigured } from "@/lib/env";
+import { getShowByOwnerSafe } from "@/lib/show/queries-safe";
+import { resolveShowVoiceProfile } from "@/lib/show/voice";
+
 export const metadata = { title: "Settings · EpisodeKit" };
 
-/** Voice settings ship in WP-07 (M9 Voice, MK-8). */
-export default function SettingsVoicePage() {
+/** Settings → Voice (M9, MK-8): §7.4 profile editor, samples, preview. */
+export default async function SettingsVoicePage() {
+  const userId = await requireUser();
+  const show = await getShowByOwnerSafe(userId);
+  if (!show && isDbConfigured()) redirect("/app/onboarding/voice");
   return (
-    <div className="rounded-lg border p-6" data-testid="voice-stub">
-      <h2 className="text-base font-semibold">Voice</h2>
-      <p className="mt-1 text-sm text-neutral-500">This page is coming soon.</p>
-    </div>
+    <VoiceSettingsForm
+      profile={resolveShowVoiceProfile(show)}
+      samples={show?.voiceSamples ?? []}
+    />
   );
 }

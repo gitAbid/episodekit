@@ -69,6 +69,9 @@ export async function updateShow(
     listenUrl: string | null;
     defaultCta: string | null;
     vocabulary: string[];
+    /** §7.4 profile JSON — validated with VoiceProfileSchema before it gets here. */
+    voiceProfile: unknown;
+    voiceSamples: string[];
   }>,
 ): Promise<ShowRow> {
   const db = getDb();
