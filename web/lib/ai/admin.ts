@@ -81,7 +81,14 @@ export async function adminAiPut(deps: AdminDeps = {}, body: unknown): Promise<A
   if (!store) {
     return { status: 503, body: { error: "settings_store_unavailable" } };
   }
-  await store.put("ai", parsed.data);
+  try {
+    await store.put("ai", parsed.data);
+  } catch (err) {
+    return {
+      status: 503,
+      body: { error: "settings_store_write_failed", detail: String(err).slice(0, 200) },
+    };
+  }
   return { status: 200, body: { ok: true, selection: parsed.data, source: "settings" } };
 }
 

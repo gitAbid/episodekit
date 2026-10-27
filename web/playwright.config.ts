@@ -1,7 +1,11 @@
 import { defineConfig, devices } from "@playwright/test";
 
-// E2E_PORT lets parallel worktrees run e2e side by side (default 3000).
-const port = Number(process.env.E2E_PORT || 3000);
+// Optional local override (E2E_PORT=3100) so concurrent agents on one machine
+// don't fight over :3000. Default stays 3000 — CI starts its own server there.
+const port = Number(process.env.E2E_PORT ?? 3000);
+const baseURL = `http://localhost:${port}`;
+const serverCommand =
+  port === 3000 ? "pnpm exec next start" : `pnpm exec next start --port ${port}`;
 
 export default defineConfig({
   testDir: "tests/e2e",
@@ -10,7 +14,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: `http://localhost:${port}`,
+    baseURL,
     trace: "on-first-retry",
   },
   projects: [
@@ -20,8 +24,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `pnpm exec next start -p ${port}`,
-    url: `http://localhost:${port}`,
+    command: serverCommand,
+    url: baseURL,
     // CI starts its own server in the e2e step; locally reuse `pnpm dev` if running.
     reuseExistingServer: true,
     stdout: "ignore",

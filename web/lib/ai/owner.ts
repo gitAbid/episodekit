@@ -34,6 +34,19 @@ export interface OwnerGateDeps {
 let warnedAuthUnavailable = false;
 
 async function defaultCurrentUser(): Promise<ClerkUserLike | null> {
+  // Align the availability check with WP-02's convention (lib/env.ts): without
+  // both Clerk keys the app fails closed here — keyless previews never own AI
+  // settings, even though app pages render with a preview user there.
+  const { isClerkConfigured } = (await import("@/lib/env")) as {
+    isClerkConfigured: () => boolean;
+  };
+  if (!isClerkConfigured()) {
+    if (!warnedAuthUnavailable) {
+      warnedAuthUnavailable = true;
+      console.warn("[admin] Clerk not configured — admin AI routes stay locked (503).");
+    }
+    throw new Error("clerk_not_configured");
+  }
   try {
     // @clerk/nextjs/server resolves under the Next.js bundler; in plain node
     // (unit tests) the import may fail and is treated as auth_unavailable.

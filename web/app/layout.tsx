@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { isClerkConfigured } from "@/lib/env";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// §5.2 type: Inter via next/font.
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -19,12 +20,26 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+  const clerk = isClerkConfigured();
+  const body = (
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col">
+        <TooltipProvider>{children}</TooltipProvider>
+        <Toaster />
+      </body>
     </html>
+  );
+  if (!clerk) {
+    // Keyless preview/CI: render without a provider — no keys are faked.
+    return body;
+  }
+  return (
+    <ClerkProvider
+      appearance={{ variables: { colorPrimary: "#2457d6" } }}
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+    >
+      {body}
+    </ClerkProvider>
   );
 }
