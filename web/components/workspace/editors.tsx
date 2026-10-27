@@ -324,7 +324,9 @@ export function ArtifactEditor(props: {
   // The 1.5 s debounce outlives renders; a ref keeps the timer's save reading
   // the latest content instead of the closure captured at keystroke time.
   const contentRef = useRef(content);
-  contentRef.current = content;
+  useEffect(() => {
+    contentRef.current = content;
+  }, [content]);
 
   const patch = (p: Record<string, unknown>) => setContent((c) => ({ ...c, ...p }));
   const save = async () => {
