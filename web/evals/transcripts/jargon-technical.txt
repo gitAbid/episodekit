@@ -1,0 +1,11 @@
+Speaker 1 (00:00:00): This is Kernel Panic, episode twelve. Today: why our event-driven ingest fell over at four thousand events per second, and what the fix says about backpressure generally. I'm joined by our staff engineer, who wrote the postmortem.
+Speaker 2 (00:00:19): Thanks. Short version: we had a Kafka topic, a consumer group, and a lie. The lie was our p99 latency dashboard, which measured the wrong percentile because of a histogram bucketing bug in the client library.
+Speaker 1 (00:00:38): The dashboard said green while consumers were dying?
+Speaker 2 (00:00:43): The dashboard said green because the dashboard was downstream of the consumers. Classic observer effect. We measured our ability to acknowledge offsets, not our ability to process events. Throughput looked fine; the dead-letter queue disagreed.
+Speaker 1 (00:01:04): Walk me through the failure sequence.
+Speaker 2 (00:01:09): Ingest spikes. Consumers fall behind. The lag grows. Our autoscaler reads CPU, not lag, so it scaled the wrong axis. Deserialization retries heap up, GC pauses hit eight hundred milliseconds, and the consumer session times out. Rebalance storm: every consumer re-joins, partitions reassigned, lag compounds. Four minutes from spike to storm.
+Speaker 1 (00:01:40): And the fix?
+Speaker 2 (00:01:44): Three things. One: scale on consumer lag, not CPU, with a floor and a ceiling so the autoscaler can't oscillate. Two: bounded retries with exponential backoff and jitter, straight to the dead-letter queue after three attempts. Three: backpressure at the edge. The API now sheds load before the broker does. We return 429s with Retry-After and our clients, thank goodness, actually honor it.
+Speaker 1 (00:02:20): What would you tell a team running the same stack without the outage?
+Speaker 2 (00:02:28): Load-test your rebalances, not just your steady state. Every event-driven system is fine until membership changes. And instrument the dead-letter queue as a first-class signal. It's the one metric that can't lie, because it's the events themselves voting no.
+Speaker 1 (00:02:53): Kernel Panic will return. Rate us five stars if the histogram bug hurt you too.

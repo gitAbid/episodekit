@@ -12,7 +12,8 @@
     "e2e": "pnpm build && playwright test",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "e2e:db": "pnpm build && E2E_DB=1 playwright test --grep \"db:\""
+    "e2e:db": "pnpm build && E2E_DB=1 playwright test --grep \"db:\"",
+    "eval": "vitest run tests/eval"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.9.20",

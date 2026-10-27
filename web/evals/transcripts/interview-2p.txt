@@ -1,0 +1,17 @@
+Maya (00:00:00): Welcome back to The Focus Hour. Today my guest is Dev Ramirez, a systems engineer who spent a decade building scheduling software before burning out and rebuilding his working life around energy, not hours. Dev, thanks for coming on.
+Dev (00:00:14): Thanks for having me. Fair warning, I get a little evangelical about calendars.
+Maya (00:00:20): That's the right crowd for it. Let's start with the burnout. You were working seventy-hour weeks and shipping fine. What actually broke?
+Dev (00:00:34): Nothing broke, and that was the problem. I kept hitting every deadline while my weeks got emptier of anything that mattered. I finished a release on a Friday and realized I couldn't remember a single conversation from the month. The machine was working; the person inside it was gone.
+Maya (00:01:02): So you didn't crash out. You faded out.
+Dev (00:01:07): Faded is exactly the word. Burnout sounds dramatic. Mine was quiet. I call it the gray mode now: you're functional, you answer messages, your code reviews are fine, and you have no access to your own enthusiasm.
+Maya (00:01:29): And the fix was calendars, of all things.
+Dev (00:01:34): The fix was admitting that time is not the resource. Energy is. A calendar just makes the energy visible. I plan my week around when my attention is expensive and when it's cheap. Deep work goes where attention is expensive. Meetings go where it's cheap. Most people do the reverse and wonder why they're tired.
+Maya (00:02:05): Give people a concrete picture of an expensive-attention block.
+Dev (00:02:12): Ninety minutes, single task, phone in another room, one window open, and a written sentence at the top of the block that says what done looks like. That sentence matters more than the timer. If you can't write what done looks like, you're not ready for the block, and you'll spend it doubting.
+Maya (00:02:40): What about teams? Not everyone controls their calendar.
+Dev (00:02:47): True, and I don't want to pretend a junior engineer on call can just schedule their muse. But almost everyone controls something. Two ninety-minute protected blocks a week changed more for me than any productivity system, because two blocks is small enough to defend and big enough to matter.
+Maya (00:03:15): Let's talk about the failure mode. People try this, protect a block, and get interrupted anyway.
+Dev (00:03:26): Then the block did its job: it made the interruption visible. An interruption during a protected block is a negotiation you would otherwise have had in your head at midnight. Say what the block is for, say when you're reachable, and let the calendar be the bad guy instead of you.
+Maya (00:03:54): Dev, last question. If someone remembers one thing from this conversation, what should it be?
+Dev (00:04:01): Attention is your scarcest resource and your calendar is its budget. Most people have never once written down where their attention will go tomorrow. Do that for a week and you'll never go back.
+Maya (00:04:22): Dev Ramirez, everyone. This has been The Focus Hour.

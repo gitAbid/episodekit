@@ -1,0 +1,13 @@
+Priya (00:00:00): You're listening to Three Mics. I'm Priya, with Marcus and June, and today we're arguing about meetings. Marcus, you wanted to defend them.
+Marcus (00:00:13): I'll do better than defend them. Meetings are the most honest artifact a team has. Show me a calendar and I'll show you what the company actually values, whatever the slides claim.
+June (00:00:29): That's exactly why they're broken. The calendar is a museum of old decisions. Every recurring meeting was someone's emergency three years ago.
+Priya (00:00:44): June, you'd cancel them all?
+June (00:00:48): I'd make them earn their slot. A recurring meeting should re-qualify every quarter like an employee review. What did this meeting decide last quarter? If the answer is nothing, it's not a meeting, it's a habit with a link.
+Marcus (00:01:08): I'm half with you. But some decisions need a room. Async writing hides disagreement. People agree in writing and relitigate in the hallway. A good meeting surfaces the disagreement while it's cheap.
+Priya (00:01:26): So the problem isn't sync versus async, it's decisions versus ritual.
+Marcus (00:01:34): Finally, a summary I accept. Ask what the meeting decides. If it decides, keep it and run it hard: agenda in, decision out, owner named. If it informs, it's a document wearing a meeting's clothes.
+June (00:01:55): And if it's a status update, it's a crime against calendars.
+Priya (00:02:01): We agree more than we admit, which on this show is suspicious. Let's put numbers on it. Marcus, your team?
+Marcus (00:02:12): Fourteen hours of meetings a week per engineer when I arrived. Six now. Output up, incidents down, and the calendar audit takes one hour a month.
+June (00:02:29): Mine's simpler. We deleted all recurring meetings for a month. Two came back. That's the honest base rate: most meetings exist because starting them was easier than ending them.
+Priya (00:02:47): An experiment every listener can run. That's our show. Three Mics, next week: documentation nobody reads.
