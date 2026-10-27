@@ -14,7 +14,10 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         showName={show?.name ?? null}
         userButton={isClerkConfigured() ? <UserButton /> : null}
       />
-      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-8">{children}</main>
+      {/* Pages sit in a 3xl column; the episode workspace (MK-6) is full width. */}
+      <main className="mx-auto flex w-full max-w-3xl flex-1 flex-col px-4 py-8 has-[[data-workspace]]:max-w-none has-[[data-workspace]]:p-0">
+        {children}
+      </main>
       <FeedbackWidget />
     </div>
   );

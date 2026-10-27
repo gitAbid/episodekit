@@ -53,9 +53,9 @@ export function WorkspaceView({ initial, freePlan, showName }: { initial: import
 
   if (!data) {
     return (
-      <main className="flex flex-1 items-center justify-center p-8 text-sm text-muted-foreground" aria-live="polite">
+      <div data-workspace className="flex flex-1 items-center justify-center p-8 text-sm text-muted-foreground" aria-live="polite">
         Loading your workspace…
-      </main>
+      </div>
     );
   }
 
@@ -79,7 +79,7 @@ export function WorkspaceView({ initial, freePlan, showName }: { initial: import
   };
 
   return (
-    <main className="flex flex-1 flex-col">
+    <div data-workspace className="flex flex-1 flex-col">
       <header className="flex flex-wrap items-center gap-3 border-b px-4 py-3 md:px-6">
         <Link href="/app/episodes" className="text-sm text-muted-foreground hover:text-foreground">
           ← Episodes
@@ -239,6 +239,6 @@ export function WorkspaceView({ initial, freePlan, showName }: { initial: import
           </button>
         ))}
       </nav>
-    </main>
+    </div>
   );
 }

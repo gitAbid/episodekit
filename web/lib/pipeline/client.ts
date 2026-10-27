@@ -83,6 +83,9 @@ export async function fetchWorkspace(episodeId: string): Promise<WorkspaceData |
 export async function drivePipeline(episodeId: string, data: WorkspaceData): Promise<void> {
   const { episode, artifacts, analysis } = data;
   if (episode.status === "uploading" || episode.status === "transcribing") return; // transcribe is driven by the intake page / resume button
+  // No transcript yet (e.g. the brief queued step before transcription starts):
+  // nothing to analyze or write from. useWorkspace drives again once it lands.
+  if (data.segments.length === 0) return;
   if (analysis === null && data.segments.length > 0) {
     await postJson(`/api/episodes/${episodeId}/analyze`);
   }
@@ -125,6 +128,7 @@ export function useWorkspace(episodeId: string, initial: WorkspaceData): UseWork
   const [data, setData] = useState<WorkspaceData | null>(initial);
   const [error, setError] = useState<string | null>(null);
   const started = useRef(false);
+  const drovenWithTranscript = useRef(initial.segments.length > 0);
 
   const refresh = useCallback(async () => {
     const fresh = await fetchWorkspace(episodeId);
@@ -143,6 +147,21 @@ export function useWorkspace(episodeId: string, initial: WorkspaceData): UseWork
       }
     })();
   }, [episodeId, initial, refresh]);
+
+  // Arrived from intake before the transcript existed (upload still
+  // transcribing): drive the pipeline once the polled data has segments.
+  useEffect(() => {
+    if (!data || drovenWithTranscript.current || data.segments.length === 0) return;
+    drovenWithTranscript.current = true;
+    void (async () => {
+      try {
+        await drivePipeline(episodeId, data);
+        await refresh();
+      } catch (err) {
+        setError(String(err));
+      }
+    })();
+  }, [data, episodeId, refresh]);
 
   // Poll every 2 s while the episode is not terminal (§7.5).
   useEffect(() => {

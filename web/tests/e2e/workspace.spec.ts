@@ -121,3 +121,24 @@ test("db: ready flag ticks an artifact (M8)", async ({ page }) => {
     await expect(page.getByTestId("ready-flag")).toBeChecked();
   }
 });
+
+test("db: M8 — intake hands over to the workspace and the episode is listed", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/app/episodes/new?sample=1");
+  await expect(page.getByTestId("paste-textarea")).not.toHaveValue("", { timeout: 10_000 });
+  await page.getByTestId("episode-title").fill("Intake handover check");
+  await page.getByTestId("create-button").click();
+
+  await expect(page).toHaveURL(/\/app\/episodes\/[0-9a-f-]{36}$/, { timeout: 15_000 });
+  const id = page.url().split("/").pop();
+  await expect(page.getByTestId("ready-count")).toHaveText("7/7 ready", { timeout: 60_000 });
+
+  // MK-6 is full width: the editor column is not squeezed into the page column.
+  const editor = page.getByTestId("fallback-banner").first();
+  expect((await editor.boundingBox())?.width ?? 0).toBeGreaterThan(400);
+
+  await page.goto("/app/episodes");
+  const row = page.getByTestId("episode-row").filter({ hasText: "Intake handover check" });
+  await expect(row).toBeVisible();
+  await expect(row.getByRole("link")).toHaveAttribute("href", `/app/episodes/${id}`);
+});

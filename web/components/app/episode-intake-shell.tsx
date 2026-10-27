@@ -5,10 +5,12 @@
  * compression + chunked Blob upload with progress, format chip for pasted
  * transcripts (U5), optional title/number/guests, sample episode (free, no
  * quota), and the resumable status read path (?id= → server status, U4).
+ * Once the transcript exists the episode continues in its workspace
+ * (/app/episodes/:id, MK-5/6), which drives analysis and writing.
  * WP-01 components are not merged yet — plain Tailwind per §5.2 tokens.
  */
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { upload } from "@vercel/blob/client";
 import { checkUpload } from "@/lib/episodes/audio";
 import { chunkPathname, compressToChunks, type CompressedChunk } from "@/lib/compress/browser";
@@ -60,6 +62,8 @@ export function EpisodeIntakeShell() {
   // ?id=<episodeId> → resumable status view (U4).
   const searchParams = useSearchParams();
   const resumeId = searchParams.get("id") ?? undefined;
+  const wantsSample = searchParams.get("sample") === "1";
+  const router = useRouter();
   const [tab, setTab] = useState<"upload" | "paste">("upload");
   const [episodeId, setEpisodeId] = useState<string | null>(resumeId ?? null);
   const [episode, setEpisode] = useState<SerializedEpisode | null>(null);
@@ -100,6 +104,12 @@ export function EpisodeIntakeShell() {
       const json = (await res.json().catch(() => ({}))) as { episode?: SerializedEpisode };
       if (alive && json.episode) {
         setEpisode(json.episode);
+        // Transcript is in (or was pasted): hand over to the workspace.
+        if (!["uploading", "transcribing", "failed"].includes(json.episode.status)) {
+          if (timer) clearInterval(timer);
+          router.replace(`/app/episodes/${json.episode.id}`);
+          return;
+        }
         if (json.episode.status === "ready" || json.episode.status === "failed") {
           if (timer) clearInterval(timer);
         }
@@ -111,7 +121,7 @@ export function EpisodeIntakeShell() {
       alive = false;
       if (timer) clearInterval(timer);
     };
-  }, [episodeId]);
+  }, [episodeId, router]);
 
   const prepareFile = useCallback(async (file: File) => {
     setError(null);
@@ -201,13 +211,14 @@ export function EpisodeIntakeShell() {
       if (!started.ok) {
         throw new Error(String(started.json.error ?? "Transcription didn't start. Try again."));
       }
+      router.push(`/app/episodes/${id}`);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Upload failed. Try again.");
       setPhase("ready");
     } finally {
       setBusy(false);
     }
-  }, [details, number_, title]);
+  }, [details, number_, title, router]);
 
   const createPaste = useCallback(async () => {
     setBusy(true);
@@ -218,27 +229,13 @@ export function EpisodeIntakeShell() {
       if (!created.ok || !created.json.id) {
         throw new Error(String(created.json.error ?? "Couldn't create the episode. Try again."));
       }
-      const id = String(created.json.id);
-      window.history.replaceState(null, "", `/app/episodes/new?id=${id}`);
-      setEpisodeId(id);
-      setEpisode({
-        id,
-        title: title.trim() || null,
-        number: number_ ? Number(number_) : null,
-        source: source as SerializedEpisode["source"],
-        status: "queued",
-        errorCode: null,
-        durationMs: null,
-        hasTimestamps: detected?.hasTimestamps ?? false,
-        hasSpeakers: detected?.hasSpeakers ?? false,
-        countsQuota: source !== "sample",
-      });
+      // Stay busy while navigating so the button can't submit twice.
+      router.push(`/app/episodes/${String(created.json.id)}`);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Couldn't create the episode. Try again.");
-    } finally {
       setBusy(false);
     }
-  }, [pasteText, sampleLoaded, details, detected, number_, title]);
+  }, [pasteText, sampleLoaded, details, router]);
 
   const loadSample = useCallback(async () => {
     setError(null);
@@ -251,6 +248,24 @@ export function EpisodeIntakeShell() {
       setError("Couldn't load the sample. Try again.");
     }
   }, []);
+
+  // Empty-state "Try a sample episode" link (MK-3) lands here with ?sample=1.
+  useEffect(() => {
+    if (!wantsSample || resumeId) return;
+    let alive = true;
+    void fetch(SAMPLE_TEXT_URL)
+      .then((res) => res.text())
+      .then((text) => {
+        if (!alive) return;
+        setPasteText(text);
+        setSampleLoaded(true);
+        setTab("paste");
+      })
+      .catch(() => alive && setError("Couldn't load the sample. Try again."));
+    return () => {
+      alive = false;
+    };
+  }, [wantsSample, resumeId]);
 
   // --- resume view (U4): show server status instead of the form ---
   if (episode) {
