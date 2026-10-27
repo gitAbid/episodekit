@@ -36,6 +36,33 @@ of the section.
 project — better branding, and email addresses finally become real.
 
 ---
+
+## 6. Relaunch (new web app): unlock accounts + database (WP-02 blocker)
+
+The rebuilt app (`web/`, preview project **episodekit-web**) deploys and renders keyless,
+but sign-up and saving need three things only you can create. Until then the preview shows
+the shells with a "Sign in isn't set up in this preview." card.
+
+1. **Clerk** — Vercel Marketplace → Clerk (or dashboard.clerk.com): create an app,
+   enable Email link + Google. Copy:
+   - `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` (pk_…)
+   - `CLERK_SECRET_KEY` (sk_…)
+2. **Neon Postgres** — Vercel Marketplace → Neon: create the database, copy
+   - `DATABASE_URL` (postgres://…)
+3. **Clerk webhook** — Clerk dashboard → Webhooks → Add endpoint:
+   `https://<your-preview-domain>/api/webhooks/clerk`, subscribe to
+   `user.created`, `user.updated`, `user.deleted`; copy the signing secret (whsec_…) as
+   - `CLERK_WEBHOOK_SIGNING_SECRET`
+
+Then: Vercel → episodekit-web → Settings → Environment Variables (all four above) →
+redeploy, and run the migration once:
+`cd web && pnpm exec drizzle-kit migrate` (uses `DATABASE_URL`; the SQL lives in
+`web/db/migrations/`).
+
+Result: sign-up lands on onboarding step 1, a workspace(plan=free) row is created by the
+webhook, and RSS prefill works against real feeds. Env var reference: `web/.env.example`.
+
+---
 That's the whole list. Every morning at 9 the agent session checks uptime,
 executes the day's roadmap items (A1–A7), activates whatever you've unlocked,
 and logs everything to the [live map](https://episodekit.vercel.app/map).

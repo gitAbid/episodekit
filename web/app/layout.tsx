@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { isClerkConfigured } from "@/lib/env";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,12 +20,26 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  return (
+  const clerk = isClerkConfigured();
+  const body = (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <TooltipProvider>{children}</TooltipProvider>
         <Toaster />
       </body>
     </html>
+  );
+  if (!clerk) {
+    // Keyless preview/CI: render without a provider — no keys are faked.
+    return body;
+  }
+  return (
+    <ClerkProvider
+      appearance={{ variables: { colorPrimary: "#2457d6" } }}
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+    >
+      {body}
+    </ClerkProvider>
   );
 }
