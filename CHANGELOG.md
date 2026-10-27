@@ -30,6 +30,10 @@ All entries map to a commit. Newest first.
   regenerated to match. Fixed an empty result card showing on tool pages before
   generation and table overflow on mobile.
 
+## Day 47 (later) — 2026-10-27
+- Customer-readiness audit + full browser audio pipeline verified live
+  (decode→resample→encode→transcribe→correct transcript)
+
 ## Day 46 (scheduled A1) — 2026-10-27
 - Scheduled run: uptime 5/5 + probe 200; audio live; GLM still 1113
   (resource package); payments pending; A1 agent-side complete
