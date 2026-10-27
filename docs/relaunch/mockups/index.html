@@ -1,0 +1,128 @@
+<title>EpisodeKit v2 Mockups</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650&display=swap">
+<style>
+/* Gallery: left screen index, right a scaled device frame. Tokens mirror mock.css. */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-3:#eceef2; --border:#e3e6eb; --border-strong:#cdd2da;
+  --text:#111827; --body:#4b5563; --faint:#6b7280; --accent:#2457d6; --accent-soft:#eef3ff; --on-accent:#ffffff;
+  --font:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0b0e12; --surface:#151a21; --surface-3:#232a35; --border:#2a313c; --border-strong:#3a4350;
+  --text:#f3f4f6; --body:#c3c8d0; --faint:#8b93a0; --accent:#5b8cff; --accent-soft:#1a2540; --on-accent:#0e1116; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0b0e12; --surface:#151a21; --surface-3:#232a35; --border:#2a313c; --border-strong:#3a4350;
+  --text:#f3f4f6; --body:#c3c8d0; --faint:#8b93a0; --accent:#5b8cff; --accent-soft:#1a2540; --on-accent:#0e1116; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--body);font:400 14px/22px var(--font)}
+.page{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh}
+aside{border-right:1px solid var(--border);background:var(--surface);padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:16px;display:flex;flex-direction:column;gap:16px}
+h1{margin:0;color:var(--text);font-size:17px;line-height:24px;font-weight:650}
+.sub{font-size:12px;line-height:18px;color:var(--faint);margin:0}
+nav{display:flex;flex-direction:column;gap:2px}
+nav button{all:unset;cursor:pointer;display:grid;grid-template-columns:44px 1fr;gap:4px;padding:8px 10px;border-radius:6px;color:var(--body);font-size:13px}
+nav button span:first-child{color:var(--faint);font-variant-numeric:tabular-nums;font-size:12px}
+nav button:hover{background:var(--surface-3)}
+nav button[aria-current="true"]{background:var(--accent-soft);color:var(--accent);font-weight:500}
+nav button:focus-visible,.seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main{padding-block:16px 24px;padding-left:20px;padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px;min-width:0}
+.bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bar h2{margin:0;color:var(--text);font-size:15px;font-weight:600;flex:1;min-width:0}
+.seg{display:inline-flex;border:1px solid var(--border-strong);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{all:unset;cursor:pointer;padding:6px 12px;font-size:13px;color:var(--body);border-right:1px solid var(--border-strong)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);font-weight:500}
+.stage{position:relative;border:1px solid var(--border);border-radius:10px;background:var(--surface);overflow:hidden}
+.stage iframe{border:0;display:block;transform-origin:0 0;background:#fff}
+.stage.mobile{align-self:center;border-radius:28px;border:8px solid var(--border-strong)}
+.desc{margin:0;font-size:13px;color:var(--faint);max-width:70ch}
+code{font-size:12px;background:var(--surface-3);padding:1px 5px;border-radius:4px;color:var(--text)}
+@media (max-width:860px){.page{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--border);padding-right:max(16px,env(safe-area-inset-right,0px))}nav{flex-direction:row;overflow-x:auto}nav button{grid-template-columns:auto;white-space:nowrap}nav button span:first-child{display:none}main{padding-left:max(16px,env(safe-area-inset-left,0px))}}
+</style>
+
+<div class="page">
+  <aside>
+    <div>
+      <h1>EpisodeKit v2 mockups</h1>
+      <p class="sub">Reference screens for the MVP build. The written spec in <code>docs/relaunch/02-design.md</code> wins on any conflict.</p>
+    </div>
+    <nav id="nav" aria-label="Screens"></nav>
+  </aside>
+  <main>
+    <div class="bar">
+      <h2 id="title"></h2>
+      <div class="seg" role="group" aria-label="Device"><button id="d-desk" aria-pressed="true">Desktop</button><button id="d-mob" aria-pressed="false">Mobile</button></div>
+      <div class="seg" role="group" aria-label="Theme"><button data-t="system" aria-pressed="true">System</button><button data-t="light" aria-pressed="false">Light</button><button data-t="dark" aria-pressed="false">Dark</button></div>
+    </div>
+    <p class="desc" id="desc"></p>
+    <div class="stage" id="stage"><iframe id="frame" title="Screen mockup"></iframe></div>
+  </main>
+</div>
+
+<script>
+const SCREENS = [
+  ["MK-1","Landing","01-landing.html","Public home page: thesis, real sample, quote check, pricing, FAQ."],
+  ["MK-2","Onboarding · voice","02-onboarding.html","Step 2 of 3: paste past show notes, then adjust the learned voice profile."],
+  ["MK-3","Episodes","03-episodes.html","Episode library with quota meter, status pills and the empty state."],
+  ["MK-4","New episode","04-new-episode.html","Upload with compress/upload progress, paste-transcript format detection, quota wall."],
+  ["MK-5","Processing","05-processing.html","Pipeline steps and artifact cards that unlock one by one; a failed card with retry."],
+  ["MK-6","Workspace","06-workspace.html","Core screen: artifact rail, editor with toolbar, quotes + transcript panel. Resize to mobile for chips and bottom tabs."],
+  ["MK-6b","Artifact layouts","06b-artifact-layouts.html","Centre-column layouts for Titles, Summary, Blog post, Newsletter, Social posts and Chapters."],
+  ["MK-7","Quote popover & menus","07-quote-popover.html","Verified badge popover, regenerate and copy menus, Apple limit warning, fallback banner."],
+  ["MK-8","Voice settings","08-voice.html","Voice profile editor with samples and preview."],
+  ["MK-9","Billing","09-billing.html","Free and Pro plan cards, founding offer, two-click cancel dialog."],
+  ["MK-10","Free tool","10-free-tool.html","No-signup SEO tool page with real result and sign-up prompt."],
+  ["MK-11","Admin","11-admin.html","Owner dashboard: weekly numbers, AI provider switcher, feedback list."]
+];
+const $ = (s) => document.querySelector(s);
+const frame = $("#frame"), stage = $("#stage");
+let cur = 0, mobile = false, theme = "system";
+try { const s = JSON.parse(localStorage.getItem("ek-mock") || "{}"); cur = s.cur ?? 0; mobile = !!s.mobile; theme = s.theme || "system"; } catch {}
+const ids = SCREENS.map(s => s[0].toLowerCase().replace(/[^a-z0-9]/g, ""));
+const fromHash = ids.indexOf(location.hash.slice(1));
+if (fromHash >= 0) cur = fromHash;
+
+SCREENS.forEach((s, i) => {
+  const b = document.createElement("button");
+  b.innerHTML = `<span>${s[0]}</span><span>${s[1]}</span>`;
+  b.onclick = () => { cur = i; render(); };
+  $("#nav").appendChild(b);
+});
+
+function save(){ try { localStorage.setItem("ek-mock", JSON.stringify({cur, mobile, theme})); } catch {} }
+function applyTheme(){
+  try {
+    const root = frame.contentDocument && frame.contentDocument.documentElement;
+    if (!root) return;
+    if (theme === "system") root.removeAttribute("data-theme"); else root.setAttribute("data-theme", theme);
+  } catch {}
+}
+function size(){
+  const W = mobile ? 390 : 1440, H = mobile ? 844 : 900;
+  const avail = stage.parentElement.clientWidth;
+  const scale = mobile ? 1 : Math.min(1, avail / W);
+  frame.style.width = W + "px"; frame.style.height = H + "px";
+  frame.style.transform = `scale(${scale})`;
+  stage.style.width = (W * scale + (mobile ? 16 : 0)) + "px";
+  stage.style.height = (H * scale + (mobile ? 16 : 0)) + "px";
+  stage.classList.toggle("mobile", mobile);
+}
+function render(){
+  const s = SCREENS[cur];
+  $("#title").textContent = `${s[0]} · ${s[1]}`;
+  $("#desc").textContent = s[3];
+  [...$("#nav").children].forEach((b, i) => b.setAttribute("aria-current", i === cur ? "true" : "false"));
+  $("#d-desk").setAttribute("aria-pressed", String(!mobile));
+  $("#d-mob").setAttribute("aria-pressed", String(mobile));
+  document.querySelectorAll("[data-t]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.t === theme)));
+  if (!frame.src.endsWith(s[2])) frame.src = s[2];
+  size(); applyTheme(); save();
+}
+frame.addEventListener("load", applyTheme);
+$("#d-desk").onclick = () => { mobile = false; render(); };
+$("#d-mob").onclick = () => { mobile = true; render(); };
+document.querySelectorAll("[data-t]").forEach(b => b.onclick = () => { theme = b.dataset.t; render(); });
+addEventListener("resize", size);
+render();
+</script>

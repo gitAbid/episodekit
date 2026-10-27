@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MK-5 Processing</title><link rel="stylesheet" href="mock.css">
+<style>
+main{padding-block:28px 64px}
+.steplist{display:flex;flex-direction:column;gap:14px;padding:20px}
+.st{display:flex;gap:12px;align-items:center}
+.st .m{width:22px;height:22px;border-radius:99px;display:grid;place-items:center;font-size:12px;flex:none;border:1px solid var(--border-strong);color:var(--faint)}
+.st.done .m{background:var(--success-soft);color:var(--success);border-color:transparent}
+.st.now .m{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.st.todo{color:var(--faint)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.ac{padding:16px;display:flex;flex-direction:column;gap:10px;min-height:112px}
+.ac.ready{cursor:pointer}
+.ac.ready:hover{border-color:var(--accent-border)}
+@media (max-width:820px){.grid{grid-template-columns:1fr 1fr}}
+</style></head>
+<body>
+<header class="topbar"><a href="#" class="small">← Episodes</a><span class="strong">Ep 41 · Untitled episode</span><span class="grow"></span><span class="pill work" aria-live="polite"><span class="spin"></span>Writing</span></header>
+<main class="wrap col" style="gap:20px">
+  <div class="card steplist" aria-label="Progress">
+    <div class="st done"><span class="m">✓</span><span>Uploaded · <span class="mono">44:03</span></span></div>
+    <div class="st done"><span class="m">✓</span><span>Transcribed</span></div>
+    <div class="st done"><span class="m">✓</span><span>Found chapters and quotes</span></div>
+    <div class="st now"><span class="m"><span class="spin"></span></span><span class="strong">Writing your package — 3 of 8 done</span></div>
+  </div>
+
+  <div class="grid">
+    <div class="card ac ready"><div class="spread"><h3>Show notes</h3><span class="badge ok">Ready</span></div><p class="small">Hook, 5 highlights, chapters</p></div>
+    <div class="card ac ready"><div class="spread"><h3>Chapters</h3><span class="badge ok">Ready</span></div><p class="small">7 chapters</p></div>
+    <div class="card ac ready"><div class="spread"><h3>Titles</h3><span class="badge ok">Ready</span></div><p class="small">8 options</p></div>
+    <div class="card ac"><div class="spread"><h3>Summary</h3><span class="spin" style="color:var(--accent)"></span></div><div class="skel" style="width:80%"></div><div class="skel" style="width:60%"></div></div>
+    <div class="card ac"><div class="spread"><h3>Blog post</h3><span class="spin" style="color:var(--accent)"></span></div><div class="skel" style="width:90%"></div><div class="skel" style="width:50%"></div></div>
+    <div class="card ac"><div class="spread"><h3>Newsletter</h3><span class="spin" style="color:var(--accent)"></span></div><div class="skel" style="width:70%"></div><div class="skel" style="width:40%"></div></div>
+    <div class="card ac"><div class="spread"><h3>Social posts</h3><span class="micro faint">Queued</span></div><div class="skel" style="width:75%"></div><div class="skel" style="width:55%"></div></div>
+    <div class="card ac" style="border-color:var(--danger)"><div class="spread"><h3>Quotes</h3><span class="badge" style="background:var(--danger-soft);color:var(--danger)">Failed</span></div><p class="small">Couldn't generate this one.</p><button class="btn sm" style="align-self:flex-start">Try again</button></div>
+  </div>
+  <p class="small faint">You can leave this page — we'll email you when it's ready.</p>
+</main>
+</body></html>

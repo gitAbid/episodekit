@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MK-2 Onboarding</title><link rel="stylesheet" href="mock.css">
+<style>
+main{display:flex;flex-direction:column;align-items:center;gap:20px;padding:40px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+.steps{display:flex;gap:8px;align-items:center}
+.steps i{width:8px;height:8px;border-radius:99px;background:var(--border-strong)}
+.steps i.on{background:var(--accent)}
+.box{width:100%;max-width:560px;padding:28px;display:flex;flex-direction:column;gap:20px}
+.sl{display:grid;grid-template-columns:90px 1fr 24px;align-items:center;gap:12px}
+</style></head>
+<body>
+<header class="topbar"><span class="logo"><i>EK</i>EpisodeKit</span></header>
+<main>
+  <div class="steps micro faint">Step 2 of 3 <i class="on"></i><i class="on"></i><i></i></div>
+
+  <section class="card box" aria-label="Before learning">
+    <div class="col" style="gap:4px"><h1 style="font-size:22px;line-height:30px">Teach EpisodeKit your voice</h1><p class="small">Paste 1–3 past show notes or newsletters. We'll match how you write.</p></div>
+    <div><label class="lbl" for="s1">Example 1</label><textarea class="textarea" id="s1" rows="6">This week on The Focus Hour, I sit down with myself (again) to talk about the one budget nobody keeps: attention. We get into why a single ping costs twenty minutes, and the calendar trick I stole from a friend who ships more than anyone I know…</textarea>
+      <div class="spread" style="margin-top:6px"><span class="counter">212 words · at least 150</span><a href="#" class="small">+ Add another example</a></div></div>
+    <div class="spread"><button class="btn primary">Learn my voice</button><a href="#" class="small">Skip for now</a></div>
+  </section>
+
+  <p class="note">After "Learn my voice" (≤15 s) the same card shows the profile below</p>
+
+  <section class="card box" aria-label="After learning">
+    <div class="col" style="gap:4px"><h1 style="font-size:22px;line-height:30px">Here's your voice</h1><p class="small">Adjust anything. You can change this later in Settings.</p></div>
+    <div><span class="lbl">Tone</span><div class="row" style="gap:8px"><span class="chip">clear <span class="x">✕</span></span><span class="chip">warm <span class="x">✕</span></span><span class="chip">wry <span class="x">✕</span></span><button class="btn ghost sm">+ Add</button></div></div>
+    <div class="col" style="gap:4px">
+      <div class="sl small"><span>Formality</span><div class="slider"><b style="width:40%"></b><i style="left:40%"></i></div><span class="mono">2</span></div>
+      <div class="sl small"><span>Energy</span><div class="slider"><b style="width:60%"></b><i style="left:60%"></i></div><span class="mono">3</span></div>
+      <div class="sl small"><span>Humor</span><div class="slider"><b style="width:60%"></b><i style="left:60%"></i></div><span class="mono">3</span></div>
+    </div>
+    <div class="row"><span class="lbl" style="margin:0">Emoji</span><span class="seg"><span class="on">None</span><span>Light</span><span>Heavy</span></span><span class="lbl" style="margin:0 0 0 12px">Write as</span><span class="seg"><span class="on">I</span><span>We</span><span>They</span></span></div>
+    <div><span class="lbl">Never say</span><div class="row" style="gap:8px"><span class="chip">delve <span class="x">✕</span></span><span class="chip">game-changer <span class="x">✕</span></span><span class="chip">unlock <span class="x">✕</span></span><button class="btn ghost sm">+ Add</button></div></div>
+    <div class="card pad" style="background:var(--surface-2)"><span class="micro faint">PREVIEW</span><p style="color:var(--text);margin-top:6px">This week I talk about the one budget nobody keeps: attention. One ping can cost you twenty minutes, so I'll show you the calendar habit that gets the morning back.</p></div>
+    <div class="spread"><a href="#" class="small">← Back</a><button class="btn primary">Continue</button></div>
+  </section>
+</main>
+</body></html>

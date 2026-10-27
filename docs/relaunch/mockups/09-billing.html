@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MK-9 Billing</title><link rel="stylesheet" href="mock.css">
+<style>
+main{padding-block:28px 64px}
+.plan{max-width:640px;padding:24px;display:flex;flex-direction:column;gap:16px}
+.dialog{max-width:420px;width:100%;padding:24px;display:flex;flex-direction:column;gap:16px}
+.demo-scrim{position:relative;inset:auto;border-radius:var(--r-lg);padding:32px 16px;background:rgb(17 24 39 / .4);display:grid;place-items:center}
+</style></head>
+<body>
+<header class="topbar"><span class="logo"><i>EK</i>EpisodeKit</span><span class="grow"></span><span class="avatar">MA</span></header>
+<main class="wrap col" style="gap:20px">
+  <h1>Settings</h1>
+  <div class="tabs"><span class="tab">Show</span><span class="tab">Voice</span><span class="tab on">Billing</span><span class="tab">Account</span></div>
+
+  <p class="note" style="align-self:flex-start">Free plan</p>
+  <div class="card plan">
+    <div class="spread"><div><span class="micro faint">CURRENT PLAN</span><h2>Free</h2></div><span class="amt strong" style="font-size:22px">$0</span></div>
+    <div class="col" style="gap:4px"><div class="bar"><span style="width:100%;background:var(--warning)"></span></div><span class="counter warn">2 of 2 episodes · resets Nov 14</span></div>
+    <div class="row"><button class="btn primary">Upgrade to Pro — $19/month</button><button class="btn">Founding Pro — $99/year · 37 left</button></div>
+  </div>
+
+  <p class="note" style="align-self:flex-start">Pro plan</p>
+  <div class="card plan">
+    <div class="spread"><div><span class="micro faint">CURRENT PLAN</span><h2>Pro</h2><span class="small">Renews Nov 30</span></div><span class="strong" style="font-size:22px">$19<span class="small faint">/mo</span></span></div>
+    <div class="col" style="gap:4px"><div class="bar"><span style="width:30%"></span></div><span class="counter">3 of 10 episodes · resets Nov 14</span></div>
+    <div class="row"><button class="btn">Manage payment</button><button class="btn ghost" style="color:var(--danger)">Cancel plan</button></div>
+  </div>
+
+  <p class="note" style="align-self:flex-start">Cancel dialog</p>
+  <div class="demo-scrim">
+    <div class="pop dialog" role="dialog" aria-labelledby="ct">
+      <h2 id="ct">Cancel Pro?</h2>
+      <p class="small">You'll keep Pro until Nov 30. Your episodes stay.</p>
+      <div class="row" style="justify-content:flex-end"><button class="btn">Keep Pro</button><button class="btn danger">Cancel plan</button></div>
+    </div>
+  </div>
+</main>
+</body></html>

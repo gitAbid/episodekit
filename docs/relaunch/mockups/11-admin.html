@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MK-11 Admin</title><link rel="stylesheet" href="mock.css">
+<style>
+main{padding-block:28px 64px}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.tile{padding:16px;display:flex;flex-direction:column;gap:4px}
+.tile b{font-size:24px;line-height:32px;color:var(--text);font-weight:650;font-variant-numeric:tabular-nums}
+.ai{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media (max-width:900px){.tiles{grid-template-columns:repeat(2,1fr)}.ai{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header class="topbar"><span class="logo"><i>EK</i>EpisodeKit</span><span class="badge warn">Admin</span><span class="grow"></span><span class="avatar">AH</span></header>
+<main class="wrap col" style="gap:24px">
+  <div class="spread"><h1>Admin</h1><span class="small faint">Last 7 days · example numbers</span></div>
+  <div class="tiles">
+    <div class="card tile"><span class="micro faint">SIGNUPS</span><b>14</b></div>
+    <div class="card tile"><span class="micro faint">EPISODES</span><b>23</b></div>
+    <div class="card tile"><span class="micro faint">ARTIFACTS COPIED</span><b>118</b></div>
+    <div class="card tile"><span class="micro faint">PAYING</span><b>3</b></div>
+    <div class="card tile"><span class="micro faint">AI + ASR COST</span><b>$4.12</b></div>
+  </div>
+
+  <section class="card pad col" style="gap:16px">
+    <div class="spread"><h2>AI provider</h2><span class="badge ok">Primary healthy</span></div>
+    <div class="ai">
+      <div><label class="lbl" for="pv">Primary provider</label><select class="select input" id="pv"><option>GLM Coding Plan (glm-coding)</option><option>GLM Open Platform</option><option>Groq</option><option>OpenAI</option><option>OpenRouter</option><option>Anthropic</option><option>Custom (OpenAI-compatible)</option></select><span class="small faint">Key GLM_API_KEY · <span style="color:var(--success)">present ✓</span></span></div>
+      <div><label class="lbl" for="fb">Fallback provider</label><select class="select input" id="fb"><option>Groq</option></select><span class="small faint">Key GROQ_API_KEY · <span style="color:var(--success)">present ✓</span></span></div>
+      <div><label class="lbl" for="ml">Long-form model</label><input class="input mono" id="ml" value="glm-4.6"></div>
+      <div><label class="lbl" for="mf">Fast model</label><input class="input mono" id="mf" value="glm-4.5-air"></div>
+      <div style="grid-column:1/-1"><label class="lbl" for="bu">Base URL</label><input class="input mono" id="bu" value="https://api.z.ai/api/coding/paas/v4"></div>
+    </div>
+    <div class="row"><button class="btn">Test connection</button><span class="badge ok">OK · 1.8 s</span><span class="grow"></span><button class="btn primary">Save</button></div>
+    <p class="small faint">Keys are set in Vercel environment variables. This page never shows them.</p>
+  </section>
+
+  <section class="col" style="gap:12px">
+    <h2>Feedback</h2>
+    <div class="card scroll-x"><table class="table">
+      <thead><tr><th>When</th><th>Artifact</th><th>Rating</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Oct 26</td><td>Blog post</td><td>👎</td><td class="title">Too long, and the intro repeats the summary.</td></tr>
+        <tr><td>Oct 26</td><td>Titles</td><td>👍</td><td class="faint">—</td></tr>
+        <tr><td>Oct 25</td><td>Show notes</td><td>👍</td><td class="title">Sounds like me. Wish it had my guest's name.</td></tr>
+      </tbody></table></div>
+    <span class="small faint">Example rows — real feedback appears here.</span>
+  </section>
+</main>
+</body></html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MK-6b Artifact layouts</title><link rel="stylesheet" href="mock.css">
+<style>
+main{max-width:780px;margin:0 auto;padding:32px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:40px}
+section{display:flex;flex-direction:column;gap:12px}
+.trow{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--border)}
+.trow:last-child{border-bottom:0}
+.star{color:var(--faint);cursor:pointer} .star.on{color:var(--warning)}
+.tt{color:var(--text)}
+.sum{display:grid;grid-template-columns:1fr;gap:12px}
+.seo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.post{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding:12px;border:1px solid var(--border);border-radius:var(--r)}
+.post b{width:24px;height:24px;border-radius:99px;background:var(--surface-3);display:grid;place-items:center;font-size:12px;color:var(--text)}
+.ch{display:grid;grid-template-columns:90px minmax(0,1fr) 40px;gap:8px;align-items:center}
+@media (max-width:600px){.trow{grid-template-columns:1fr auto}.trow .badge{grid-column:1/-1;justify-self:start}.seo{grid-template-columns:1fr}}
+</style></head>
+<body>
+<main>
+  <section aria-label="Titles">
+    <div class="spread"><h2>Titles</h2><span class="small faint">Star your favourites</span></div>
+    <div class="card">
+      <div class="trow"><span class="badge neutral">Curiosity</span><span class="tt">The Budget You Never Check</span><span class="row" style="gap:8px"><span class="star on">★</span><a class="small" href="#">Copy</a><a class="small" href="#">Use as title</a></span></div>
+      <div class="trow"><span class="badge neutral">Benefit</span><span class="tt">Get Your Mornings Back With One Calendar Block</span><span class="row" style="gap:8px"><span class="star">☆</span><a class="small" href="#">Copy</a><a class="small" href="#">Use as title</a></span></div>
+      <div class="trow"><span class="badge neutral">Number</span><span class="tt">3 Tools, 2 Blocks, 1 Rule for Real Focus</span><span class="row" style="gap:8px"><span class="star">☆</span><a class="small" href="#">Copy</a><a class="small" href="#">Use as title</a></span></div>
+      <div class="trow"><span class="badge neutral">Question</span><span class="tt">Who Is Spending Your Attention?</span><span class="row" style="gap:8px"><span class="star on">★</span><a class="small" href="#">Copy</a><a class="small" href="#">Use as title</a></span></div>
+      <div class="trow"><span class="badge neutral">Quote</span><span class="tt">“A To-Do Item Is a Wish”</span><span class="row" style="gap:8px"><span class="star">☆</span><a class="small" href="#">Copy</a><a class="small" href="#">Use as title</a></span></div>
+    </div>
+    <span class="small faint">…8 rows total</span>
+  </section>
+
+  <section aria-label="Summary">
+    <h2>Summary</h2>
+    <div class="sum">
+      <div class="card pad col" style="gap:8px"><div class="spread"><span class="strong small">One-liner</span><span class="row" style="gap:12px"><span class="counter mono">96 / 140</span><a class="small" href="#">Copy</a></span></div><textarea class="textarea" style="min-height:0" rows="2">Why one notification can tax your whole morning, and the calendar habit that wins it back.</textarea></div>
+      <div class="card pad col" style="gap:8px"><div class="spread"><span class="strong small">Short · 50–80 words</span><span class="row" style="gap:12px"><span class="counter mono">64 words</span><a class="small" href="#">Copy</a></span></div><textarea class="textarea" rows="3">Focus is the most expensive resource in modern work, yet we budget money and hours and let notifications spend our attention for free…</textarea></div>
+    </div>
+  </section>
+
+  <section aria-label="Blog post">
+    <h2>Blog post</h2>
+    <div class="card pad col">
+      <div class="seo">
+        <div><label class="lbl" for="st">SEO title <span class="counter mono">48/60</span></label><input class="input" id="st" value="Attention Is a Budget: How to Protect Your Focus"></div>
+        <div><label class="lbl" for="sl">Slug</label><input class="input mono" id="sl" value="attention-is-a-budget"></div>
+      </div>
+      <div><label class="lbl" for="md">Meta description <span class="counter mono">142/155</span></label><input class="input" id="md" value="One interruption can cost twenty minutes of depth. Here's why attention compounds and the calendar habit that protects it."></div>
+    </div>
+    <div class="row"><div class="tabs" style="border:0"><span class="tab on">Write</span><span class="tab">Preview</span></div><span class="grow"></span><span class="counter">1,104 words</span></div>
+    <textarea class="textarea mono" rows="6" style="font-size:13px">## Attention compounds
+Because attention compounds, the cost of an interruption is not the five minutes it takes…
+
+{{quote:1}}
+
+## A wish versus a promise</textarea>
+  </section>
+
+  <section aria-label="Newsletter">
+    <h2>Newsletter</h2>
+    <span class="lbl" style="margin:0">Subject line</span>
+    <label class="row small"><input type="radio" name="s" checked> The budget you never check</label>
+    <label class="row small"><input type="radio" name="s"> One ping, twenty minutes</label>
+    <label class="row small"><input type="radio" name="s"> Your Tuesday, protected</label>
+    <label class="row small"><input type="radio" name="s"> <input class="input" style="height:32px;max-width:320px" placeholder="Write your own"></label>
+    <div><label class="lbl" for="pv">Preview text <span class="counter mono">58/90</span></label><input class="input" id="pv" value="The calendar habit that gets your mornings back this week."></div>
+  </section>
+
+  <section aria-label="Social posts">
+    <h2>Social posts</h2>
+    <div class="tabs"><span class="tab">LinkedIn</span><span class="tab on">Thread</span><span class="tab">Instagram</span></div>
+    <div class="post"><b>1</b><div class="col" style="gap:6px"><p style="color:var(--text)">We budget dollars. We calendar hours. Then we let any notification spend our attention for free. 🧵</p><div class="spread"><span class="counter mono">104 / 280</span><a class="small" href="#">Copy</a></div></div></div>
+    <div class="post"><b>2</b><div class="col" style="gap:6px"><p style="color:var(--text)">One ping isn't five minutes. Getting back to full depth can take over twenty.</p><div class="spread"><span class="counter mono">78 / 280</span><a class="small" href="#">Copy</a></div></div></div>
+    <a class="small" href="#">Copy whole thread</a>
+  </section>
+
+  <section aria-label="Chapters">
+    <h2>Chapters</h2>
+    <div class="card pad col" style="gap:8px">
+      <div class="ch"><input class="input mono" value="00:00"><input class="input" value="Why focus is a budget"><button class="btn ghost sm" aria-label="Delete">✕</button></div>
+      <div class="ch"><input class="input mono" value="04:12"><input class="input" value="One ping, twenty minutes"><button class="btn ghost sm" aria-label="Delete">✕</button></div>
+      <div class="ch"><input class="input mono" value="07:30"><input class="input" value="Wishes and promises"><button class="btn ghost sm" aria-label="Delete">✕</button></div>
+      <button class="btn ghost sm" style="align-self:flex-start">+ Add chapter</button>
+    </div>
+  </section>
+</main>
+</body></html>

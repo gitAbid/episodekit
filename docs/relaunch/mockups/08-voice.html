@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MK-8 Voice settings</title><link rel="stylesheet" href="mock.css">
+<style>
+main{padding-block:28px 64px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:start}
+.sl{display:grid;grid-template-columns:90px 1fr 24px;align-items:center;gap:12px}
+.sample{display:flex;justify-content:space-between;gap:12px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--r);font-size:13px}
+@media (max-width:900px){.two{grid-template-columns:1fr}}
+</style></head>
+<body>
+<header class="topbar"><span class="logo"><i>EK</i>EpisodeKit</span><span class="small strong">The Focus Hour ▾</span><span class="grow"></span><span class="avatar">MA</span></header>
+<main class="wrap col" style="gap:20px">
+  <h1>Settings</h1>
+  <div class="tabs"><span class="tab">Show</span><span class="tab on">Voice</span><span class="tab">Billing</span><span class="tab">Account</span></div>
+  <div class="two">
+    <div class="card pad col" style="gap:20px">
+      <div><span class="lbl">Tone</span><div class="row" style="gap:8px"><span class="chip">clear <span class="x">✕</span></span><span class="chip">warm <span class="x">✕</span></span><span class="chip">wry <span class="x">✕</span></span><button class="btn ghost sm">+ Add</button></div></div>
+      <div class="col" style="gap:4px">
+        <div class="sl small"><span>Formality</span><div class="slider"><b style="width:40%"></b><i style="left:40%"></i></div><span class="mono">2</span></div>
+        <div class="sl small"><span>Energy</span><div class="slider"><b style="width:60%"></b><i style="left:60%"></i></div><span class="mono">3</span></div>
+        <div class="sl small"><span>Humor</span><div class="slider"><b style="width:60%"></b><i style="left:60%"></i></div><span class="mono">3</span></div>
+      </div>
+      <div class="row"><span class="lbl" style="margin:0">Emoji</span><span class="seg"><span class="on">None</span><span>Light</span><span>Heavy</span></span><span class="lbl" style="margin:0 0 0 12px">Write as</span><span class="seg"><span class="on">I</span><span>We</span><span>They</span></span></div>
+      <div><span class="lbl">Never say</span><div class="row" style="gap:8px"><span class="chip">delve <span class="x">✕</span></span><span class="chip">game-changer <span class="x">✕</span></span><span class="chip">unlock <span class="x">✕</span></span><span class="chip">dive deep <span class="x">✕</span></span><button class="btn ghost sm">+ Add</button></div></div>
+      <div><span class="lbl">Always include</span><div class="row" style="gap:8px"><span class="chip">Follow wherever you listen <span class="x">✕</span></span><button class="btn ghost sm">+ Add</button></div></div>
+      <div class="col" style="gap:8px"><span class="lbl" style="margin:0">Writing samples</span>
+        <div class="sample"><span>Ep 39 show notes · 212 words</span><a href="#">Remove</a></div>
+        <div class="sample"><span>October newsletter · 340 words</span><a href="#">Remove</a></div>
+        <button class="btn sm" style="align-self:flex-start">+ Add sample</button></div>
+      <div class="row"><button class="btn primary">Save voice</button><span class="small faint">Used for every new episode.</span></div>
+    </div>
+    <div class="card pad col">
+      <span class="micro faint">PREVIEW</span>
+      <p style="color:var(--text)">This week I talk about the one budget nobody keeps: attention. One ping can cost you twenty minutes, so I'll show you the calendar habit that gets the morning back. Bring your Tuesday.</p>
+      <button class="btn sm" style="align-self:flex-start">Update preview</button>
+    </div>
+  </div>
+</main>
+</body></html>
