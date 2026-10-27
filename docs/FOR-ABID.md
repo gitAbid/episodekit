@@ -66,3 +66,29 @@ webhook, and RSS prefill works against real feeds. Env var reference: `web/.env.
 That's the whole list. Every morning at 9 the agent session checks uptime,
 executes the day's roadmap items (A1–A7), activates whatever you've unlocked,
 and logs everything to the [live map](https://episodekit.vercel.app/map).
+
+---
+
+## 7. Lemon Squeezy (WP-08 blocker): subscriptions + quota walls activate
+
+The billing code (checkout, webhook, cancel, quota) is built and tested with
+signed fixtures, but nothing charges until you create the LS store. Until then:
+upgrade buttons answer "Checkout isn't set up in this preview." and every
+workspace stays on Free. Three steps:
+
+1. **LS store (test mode first)** — lemonsqueezy.com → create store
+   **EpisodeKit**, then two products:
+   - **EpisodeKit Pro** — $19/month subscription → note the **variant id**
+   - **EpisodeKit Founding Pro** — $99/year subscription (first 100) → note the
+     **variant id**
+2. **Webhook** — Settings → Webhooks → new endpoint
+   `https://<your-preview-domain>/api/webhooks/lemonsqueezy`, events: order +
+   subscription lifecycle; copy the **signing secret**.
+3. **Env vars** (Vercel → episodekit-web → Settings → Environment Variables):
+   `LS_API_KEY`, `LS_STORE_ID`, `LS_WEBHOOK_SECRET`,
+   `LS_VARIANT_PRO_MONTHLY`, `LS_VARIANT_FOUNDING` (numeric ids as strings) →
+   redeploy. Verify with LS's "Send test" webhook + a test purchase.
+
+Founding without a store (launch fallback, §0.2): create the $99/yr product's
+**payment link**, set `LS_FOUNDING_PAYMENT_URL`, and flip buyers to Pro in
+`/admin` (manual flag) — see the PR for WP-08 for the exact flow.
