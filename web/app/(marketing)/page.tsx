@@ -4,7 +4,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CheckIcon, XIcon } from "lucide-react";
-import { FOUNDING_TOTAL, foundingRemaining } from "@/lib/billing/entitlements";
+import { FOUNDING_TOTAL } from "@/lib/billing/entitlements";
+import { foundingRemainingForMarketing } from "@/lib/marketing/founding";
 
 export const metadata: Metadata = {
   title: "EpisodeKit — Show notes that sound like you",
@@ -84,7 +85,7 @@ const FAQ = [
 ] as const;
 
 export default async function LandingPage() {
-  const foundingLeft = await foundingRemaining();
+  const foundingRemaining = await foundingRemainingForMarketing();
   return (
     <div>
       {/* Hero */}
@@ -269,8 +270,16 @@ export default async function LandingPage() {
             </div>
           </div>
           <p className="text-sm">
-            Founding Pro: <span className="font-semibold">$99/year</span>, price locked for life ·{" "}
-            <span className="font-mono tabular-nums">{foundingLeft}</span> of {FOUNDING_TOTAL} left
+            Founding Pro: <span className="font-semibold">$99/year</span>, price locked for life
+            {foundingRemaining == null ? (
+              " · first 100 only"
+            ) : (
+              <>
+                {" · "}
+                <span className="font-mono tabular-nums">{foundingRemaining}</span> of{" "}
+                {FOUNDING_TOTAL} left
+              </>
+            )}
           </p>
         </div>
       </section>

@@ -5,7 +5,7 @@ import { LEGACY_PUBLIC_PATHS } from "@/lib/marketing/routes";
 // U16 (deterministic path): a visitor with no signup pastes a transcript into
 // /tools/show-notes and gets package-quality output plus the honest fallback
 // note — no AI keys exist in CI/preview, so the deterministic engine answers.
-const demo = readFileSync(new URL("../tests/fixtures/demo-episode.txt", import.meta.url), "utf8");
+const demo = readFileSync("tests/fixtures/demo-episode.txt", "utf8");
 
 test("visitor generates show notes without signup (deterministic path)", async ({ page }) => {
   test.setTimeout(60_000);

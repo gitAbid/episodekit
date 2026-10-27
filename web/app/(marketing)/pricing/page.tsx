@@ -1,7 +1,8 @@
 // §5.4 /pricing — M10 plans, plain copy. Static.
 import type { Metadata } from "next";
 import Link from "next/link";
-import { FOUNDING_TOTAL, foundingRemaining } from "@/lib/billing/entitlements";
+import { FOUNDING_TOTAL } from "@/lib/billing/entitlements";
+import { foundingRemainingForMarketing } from "@/lib/marketing/founding";
 
 export const metadata: Metadata = {
   title: "Pricing — EpisodeKit",
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function PricingPage() {
-  const foundingLeft = await foundingRemaining();
+  const foundingRemaining = await foundingRemainingForMarketing();
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-16">
       <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 text-center">
@@ -62,8 +63,16 @@ export default async function PricingPage() {
       </div>
 
       <p className="mt-6 text-center text-sm">
-        Founding Pro: <span className="font-semibold">$99/year</span>, price locked for life ·{" "}
-        <span className="font-mono tabular-nums">{foundingLeft}</span> of {FOUNDING_TOTAL} left
+        Founding Pro: <span className="font-semibold">$99/year</span>, price locked for life
+        {foundingRemaining == null ? (
+          " · first 100 only"
+        ) : (
+          <>
+            {" · "}
+            <span className="font-mono tabular-nums">{foundingRemaining}</span> of{" "}
+            {FOUNDING_TOTAL} left
+          </>
+        )}
       </p>
 
       <div className="mx-auto mt-10 flex max-w-2xl flex-col gap-3 text-sm text-body">

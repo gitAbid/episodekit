@@ -26,7 +26,7 @@ function countWords(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length;
 }
 
-export function ToolClient({ def }: { def: ToolDef }) {
+export function ToolClient({ def, botIdEnabled }: { def: ToolDef; botIdEnabled: boolean }) {
   const [text, setText] = React.useState("");
   const [status, setStatus] = React.useState<"idle" | "loading" | "error">("idle");
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
@@ -58,8 +58,13 @@ export function ToolClient({ def }: { def: ToolDef }) {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* BotID proof-of-work for the POST this page issues. */}
-      <BotIdClient protect={[{ path: `/api/public/tools/${def.id}`, method: "POST" }]} />
+      {/* BotID proof-of-work for the POST this page issues. Off-Vercel
+          (local/CI) its worker script 404s and the wrapped fetch rejects, so
+          it renders only where the server check actually runs — the server
+          bypasses with isDevelopment+bypass in exactly the same condition. */}
+      {botIdEnabled ? (
+        <BotIdClient protect={[{ path: `/api/public/tools/${def.id}`, method: "POST" }]} />
+      ) : null}
 
       <div className="flex flex-col gap-2">
         <label htmlFor="transcript" className="text-sm font-medium">

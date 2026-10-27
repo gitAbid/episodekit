@@ -12,7 +12,9 @@ test("landing renders the mockup hero and pricing", async ({ page }) => {
 
   await expect(page.getByText("Simple pricing")).toBeVisible();
   await expect(page.getByText("$19", { exact: false })).toBeVisible();
-  await expect(page.getByText(/of 100 left/)).toBeVisible();
+  // Founding counter is DB-derived (never faked): keyless shows "first 100
+  // only"; with a DB it shows "N of 100 left".
+  await expect(page.getByText(/of 100 left|first 100 only/)).toBeVisible();
   await expect(page.getByText("A PeraByte AI product")).toBeVisible();
 });
 

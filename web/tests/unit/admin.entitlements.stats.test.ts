@@ -1,7 +1,8 @@
-// Admin stats window helper + entitlements stub (WP-08 seam).
+// Admin stats window helper + founding counter semantics (WP-08 entitlements).
 import { describe, expect, it, vi } from "vitest";
 import { EMPTY_STATS, statWindowCutoff } from "@/lib/admin/stats";
-import { FOUNDING_TOTAL, configEntitlements, foundingRemaining } from "@/lib/billing/entitlements";
+import { FOUNDING_TOTAL, foundingLeft } from "@/lib/billing/entitlements";
+import { foundingRemainingForMarketing } from "@/lib/marketing/founding";
 import { captureServerEvent, posthogConfigured } from "@/lib/analytics/posthog";
 
 describe("stat window", () => {
@@ -19,15 +20,23 @@ describe("stat window", () => {
   });
 });
 
-describe("founding counter (entitlements stub seam)", () => {
-  it("defaults to the full 100 remaining (true today: none sold)", async () => {
-    expect(await foundingRemaining({} as unknown as NodeJS.ProcessEnv)).toBe(FOUNDING_TOTAL);
+describe("founding counter (DB-derived, WP-08 entitlements)", () => {
+  it("derives left from the workspace count and clamps at 0 and 100", () => {
+    expect(foundingLeft(0)).toBe(FOUNDING_TOTAL);
+    expect(foundingLeft(37)).toBe(63);
+    expect(foundingLeft(FOUNDING_TOTAL)).toBe(0);
+    expect(foundingLeft(FOUNDING_TOTAL + 20)).toBe(0);
   });
 
-  it("derives from FOUNDING_SOLD and clamps", async () => {
-    expect(await configEntitlements({ FOUNDING_SOLD: "37" } as unknown as NodeJS.ProcessEnv).foundingRemaining()).toBe(63);
-    expect(await configEntitlements({ FOUNDING_SOLD: "120" } as unknown as NodeJS.ProcessEnv).foundingRemaining()).toBe(0);
-    expect(await configEntitlements({ FOUNDING_SOLD: "nonsense" } as unknown as NodeJS.ProcessEnv).foundingRemaining()).toBe(100);
+  it("marketing helper returns null when the DB is unavailable (no fake numbers)", async () => {
+    // No DATABASE_URL in the test env → getDb() throws → null, never a number.
+    const prev = process.env.DATABASE_URL;
+    delete process.env.DATABASE_URL;
+    try {
+      expect(await foundingRemainingForMarketing()).toBeNull();
+    } finally {
+      if (prev !== undefined) process.env.DATABASE_URL = prev;
+    }
   });
 });
 

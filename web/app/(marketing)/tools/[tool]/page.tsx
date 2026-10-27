@@ -49,7 +49,7 @@ export default async function ToolPage({ params }: { params: Promise<{ tool: str
         <p className="text-body">{def.intro}</p>
       </div>
 
-      <ToolClient def={def} />
+      <ToolClient def={def} botIdEnabled={Boolean(process.env.VERCEL)} />
 
       <p className="text-sm text-body">
         {TIPS[tool]}{" "}
