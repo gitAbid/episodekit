@@ -19,7 +19,9 @@ export default defineConfig({
   webServer: {
     command: "pnpm exec next start",
     url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
+    // CI starts its own server in the e2e step; locally reuse `pnpm dev` if running.
+    reuseExistingServer: true,
+    stdout: "ignore",
     timeout: 120_000,
   },
 });

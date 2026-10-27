@@ -36,4 +36,12 @@ jobs:
       - run: pnpm test
       - run: pnpm build
       - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm e2e
+      - name: e2e (server + Playwright in one step)
+        run: |
+          pnpm exec next start &
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:3000 >/dev/null && break
+            sleep 1
+          done
+          curl -sf http://localhost:3000 >/dev/null
+          pnpm exec playwright test
