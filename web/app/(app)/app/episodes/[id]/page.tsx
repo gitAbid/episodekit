@@ -13,9 +13,9 @@ export default function EpisodeWorkspacePage({ params }: PageProps<"/app/episode
   return (
     <Suspense
       fallback={
-        <main className="flex flex-1 items-center justify-center p-10 text-sm text-muted-foreground" data-testid="workspace-loading">
+        <div data-workspace className="flex flex-1 items-center justify-center p-10 text-sm text-muted-foreground" data-testid="workspace-loading">
           Loading your workspace…
-        </main>
+        </div>
       }
     >
       <WorkspaceContent params={params} />
@@ -32,12 +32,12 @@ async function WorkspaceContent({ params }: { params: Promise<{ id: string }> })
   const result = await handleEpisodeWithArtifactsGet(userId, id);
   if (result.status !== 200) {
     return (
-      <main className="flex flex-1 flex-col items-center gap-2 p-10 text-center">
+      <div data-workspace className="flex flex-1 flex-col items-center gap-2 p-10 text-center">
         <h1 className="text-lg font-semibold">Episode not found</h1>
         <Link href="/app/episodes" className="text-sm text-[var(--accent)]">
           Back to episodes
         </Link>
-      </main>
+      </div>
     );
   }
 

@@ -435,3 +435,30 @@ export async function deleteEpisodeForUser(userId: string, episodeId: string): P
   if (!owned) return;
   await db.delete(episodes).where(eq(episodes.id, episodeId));
 }
+
+export type EpisodeListRow = Pick<
+  EpisodeRow,
+  "id" | "title" | "number" | "status" | "durationMs" | "source" | "createdAt"
+> & { readyCount: number };
+
+/** M8 library rows: newest first, with the user-ticked "Ready x/7" count (quotes excluded). */
+export async function listEpisodeSummariesForShow(showId: string): Promise<EpisodeListRow[]> {
+  const db = getDb();
+  const rows = await db
+    .select({
+      id: episodes.id,
+      title: episodes.title,
+      number: episodes.number,
+      status: episodes.status,
+      durationMs: episodes.durationMs,
+      source: episodes.source,
+      createdAt: episodes.createdAt,
+      readyCount: sql<number>`count(${artifacts.id}) filter (where ${artifacts.readyFlag} and ${artifacts.kind} <> 'quotes')`,
+    })
+    .from(episodes)
+    .leftJoin(artifacts, eq(artifacts.episodeId, episodes.id))
+    .where(eq(episodes.showId, showId))
+    .groupBy(episodes.id)
+    .orderBy(desc(episodes.createdAt));
+  return rows.map((r) => ({ ...r, readyCount: Number(r.readyCount) }));
+}
