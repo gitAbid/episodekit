@@ -54,9 +54,11 @@ test.describe("WP-02 keyless shells", () => {
     });
   });
 
-  test("step 2 placeholder offers skip to step 3", async ({ page }) => {
+  test("step 2 renders the voice form; skip lands on step 3 (WP-07 shell)", async ({ page }) => {
     await page.goto("/app/onboarding/voice");
-    await expect(page.getByText("This page is coming soon.")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Teach EpisodeKit your voice" })).toBeVisible();
+    await expect(page.getByTestId("sample-counter-0")).toHaveText("0 words · at least 150");
+    await expect(page.getByTestId("learn-voice")).toBeDisabled();
     await page.getByTestId("skip-voice").click();
     await expect(page.getByRole("heading", { name: "Add your first episode" })).toBeVisible();
   });

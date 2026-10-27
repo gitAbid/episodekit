@@ -158,3 +158,89 @@ export async function previewVoice(args: {
   }
   return { ok: false, errorCode: "voice_preview_failed" };
 }
+
+// ---- deterministic no-AI mode (§8.1 last resort, added in WP-07) ------------
+// U3 gives "Learn my voice" ≤15 s; with no usable provider key the chain above
+// fails in seconds and onboarding must still produce a profile. Both functions
+// below derive ONLY from the user's own input (extractive, never invented);
+// fields a lexicon-free analyzer cannot honestly infer stay at the §7.4
+// defaults. Callers must label the result as the basic version — it is never
+// presented as a learned AI profile.
+
+/** First-person pronoun counts decide person (word-boundary, contractions included). */
+const PRONOUN_RE = {
+  I: /\bI\b|\bI'm\b|\bI've\b|\bI'll\b|\bI'd\b|\bme\b|\bmy\b|\bmine\b|\bmyself\b/gi,
+  we: /\bwe\b|\bwe're\b|\bwe've\b|\bwe'll\b|\bwe'd\b|\bus\b|\bour\b|\bours\b|\bourselves\b/gi,
+  they: /\bthey\b|\bthey're\b|\bthey've\b|\bthey'll\b|\bthem\b|\btheir\b|\btheirs\b/gi,
+} as const;
+
+/** Sentence splitter without the engine's 40-char floor: short-sentence
+ * authors would otherwise look "long" because their sentences get dropped. */
+function splitSentences(text: string): string[] {
+  return text
+    .split(/(?<=[.!?])\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+export function learnVoiceProfileDeterministic(samples: string[]): VoiceProfile {
+  const text = samples.join(" ").replace(/\s+/g, " ").trim();
+  const count = (re: RegExp) => (text.match(re)?.length ?? 0);
+  const iCount = count(PRONOUN_RE.I);
+  const weCount = count(PRONOUN_RE.we);
+  const theyCount = count(PRONOUN_RE.they);
+  const max = Math.max(iCount, weCount, theyCount);
+  const person: VoiceProfile["person"] =
+    max === 0 ? DEFAULT_VOICE_PROFILE.person : iCount === max ? "I" : weCount === max ? "we" : "they";
+
+  const sents = splitSentences(text);
+  const words = text.split(" ").filter(Boolean);
+  const avgWords = sents.length ? words.length / sents.length : 0;
+  const sentenceLength: VoiceProfile["sentenceLength"] =
+    sents.length === 0 || (avgWords >= 12 && avgWords <= 22)
+      ? DEFAULT_VOICE_PROFILE.sentenceLength
+      : avgWords < 12
+        ? "short"
+        : "long";
+
+  const emojiCount = (text.match(/\p{Extended_Pictographic}/gu) ?? []).length;
+  const emoji: VoiceProfile["emoji"] =
+    emojiCount === 0 ? DEFAULT_VOICE_PROFILE.emoji : emojiCount <= 5 ? "light" : "heavy";
+
+  return { ...DEFAULT_VOICE_PROFILE, person, sentenceLength, emoji };
+}
+
+/**
+ * A ~60-word sample paragraph rendered from the profile's own parameters
+ * (person, tone, sentence length, emoji). Pure function of its inputs so the
+ * preview card always reflects the editor state; contains no never-say term
+ * because the template vocabulary is fixed.
+ */
+export function previewVoiceDeterministic(voice: VoiceProfile, show?: { name?: string }): string {
+  const name = show?.name?.trim() || "the show";
+  const subject = voice.person === "I" ? "I" : voice.person === "we" ? "We" : "They";
+  const poss = voice.person === "I" ? "my" : voice.person === "we" ? "our" : "their";
+  const casual = voice.formality <= 2;
+
+  const opener = `This week on ${name}: a ${voice.tone.join(", ")} look at the habits behind a calmer week.`;
+  const core =
+    voice.sentenceLength === "short"
+      ? `${subject} ${casual ? "get into" : "discuss"} ${poss} favorite routine.`
+      : `${subject} ${casual ? "get into" : "discuss"} why small routines beat big plans, and what ${poss} listeners can borrow from them.`;
+  const extra =
+    voice.sentenceLength === "short"
+      ? ""
+      : `And a quick answer to a listener question about keeping ${poss} workflow simple.`;
+  const closer =
+    voice.energy >= 4
+      ? "Bring some energy — this one moves."
+      : voice.humor >= 4
+        ? casual
+          ? "There's at least one bad joke ahead."
+          : "There is at least one bad joke ahead."
+        : casual
+          ? "Have a listen."
+          : "Enjoy the episode.";
+  const marks = voice.emoji === "heavy" ? " 🎧✨" : voice.emoji === "light" ? " 🎧" : "";
+  return `${[opener, core, extra, closer].filter(Boolean).join(" ")}${marks}`;
+}

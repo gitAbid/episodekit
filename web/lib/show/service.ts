@@ -77,6 +77,8 @@ export async function handleShowPatch(userId: string, raw: unknown): Promise<Api
   if (patch.listenUrl !== undefined) updates.listenUrl = patch.listenUrl ?? null;
   if (patch.defaultCta !== undefined) updates.defaultCta = patch.defaultCta ?? null;
   if (patch.vocabulary !== undefined) updates.vocabulary = patch.vocabulary;
+  if (patch.voiceProfile !== undefined) updates.voiceProfile = patch.voiceProfile;
+  if (patch.voiceSamples !== undefined) updates.voiceSamples = patch.voiceSamples;
   const show = await queries.updateShow(existing.id, updates);
   return { status: 200, json: { show: serializeShow(show) } };
 }

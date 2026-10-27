@@ -1,5 +1,14 @@
 import { z } from "zod";
-import { SHOW_NAME_REQUIRED_COPY, URL_INVALID_COPY } from "@/lib/copy";
+import {
+  SAMPLE_LIMIT_COPY,
+  SAMPLE_TOO_SHORT_COPY,
+  SHOW_NAME_REQUIRED_COPY,
+  URL_INVALID_COPY,
+} from "@/lib/copy";
+import { VoiceProfileSchema } from "@/lib/ai/voice";
+import { MIN_SAMPLE_WORDS, countWords } from "@/lib/words";
+
+export { MIN_SAMPLE_WORDS, countWords };
 
 const emptyStringToUndefined = (v: unknown) =>
   typeof v === "string" && v.trim() === "" ? undefined : v;
@@ -37,8 +46,43 @@ export const showCreateSchema = z.object({
   vocabulary: z.array(requiredText(60).refine((v) => v.length > 0)).max(50).optional(),
 });
 
-/** PATCH accepts any subset of the General settings fields (M9). */
-export const showPatchSchema = showCreateSchema.partial();
+// ---- voice (M1 step 2, §7.5) -------------------------------------------------
+
+/** M1: past show notes of at least 150 words, up to 3, each ≤50k chars. */
+export const MAX_SAMPLE_CHARS = 50_000;
+
+export const voiceSampleSchema = z
+  .string()
+  .trim()
+  .min(1, SAMPLE_TOO_SHORT_COPY)
+  .max(MAX_SAMPLE_CHARS, SAMPLE_TOO_SHORT_COPY)
+  .refine((v) => countWords(v) >= MIN_SAMPLE_WORDS, SAMPLE_TOO_SHORT_COPY);
+
+function voiceSampleArray() {
+  return z
+    .array(voiceSampleSchema)
+    .min(1, SAMPLE_TOO_SHORT_COPY)
+    .max(3, SAMPLE_LIMIT_COPY);
+}
+
+/** POST /api/show/voice/learn — 1–3 past show notes (M1/U3). */
+export const voiceLearnSchema = z.object({
+  samples: voiceSampleArray(),
+});
+
+/** POST /api/show/voice/preview — profile to preview (stored one when absent). */
+export const voicePreviewSchema = z.object({
+  profile: z.unknown().optional(),
+  topic: z.string().trim().max(200).optional(),
+});
+
+/** PATCH accepts any subset of the General settings fields (M9), plus the
+ * §7.4 voice profile / samples the Voice settings page and onboarding step 2
+ * save (profile validated by the shared WP-04 schema). */
+export const showPatchSchema = showCreateSchema.partial().extend({
+  voiceProfile: VoiceProfileSchema.optional(),
+  voiceSamples: voiceSampleArray().optional(),
+});
 
 export const rssPreviewSchema = z.object({
   url: z.string().trim().min(1).max(2048),
