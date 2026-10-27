@@ -1,10 +1,83 @@
 import { and, count, eq } from "drizzle-orm";
 import { getDb } from "./index";
-import { episodes, shows, users, webhookEvents, workspaces } from "./schema";
+import {
+  episodes,
+  segments,
+  shows,
+  users,
+  webhookEvents,
+  workspaces,
+} from "./schema";
 
 export type ShowRow = typeof shows.$inferSelect;
 export type WorkspaceRow = typeof workspaces.$inferSelect;
 export type UserRow = typeof users.$inferSelect;
+export type EpisodeRow = typeof episodes.$inferSelect;
+export type SegmentRow = typeof segments.$inferSelect;
+
+// ---------------------------------------------------------------------------
+// Episodes + segments (WP-05, additive — WP-02 functions above are untouched).
+// ---------------------------------------------------------------------------
+
+export async function createEpisode(
+  values: typeof episodes.$inferInsert,
+): Promise<EpisodeRow> {
+  const db = getDb();
+  const inserted = await db.insert(episodes).values(values).returning();
+  return inserted[0];
+}
+
+/** Ownership check per §9: the episode must belong to a show in the caller's workspace. */
+export async function getEpisodeForUser(
+  userId: string,
+  episodeId: string,
+): Promise<{ episode: EpisodeRow; show: ShowRow; workspace: WorkspaceRow } | null> {
+  const db = getDb();
+  const rows = await db
+    .select({ episode: episodes, show: shows, workspace: workspaces })
+    .from(episodes)
+    .innerJoin(shows, eq(episodes.showId, shows.id))
+    .innerJoin(workspaces, eq(shows.workspaceId, workspaces.id))
+    .where(and(eq(episodes.id, episodeId), eq(workspaces.ownerId, userId)))
+    .limit(1);
+  return rows[0] ?? null;
+}
+
+export async function updateEpisode(
+  episodeId: string,
+  values: Partial<typeof episodes.$inferInsert>,
+): Promise<EpisodeRow> {
+  const db = getDb();
+  const updated = await db
+    .update(episodes)
+    .set({ ...values, updatedAt: new Date() })
+    .where(eq(episodes.id, episodeId))
+    .returning();
+  return updated[0];
+}
+
+/** Replaces the episode's segments (atomic delete+insert via Neon batch —
+ * the neon-http driver has no interactive transactions). */
+export async function replaceSegments(
+  episodeId: string,
+  rows: Array<Omit<typeof segments.$inferInsert, "episodeId">>,
+): Promise<SegmentRow[]> {
+  const db = getDb();
+  if (!rows.length) {
+    await db.delete(segments).where(eq(segments.episodeId, episodeId));
+    return [];
+  }
+  const result = await db.batch([
+    db.delete(segments).where(eq(segments.episodeId, episodeId)),
+    db.insert(segments).values(rows.map((r) => ({ ...r, episodeId }))).returning(),
+  ] as const);
+  return result[1];
+}
+
+export async function listSegments(episodeId: string): Promise<SegmentRow[]> {
+  const db = getDb();
+  return db.select().from(segments).where(eq(segments.episodeId, episodeId));
+}
 
 export async function upsertUser(input: {
   id: string;
