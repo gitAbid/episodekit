@@ -10,6 +10,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 vi.mock("@/db/queries", () => ({
   getShowByOwner: vi.fn(),
   getOrCreateWorkspaceByOwner: vi.fn(),
+  getWorkspaceById: vi.fn(),
+  getWorkspaceByOwnerEmail: vi.fn(),
+  updateWorkspacePlan: vi.fn(),
+  markEpisodeQuotaCounted: vi.fn(),
+  refundEpisodeQuota: vi.fn(),
+  countFoundingWorkspaces: vi.fn(),
+  getUserEmail: vi.fn(),
   createEpisode: vi.fn(),
   getEpisodeForUser: vi.fn(),
   updateEpisode: vi.fn(),
@@ -171,7 +178,7 @@ describe("handleEpisodesPost — create (§7.5)", () => {
     expect(result.status).toBe(402);
     expect(result.json).toEqual({
       errorCode: "quota_exceeded",
-      error: "You've used 2 of 2 episodes this month. Upgrade for more, or wait until 2026-11-01.",
+      error: "You've used 2 of 2 episodes this month. Upgrade for more, or wait until Nov 1.",
     });
     expect(mocked.createEpisode).not.toHaveBeenCalled();
   });

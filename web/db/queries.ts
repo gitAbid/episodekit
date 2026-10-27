@@ -79,20 +79,6 @@ export async function listSegments(episodeId: string): Promise<SegmentRow[]> {
   return db.select().from(segments).where(eq(segments.episodeId, episodeId));
 }
 
-/** Episodes created in `month` that count against the plan quota (M10). */
-export async function countQuotaEpisodes(
-  workspaceId: string,
-  month: string,
-): Promise<number> {
-  const db = getDb();
-  const rows = await db
-    .select({ id: episodes.id })
-    .from(episodes)
-    .innerJoin(shows, eq(episodes.showId, shows.id))
-    .where(and(eq(shows.workspaceId, workspaceId), eq(episodes.quotaMonth, month), eq(episodes.countsQuota, true)));
-  return rows.length;
-}
-
 export async function upsertUser(input: {
   id: string;
   email: string | null;
