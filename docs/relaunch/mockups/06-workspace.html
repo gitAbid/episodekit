@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MK-6 Workspace</title><link rel="stylesheet" href="mock.css">
+<style>
+html,body{height:100%}
+body{display:flex;flex-direction:column}
+.shell{flex:1;min-height:0;display:grid;grid-template-columns:220px minmax(0,1fr) 340px}
+.rail{border-right:1px solid var(--border);background:var(--surface-2);padding:12px 8px;display:flex;flex-direction:column;gap:2px;overflow:auto}
+.rail a{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:var(--r-sm);color:var(--body);font-size:14px;font-weight:500;text-decoration:none}
+.rail a:hover{background:var(--surface-3)}
+.rail a.on{background:var(--accent-soft);color:var(--accent)}
+.rail .ok{color:var(--success);font-size:12px}
+.rail hr{border:0;border-top:1px solid var(--border);margin:8px 4px}
+.center{overflow:auto}
+.tool{position:sticky;top:0;z-index:2;background:var(--bg);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.doc{max-width:720px;padding:24px;display:flex;flex-direction:column;gap:20px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field .textarea{min-height:0}
+.bul{display:flex;gap:8px;align-items:center}
+.right{border-left:1px solid var(--border);overflow:auto;display:flex;flex-direction:column}
+.right section{padding:16px;display:flex;flex-direction:column;gap:14px}
+.player{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:var(--r);}
+.play{width:32px;height:32px;border-radius:99px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-size:12px;border:0}
+.seg{display:grid;grid-template-columns:52px 1fr;gap:8px;font-size:13px;line-height:20px;padding:6px;border-radius:6px}
+.seg.on{background:var(--accent-soft)}
+.seg .t{color:var(--accent);font-family:var(--mono);font-size:12px}
+.chiprow{display:none}
+.mtabs{display:none}
+@media (max-width:1100px){.shell{grid-template-columns:200px minmax(0,1fr)}.right{display:none}}
+@media (max-width:767px){
+  .shell{grid-template-columns:1fr}.rail{display:none}
+  .chiprow{display:flex;gap:8px;overflow-x:auto;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--border)}
+  .chiprow .chip.on{background:var(--accent-soft);border-color:var(--accent-border);color:var(--accent)}
+  .tool,.doc{padding-left:16px;padding-right:16px}
+  .mtabs{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);background:var(--bg);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .mtabs span{text-align:center;padding:12px 0;font-size:13px;font-weight:500;color:var(--faint)}
+  .mtabs span.on{color:var(--accent)}
+  .hide-sm{display:none}
+}
+</style></head>
+<body>
+<header class="topbar">
+  <a href="#" class="small hide-sm">← Episodes</a>
+  <span class="strong" style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Ep 42 · Attention is a budget ✎</span>
+  <span class="pill ready hide-sm"><span class="dot"></span>Ready</span>
+  <span class="small faint hide-sm mono">6/7 ready</span>
+  <span class="grow"></span>
+  <button class="btn sm">Download all</button>
+</header>
+<nav class="chiprow" aria-label="Artifacts"><span class="chip on">Show notes</span><span class="chip">Chapters</span><span class="chip">Summary</span><span class="chip">Titles</span><span class="chip">Blog post</span><span class="chip">Newsletter</span><span class="chip">Social</span></nav>
+
+<div class="shell">
+  <nav class="rail" aria-label="Artifacts">
+    <a class="on" href="#">Show notes <span class="ok">✓</span></a>
+    <a href="#">Chapters <span class="ok">✓</span></a>
+    <a href="#">Summary <span class="ok">✓</span></a>
+    <a href="#">Titles</a>
+    <a href="#">Blog post <span class="ok">✓</span></a>
+    <a href="#">Newsletter <span class="ok">✓</span></a>
+    <a href="#">Social posts <span class="ok">✓</span></a>
+    <hr><a href="#">Transcript</a><a href="#">Show settings</a>
+  </nav>
+
+  <main class="center">
+    <div class="tool">
+      <h2 style="font-size:17px;margin-right:8px">Show notes</h2>
+      <label class="row small" style="gap:6px"><input type="checkbox" id="ready"> Ready</label>
+      <span class="grow"></span>
+      <button class="btn ghost sm" aria-label="Good output">👍</button><button class="btn ghost sm" aria-label="Bad output">👎</button>
+      <button class="btn sm">Regenerate ▾</button>
+      <button class="btn primary sm">Copy for Apple Podcasts ▾</button>
+      <span class="counter mono">1,284 / 4,000</span>
+    </div>
+    <div class="doc">
+      <div class="field"><label class="lbl" for="hook">Hook</label>
+        <textarea class="textarea" id="hook" rows="3">Focus is the most expensive resource in modern work, and almost nobody budgets it like money. This week: why one ping can tax a whole morning, and the calendar habit that gets it back.</textarea></div>
+      <div class="field"><span class="lbl">In this episode</span>
+        <div class="bul"><input class="input" value="Why attention compounds — and what one interruption really costs"><button class="btn ghost sm" aria-label="Remove">✕</button></div>
+        <div class="bul"><input class="input" value="Calendars beat to-do lists: a wish versus a promise"><button class="btn ghost sm" aria-label="Remove">✕</button></div>
+        <div class="bul"><input class="input" value="Subtraction is the real productivity upgrade"><button class="btn ghost sm" aria-label="Remove">✕</button></div>
+        <div class="bul"><input class="input" value="Boundary scripts you can say out loud tomorrow"><button class="btn ghost sm" aria-label="Remove">✕</button></div>
+        <button class="btn ghost sm" style="align-self:flex-start">+ Add bullet</button></div>
+      <div class="field"><span class="lbl">Quote</span>
+        <div class="quote"><q>Calendars beat to-do lists because a to-do item is a wish while a calendar block is a promise.</q><div class="meta">— Maya <span class="badge ok">✓ Verified · 07:40</span> <a href="#">Swap</a> <a href="#">Remove</a></div></div></div>
+      <div class="field"><span class="lbl">Chapters <a class="small" href="#" style="font-weight:400">Edit in Chapters</a></span>
+        <div class="card pad mono small" style="background:var(--surface-2);line-height:26px">00:00 Why focus is a budget<br>04:12 One ping, twenty minutes<br>07:30 Wishes and promises<br>13:05 Fewer tools, more output<br>19:48 Boundaries out loud<br>26:10 Your ninety-minute block</div></div>
+      <div class="field"><label class="lbl" for="cta">Call to action</label><input class="input" id="cta" value="Follow The Focus Hour wherever you listen, and send this to the person who pings you at 9 a.m."></div>
+    </div>
+  </main>
+
+  <aside class="right" aria-label="Quotes and transcript">
+    <section>
+      <div class="player"><button class="play" aria-label="Play">▶</button><span class="mono small">07:40 / 58:12</span><span class="grow"></span><span class="seg-speed small faint">1×</span></div>
+      <h3>Quotes</h3>
+      <div class="quote"><q>We budget our dollars, we calendar our hours, and then we let anyone with a notification spend our attention for free.</q><div class="meta">— Maya <span class="badge ok">✓ 00:14</span> ▶</div></div>
+      <div class="quote"><q>Seconds are how attention debt is issued, and the interest rate is brutal.</q><div class="meta">— Maya <span class="badge ok">✓ 04:51</span> ▶</div></div>
+      <div class="quote"><q>Every app that promises to organize your attention is also competing for it.</q><div class="meta">— Maya <span class="badge ok">✓ 13:20</span> ▶</div></div>
+    </section>
+    <hr class="divider">
+    <section>
+      <div class="spread"><h3>Transcript</h3><input class="input" style="height:32px;width:150px" placeholder="Search"></div>
+      <div class="seg"><span class="t">00:00</span><span>Welcome back to the show. Today I want to talk about focus…</span></div>
+      <div class="seg"><span class="t">00:14</span><span>We budget our dollars, we calendar our hours, and then we let anyone with a notification spend our attention for free.</span></div>
+      <div class="seg on"><span class="t">07:40</span><span>Calendars beat to-do lists because a to-do item is a wish while a calendar block is a promise.</span></div>
+      <div class="seg"><span class="t">08:02</span><span>Imagine looking at your Tuesday and seeing two ninety-minute blocks with your name on them…</span></div>
+    </section>
+  </aside>
+</div>
+<nav class="mtabs" aria-label="Panels"><span class="on">Write</span><span>Quotes</span><span>Transcript</span></nav>
+<div class="toast" role="status">Regenerated <a href="#">Undo</a></div>
+</body></html>

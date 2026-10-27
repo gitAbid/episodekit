@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MK-3 Episodes</title><link rel="stylesheet" href="mock.css">
+<style>
+main{padding-block:32px 64px}
+.list-cards{display:none}
+@media (max-width:700px){.table-wrap{display:none}.list-cards{display:flex;flex-direction:column;gap:8px}}
+.empty{padding:48px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.empty .ic{width:44px;height:44px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);display:grid;place-items:center;color:var(--faint);font-size:20px}
+</style></head>
+<body>
+<header class="topbar">
+  <span class="logo"><i>EK</i>EpisodeKit</span>
+  <span class="small strong">The Focus Hour ▾</span>
+  <span class="grow"></span><button class="btn ghost sm">Feedback</button><span class="avatar">MA</span>
+</header>
+<main class="wrap col" style="gap:20px">
+  <div class="spread">
+    <h1>Episodes</h1>
+    <div class="row" style="gap:16px">
+      <div class="col" style="gap:4px;min-width:200px"><div class="bar"><span style="width:30%"></span></div><span class="counter">3 of 10 episodes · resets Nov 14</span></div>
+      <button class="btn primary">+ New episode</button>
+    </div>
+  </div>
+
+  <div class="card table-wrap scroll-x">
+    <table class="table">
+      <thead><tr><th>Title</th><th>Status</th><th>Length</th><th>Ready</th><th>Date</th><th></th></tr></thead>
+      <tbody>
+        <tr><td class="title">Ep 42 · Attention is a budget</td><td><span class="pill ready"><span class="dot"></span>Ready</span></td><td class="mono">58:12</td><td class="mono">6/7</td><td>Oct 26</td><td>⋯</td></tr>
+        <tr><td class="title">Ep 41 · Saying no without guilt</td><td><span class="pill work"><span class="spin"></span>Writing</span></td><td class="mono">44:03</td><td class="faint">—</td><td>Oct 19</td><td>⋯</td></tr>
+        <tr><td class="title">Ep 40 · The two-tool rule</td><td><span class="pill fail"><span class="dot"></span>Failed</span></td><td class="mono">51:40</td><td class="faint">—</td><td>Oct 12</td><td>⋯</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="list-cards">
+    <div class="card pad col" style="gap:6px"><span class="strong">Ep 42 · Attention is a budget</span><div class="spread small"><span class="pill ready"><span class="dot"></span>Ready</span><span class="faint">Oct 26 · 6/7 ready</span></div></div>
+    <div class="card pad col" style="gap:6px"><span class="strong">Ep 41 · Saying no without guilt</span><div class="spread small"><span class="pill work"><span class="spin"></span>Writing</span><span class="faint">Oct 19</span></div></div>
+  </div>
+
+  <p class="note" style="align-self:flex-start">Empty state (no episodes yet)</p>
+  <div class="card empty">
+    <span class="ic">♪</span>
+    <h2>No episodes yet</h2>
+    <p class="small" style="max-width:36em">Upload your first episode and get a full content package in minutes.</p>
+    <div class="row" style="justify-content:center"><button class="btn primary">New episode</button><a href="#" class="small">Try a sample episode</a></div>
+  </div>
+</main>
+</body></html>
