@@ -114,14 +114,13 @@ function artifactRow(overrides: Partial<queries.ArtifactRow> = {}) {
 }
 
 beforeEach(() => {
-  vi.resetModules ? undefined : undefined;
   process.env.DATABASE_URL = "postgres://test";
   mocked.getEpisodeForUser.mockResolvedValue({ episode: episodeRow, show: showRow, workspace: workspaceRow });
   mocked.listSegments.mockResolvedValue(segmentRows as unknown as queries.SegmentRow[]);
   mocked.getAnalysis.mockResolvedValue(null);
   mocked.getArtifactsByEpisode.mockResolvedValue([]);
-  mocked.upsertArtifact.mockImplementation((async (_ep: string, kind: string, values: Record<string, unknown>) =>
-    artifactRow({ kind: kind as "show_notes", ...values })) as typeof mocked.upsertArtifact);
+  mocked.upsertArtifact.mockImplementation((async (_ep: string, kind: string, values: Partial<queries.ArtifactRow>) =>
+    artifactRow({ kind: kind as "show_notes", ...values })) as unknown as typeof mocked.upsertArtifact);
   mockGenerate.mockResolvedValue({
     kind: "show_notes",
     content: { hook: "h", bullets: ["b"], cta: "c" },

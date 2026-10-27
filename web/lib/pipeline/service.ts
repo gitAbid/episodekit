@@ -10,6 +10,7 @@ import { generateArtifact } from "@/lib/ai/generate";
 import { runAnalyze } from "@/lib/ai/analyze";
 import { DEFAULT_VOICE_PROFILE, type VoiceProfile } from "@/lib/ai/voice";
 import { ARTIFACT_KINDS, artifactContentSchema, type ArtifactKind } from "@/lib/artifacts/schemas";
+import { effectivePlan } from "@/lib/billing/entitlements";
 import type { Segment } from "@/lib/quotes/types";
 
 export interface ApiResult {
@@ -314,6 +315,23 @@ export async function handleEpisodeWithArtifactsGet(userId: string, episodeId: s
       artifacts: artifactRows.map(serializeArtifact),
       analysis: analysisRow ? serializeAnalysis(analysisRow) : null,
       hasSegments: segmentRows.length > 0,
+      segments: segmentRows.map((r) => ({
+        id: r.id,
+        speaker: r.speaker ?? null,
+        startMs: r.startMs ?? null,
+        text: r.text,
+      })),
+      // M7 footer flag: effectivePlan keeps Pro until current_period_end.
+      freePlan:
+        effectivePlan(
+          {
+            plan: owned.workspace.plan,
+            status: owned.workspace.status,
+            founding: owned.workspace.founding,
+            currentPeriodEnd: owned.workspace.currentPeriodEnd ?? null,
+          },
+          new Date(),
+        ) === "free",
     },
   };
 }

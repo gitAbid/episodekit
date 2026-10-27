@@ -61,21 +61,27 @@ export async function updateEpisode(
 }
 
 /** Replaces the episode's segments (atomic delete+insert via Neon batch —
- * the neon-http driver has no interactive transactions). */
+ * the neon-http driver has no interactive transactions; the embedded pglite
+ * test driver has no .batch, so it falls back to sequential statements). */
 export async function replaceSegments(
   episodeId: string,
   rows: Array<Omit<typeof segments.$inferInsert, "episodeId">>,
 ): Promise<SegmentRow[]> {
-  const db = getDb();
+  const db = getDb() as { batch?: unknown } & ReturnType<typeof getDb>;
   if (!rows.length) {
     await db.delete(segments).where(eq(segments.episodeId, episodeId));
     return [];
   }
-  const result = await db.batch([
-    db.delete(segments).where(eq(segments.episodeId, episodeId)),
-    db.insert(segments).values(rows.map((r) => ({ ...r, episodeId }))).returning(),
-  ] as const);
-  return result[1];
+  if (typeof db.batch === "function") {
+    const result = await db.batch([
+      db.delete(segments).where(eq(segments.episodeId, episodeId)),
+      db.insert(segments).values(rows.map((r) => ({ ...r, episodeId }))).returning(),
+    ] as const);
+    return result[1];
+  }
+  await db.delete(segments).where(eq(segments.episodeId, episodeId));
+  const inserted = await db.insert(segments).values(rows.map((r) => ({ ...r, episodeId }))).returning();
+  return inserted;
 }
 
 export async function listSegments(episodeId: string): Promise<SegmentRow[]> {

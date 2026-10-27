@@ -2,7 +2,11 @@
 // Plain text + "Download all (.md)". Pure functions over artifact content
 // (§7.2 shapes) + segments (quote/chapter rendering by reference). The free
 // plan appends the footer line "Show notes made with EpisodeKit".
-import type { Segment } from "@/lib/quotes/types";
+/** Minimal transcript line the pure export functions need. */
+export interface SegmentLike {
+  id: string;
+  text: string;
+}
 
 export const FREE_FOOTER = "Show notes made with EpisodeKit";
 export const APPLE_LIMIT = 4000;
@@ -19,7 +23,7 @@ export const DESTINATION_LABELS: Record<Destination, string> = {
 };
 
 export interface ExportContext {
-  segments: Segment[];
+  segments: SegmentLike[];
   showName: string;
   episodeTitle: string | null;
   freePlan: boolean;
@@ -44,7 +48,7 @@ function youtubeTs(ms: number): string {
   return h > 0 ? `${h}:${String(m % 60).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}` : `${m}:${String(s % 60).padStart(2, "0")}`;
 }
 
-function segmentText(ref: { segmentId: string; start: number; end: number; endSegmentId?: string }, segments: Segment[]): string {
+function segmentText(ref: { segmentId: string; start: number; end: number; endSegmentId?: string }, segments: SegmentLike[]): string {
   const ids = ref.endSegmentId ? [ref.segmentId, ref.endSegmentId] : [ref.segmentId];
   const parts: string[] = [];
   for (const id of ids) {
@@ -54,7 +58,7 @@ function segmentText(ref: { segmentId: string; start: number; end: number; endSe
   return parts.join(" ").trim();
 }
 
-function quoteLine(ref: unknown, segments: Segment[]): string {
+function quoteLine(ref: unknown, segments: SegmentLike[]): string {
   const text = segmentText(ref as { segmentId: string; start: number; end: number; endSegmentId?: string }, segments);
   return text ? `“${text}”` : "";
 }
