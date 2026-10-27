@@ -35,9 +35,9 @@ test.describe("WP-02 settings and app shells", () => {
     );
   });
 
-  test("settings tabs exist; Billing/Account are stubs (Voice is WP-07)", async ({ page }) => {
+  test("settings tabs exist; Voice and Billing are real; Account is a stub (WP-07/WP-08)", async ({ page }) => {
     await page.goto("/app/settings/billing");
-    await expect(page.getByTestId("billing-stub")).toBeVisible();
+    await expect(page.getByTestId("billing-plan-card")).toBeVisible();
     await page.goto("/app/settings/account");
     await expect(page.getByTestId("account-stub")).toBeVisible();
   });
