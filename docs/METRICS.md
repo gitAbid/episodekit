@@ -22,6 +22,8 @@ exists (see ROADMAP "Needs from user").
 - `sk_waitlist` — email signups
 - `sk_license` — license issues/validations (payments live)
 
+| 2026-10-28 21:00 | 0 (log) | — | 0 | 0 | contact:0 licenses:0 | A2 day: HN submission not posted |
+
 **Decision gates (from ROADMAP):** <10 activated free users by Day 14 despite
 distribution → distribution autopsy; 0 paying by Day 24 despite ≥200 activated
 → pricing/positioning autopsy + podcast→other-vertical pivot evaluation.
