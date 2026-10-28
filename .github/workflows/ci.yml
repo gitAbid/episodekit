@@ -44,4 +44,14 @@ jobs:
             sleep 1
           done
           curl -sf http://localhost:3000 >/dev/null
-          pnpm exec playwright test
+          pnpm exec playwright test --grep-invert "db:"
+      - name: e2e DB mode (workspace flows, embedded Postgres)
+        run: |
+          DATABASE_URL=pglite:./.pglite-e2e node scripts/e2e-seed.mjs
+          E2E_DB=1 DATABASE_URL=pglite:./.pglite-e2e E2E_AUTH_USER_ID=user_preview pnpm exec next start -p 3110 &
+          for i in $(seq 1 60); do
+            curl -sf http://localhost:3110 >/dev/null && break
+            sleep 1
+          done
+          curl -sf http://localhost:3110 >/dev/null
+          E2E_DB=1 E2E_PORT=3110 pnpm exec playwright test --grep "db:" --workers=2
